@@ -128,16 +128,12 @@ find_tiny_image_differences(directory, s=5, percentile=8):
 tesseract_specific(directory):
 
  
-    """
- this function runs tessseract ocr for text detection over images in a directory, and gives a dataframe with what it found
-  
-    """
+    """this function runs tessseract ocr for text detection over images in a directory, and gives a dataframe with what it found"""
    
 
 find_suspect_text(directory, label_word):
  
-    """
- this function looks for one single string in texts (multilingual!) on images
+    """finds a specific string you believe is a label e.g. "cancer"  , this function looks for one single string in texts (multilingual!) on images
 
      
     """
