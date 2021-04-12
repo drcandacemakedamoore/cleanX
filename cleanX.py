@@ -37,15 +37,14 @@ def check_paths_for_group_leakage(train_df, test_df, uniqueID):
 # to run on single images, one at a time
 
 def crop(image):
-     """
+    """
     Args:
-        
+
         image: an image 
-    
+
     Returns:
         image[np.min(y_nonzero):np.max(y_nonzero), np.min(x_nonzero):np.max(x_nonzero)]: image cropped of black edges
     """
-    
     nonzero = np.nonzero(image)
     y_nonzero = nonzero[0]
     x_nonzero = nonzero[1]

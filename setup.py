@@ -18,28 +18,17 @@ setup(
     url="https://github.com/drcandacemakedamoore/cleanX",
     license="MIT",
     py_modules=["cleanX"],
-    install_requires=["pip"]
+    
     install_requires=[
         "pandas",
-        'numpy'# < 3.0 ; python_version < "3.6"',
+        'numpy',# < 3.0 ; python_version < "3.6"',
         "matplotlib",
         "pillow",
         "tesserocr",
         
         
     ],
-    long_description=dedent(
-        """\
-        CleanX.
-        Contact
-        =============
-        If you have any questions or comments about cleanX,
-        please feel free to contact me via
-        email: doctormakeda@gmail.com
-        This project is hosted on Github at https://github.com/drcandacemakedamoore/cleanX
-        The documentation can be found at
-        https://github.com/drcandacemakedamoore/cleanX/README.md"""
-    ),
+   
     
     
 
