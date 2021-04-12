@@ -40,9 +40,9 @@ setup(
         If you have any questions or comments about cleanX,
         please feel free to contact me via
         email: doctormakeda@gmail.com
-        This project is hosted on Github
+        This project is hosted on Github at https://github.com/drcandacemakedamoore/cleanX
         The documentation can be found at
-        https://github.com/.../README.md"""
+        https://github.com/drcandacemakedamoore/cleanX/README.md"""
     ),
     
     
