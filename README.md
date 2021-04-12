@@ -153,6 +153,12 @@ histogram_difference_for_inverts(directory):
     """
           
 histogram_difference_for_inverts_todf(directory):
+
+
+     """
+     this function looks for images by a spike on the end of pixel value histogram to find inverted images, puts results in a dataframe
+      
+    """
     
 
 find_duplicated_images(directory):
