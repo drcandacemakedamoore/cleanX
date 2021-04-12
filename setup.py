@@ -21,15 +21,11 @@ setup(
     install_requires=["pip"]
     install_requires=[
         "pandas",
-        'numpy < 3.0 ; python_version < "3.6"',
+        'numpy'# < 3.0 ; python_version < "3.6"',
         "matplotlib",
-        "glob",
-        "os",
-        "PIL",
-        "filecmp",
+        "pillow",
         "tesserocr",
-        "re",
-        "pathlib",
+        
         
     ],
     long_description=dedent(
