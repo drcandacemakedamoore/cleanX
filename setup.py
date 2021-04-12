@@ -19,5 +19,34 @@ setup(
     license="MIT",
     py_modules=["cleanX"],
     install_requires=["pip"]
+    install_requires=[
+        "pandas",
+        'numpy < 3.0 ; python_version < "3.6"',
+        "matplotlib",
+        "glob",
+        "os",
+        "PIL",
+        "filecmp",
+        "tesserocr",
+        "re",
+        "pathlib",
+        
+    ],
+    long_description=dedent(
+        """\
+        CleanX.
+        Contact
+        =============
+        If you have any questions or comments about cleanX,
+        please feel free to contact me via
+        email: doctormakeda@gmail.com
+        This project is hosted on Github
+        The documentation can be found at
+        https://github.com/.../README.md"""
+    ),
     
+    
+
+
+
 )
