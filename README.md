@@ -1,5 +1,5 @@
 # cleanX
-Python library for cleaning large datasets of Xrays.
+Python library for cleaning large datasets of Xrays. (Library to be released on 4/14/2021 as a Python library.)
 
 primary author: Dr. Candace Makeda H. Moore, MD
 other authors: Oleg Sivokon, Andrew Murphy
