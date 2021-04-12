@@ -7,8 +7,8 @@ other authors: Oleg Sivokon, Andrew Murphy
 Includes several functions including: 
 
 
-
 Ones to run on dataframes to make sure there is no image leakage: 
+
 def check_paths_for_group_leakage(train_df, test_df, uniqueID):
     """
     Args:
@@ -61,43 +61,16 @@ def augment_and_move(origin_folder, target_folder, transformations):
     Returns:
         pics_in_both_groups: duplications of any image into both sets as a new dataframe
     """
-    non_suspects = glob.glob(os.path.join(origin_folder, '*.jpg'))
-    for picy in non_suspects:
-        example = Image.open(picy)
-        novo = os.path.basename(picy)
-        for transformation in transformations:
-            example = transformation(example)
-        example.save(os.path.join(target_folder, novo + ".jpg"))
+   
 
 
 def find_by_sample_upper(source_directory, percent_height_of_sample,  value_for_line):
     ## function that takes top (upper percent) of images and checks if average pixel value is above value_for_line
-    suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
-    estimates = []
-    for pic in suspects:
-        example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
-        height = example.shape[0]
-        height_of_sample = int((percent_height_of_sample / 100)* height)
-        estimates.append(np.mean(example[0:height_of_sample, :]) > value_for_line)
-    return pd.DataFrame({'images': suspects, 'estimates_b_find_by_sample_upper': estimates})                
+                 
 
 def find_sample_upper_greater_than_lower(source_directory, percent_height_of_sample):
     # function that checks that upper field (cut on percent_height of sample) of imagae has a higher pixel value than the lower field (it should in a typical CXR)
-    estimates = []
-    suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
-    for pic in suspects:
-        example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
-        height = example.shape[0]
-        height_of_sample = int((percent_height_of_sample / 100) * height)
-        estimates.append(
-            np.mean(example[0:height_of_sample, :]) > 
-            np.mean(example[(height - height_of_sample):height, :])
-        )
-    return pd.DataFrame({
-        'images': suspects,
-        'estimates': estimates,
-    })    
-
+    
 def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
         """
         Args:
@@ -108,19 +81,7 @@ def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
         Returns:
         lows,highs: images with low mean, images with high mean
         """
-        suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
-        images, means = [], []
-        for pic in suspects:
-            example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
-            mean = np.mean(example)
-            images.append(pic)
-            means.append(mean)
-        df = pd.DataFrame({'images': images, 'means': means})
-        df.sort_values(by='means', inplace=True)
-        percentile = int((len(df) / 100) * percentage_to_say_outliers)
-        lows = df.head(percentile)
-        highs = df.tail(percentile)
-        return (lows,highs)
+        
 
 
 def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
@@ -136,25 +97,7 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
         Returns:
         lows,highs: images with low mean, images with high mean into a dataframe
         """
-        suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
-        images, means = [], []
-        for pic in suspects:
-            example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
-            mean = np.mean(example)
-            images.append(pic)
-            means.append(mean)
-        df = pd.DataFrame({'images': images, 'means': means})
-        df.sort_values(by='means', inplace=True)
-        df.reset_index(inplace=True, drop=True)
-        percentile = int((len(df) / 100) * percentage_to_say_outliers)
-        #lows = df.head(percentile)
-        #highs = df.tail(percentile)
-        df['results'] = 'within range'
-        df.loc[:percentile, 'results'] = 'low'
-        df.loc[len(df) - percentile:, 'results'] = 'high'
-        #whole = [lows, highs]
-        #new_df= pd.concat(whole)
-        return(df)     
+        
 
 
 def find_tiny_image_differences(directory, s=5, percentile=8): 
