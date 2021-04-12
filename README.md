@@ -25,6 +25,7 @@ check_paths_for_group_leakage(train_df, test_df, uniqueID):
 One to run on single images, one at a time, if you want to crop off a black frame:
 
 dcrop(image):
+
      """
     Args:
         
@@ -67,13 +68,21 @@ augment_and_move(origin_folder, target_folder, transformations):
 
 
 find_by_sample_upper(source_directory, percent_height_of_sample,  value_for_line):
+ 
+    """
+
     function that takes top (upper percent) of images and checks if average pixel value is above value_for_line
-                 
+        """         
 
 find_sample_upper_greater_than_lower(source_directory, percent_height_of_sample):
+ 
+    """
     function that checks that upper field (cut on percent_height of sample) of imagae has a higher pixel value than the lower field (it should in a typical CXR)
+     
+    """
     
 def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
+
         """
         Args:
         source_directory: directory with image files (should be more than 20)
@@ -87,6 +96,7 @@ def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
 
 
 find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
+
         """
         Important note: approximate, and it can by chance cut the group so images with 
         the same mean are in and out of normal range if the knife so falls
@@ -116,33 +126,57 @@ find_tiny_image_differences(directory, s=5, percentile=8):
       
 
 tesseract_specific(directory):
+
+ 
+    """
  this function runs tessseract ocr for text detection over images in a directory, and gives a dataframe with what it found
+  
+    """
    
 
 find_suspect_text(directory, label_word):
+ 
+    """
  this function looks for one single string in texts (multilingual!) on images
 
-    
+     
+    """
 
 find_suspect_text_by_legnth(directory, legnth):
+ 
+    """
      this function finds all texts above a specified legnth (number of charecters)
+      
+    """
    
 histogram_difference_for_inverts(directory):
+ 
+    """
      this function looks for images by a spike on the end of pixel value histogram to find inverted images
+      
+    """
           
 histogram_difference_for_inverts_todf(directory):
     
 
 find_duplicated_images(directory):
+ 
+    """
      this function finds duplicated images and return a list
+      
+    """
    
 find_duplicated_images_todf(directory):
+ 
+    """
      looks for duplicated images, returns dataframe
-    
+     
+    """
 
 Function that takes a dataframe and returns plotted images:
 
 show_images_in_df(iter_ob, legnth_name):
+
     """
     Args:
         iter_ob: should be list(df.column)
