@@ -1,6 +1,5 @@
 # cleanX
 Python library for cleaning large datasets of Xrays. (Library to be released on 4/14/2021 as a Python library.)
-It assumed you have a directories with imagges in them, and a dataframe that has IDs for them. 
 
 primary author: Dr. Candace Makeda H. Moore, MD
 other authors: Oleg Sivokon, Andrew Murphy

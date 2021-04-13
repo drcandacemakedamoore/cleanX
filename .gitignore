@@ -2,3 +2,5 @@
 build/
 *.egg-info/
 dist/
+test/__pycache__/
+test/target/
