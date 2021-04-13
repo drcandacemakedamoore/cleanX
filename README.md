@@ -24,7 +24,7 @@ check_paths_for_group_leakage(train_df, test_df, uniqueID):
     
 One to run on single images, one at a time, if you want to crop off a black frame:
 
-dcrop(image):
+crop(image):
 
      """
     Args:
