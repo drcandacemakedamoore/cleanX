@@ -1,5 +1,5 @@
 # cleanX
-Python library for cleaning large datasets of Xrays as JPEG files. (JPEG files can be extracted from DICOM files.) (Library to be released on 4/14/2021 10:00pm Israel time.)
+CleanX <a href="https://zenodo.org/badge/latestdoi/357094031"><img src="https://zenodo.org/badge/357094031.svg" alt="DOI"></a> is a python library for cleaning large datasets of Xrays as JPEG files. (JPEG files can be extracted from DICOM files.) (Library to be released on 4/14/2021 10:00pm Israel time.)
 
 primary author: Candace Makeda H. Moore
 
