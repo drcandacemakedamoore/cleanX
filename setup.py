@@ -7,7 +7,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name="cleanX",
-    version='0.0.1',
+    version='0.0.2',
     description="Python library for cleaning data in large datasets of Xrays",
     long_description=readme,
     long_description_content_type='text/markdown',
