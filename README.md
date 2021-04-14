@@ -1,5 +1,5 @@
 # cleanX
-Python library for cleaning large datasets of Xrays. (Library to be released on 4/14/2021 as a Python library.)
+Python library for cleaning large datasets of Xrays as JPEG files. (JPEG files can be extracted from DICOM files.) (Library to be released on 4/14/2021 10:00pm Israel time.)
 
 primary author: Candace Makeda H. Moore
 
