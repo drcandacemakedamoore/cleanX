@@ -54,22 +54,31 @@ def crop(image):
 # to run on a list to make a prototype tiny Xray
 
 
-def seperate_image_averger(set_of_images, s=5 ):
-    """
-    Args:
+# def seperate_image_averger(set_of_images, s=5 ):
+#     """
+#     Args:
         
-        set_of_images: a list 
-        s: number of pixels for height and wifth
+#         set_of_images: a list 
+#         s: number of pixels for height and wifth
     
-    Returns:
-        canvas/len(set_of_images): an average tiny image (can feed another function which compares to this mini)
-    """
+#     Returns:
+#         canvas/len(set_of_images): an average tiny image (can feed another function which compares to this mini)
+#     """
+#     canvas = np.zeros((s, s))
+#     for example in set_of_images:
+#         example = cv2.imread(example, cv2.IMREAD_GRAYSCALE)
+#         example_small = cv2.resize(example, (s, s))
+#         canvas += np.array(example_small)
+#     return canvas / len(set_of_images)
+
+def seperate_image_averger(set_of_images, s=5 ):
     canvas = np.zeros((s, s))
     for example in set_of_images:
         example = cv2.imread(example, cv2.IMREAD_GRAYSCALE)
         example_small = cv2.resize(example, (s, s))
         canvas += np.array(example_small)
     return canvas / len(set_of_images)
+
 
 # to run on files which are inside a folder   
 
@@ -94,32 +103,36 @@ def augment_and_move(origin_folder, target_folder, transformations):
 
 
 def find_by_sample_upper(source_directory, percent_height_of_sample,  value_for_line):
-    ## function that takes top (upper percent) of images and checks if average pixel value is above value_for_line
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
-    estimates = []
+    estimates, piclist = [],[]
     for pic in suspects:
+        piclist.append(pic)
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
         height = example.shape[0]
         height_of_sample = int((percent_height_of_sample / 100)* height)
-        estimates.append(np.mean(example[0:height_of_sample, :]) > value_for_line)
-    return pd.DataFrame({'images': suspects, 'estimates_b_find_by_sample_upper': estimates})                
+        estimates.append(np.mean(example[0:height_of_sample, :]))
+        lovereturn = pd.DataFrame({'images': piclist, 'estimates_b_find_by_sample_upper': estimates})
+        lovereturn['where']= 'less'
+        lovereturn.loc[lovereturn.estimates_b_find_by_sample_upper >= value_for_line,'where'] = 'same or more'
+      
+        
+    return lovereturn           
 
 def find_sample_upper_greater_than_lower(source_directory, percent_height_of_sample):
-    # function that checks that upper field (cut on percent_height of sample) of imagae has a higher pixel value than the lower field (it should in a typical CXR)
-    estimates = []
+    estup, estdown, piclist = [], [], []
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     for pic in suspects:
+        piclist.append(pic)
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
         height = example.shape[0]
         height_of_sample = int((percent_height_of_sample / 100) * height)
-        estimates.append(
-            np.mean(example[0:height_of_sample, :]) > 
-            np.mean(example[(height - height_of_sample):height, :])
-        )
-    return pd.DataFrame({
-        'images': suspects,
-        'estimates': estimates,
-    })    
+        estup.append(np.mean(example[0:height_of_sample, :]))
+        estdown.append(np.mean(example[(height - height_of_sample):height, :]))
+    love = pd. DataFrame({'images': piclist,'estup': estup, 'estdown': estdown})  
+    love['which_greater'] = 'upper less'
+    love.loc[love.estup > love.estdown, 'which_greater'] = 'upper more'
+    return love    
+          
 
 def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
         """
@@ -288,12 +301,12 @@ def histogram_difference_for_inverts(directory):
         highs =np.count_nonzero(example > (example.max()-11))
         if lows > highs:
             regulars.append(pic)
-        elif highs < lows:
+        elif highs >lows:
             inverts.append(pic)
         else:    
             unclear.append(pic)
-            
-    return inverts        
+           
+    return inverts       
 
 def histogram_difference_for_inverts_todf(directory):
     # looks for inverted and returns a dataframe
@@ -305,7 +318,7 @@ def histogram_difference_for_inverts_todf(directory):
         highs =np.count_nonzero(example > (example.max()-11))
         if lows > highs:
             regulars.append(pic)
-        elif highs < lows:
+        elif highs > lows:
             inverts.append(pic)
         else:    
             unclear.append(pic)
