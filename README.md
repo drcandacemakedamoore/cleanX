@@ -8,7 +8,7 @@ other authors + idea contributors: Oleg Sivokon, Andrew Murphy
 ABOUT USING THIS LIBRARY:
 If you use the library, please credit me and my collaborators.  You are only free to use this library according to license. The GLP license implies you should be open sourcing your entire code base, and sending me modifications.  You can get in touch with me by email (doctormakeda@gmail.com) if you have a legitamate reason to use my library without open-sourcing your code base,or following other conditions, and I can make you specifically a different license.
 
-This is the beta+ version. Some unit tests are availalable in the test folder. Test coverage is currently over 90%! The library includes several functions including: 
+This is the beta+ version. Some unit tests are availalable in the test folder. Test coverage is currently partial. The library includes several functions including: 
 
 
 Ones to run on dataframes to make sure there is no image leakage: 
