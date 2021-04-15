@@ -9,5 +9,5 @@ jobs:
       - run: . .venv/bin/activate
       - run: ls -lah
       - run: pwd
-      - run: python setup.py install
-      - run: python setup.py test
+      - run: .venv/bin/python setup.py install
+      - run: .venv/bin/python setup.py test
