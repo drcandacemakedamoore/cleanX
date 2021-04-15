@@ -51,6 +51,6 @@ setup(
         "matplotlib",
         "pillow",
         "tesserocr",
-        "cv2",
+        "opencv-python",
     ],
 )
