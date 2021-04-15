@@ -68,7 +68,7 @@ setup(
         'test': PyTest,
         'lint': Pep8,
     },
-    tests_require=['pytest', 'pycodestyle'],
+    tests_require=['pytest', 'pycodestyle', 'wheel'],
     install_requires=[
         "pandas",
         'numpy',
