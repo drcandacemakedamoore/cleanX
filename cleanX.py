@@ -73,8 +73,8 @@ def crop(image):
 
 def seperate_image_averger(set_of_images, s=5 ):
     canvas = np.zeros((s, s))
-    for example in set_of_images:
-        example = cv2.imread(example, cv2.IMREAD_GRAYSCALE)
+    for pic in set_of_images:
+        example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
         example_small = cv2.resize(example, (s, s))
         canvas += np.array(example_small)
     return canvas / len(set_of_images)

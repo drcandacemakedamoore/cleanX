@@ -30,7 +30,8 @@ def test_check_paths_for_group_leakage():
 def test_seperate_image_averager():
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
     test_df = pd.read_csv(test_dfE)
-    blended =  cleanX.seperate_image_averger(test_df.image_path, s=5 )
+    images = image_directory + '/' + test_df.image_path.dropna()
+    blended =  cleanX.seperate_image_averger(images, s=5)
     assert type(blended) is np.ndarray
 
 
@@ -77,7 +78,7 @@ def test_find_duplicated_images_todf():
 
 def test_histogram_difference_for_inverts():
     histosy = cleanX.histogram_difference_for_inverts(image_directory)
-    assert len(histosy) == 0
+    assert len(histosy) > 0
 
 def test_histogram_difference_for_inverts_todf():
     histos = cleanX.histogram_difference_for_inverts_todf(image_directory)
