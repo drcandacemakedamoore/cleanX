@@ -4,6 +4,7 @@ jobs:
   Sanity:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: python3 -m venv .venv
       - run: . .venv/bin/activate
       - run: ls -lah
