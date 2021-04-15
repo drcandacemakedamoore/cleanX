@@ -8,6 +8,7 @@ jobs:
       - run: sudo apt-get install -y libleptonica-dev tesseract-ocr-all
       - run: sudo apt-get install -y libtesseract-dev
       - run: sudo apt-get install -y python3-opencv
+      - run: supo apt-get install -y python3-wheel
       - run: python3 -m venv .venv
       - run: .venv/bin/python setup.py install
       - run: .venv/bin/python setup.py test --pytest-args "--junit-xml junit-report.xml"
@@ -23,5 +24,6 @@ jobs:
       - run: sudo apt-get install -y libleptonica-dev tesseract-ocr-all
       - run: sudo apt-get install -y libtesseract-dev
       - run: sudo apt-get install -y python3-opencv
+      - run: supo apt-get install -y python3-wheel
       - run: python3 -m venv .venv
       - run: .venv/bin/python setup.py lint
