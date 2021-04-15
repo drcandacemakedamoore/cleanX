@@ -1,8 +1,33 @@
+import sys
+import shlex
+
 from setuptools import setup
+from setuptools.command.test import test as TestCommand
+
+
+class PyTest(TestCommand):
+
+    user_options = [('pytest-args=', 'a', "Arguments to pass into py.test")]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        self.pytest_args = ''
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+
+        errno = pytest.main(shlex.split(self.pytest_args))
+        sys.exit(errno)
+
+
 
 with open('README.md', 'r') as f:
     readme = f.read()
-
 
 
 setup(
@@ -18,20 +43,13 @@ setup(
     url="https://github.com/drcandacemakedamoore/cleanX",
     license="MIT",
     py_modules=["cleanX"],
-    
+    cmdclass={'test': PyTest},
+    tests_require=['pytest'],
     install_requires=[
         "pandas",
-        'numpy',# < 3.0 ; python_version < "3.6"',
+        'numpy',
         "matplotlib",
         "pillow",
         "tesserocr",
-        
-        
     ],
-   
-    
-    
-
-
-
 )
