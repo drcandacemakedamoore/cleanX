@@ -1,7 +1,7 @@
-## cleanX
+# cleanX
 CleanX <a href="https://zenodo.org/badge/latestdoi/357094031"><img src="https://zenodo.org/badge/357094031.svg" alt="DOI"></a> is a python library for cleaning large datasets of Xrays as JPEG files. (JPEG files can be extracted from DICOM files.)
 
-# CI status
+## CI status
 
 ![ci workflow](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/github-actions-on-commit.yml/badge.svg)
 
