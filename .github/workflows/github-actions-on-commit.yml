@@ -10,7 +10,12 @@ jobs:
       - run: sudo apt-get install -y python3-opencv
       - run: python3 -m venv .venv
       - run: .venv/bin/python setup.py install
-      - run: .venv/bin/python setup.py test
+      - run: .venv/bin/python setup.py test --pytest-args "--junit-xml junit-report.xml"
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: junit-report.xml
   Lint:
     runs-on: ubuntu-latest
     steps:
