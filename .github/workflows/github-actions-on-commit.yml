@@ -6,5 +6,6 @@ jobs:
     steps:
       - run: python3 -m venv .venv
       - run: . .venv/bin/activate
+      - run: ls -lah
       - run: python setup.py install
       - run: python setup.py test
