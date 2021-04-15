@@ -3,7 +3,7 @@ CleanX <a href="https://zenodo.org/badge/latestdoi/357094031"><img src="https://
 
 # CI status
 
-![ci workflow](https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/github-actions-on-commit.yml/badge.svg)
+![ci workflow](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/github-actions-on-commit.yml/badge.svg)
 
 primary author: Candace Makeda H. Moore
 
