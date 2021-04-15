@@ -2,7 +2,7 @@ name: Sanity
 on: [push]
 jobs:
   Sanity:
-    runs-on: python3
+    runs-on: ubuntu-latest
     steps:
       - run: python3 -m venv .venv
       - run: . .venv/bin/activate
