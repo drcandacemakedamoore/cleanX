@@ -1,5 +1,8 @@
 import sys
 import shlex
+import os
+
+from glob import glob
 
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
@@ -25,6 +28,24 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 
+class Pep8(TestCommand):
+
+    def run_tests(self):
+        from pycodestyle import StyleGuide
+
+        package_dir = os.path.dirname(os.path.abspath(__file__))
+        sources = [os.path.join(package_dir, 'cleanX.py')]
+        style_guide = StyleGuide(paths=sources)
+        options = style_guide.options
+
+        report = style_guide.check_files()
+        report.print_statistics()
+
+        if report.total_errors:
+            if options.count:
+                sys.stderr.write(str(report.total_errors) + '\n')
+            sys.exit(1)
+
 
 with open('README.md', 'r') as f:
     readme = f.read()
@@ -43,8 +64,11 @@ setup(
     url="https://github.com/drcandacemakedamoore/cleanX",
     license="MIT",
     py_modules=["cleanX"],
-    cmdclass={'test': PyTest},
-    tests_require=['pytest'],
+    cmdclass={
+        'test': PyTest,
+        'lint': Pep8,
+    },
+    tests_require=['pytest', 'pycodestyle'],
     install_requires=[
         "pandas",
         'numpy',

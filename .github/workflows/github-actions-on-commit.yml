@@ -6,12 +6,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: python3 -m venv .venv
-      - run: . .venv/bin/activate
-      - run: ls -lah
-      - run: pwd
       - run: sudo apt-get install -y libleptonica-dev tesseract-ocr-all
-      - run: ls -lah /usr/share/tesseract-ocr/4.00/tessdata/
       - run: sudo apt-get install -y libtesseract-dev
       - run: sudo apt-get install -y python3-opencv
       - run: .venv/bin/python setup.py install
       - run: .venv/bin/python setup.py test
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: python3 -m venv .venv
+      - run: .venv/bin/python setup.py lint
