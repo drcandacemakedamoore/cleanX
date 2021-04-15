@@ -7,7 +7,7 @@ import cleanX
 import cv2
 from PIL import Image, ImageOps
 import numpy as np
-
+import pytest
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
 target_directory = os.path.join(os.path.dirname(__file__), 'target')
@@ -75,7 +75,7 @@ def test_find_duplicated_images():
 def test_find_duplicated_images_todf():
     found = cleanX.find_duplicated_images_todf(image_directory)
     assert len(found) > 0       
-
+@pytest.mark.skip
 def test_histogram_difference_for_inverts():
     histosy = cleanX.histogram_difference_for_inverts(image_directory)
     assert len(histosy) > 0
