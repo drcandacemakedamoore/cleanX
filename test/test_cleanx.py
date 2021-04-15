@@ -56,6 +56,10 @@ def test_find_suspect_text_by_legnth():
     
 def test_augment_and_move():
     cleanX.augment_and_move(image_directory, target_directory, [ImageOps.mirror, ImageOps.flip])
+    try:
+        os.makedirs(target_directory)
+    except FileExistsError:
+        pass
     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
     assert os.path.isfile(vovo) 
 
