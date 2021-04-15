@@ -9,6 +9,7 @@ jobs:
       - run: . .venv/bin/activate
       - run: ls -lah
       - run: pwd
+      - run: ls -lah /usr/share/tesseract-ocr/4.00/tessdata/
       - run: sudo apt-get install -y libleptonica-dev
       - run: sudo apt-get install -y libtesseract-dev
       - run: sudo apt-get install -y python3-opencv
