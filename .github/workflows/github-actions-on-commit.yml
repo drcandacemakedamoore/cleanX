@@ -10,6 +10,7 @@ jobs:
       - run: ls -lah
       - run: pwd
       - run: sudo apt-get install -y libleptonica-dev
-      - run: sudo apt-get install -y libtesseract-dev 
+      - run: sudo apt-get install -y libtesseract-dev
+      - run: sudo apt-get install -y python3-opencv
       - run: .venv/bin/python setup.py install
       - run: .venv/bin/python setup.py test
