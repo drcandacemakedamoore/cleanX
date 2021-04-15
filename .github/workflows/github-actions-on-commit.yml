@@ -9,5 +9,6 @@ jobs:
       - run: . .venv/bin/activate
       - run: ls -lah
       - run: pwd
+      - run: sudo apt-get install -y libleptonica-dev
       - run: .venv/bin/python setup.py install
       - run: .venv/bin/python setup.py test
