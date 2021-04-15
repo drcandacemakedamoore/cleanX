@@ -1,0 +1,10 @@
+name: Sanity
+on: [push]
+jobs:
+  Sanity:
+    runs-on: python3
+    steps:
+      - run: python3 -m venv .venv
+      - run: . .venv/bin/activate
+      - run: python setup.py install
+      - run: python setup.py test
