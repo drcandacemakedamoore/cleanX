@@ -194,4 +194,15 @@ show_images_in_df(iter_ob, legnth_name):
     Returns: plot of images with names    
         """
     
-           
+
+One to run to make a dataframe of pics in a folder (
+    assuming they all have the same 'label'/diagnosis):
+
+def dataframe_up_my_pics(directory, diagnosis_string):
+
+    """
+    Args:
+        directory: directory/folder with images
+        diagnosis_string: label column label
+    Returns:
+        ddataframe    

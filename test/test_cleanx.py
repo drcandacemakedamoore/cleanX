@@ -87,4 +87,10 @@ def test_histogram_difference_for_inverts():
 def test_histogram_difference_for_inverts_todf():
     histos = cleanX.histogram_difference_for_inverts_todf(image_directory)
     assert len(histos) >0
+
+def test_def dataframe_up_my_pics(directory):
+    dfy = dataframe_up_my_pics(image_directory, 'diagnosis_string')
+    assert len(dfy) >0
+    
+
         
