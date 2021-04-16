@@ -207,6 +207,41 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     return(df)
 
 
+def understand_df(df):
+
+    print("The dataframe has", len(df.columns), "columns, named", df.columns )
+    print("")
+    print("The dataframe has", len(df), "rows")
+    print("")
+    print("The types of data:\n", df.dtypes)
+    print("")
+    print("In terms of nulls, the dataframe has: \n", df[df.isnull()].count())
+    print("")
+    print("Number of duplicated rows in the data is ",  df.duplicated().sum(), ".")
+    print("")
+    print("Numeric qualities of numeric data: \n", df.describe()) 
+    
+    
+def show_duplicates(df):
+    if df.duplicated().any():
+        print("This dataframe table has", df.duplicated().sum()," duplicated rows")
+        print("They are: \n", df[df.duplicated()])
+    else:
+        print("There are no duplicated rows")   
+
+
+
+def create_matrix(width, height, default_element):
+  
+    # In python Sequence * Number = Sequence repeated Number of times
+    result = [0] * width
+
+    for i in range(width):
+        result[i] = [default_element] * height
+
+    return result    
+
+
 def find_tiny_image_differences(directory, s=5, percentile=8):
     """
     Note: percentile returned is approximate, may be a tad more
@@ -450,3 +485,14 @@ def show_images_in_df(iter_ob, legnth_name):
             axarr[y].imshow(exop, cmap='gray')
             # plt.title('Outlier images')
     plt.show()
+
+def dataframe_up_my_pics(directory, diagnosis_string):
+    picture_directory = Path(directory)
+    files = sorted(os.listdir(picture_directory))
+    dupli = []
+    for file in files:
+        dupli.append(file)
+    df = pd.DataFrame(dupli)
+    df['diagnosis'] = diagnosis_string
+    df = df.rename(columns={0:'identifier_pic_name'})
+    return df    
