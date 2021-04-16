@@ -5,8 +5,6 @@ CleanX <a href="https://zenodo.org/badge/latestdoi/357094031"><img src="https://
 
 ![ci workflow](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/github-actions-on-commit.yml/badge.svg)
 
-Note: CI was working until Linter was installed. Code will be updated in next version such that it passes. CI is now built that such that code without perfect formatting will produce a CI fail.
-
 primary author: Candace Makeda H. Moore
 
 other authors + idea contributors: Oleg Sivokon, Andrew Murphy
