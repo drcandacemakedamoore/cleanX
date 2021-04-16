@@ -1,4 +1,4 @@
-#cleanX library
+# cleanX library
 
 # imported libraries
 import cv2
@@ -7,8 +7,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import glob
 import os 
-
-    #import shutil
 from PIL import Image
 from PIL import Image, ImageOps
 import math
@@ -18,7 +16,6 @@ from tesserocr import PyTessBaseAPI
 from filecmp import cmp
 from pathlib import Path
 import re
-
 
 # to run on dataframes
 def check_paths_for_group_leakage(train_df, test_df, uniqueID):
@@ -34,6 +31,7 @@ def check_paths_for_group_leakage(train_df, test_df, uniqueID):
     
     pics_in_both_groups = train_df.merge(test_df, on = uniqueID, how='inner')
     return pics_in_both_groups
+
 # to run on single images, one at a time
 
 def crop(image):
@@ -53,24 +51,6 @@ def crop(image):
 
 # to run on a list to make a prototype tiny Xray
 
-
-# def seperate_image_averger(set_of_images, s=5 ):
-#     """
-#     Args:
-        
-#         set_of_images: a list 
-#         s: number of pixels for height and wifth
-    
-#     Returns:
-#         canvas/len(set_of_images): an average tiny image (can feed another function which compares to this mini)
-#     """
-#     canvas = np.zeros((s, s))
-#     for example in set_of_images:
-#         example = cv2.imread(example, cv2.IMREAD_GRAYSCALE)
-#         example_small = cv2.resize(example, (s, s))
-#         canvas += np.array(example_small)
-#     return canvas / len(set_of_images)
-
 def seperate_image_averger(set_of_images, s=5 ):
     canvas = np.zeros((s, s))
     for pic in set_of_images:
@@ -78,7 +58,6 @@ def seperate_image_averger(set_of_images, s=5 ):
         example_small = cv2.resize(example, (s, s))
         canvas += np.array(example_small)
     return canvas / len(set_of_images)
-
 
 # to run on files which are inside a folder   
 
