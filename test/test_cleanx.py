@@ -79,7 +79,7 @@ def test_find_duplicated_images():
 def test_find_duplicated_images_todf():
     found = cleanX.find_duplicated_images_todf(image_directory)
     assert len(found) > 0       
-@pytest.mark.skip
+
 def test_histogram_difference_for_inverts():
     histosy = cleanX.histogram_difference_for_inverts(image_directory)
     assert len(histosy) > 0
