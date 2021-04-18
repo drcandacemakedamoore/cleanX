@@ -44,8 +44,10 @@ We acknowledge contributions from Oleg Sivokon during the testing of the code re
 
 # References
 
-1. “A Study on the Importance of and Time Spent on Different Modeling Steps”. M.A. Munson. 2011, ACM SIGKDD Explorations, pp. Pages 65-71.
+1. “A Study on the Importance of and Time Spent on Different Modeling Steps”. M.A. Munson. 2011, ACM SIGKDD Explorations, pp. Pages 65-71. doi: 10.1145/2207243.2207253
 2. Tidy data. Wickham, H. 2014, Journal of Statistical Software, Vol. 5910, pp. 1-23.
 3. Data cleaning: Problems and current approaches. E Rahm, HH Do. 2000, IEEE Data Eng. Bull., Vol. 23 (4), pp. 3-13.
-4. Harvey H., Glocker B. A Standardised Approach for Preparing Imaging Data for Machine Learning Tasks in Radiology. . 2019.
-5. COVID-19, AI enthusiasts, and toy datasets: radiology without radiologists. Tizhoosh, H.R., Fratesi, J. 2020, Eur Radiol.
+4. Harvey H., Glocker B. (2019) A Standardised Approach for Preparing Imaging Data for Machine Learning Tasks in Radiology. In: Ranschaert E., Morozov S., Algra P. (eds) Artificial Intelligence in Medical Imaging. Springer, Cham. https://doi.org/10.1007/978-3-319-94878-2_6
+5. Tizhoosh, H.R., Fratesi, J. COVID-19, AI enthusiasts, and toy datasets: radiology without radiologists. Eur Radiol 31, 3553–3554 (2021). https://doi.org/10.1007/s00330-020-07453-w
+
+
