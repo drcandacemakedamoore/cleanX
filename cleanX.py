@@ -62,11 +62,12 @@ def crop_np(image_array):
     nonzero = np.nonzero(image_array)
     y_nonzero = nonzero[0]
     x_nonzero = nonzero[1]
-    
+
     return image_array[
         np.min(y_nonzero):np.max(y_nonzero),
         np.min(x_nonzero):np.max(x_nonzero),
     ]
+
 
 def crop_pil(image):
     mode = image.mode
@@ -75,11 +76,12 @@ def crop_pil(image):
         mode=mode,
     )
 
+
 def crop(image):
     if isinstance(image, Image.Image):
         return crop_pil(image)
     if isinstance(image, np.ndarray):
-        return crop_np(image)    
+        return crop_np(image)
 
 # to run on a list to make a prototype tiny Xray
 
@@ -93,8 +95,6 @@ def seperate_image_averger(set_of_images, s=5):
     return canvas / len(set_of_images)
 
 # to run on files which are inside a folder
-
-
 
 
 def augment_and_move(origin_folder, target_folder, transformations):
@@ -124,11 +124,13 @@ def augment_and_move(origin_folder, target_folder, transformations):
 
 
 def crop_them_all(origin_folder, target_folder):
+    # crops and moves to a new folder for a set inside origin folder
     augment_and_move(
-    origin_folder,
-    target_folder,
-    [crop],
-)
+        origin_folder,
+        target_folder,
+        [crop],
+    )
+
 
 def find_by_sample_upper(
     source_directory,
