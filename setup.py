@@ -6,6 +6,15 @@ from glob import glob
 
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
+from setuptools import Command
+
+
+project_dir = os.path.dirname(os.path.realpath(__file__))
+# Excluding project directory from sys.path so that Sphinx
+# wouldn't get confused about where to load the sources.
+# This, however, implies that you _must_ install the project
+# before you generate documentation.
+sys.path = [x for x in sys.path if not x == project_dir]
 
 
 class PyTest(TestCommand):
@@ -51,9 +60,12 @@ with open('README.md', 'r') as f:
     readme = f.read()
 
 
+name = 'cleanX'
+version = '0.0.4'
+
 setup(
-    name="cleanX",
-    version='0.0.4',
+    name=name,
+    version=version,
     description="Python library for cleaning data in large datasets of Xrays",
     long_description=readme,
     long_description_content_type='text/markdown',
@@ -69,6 +81,14 @@ setup(
         'lint': Pep8,
     },
     tests_require=['pytest', 'pycodestyle'],
+    command_options={
+        'build_sphinx': {
+            'project': ('setup.py', name),
+            'version': ('setup.py', version),
+            'config_dir': ('setup.py', './source'),
+        },
+    },
+    setup_requires = ['sphinx'],
     install_requires=[
         "pandas",
         'numpy',

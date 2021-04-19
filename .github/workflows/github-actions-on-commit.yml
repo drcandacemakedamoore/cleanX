@@ -27,3 +27,14 @@ jobs:
       - run: python3 -m venv .venv
       - run: .venv/bin/python -m pip install wheel
       - run: .venv/bin/python setup.py lint
+
+  Sphinx:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo apt-get install -y libleptonica-dev tesseract-ocr-all
+      - run: sudo apt-get install -y libtesseract-dev
+      - run: sudo apt-get install -y python3-opencv
+      - run: python3 -m venv .venv
+      - run: .venv/bin/python -m pip install wheel
+      - run: .venv/bin/python setup.py build_sphinx
