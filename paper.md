@@ -19,7 +19,7 @@ affiliations:
  - name: MaxCor lab, Sapir College, Israel
    index: 1
 
- - name: pending
+ - name: Department of Medical Imaging, Princess Alexandra Hospital, Brisbane, QLD, Australia
    index: 2   
 
 date: 18 April 2021
