@@ -110,15 +110,14 @@ def augment_and_move(origin_folder, target_folder, transformations):
         ...some function to transform the image
 
     Returns:
-        pics_in_both_groups: duplications of any image into both sets as a new
-        dataframe
+        technical nonreturn
     """
     non_suspects = glob.glob(os.path.join(origin_folder, '*.jpg'))
     for picy in non_suspects:
         example = Image.open(picy)
         if example.mode == 'RGBA':
             example = example.convert('RGB')
-        novo = os.path.basename(picy)f
+        novo = os.path.basename(picy)
         for transformation in transformations:
             example = transformation(example)
         example.save(os.path.join(target_folder, novo + ".jpg"))
