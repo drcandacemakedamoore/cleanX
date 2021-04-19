@@ -18,6 +18,11 @@ def test_crop():
     cropped_example = cleanX.crop(example)
     assert cropped_example.shape < example.shape
 
+def test_simpler_crop():
+    example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
+    cropped_example = cleanX.simpler_crop(example)
+    assert cropped_example.shape < example.shape
+
 def test_check_paths_for_group_leakage():
     train_dfE = (os.path.join(image_directory,'train_sample_df.csv'))
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
@@ -63,6 +68,14 @@ def test_augment_and_move():
     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
     assert os.path.isfile(vovo) 
 
+def test_crop_them_all():
+    try:
+        os.makedirs(target_directory)
+    except FileExistsError:
+        pass
+    cleanX.crop_them_all(image_directory, target_directory)
+    vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
+    assert os.path.isfile(vovo) 
 
 def test_find_by_sample_upper():
     lovereturned = cleanX.find_by_sample_upper(image_directory, 10, 10)

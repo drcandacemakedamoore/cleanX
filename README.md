@@ -32,7 +32,7 @@ check_paths_for_group_leakage(train_df, test_df, uniqueID):
     
 One to run on single images, one at a time, if you want to crop off a black frame:
 
-crop(image):
+simpler_crop(image):
 
      """
     Args:
@@ -43,7 +43,18 @@ crop(image):
         image[np.min(y_nonzero):np.max(y_nonzero), np.min(x_nonzero):np.max(x_nonzero)]: image cropped of black edges
     """
     
-   
+crop(image):
+
+     """
+    NB: expanded from simpler crop to handle for PIl and nonPIl types of JPEGS
+    Args:
+        
+        image: an image 
+    
+    Returns:
+        image[np.min(y_nonzero):np.max(y_nonzero), np.min(x_nonzero):np.max(x_nonzero)]: image cropped of black edges
+    """
+       
 One to run on a list to make a prototype tiny Xray others can be comapared to: 
 
 
@@ -70,7 +81,19 @@ augment_and_move(origin_folder, target_folder, transformations):
         transformations : example tranformations = [ImageOps.mirror, ImageOps.flip]...some function to transform the image
     
     Returns:
-        pics_in_both_groups: duplications of any image into both sets as a new dataframe
+        technically not a return but puts augmented images into a new folder
+    """
+
+crop_them_all(origin_folder, target_folder):
+
+    """
+    Args:
+        origin_folder: folder with 'virgin' images
+        target_folder: folder to drop images after transformations
+        
+    
+    Returns:
+        technically not a return, but puts cropped images into target folder
     """
    
 

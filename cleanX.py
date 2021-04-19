@@ -37,7 +37,7 @@ def check_paths_for_group_leakage(train_df, test_df, uniqueID):
 # to run on single images, one at a time
 
 
-def crop(image):
+def simpler_crop(image):
     """
     Args: image: an image
 
@@ -57,6 +57,30 @@ def crop(image):
         np.min(x_nonzero):np.max(x_nonzero)
     ]
 
+
+def crop_np(image_array):
+    nonzero = np.nonzero(image_array)
+    y_nonzero = nonzero[0]
+    x_nonzero = nonzero[1]
+    
+    return image_array[
+        np.min(y_nonzero):np.max(y_nonzero),
+        np.min(x_nonzero):np.max(x_nonzero),
+    ]
+
+def crop_pil(image):
+    mode = image.mode
+    return Image.fromarray(
+        crop_np(np.array(image)),
+        mode=mode,
+    )
+
+def crop(image):
+    if isinstance(image, Image.Image):
+        return crop_pil(image)
+    if isinstance(image, np.ndarray):
+        return crop_np(image)    
+
 # to run on a list to make a prototype tiny Xray
 
 
@@ -69,6 +93,8 @@ def seperate_image_averger(set_of_images, s=5):
     return canvas / len(set_of_images)
 
 # to run on files which are inside a folder
+
+
 
 
 def augment_and_move(origin_folder, target_folder, transformations):
@@ -90,11 +116,20 @@ def augment_and_move(origin_folder, target_folder, transformations):
     non_suspects = glob.glob(os.path.join(origin_folder, '*.jpg'))
     for picy in non_suspects:
         example = Image.open(picy)
-        novo = os.path.basename(picy)
+        if example.mode == 'RGBA':
+            example = example.convert('RGB')
+        novo = os.path.basename(picy)f
         for transformation in transformations:
             example = transformation(example)
         example.save(os.path.join(target_folder, novo + ".jpg"))
 
+
+def crop_them_all(origin_folder, target_folder):
+    augment_and_move(
+    origin_folder,
+    target_folder,
+    [crop],
+)
 
 def find_by_sample_upper(
     source_directory,
@@ -263,7 +298,7 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     images, sums = [], []
     for pic in suspects:
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
-        example_clipped = crop(example)
+        example_clipped = simpler_crop(example)
         example_small = cv2.resize(example_clipped, (s, s))
         experiment_a = (example_small - avg_image) ** 2
         experiment_sum = experiment_a.sum()
