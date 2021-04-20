@@ -1,4 +1,8 @@
-# cleanX library
+# -*- coding: utf-8 -*-
+"""
+Library for cleaning radiological data used in machine learning
+applications
+"""
 
 # imported libraries
 import cv2
@@ -19,20 +23,22 @@ import re
 
 
 # to run on dataframes
-def check_paths_for_group_leakage(train_df, test_df, uniqueID):
+def check_paths_for_group_leakage(train_df, test_df, unique_id):
     """
-    Args:
-        train_df (dataframe): dataframe describing train dataset
-        test_df (dataframe): dataframe describing test dataset
-        uniqueID (str): string name of column with image ID,
-        patient IDs or some other unique ID that is in all dfs
+    Finds train samples that have been accidentally leaked into test
+    samples
 
-    Returns:
-    pics_in_both_groups: duplications of any image into both sets as a new
-            dataframe
+    :param train_df: Pandas dataframe containing information about
+                     train assets.
+    :type train_df: DataFrame
+    :param test_df: Pandas dataframe containing information about
+                    train assets.
+    :type test_df: DataFrame
+
+    :return: duplications of any image into both sets as a new dataframe
+    :rtype: DataFrame
     """
-    pics_in_both_groups = train_df.merge(test_df, on=uniqueID, how='inner')
-    return pics_in_both_groups
+    return train_df.merge(test_df, on=unique_id, how='inner')
 
 # to run on single images, one at a time
 

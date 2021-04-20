@@ -7,3 +7,5 @@ __pycache__/
 test/target/
 .eggs/
 *~
+/source/cleanX.rst
+/source/modules.rst
