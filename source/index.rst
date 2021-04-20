@@ -1,15 +1,22 @@
-.. cleanX documentation master file, created by
-   sphinx-quickstart on Mon Apr 19 17:40:26 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. cleanX documentation master
 
-Welcome to cleanX's documentation!
-==================================
+cleanX documentation
+========================
+
+Here goes general information about the package.
+
+
+The API Documentation / Guide
+-----------------------------
+
+If you are looking for information on a specific function, class, or method,
+this part of the documentation is for you.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   modules
 
 
 Indices and tables

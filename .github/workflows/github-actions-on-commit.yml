@@ -37,4 +37,5 @@ jobs:
       - run: sudo apt-get install -y python3-opencv
       - run: python3 -m venv .venv
       - run: .venv/bin/python -m pip install wheel
+      - run: .venv/bin/python setup.py apidoc
       - run: .venv/bin/python setup.py build_sphinx

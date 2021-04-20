@@ -56,6 +56,27 @@ class Pep8(TestCommand):
             sys.exit(1)
 
 
+class SphinxApiDoc(Command):
+
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        from sphinx.ext.apidoc import main
+        sys.exit(main([
+            '-o', os.path.join(project_dir, 'source'),
+            '-f',
+            project_dir,
+            '.*',
+            'setup.py',
+        ]))
+
+
 with open('README.md', 'r') as f:
     readme = f.read()
 
@@ -79,12 +100,14 @@ setup(
     cmdclass={
         'test': PyTest,
         'lint': Pep8,
+        'apidoc': SphinxApiDoc,
     },
     tests_require=['pytest', 'pycodestyle'],
     command_options={
         'build_sphinx': {
             'project': ('setup.py', name),
             'version': ('setup.py', version),
+            'source_dir': ('setup.py', './source'),
             'config_dir': ('setup.py', './source'),
         },
     },
