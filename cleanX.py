@@ -45,14 +45,15 @@ def check_paths_for_group_leakage(train_df, test_df, unique_id):
 
 def simpler_crop(image):
     """
-    Args: image: an image
+    Crops an image of a black frame
+    :param image: an image
+    :type image: image (JPEG)
 
-    Returns:
-    image[
+    :return: image cropped of black edges
+    :rtype: image[
         np.min(y_nonzero):np.max(y_nonzero),
         np.min(x_nonzero):np.max(x_nonzero))
-    ]:
-            image cropped of black edges
+    ]            
     """
     nonzero = np.nonzero(image)
     y_nonzero = nonzero[0]
