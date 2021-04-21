@@ -46,9 +46,9 @@ def check_paths_for_group_leakage(train_df, test_df, unique_id):
 def simpler_crop(image):
     """
     Crops an image of a black frame
-    
-    :param image: an image
-    :type image: image (JPEG)
+
+    :param image: Image
+    :type image: Image (JPEG)
 
     :return: image cropped of black edges
     :rtype: image[
@@ -86,6 +86,18 @@ def crop_pil(image):
 
 
 def crop(image):
+    """
+    Crops an image of a black frame: does both PIL and opencv2 images
+
+    :param image: Image
+    :type image: Image (JPEG)
+
+    :return: image cropped of black edges
+    :rtype: image[
+        np.min(y_nonzero):np.max(y_nonzero),
+        np.min(x_nonzero):np.max(x_nonzero))
+    ]
+    """
     if isinstance(image, Image.Image):
         return crop_pil(image)
     if isinstance(image, np.ndarray):
@@ -95,6 +107,17 @@ def crop(image):
 
 
 def seperate_image_averger(set_of_images, s=5):
+    """
+    To run on a list to make a prototype tiny Xray that is an averages image
+
+    :param set_of_images: Set_of_images
+    :type set_of_images:
+    :param s: legnth of sides in image made
+    :type s: integer  
+
+    :return: image 
+    :rtype: image
+    """
     canvas = np.zeros((s, s))
     for pic in set_of_images:
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
