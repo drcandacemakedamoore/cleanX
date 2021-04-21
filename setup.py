@@ -1,3 +1,4 @@
+
 import sys
 import shlex
 import os
@@ -10,10 +11,10 @@ from setuptools import Command
 
 
 project_dir = os.path.dirname(os.path.realpath(__file__))
-# Excluding project directory from sys.path so that Sphinx
-# wouldn't get confused about where to load the sources.
-# This, however, implies that you _must_ install the project
-# before you generate documentation.
+# This will exclude the project directory from sys.path so that Sphinx
+# doesn't get confused about where to load the sources.
+# _Note_ you _must_ install the project
+# before you generate documentation, otherwise it will not work.
 sys.path = [x for x in sys.path if not x == project_dir]
 
 
