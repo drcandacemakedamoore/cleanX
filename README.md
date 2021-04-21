@@ -25,7 +25,12 @@ python setup.py build_sphinx
 The documentation will be generated in `./build/sphinx/html` directory. Documentation
 is under revision. 
 
+## Installation
 
+    """
+    pip install cleanX
+    """
+    
 
 ABOUT USING THIS LIBRARY:
 If you use the library, please credit me and my collaborators.  You are only free to use this library according to license. The GLP license implies you should be open sourcing your entire code base, and sending me modifications.  You can get in touch with me by email (doctormakeda@gmail.com) if you have a legitamate reason to use my library without open-sourcing your code base,or following other conditions, and I can make you specifically a different license.
