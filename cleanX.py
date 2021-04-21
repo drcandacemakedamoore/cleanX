@@ -46,6 +46,7 @@ def check_paths_for_group_leakage(train_df, test_df, unique_id):
 def simpler_crop(image):
     """
     Crops an image of a black frame
+    
     :param image: an image
     :type image: image (JPEG)
 
