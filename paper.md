@@ -15,6 +15,9 @@ authors:
     orcid: 0000-0002-7710-6095
     affiliation: 2    
 
+  - name: Oleg Sivokon
+     
+
 affiliations:
  - name: MaxCor lab, Sapir College, Israel
    index: 1
@@ -47,7 +50,7 @@ Automated data cleaning can improve dataset quality on some parameters. This wor
 
 # Acknowledgements
 
-We acknowledge contributions from Oleg Sivokon during the testing of the code related to this project.
+We acknowledge many contributions from Oleg Sivokon during the testing and documentation of the code related to this project.
 
 # References
 
