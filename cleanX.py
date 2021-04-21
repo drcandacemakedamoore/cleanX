@@ -113,9 +113,9 @@ def seperate_image_averger(set_of_images, s=5):
     :param set_of_images: Set_of_images
     :type set_of_images:
     :param s: legnth of sides in image made
-    :type s: integer  
+    :type s: integer
 
-    :return: image 
+    :return: image
     :rtype: image
     """
     canvas = np.zeros((s, s))
