@@ -27,9 +27,9 @@ is under revision.
 
 ## Installation
 
-    """
+
     pip install cleanX
-    """
+    
     
 
 ABOUT USING THIS LIBRARY:
