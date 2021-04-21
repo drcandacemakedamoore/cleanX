@@ -53,7 +53,7 @@ def simpler_crop(image):
     :rtype: image[
         np.min(y_nonzero):np.max(y_nonzero),
         np.min(x_nonzero):np.max(x_nonzero))
-    ]            
+    ]
     """
     nonzero = np.nonzero(image)
     y_nonzero = nonzero[0]
