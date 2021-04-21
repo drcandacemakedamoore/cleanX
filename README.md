@@ -1,5 +1,5 @@
 <p align="center">
-<img style="width: 30%; height: 30%" src="https://raw.githubusercontent.com/drcandacemakedamoore/cleanX/test/cleanXpic.png">
+<img style="width: 30%; height: 30%" src="https://github.com/drcandacemakedamoore/cleanX/blob/main/test/cleanXpic.png">
 </p>
 
 # cleanX
