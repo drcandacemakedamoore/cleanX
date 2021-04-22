@@ -236,8 +236,22 @@ def find_by_sample_upper(
 ):
     """
         Takes average of upper pixels, and can show you outliers defined by a
-        percentage e.g. shows images with averge of top pixels in top x %
-        """
+        percentage e.g. shows images with averge of top pixels in top x % where
+        x is the percent height of the sample.
+
+        :param source_directory: The folder in which the images are
+        :type source_directory: directory
+        :param percent_height_of_sample: from where on image to call upper
+        :type source_directory: integer
+        :param value_for_line: from where in pixel values to call averaged
+        values abnormal
+        :type value_for_line: integer
+
+
+        :return: Dataframe with images labeled
+        :rtype: Dataframe
+         """
+
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     estimates, piclist = [], []
     for pic in suspects:
@@ -405,9 +419,12 @@ def create_matrix(width, height, default_element):
         :type width: integer
         :param height: height of matrix to be created
         :type height: integer
-
         :param default_element: element to populate the matrix with
         :type default_element: float or integer or string
+
+        :return: 2D matrix populated
+        :rtype: matrix
+
         """
     result = [0] * width
 
