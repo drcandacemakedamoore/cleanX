@@ -153,16 +153,17 @@ def augment_and_move(origin_folder, target_folder, transformations):
             example = transformation(example)
         example.save(os.path.join(target_folder, novo + ".jpg"))
 
+
 def dimensions_to_df(folder_name):
     """
-    Finds dimensions on images in a folder, and makes a df for exploratory 
+    Finds dimensions on images in a folder, and makes a df for exploratory
     data analysis
 
     :param folder_name: adress of folder with images
     :type folder_name: folder/directory
-    
 
-    :return: image height, width and proportion heith/width as a new dataframe
+
+    :return: image height, width and proportion heigth/width as a new dataframe
     :rtype: DataFrame
     """
     non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
@@ -171,18 +172,17 @@ def dimensions_to_df(folder_name):
     for picy in non_suspects:
         picy_list.append(picy)
         image = cv2.imread(picy, cv2.IMREAD_GRAYSCALE)
-        ht, wt= image.shape
-        list_ht.append(ht)  
+        ht, wt = image.shape
+        list_ht.append(ht)
         list_wt.append(wt)
-        new_dataframe = pd.DataFrame({
+        new_datafrm = pd.DataFrame({
             'images': picy_list,
             'height': list_ht,
             'width': list_wt
         })
-    new_dataframe['proportion'] = new_dataframe['height']/new_dataframe['width']
-    
-    return new_dataframe
-    
+    new_datafrm['proportion'] = new_datafrm['height']/new_datafrm['width']
+    return new_datafrm
+
 
 def crop_them_all(origin_folder, target_folder):
     # crops and moves to a new folder for a set inside origin folder
