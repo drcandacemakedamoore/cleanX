@@ -126,6 +126,30 @@ def crop(image):
     if isinstance(image, np.ndarray):
         return crop_np(image)
 
+
+def blur_out_edges(image):
+    """
+    For an individual image, blurs out the edges as an augmentation.
+
+    :param image: Image
+    :type image: Image (JPEG)
+
+    :return: blurred_edge_image an array of an image blurred around the edges
+    :rtype: image array
+    """
+    example = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
+    msk = np.zeros(example.shape)
+    center_coordinates = (example.shape[1] // 2, example.shape[0] // 2)
+    radius = int((min(example.shape) // 100) * (min(example.shape)/40))
+    color = 255
+    thickness = -1
+    msk = cv2.circle(msk, center_coordinates, radius, color, thickness)
+    ksize = (600, 600)
+    msk = cv2.blur(msk, ksize)
+    filtered = cv2.blur(example, ksize)
+    blurred_edge_image = example * (msk / 255) + filtered * ((255 - msk) / 255)
+    return blurred_edge_image
+
 # to run on a list to make a prototype tiny Xray
 
 
@@ -244,7 +268,7 @@ def find_by_sample_upper(
         :param percent_height_of_sample: from where on image to call upper
         :type source_directory: integer
         :param value_for_line: from where in pixel values to call averaged
-        values abnormal
+            values abnormal
         :type value_for_line: integer
 
 
@@ -742,7 +766,7 @@ def show_images_in_df(iter_ob, legnth_name):
     Shows images by taking them off a dataframe column, and puths them up
     but smaller, so they can be compared quickly
 
-    :param inter_ob:list, should be a dataframe column
+    :param inter_ob: list, should be a dataframe column
     :type iter_ob: list
     :param legnth_name: size of image name going from end
     :type legnth_name: integer
