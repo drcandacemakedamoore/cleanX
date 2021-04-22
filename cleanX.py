@@ -411,6 +411,17 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     or dramatically different in some way. Note: percentile returned
     is approximate, may be a tad more
 
+    :param directory: Directory (folder).
+    :type directory: Directory
+    :param s: legnth to make the sides of the tiny image for comparison
+    :type s: integer
+    :param percentile: percentil to mark as abnormal
+    :type percentile: integer
+
+    :return: Dataframe with a column that notes mismatches
+    and within range images
+    :rtype: Dataframe
+
     Args:
         directory: directory of all the images you want to compare
         s: size of image sizes to compare
@@ -446,6 +457,12 @@ def tesseract_specific(directory):
     """
     Finds images with text on them. Multi-lingual including English.
 
+    :param directory: Directory (folder).
+    :type directory: Directory
+
+    :return: Dataframe with a column of text found
+    :rtype: Dataframe
+
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     texts, clean_texts, confidences = [], [], []
@@ -473,6 +490,14 @@ def find_suspect_text(directory, label_word):
     """
     Finds images with a specific text you ask for on them.
     Multi-lingual including English. Accuracy is very high, but not perfect.
+
+    :param directory: Directory (folder).
+    :type directory: Directory
+    :param label_word: label word
+    :type label_word: string
+
+    :return: Dataframe with a column of text found over the legnth
+    :rtype: Dataframe
 
 
     """
@@ -502,6 +527,14 @@ def find_suspect_text_by_legnth(directory, legnth):
     Finds images with text over a specific legnth you ask for.
     Useful if you know you do not care about R and L or SUP.
     Multi-lingual including English. Accuracy is very high, but not perfect.
+
+    :param directory: Directory (folder).
+    :type directory: Directory
+    :param legnth: legnth to find above, inclusive
+    :type legnth: integer
+
+    :return: Dataframe with a column of text found
+    :rtype: Dataframe
 
 
     """
@@ -602,6 +635,12 @@ def find_duplicated_images(directory):
     """
     Finds duplicated images and returns a list of them.
 
+    :param directory: Directory (folder).
+    :type directory: Directory
+
+    :return: a list of duplicated images
+    :rtype: list
+
     """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
@@ -632,6 +671,12 @@ def find_duplicated_images_todf(directory):
     # looks for duplicated images, returns dataframe
     """
     Finds duplicated images and returns a dataframe of them.
+
+    :param directory: Directory (folder).
+    :type directory: Directory
+
+    :return: a dataframe of duplicated images
+    :rtype: Dataframe
 
     """
     picture_directory = Path(directory)
@@ -673,10 +718,15 @@ def show_images_in_df(iter_ob, legnth_name):
     """
     Shows images by taking them off a dataframe column, and puths them up
     but smaller, so they can be compared quickly
-    Args:
-        iter_ob: should be list(df.column)
-        legnth_name: size of image name going from end
-    Returns: plot of images with names
+
+    :param inter_ob:list, should be a dataframe column
+    :type iter_ob: list
+    :param legnth_name: size of image name going from end
+    :type legnth_name: integer
+
+    :return: techically no return but makes a plot of images with names
+    :rtype: none
+
         """
 
     width = int(math.sqrt(len(iter_ob)))
@@ -708,6 +758,14 @@ def dataframe_up_my_pics(directory, diagnosis_string):
     """
     Takes images in a directory (should all be with same label), and puts the
     name (with path) and label into a dataframe
+
+    :param directory: Directory (folder).
+    :type directory: Directory
+    :param diagnosis_string: usually a label, may be any string
+    :type diagnosis_string: string
+
+    :return: Dataframe of pictures and label
+    :rtype: Dataframe
 
         """
     picture_directory = Path(directory)
