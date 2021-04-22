@@ -353,7 +353,7 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
 def understand_df(df):
     """
         Takes a dataframe (if you have a dataframe for images) and prints
-        information including legnth, data types, nulls and number of 
+        information including legnth, data types, nulls and number of
         duplicated rows
         """
 
@@ -474,7 +474,7 @@ def find_suspect_text(directory, label_word):
     Finds images with a specific text you ask for on them.
     Multi-lingual including English. Accuracy is very high, but not perfect.
 
-    
+
     """
 
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
@@ -503,7 +503,7 @@ def find_suspect_text_by_legnth(directory, legnth):
     Useful if you know you do not care about R and L or SUP.
     Multi-lingual including English. Accuracy is very high, but not perfect.
 
-    
+
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     images, texts, clean_texts = [], [], []
@@ -578,7 +578,6 @@ def find_duplicated_images(directory):
     """
     Finds duplicated images and returns a list of them.
 
-    
     """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
@@ -610,7 +609,6 @@ def find_duplicated_images_todf(directory):
     """
     Finds duplicated images and returns a dataframe of them.
 
-    
     """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
@@ -649,7 +647,7 @@ def find_duplicated_images_todf(directory):
 
 def show_images_in_df(iter_ob, legnth_name):
     """
-    Shows images by taking them off a dataframe column, and puths them up 
+    Shows images by taking them off a dataframe column, and puths them up
     but smaller, so they can be compared quickly
     Args:
         iter_ob: should be list(df.column)
@@ -685,8 +683,8 @@ def show_images_in_df(iter_ob, legnth_name):
 def dataframe_up_my_pics(directory, diagnosis_string):
     """
     Takes images in a directory (should all be with same label), and puts the
-    name (with path) and label into a dataframe 
-    
+    name (with path) and label into a dataframe
+
         """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
