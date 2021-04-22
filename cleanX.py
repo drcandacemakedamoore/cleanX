@@ -131,6 +131,18 @@ def seperate_image_averger(set_of_images, s=5):
 def augment_and_move(origin_folder, target_folder, transformations):
 
     """
+    Takes images, and applies the same list of augmentations to all of them
+
+    :param origin_folder: The folder in which the images are
+    :type origin_folder: directory
+    :param target_folder: The folder where augmented images will be sent
+    :type target_folder: directory
+    :param transformations: A list of augmentation functions to apply
+    :type transformations: list
+
+    :return: technically a nonreturning function, but new images will be made
+    :rtype: none
+
     Args:
         origin_folder: folder with 'virgin' images
         target_folder: folder to drop
@@ -185,6 +197,18 @@ def dimensions_to_df(folder_name):
 
 
 def crop_them_all(origin_folder, target_folder):
+    """
+    Crops all images and moves them to a target folder
+
+    :param origin_folder: The folder in which the images are
+    :type origin_folder: directory
+    :param target_folder: The folder where augmented images will be sent
+    :type target_folder: directory
+
+
+    :return: technically nothing returned, but new images will be made
+    :rtype: none
+    """
     # crops and moves to a new folder for a set inside origin folder
     augment_and_move(
         origin_folder,
