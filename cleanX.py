@@ -290,13 +290,19 @@ def find_sample_upper_greater_than_lower(
 
 def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
     """
-        Args:
-        source_directory: directory with image files (should be more than 20)
-        percentage_to_say_outliers: a number which will be the percentage of
-            images contained in the high mean and low mean sets
+        Takes the average of all pixels in image, returns a dataframe with
+        those images that are outliers by mean...should catch some inverted or
+        or problem images
 
-        Returns:
-        lows,highs: images with low mean, images with high mean
+        :param source_directory: The folder in which the images are
+        :type source_directory: directory
+        :param percentage_to_say_outliers: percentage to capture
+        :type percentage_to_say_outliers: integer
+
+
+        :return: Dataframe made up of outliers only
+        :rtype: Dataframe
+
         """
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
@@ -319,15 +325,14 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
         so images with
         the same mean are in and out of normal range if the knife so falls
 
-        Args:
-        source_directory: directory with image files (should be more than 20)
-        percentage_to_say_outliers: a number which will be the percentage of
-        images contained in the high mean OR low mean sets- note if you set to
-        50, then all images will be high or low
+        :param source_directory: The folder in which the images are
+        :type source_directory: directory
+        :param percentage_to_say_outliers: percentage to capture
+        :type percentage_to_say_outliers: integer
 
-        Returns:
-        lows,highs: images with low mean, images with high mean into a
-        dataframe
+
+        :return: Dataframe all images, marked as high, low or within range
+        :rtype: Dataframe
         """
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
@@ -395,6 +400,14 @@ def create_matrix(width, height, default_element):
     """
         Takes width, height then creates a matrix populated by the default
         element. Super handy for advanced image manipulation.
+
+        :param width: width of matrix to be created
+        :type width: integer
+        :param height: height of matrix to be created
+        :type height: integer
+
+        :param default_element: element to populate the matrix with
+        :type default_element: float or integer or string
         """
     result = [0] * width
 
@@ -422,12 +435,6 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     and within range images
     :rtype: Dataframe
 
-    Args:
-        directory: directory of all the images you want to compare
-        s: size of image sizes to compare
-        percentile: what percentage you want to return
-    Returns:
-    difference_outliers: outliers in terms of difference from an average image
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     avg_image = seperate_image_averger(suspects, s)  # np.zeros((5, 5)) + 128
@@ -498,7 +505,6 @@ def find_suspect_text(directory, label_word):
 
     :return: Dataframe with a column of text found over the legnth
     :rtype: Dataframe
-
 
     """
 
