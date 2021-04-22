@@ -39,6 +39,10 @@ def test_seperate_image_averager():
     blended =  cleanX.seperate_image_averger(images, s=5)
     assert type(blended) is np.ndarray
 
+def test_dimensions_to_df():
+    deflep = cleanX.dimensions_to_df(image_directory)
+    assert len(deflep) > 1    
+
 
 # def test_show_images_in_df():
 
