@@ -91,6 +91,16 @@ def crop_np(image_array):
 
 
 def crop_pil(image):
+    """
+    Crops black edges of an Pil/Pillow image 
+
+    :param image_array: Image.
+    :type image_array: image
+
+
+    :return: image_array
+    :rtype: array
+    """
     mode = image.mode
     return Image.fromarray(
         crop_np(np.array(image)),
@@ -224,6 +234,10 @@ def find_by_sample_upper(
     percent_height_of_sample,
     value_for_line
 ):
+    """
+        Takes average of upper pixels, and can show you outliers defined by a 
+        percentage e.g. shows images with averge of top pixels in top x % 
+        """
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     estimates, piclist = [], []
     for pic in suspects:
@@ -249,6 +263,12 @@ def find_sample_upper_greater_than_lower(
     source_directory,
     percent_height_of_sample
 ):
+    """
+        Takes average of upper pixels, average of lower (you define what
+        percent of picture should be considered upper and lower) and compares.
+        In a CXR if lower average is greater than upper it may be upside down
+        or otherwise bizzare, as the neck is smaller than the abdomen.  
+        """
     estup, estdown, piclist = [], [], []
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     for pic in suspects:
