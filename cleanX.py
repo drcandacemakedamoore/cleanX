@@ -531,17 +531,18 @@ def find_suspect_text_by_legnth(directory, legnth):
 def histogram_difference_for_inverts(directory):
     # this function looks for images by a spike on the end of pixel
     # value histogram to find inverted images
-        """
+    """
         This function looks for images by a spike on the end of thier pixel
         value histogram to find inverted images. Note we assume classical
-        X-rays, not inverted floroscopy images. 
-        
+        X-rays, not inverted floroscopy images.
+
         :param directory: Directory (folder).
         :type directory: Directory
 
         :return: a list of images suspected to be inverted
         :rtype: list
         """
+
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     regulars, inverts, unclear = [], [], []
     for pic in suspects:
