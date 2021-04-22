@@ -72,7 +72,7 @@ def crop_np(image_array):
 
     :param image_array: Image array.
     :type image_array: array
-    
+
 
     :return: image_array[
         np.min(y_nonzero):np.max(y_nonzero),
@@ -376,7 +376,7 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     Finds differences between a manufactured tiny image, and all your images at
     that size. If you return the outliers they are inverted,
     or dramatically different in some way. Note: percentile returned
-    is approximate, may be a tad more 
+    is approximate, may be a tad more
 
     Args:
         directory: directory of all the images you want to compare
@@ -411,8 +411,8 @@ def tesseract_specific(directory):
     # this function runs tessseract ocr for text detection over images
     # in a directory, and gives a dataframe with what it found
     """
-    Finds images with text on them. Multi-lingual including English.  
-    
+    Finds images with text on them. Multi-lingual including English.
+
     Args:
         directory: directory of all the images you want to compare
         s: size of image sizes to compare
