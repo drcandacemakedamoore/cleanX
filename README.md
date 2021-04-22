@@ -4,8 +4,8 @@
 
 # cleanX
 
-CleanX <a href="https://zenodo.org/badge/latestdoi/357094031"
-><img src="https://zenodo.org/badge/357094031.svg" alt="DOI"></a> is a python library
+CleanX <a href="https://zenodo.org/badge/latestdoi/357094031"><img
+src="https://zenodo.org/badge/357094031.svg" alt="DOI"></a> is a python library
 for exploring, cleaning and augmenting large datasets of Xrays as JPEG files.
 (JPEG files can be extracted from DICOM files.)
 
