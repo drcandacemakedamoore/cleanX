@@ -351,6 +351,11 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
 
 
 def understand_df(df):
+    """
+        Takes a dataframe (if you have a dataframe for images) and prints
+        information including legnth, data types, nulls and number of 
+        duplicated rows
+        """
 
     print("The dataframe has", len(df.columns), "columns, named", df.columns)
     print("")
@@ -370,6 +375,10 @@ def understand_df(df):
 
 
 def show_duplicates(df):
+    """
+        Takes a dataframe (if you have a dataframe for images) and prints
+        duplicated rows
+        """
     if df.duplicated().any():
         print(
             "This dataframe table has",
@@ -383,6 +392,10 @@ def show_duplicates(df):
 
 def create_matrix(width, height, default_element):
     # In python Sequence * Number = Sequence repeated Number of times
+    """
+        Takes width, height then creates a matrix populated by the default
+        element. Super handy for advanced image manipulation.
+        """
     result = [0] * width
 
     for i in range(width):
@@ -433,12 +446,6 @@ def tesseract_specific(directory):
     """
     Finds images with text on them. Multi-lingual including English.
 
-    Args:
-        directory: directory of all the images you want to compare
-        s: size of image sizes to compare
-        percentile: what percentage you want to return
-    Returns:
-    difference_outliers: outliers in terms of difference from an average image
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     texts, clean_texts, confidences = [], [], []
@@ -463,6 +470,12 @@ def tesseract_specific(directory):
 def find_suspect_text(directory, label_word):
     # this function looks for one single string in texts (multilingual!)
     # on images
+    """
+    Finds images with a specific text you ask for on them.
+    Multi-lingual including English. Accuracy is very high, but not perfect.
+
+    
+    """
 
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     images, texts, clean_texts = [], [], []
@@ -485,6 +498,13 @@ def find_suspect_text(directory, label_word):
 def find_suspect_text_by_legnth(directory, legnth):
     # this function finds all texts above a specified legnth
     # (legnth is number of charecters)
+    """
+    Finds images with text over a specific legnth you ask for.
+    Useful if you know you do not care about R and L or SUP.
+    Multi-lingual including English. Accuracy is very high, but not perfect.
+
+    
+    """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     images, texts, clean_texts = [], [], []
     with PyTessBaseAPI() as api:
@@ -555,6 +575,11 @@ def histogram_difference_for_inverts_todf(directory):
 
 def find_duplicated_images(directory):
     # this function finds duplicated images and return a list
+    """
+    Finds duplicated images and returns a list of them.
+
+    
+    """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
     duplicates = []
@@ -582,6 +607,11 @@ def find_duplicated_images(directory):
 
 def find_duplicated_images_todf(directory):
     # looks for duplicated images, returns dataframe
+    """
+    Finds duplicated images and returns a dataframe of them.
+
+    
+    """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
     duplicates, class_list = [], []
@@ -619,6 +649,8 @@ def find_duplicated_images_todf(directory):
 
 def show_images_in_df(iter_ob, legnth_name):
     """
+    Shows images by taking them off a dataframe column, and puths them up 
+    but smaller, so they can be compared quickly
     Args:
         iter_ob: should be list(df.column)
         legnth_name: size of image name going from end
@@ -651,6 +683,11 @@ def show_images_in_df(iter_ob, legnth_name):
 
 
 def dataframe_up_my_pics(directory, diagnosis_string):
+    """
+    Takes images in a directory (should all be with same label), and puts the
+    name (with path) and label into a dataframe 
+    
+        """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
     dupli = []
