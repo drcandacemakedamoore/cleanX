@@ -78,7 +78,7 @@ def crop_np(image_array):
         np.min(y_nonzero):np.max(y_nonzero),
         np.min(x_nonzero):np.max(x_nonzero),
     ]
-    :rtype: nd.array
+    :rtype: ndarray
     """
     nonzero = np.nonzero(image_array)
     y_nonzero = nonzero[0]
@@ -135,7 +135,7 @@ def blur_out_edges(image):
     :type image: Image (JPEG)
 
     :return: blurred_edge_image an array of an image blurred around the edges
-    :rtype: nd.array
+    :rtype: ndarray
     """
     example = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
     msk = np.zeros(example.shape)
