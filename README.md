@@ -28,7 +28,7 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 
 - a [python](https://www.python.org/downloads/) installation
 - ability to create virtual environments (reccomended, not absolutely neccesary)
-- tesseractocr and opencv
+- tesseract-ocr and opencv
 
 
 ## Documentation
