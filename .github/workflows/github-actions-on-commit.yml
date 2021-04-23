@@ -39,7 +39,7 @@ jobs:
       - run: .venv/bin/python -m pip install wheel
       - run: .venv/bin/python setup.py apidoc
       - run: .venv/bin/python setup.py build_sphinx
-  Conda Build:
+  CondaBuild:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
