@@ -1,0 +1,31 @@
+package:
+  name: cleanx
+  version: 0.0.4
+
+source:
+  git_rev: v0.0.4
+  git_url: https://github.com/drcandacemakedamoore/cleanX.git
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - numpy
+    - pandas
+    - matplotlib
+    - opencv
+    - tesserocr
+
+test:
+  imports:
+    - cleanX
+
+about:
+  home: https://github.com/drcandacemakedamoore/cleanX
+  license: LGPL
+  summary: >
+    CleanX is a python library for exploring, cleaning and augmenting
+    large datasets of Xrays as JPEG files.
