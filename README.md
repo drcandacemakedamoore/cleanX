@@ -43,8 +43,8 @@ python setup.py apidoc
 python setup.py build_sphinx
 ```
 
-The documentation will be generated in `./build/sphinx/html` directory. Documentation
-is under revision. 
+The documentation will be generated in `./build/sphinx/html` directory. Documentation is generated
+automatically as new functions are added.  
 
 # Installation
 - setting up a virtual environment is desirable, but not absolutely neccesary

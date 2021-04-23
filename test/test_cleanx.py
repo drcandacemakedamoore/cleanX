@@ -23,6 +23,11 @@ def test_simpler_crop():
     cropped_example = cleanX.simpler_crop(example)
     assert cropped_example.shape < example.shape
 
+def test_blur_out_edges():
+    image = os.path.join(image_directory, 'testtocrop.jpg')
+    defblur = cleanX.blur_out_edges(image)
+    assert type(defblur) == np.ndarray 
+
 def test_check_paths_for_group_leakage():
     train_dfE = (os.path.join(image_directory,'train_sample_df.csv'))
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
