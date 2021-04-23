@@ -39,6 +39,12 @@ jobs:
       - run: .venv/bin/python -m pip install wheel
       - run: .venv/bin/python setup.py apidoc
       - run: .venv/bin/python setup.py build_sphinx
+      - name: Publish Docs to Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages
+          folder: build/sphinx/html
+
   CondaBuild:
     runs-on: ubuntu-latest
     steps:
