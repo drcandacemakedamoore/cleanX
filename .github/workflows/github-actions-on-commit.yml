@@ -39,3 +39,15 @@ jobs:
       - run: .venv/bin/python -m pip install wheel
       - run: .venv/bin/python setup.py apidoc
       - run: .venv/bin/python setup.py build_sphinx
+  Conda Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - uses: s-weigand/setup-conda@v1
+        with:
+          conda-channesl: conda-forge
+      - run: conda build -c conda-forge ./conda-pkg/
