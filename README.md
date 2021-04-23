@@ -64,7 +64,7 @@ is under revision.
 ## About using this library
 If you use the library, please credit me and my collaborators.  You are only free to use this library according to license. The GLP license implies you should be open sourcing your entire code base, and sending me modifications.  You can get in touch with me by email (doctormakeda@gmail.com) if you have a legitamate reason to use my library without open-sourcing your code base,or following other conditions, and I can make you specifically a different license.
 
-This is the beta+ version. Some unit tests are availalable in the test folder. Test coverage is currently partial. The library includes several functions including: 
+We are adding new functions all the time. Some unit tests are availalable in the test folder. Test coverage is currently partial. The library includes many functions. Some allow data augmentation.Some are for cleaning datasets including: 
 
 
 ### Run on dataframes to make sure there is no image leakage: 
