@@ -34,10 +34,6 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 ## Documentation
 
 
-<a href='https://cleanx.readthedocs.io/en/latest/?badge=latest'>
-    <img src='https://readthedocs.org/projects/cleanx/badge/?version=latest' alt='Documentation Status' />
-</a>
-
 We are working on getting our documentation in shape- the latest should not be at
 https://cleanx.readthedocs.io/en/latest/ rather we encourage you to build by command
 
