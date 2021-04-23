@@ -60,7 +60,7 @@ is under revision.
 ## About using this library
 If you use the library, please credit me and my collaborators.  You are only free to use this library according to license. The GLP license implies you should be open sourcing your entire code base, and sending me modifications.  You can get in touch with me by email (doctormakeda@gmail.com) if you have a legitamate reason to use my library without open-sourcing your code base,or following other conditions, and I can make you specifically a different license.
 
-We are adding new functions all the time. Some unit tests are availalable in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for X-rays). Some other functions are for cleaning datasets including: 
+We are adding new functions all the time. Some unit tests are availalable in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for X-rays). Some other functions are for cleaning datasets including ones that: 
 
 
 ### Run on dataframes to make sure there is no image leakage: 
@@ -78,7 +78,7 @@ check_paths_for_group_leakage(train_df, test_df, uniqueID):
     """
     
     
-### If you want to crop off excessive black frame run this on single images, one at a time:
+### Crop off excessive black frames (run this on single images) one at a time:
 
 simpler_crop(image):
 
@@ -103,7 +103,7 @@ simpler_crop(image):
         image[np.min(y_nonzero):np.max(y_nonzero), np.min(x_nonzero):np.max(x_nonzero)]: image cropped of black edges
     """
        
-### One to run on a list to make a prototype tiny Xray others can be comapared to: 
+### Run on a list to make a prototype tiny Xray others can be comapared to: 
 
 
 seperate_image_averger(set_of_images, s=5 ):
@@ -118,7 +118,7 @@ seperate_image_averger(set_of_images, s=5 ):
         canvas/len(set_of_images): an average tiny image (can feed another function which compares to this mini)
     """
     
-### Many to run on image files which are inside a folder to check if they are "clean":
+### Run on image files which are inside a folder to check if they are "clean":
 
 augment_and_move(origin_folder, target_folder, transformations):
     
@@ -254,7 +254,7 @@ find_duplicated_images_todf(directory):
      
     """
 
-### Function that takes a dataframe and returns plotted images:
+### Takes a dataframe with image names and returns plotted images:
 
 show_images_in_df(iter_ob, legnth_name):
 
@@ -266,7 +266,7 @@ show_images_in_df(iter_ob, legnth_name):
         """
     
 
-### One to run to make a dataframe of pics in a folder (assuming they all have the same 'label'/diagnosis):
+### Run to make a dataframe of pics in a folder (assuming they all have the same 'label'/diagnosis):
 
 def dataframe_up_my_pics(directory, diagnosis_string):
 
