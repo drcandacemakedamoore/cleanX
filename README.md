@@ -25,9 +25,11 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 <a href="https://github.com/drcandacemakedamoore/cleanX/actions"><img alt="Actions Status" src="https://github.com/drcandacemakedamoore/cleanX/workflows/Test/badge.svg"></a>
 
 ## Requirements
-- [git](https://git-scm.com/downloads)
+
 - a [python](https://www.python.org/downloads/) installation
-- ability to create virtual environments
+- ability to create virtual environments (reccomended, not absolutely neccesary)
+- tesseractocr and opencv
+
 
 ## Documentation
 
@@ -50,12 +52,12 @@ The documentation will be generated in `./build/sphinx/html` directory. Document
 is under revision. 
 
 # Installation
-## Set up a virtual environment
-- you will have to use xxxx
-- activate  the environment
-- ensure you have the pip as below
+- setting up a virtual environment is desirable, but not absolutely neccesary
 
-    pip install cleanX
+- activate  the environment
+- use pip as below
+
+        pip install cleanX
     
     
 
