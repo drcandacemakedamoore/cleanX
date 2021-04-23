@@ -254,7 +254,7 @@ find_duplicated_images_todf(directory):
      
     """
 
-### Takes a dataframe with image names and returns plotted images:
+### Take a dataframe with image names and return plotted(visualized) images:
 
 show_images_in_df(iter_ob, legnth_name):
 
