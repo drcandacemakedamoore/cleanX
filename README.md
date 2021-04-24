@@ -33,6 +33,7 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 
 ## Documentation
 
+Online documentation at https://drcandacemakedamoore.github.io/cleanX/
 
 We encourage you to build up-to-date documentation by command.
 
