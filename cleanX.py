@@ -38,7 +38,32 @@ def check_paths_for_group_leakage(train_df, test_df, unique_id):
     :return: duplications of any image into both sets as a new dataframe
     :rtype: DataFrame
     """
-    return train_df.merge(test_df, on=unique_id, how='inner')
+
+
+def see_part_potential_bias(df, label, sensitive_column_list):
+    """
+    This function gives you a tabulated dataframe of sensitive columns e.g.
+    gender, race, or whichever you think are relevant,
+    in terms of a labels (put in the label column name).
+    You may discover all your pathologically labeled sample are of one ethnic
+    group, gender or other category in your dataframe. Remeber some early
+    neural nets for chest-Xrays were less accurate in women and the fact that
+    there were fewer Xrays of women in the datasets they built on did not help
+
+    :param df: dataframe including sample IDs, labels, and sensitive columns
+    :type df: Dataframe
+
+    :return: tab_fight_bias2, a neatly sorted dataframe
+    :rtype: Dataframe
+    """
+
+    label_and_sensitive = [label]+sensitive_column_list
+    tab_fight_bias = pd.DataFrame(
+        example[label_and_sensitive].value_counts()
+    )
+    tab_fight_bias2 = tab_fight_bias.groupby(label_and_sensitive).sum()
+    tab_fight_bias2 = tab_fight_bias2.rename(columns={0: 'sums'})
+    return tab_fight_bias2
 
 # to run on single images, one at a time
 

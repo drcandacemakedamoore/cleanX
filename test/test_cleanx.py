@@ -28,6 +28,15 @@ def test_blur_out_edges():
     defblur = cleanX.blur_out_edges(image)
     assert type(defblur) == np.ndarray 
 
+# def test_check_paths_for_group_leakage():
+#     train_dfE = (os.path.join(image_directory,'train_sample_df.csv'))
+#     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
+#     train_df= pd.read_csv(train_dfE)
+#     test_df = pd.read_csv(test_dfE)
+#     uniqueIDE = 'image_path'
+#     checked_example = cleanX.check_paths_for_group_leakage(train_df, test_df, uniqueIDE)
+#     assert len(checked_example) > 1 
+
 def test_check_paths_for_group_leakage():
     train_dfE = (os.path.join(image_directory,'train_sample_df.csv'))
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
@@ -48,7 +57,10 @@ def test_dimensions_to_df():
     deflep = cleanX.dimensions_to_df(image_directory)
     assert len(deflep) > 1    
 
-
+def test_see_part_potential_bias():
+    e2 = (os.path.join(image_directory,'example_for_bias.csv'))
+    donwa = cleanX.see_part_potential_bias(e2,"Label", ["Gender", "Race"])
+    assert len(donway) > 1
 # def test_show_images_in_df():
 
 #     # this testing remains undone... the function returns basically the line bwlo, and testing will be difficult     
