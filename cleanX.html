@@ -104,9 +104,9 @@ element. Super handy for advanced image manipulation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>width</strong> (<em>integer</em>) – width of matrix to be created</p></li>
-<li><p><strong>height</strong> (<em>integer</em>) – height of matrix to be created</p></li>
-<li><p><strong>default_element</strong> (<em>float</em><em> or </em><em>integer</em><em> or </em><em>string</em>) – element to populate the matrix with</p></li>
+<li><p><strong>width</strong> (<em>integer</em>) – Width of matrix to be created</p></li>
+<li><p><strong>height</strong> (<em>integer</em>) – Height of matrix to be created</p></li>
+<li><p><strong>default_element</strong> (<em>float</em><em> or </em><em>integer</em><em> or </em><em>string</em>) – Element to populate the matrix with</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -202,7 +202,7 @@ name (with path) and label into a dataframe</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p></li>
-<li><p><strong>diagnosis_string</strong> (<em>string</em>) – usually a label, may be any string</p></li>
+<li><p><strong>diagnosis_string</strong> (<em>string</em>) – Usually a label, may be any string</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -221,7 +221,7 @@ name (with path) and label into a dataframe</p>
 data analysis</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>folder_name</strong> (<em>folder/directory</em>) – adress of folder with images</p>
+<dd class="field-odd"><p><strong>folder_name</strong> (<em>Folder/directory</em>) – Adress of folder with images.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>image height, width and proportion heigth/width as a new dataframe</p>
@@ -242,7 +242,7 @@ however the dataset may be different and/or varied</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>folder_name</strong> (<em>string</em>) – folder_name, directory name</p></li>
+<li><p><strong>folder_name</strong> (<em>string</em>) – Folder_name, directory name.</p></li>
 <li><p><strong>bins_count</strong> (<em>int</em>) – bins_count, number of bins desired (defaults to 10)</p></li>
 </ul>
 </dd>
@@ -265,8 +265,8 @@ x is the percent height of the sample.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_directory</strong> (<em>integer</em>) – The folder in which the images are</p></li>
-<li><p><strong>percent_height_of_sample</strong> – from where on image to call upper</p></li>
-<li><p><strong>value_for_line</strong> (<em>integer</em>) – from where in pixel values to call averaged
+<li><p><strong>percent_height_of_sample</strong> – From where on image to call upper</p></li>
+<li><p><strong>value_for_line</strong> (<em>integer</em>) – From where in pixel values to call averaged
 values abnormal</p></li>
 </ul>
 </dd>
@@ -323,7 +323,7 @@ the same mean are in and out of normal range if the knife so falls</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_directory</strong> (<em>directory</em>) – The folder in which the images are</p></li>
-<li><p><strong>percentage_to_say_outliers</strong> (<em>integer</em>) – percentage to capture</p></li>
+<li><p><strong>percentage_to_say_outliers</strong> (<em>integer</em>) – Percentage to capture</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -345,7 +345,7 @@ or problem images</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_directory</strong> (<em>directory</em>) – The folder in which the images are</p></li>
-<li><p><strong>percentage_to_say_outliers</strong> (<em>integer</em>) – percentage to capture</p></li>
+<li><p><strong>percentage_to_say_outliers</strong> (<em>integer</em>) – Percentage to capture</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -375,7 +375,7 @@ Multi-lingual including English. Accuracy is very high, but not perfect.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p></li>
-<li><p><strong>label_word</strong> (<em>string</em>) – label word</p></li>
+<li><p><strong>label_word</strong> (<em>string</em>) – Label word</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -397,7 +397,7 @@ Multi-lingual including English. Accuracy is very high, but not perfect.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p></li>
-<li><p><strong>legnth</strong> (<em>integer</em>) – legnth to find above, inclusive</p></li>
+<li><p><strong>legnth</strong> (<em>integer</em>) – Legnth to find above, inclusive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -421,7 +421,7 @@ is approximate, may be a tad more</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p></li>
 <li><p><strong>s</strong> (<em>integer</em>) – legnth to make the sides of the tiny image for comparison</p></li>
-<li><p><strong>percentile</strong> (<em>integer</em>) – percentil to mark as abnormal</p></li>
+<li><p><strong>percentile</strong> (<em>integer</em>) – percentile to mark as abnormal</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -478,13 +478,21 @@ unclear have equal spikes on both ends)</p>
 of the images by dividing their height by widths.
 Important information as many neural nets take images all the
 same size. Clasically most chestXrays are 2500*2000 or 2500 <a href="#id3"><span class="problematic" id="id4">*</span></a>2048;
-however the dataset may be different and/or varied
-:param folder_name: folder_name, directory name
-:type folder_name: string
-:param bins_count: bins_count, number of bins desired (defaults to 10)
-:type bins_count: int
-:return: histo_ht_wt_p, a labeled histogram
-:rtype: tuple</p>
+however the dataset may be different and/or varied</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folder_name</strong> (<em>string</em>) – Folder_name, directory name.</p></li>
+<li><p><strong>bins_count</strong> (<em>int</em>) – bins_count, number of bins desired (defaults to 10)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>histo_ht_wt_p, a labeled histogram</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -500,9 +508,9 @@ there were fewer Xrays of women in the datasets they built on did not help</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>Dataframe</em>) – dataframe including sample IDs, labels, and sensitive columns</p></li>
-<li><p><strong>label</strong> (<em>string</em>) – the name of the column with the labels</p></li>
-<li><p><strong>sensitive_column_list</strong> – list of names of sensitive columns on your</p></li>
+<li><p><strong>df</strong> (<em>Dataframe</em>) – Dataframe including sample IDs, labels, and sensitive columns</p></li>
+<li><p><strong>label</strong> (<em>string</em>) – The name of the column with the labels</p></li>
+<li><p><strong>sensitive_column_list</strong> – List of names of sensitive columns on your</p></li>
 </ul>
 </dd>
 </dl>
@@ -553,8 +561,8 @@ but smaller, so they can be compared quickly</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>inter_ob</strong> – list, should be a dataframe column</p></li>
-<li><p><strong>legnth_name</strong> (<em>integer</em>) – size of image name going from end</p></li>
+<li><p><strong>inter_ob</strong> – List, should be a dataframe column</p></li>
+<li><p><strong>legnth_name</strong> (<em>integer</em>) – Size of image name going from end</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
