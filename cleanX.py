@@ -52,11 +52,11 @@ def see_part_potential_bias(df, label, sensitive_column_list):
     neural nets for chest-Xrays were less accurate in women and the fact that
     there were fewer Xrays of women in the datasets they built on did not help
 
-    :param df: dataframe including sample IDs, labels, and sensitive columns
+    :param df: Dataframe including sample IDs, labels, and sensitive columns
     :type df: Dataframe
-    :param label: the name of the column with the labels
+    :param label: The name of the column with the labels
     :type label: string
-    :param sensitive_column_list: list of names of sensitive columns on your
+    :param sensitive_column_list: List of names of sensitive columns on your
     dataframe
     :type sensitive_column_list: list
 
@@ -239,8 +239,8 @@ def dimensions_to_df(folder_name):
     Finds dimensions on images in a folder, and makes a df for exploratory
     data analysis
 
-    :param folder_name: adress of folder with images
-    :type folder_name: folder/directory
+    :param folder_name: Adress of folder with images.
+    :type folder_name: Folder/directory
 
 
     :return: image height, width and proportion heigth/width as a new dataframe
@@ -271,8 +271,9 @@ def dimensions_to_histo(folder_name, bins_count=10):
     same size. Clasically most chestXrays are 2500*2000 or 2500 *2048;
     however the dataset may be different and/or varied
 
-    :param folder_name: folder_name, directory name
+    :param folder_name: Folder_name, directory name.
     :type folder_name: string
+
     :param bins_count: bins_count, number of bins desired (defaults to 10)
     :type bins_count: int
 
@@ -319,7 +320,8 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     Important information as many neural nets take images all the
     same size. Clasically most chestXrays are 2500*2000 or 2500 *2048;
     however the dataset may be different and/or varied
-    :param folder_name: folder_name, directory name
+
+    :param folder_name: Folder_name, directory name.
     :type folder_name: string
     :param bins_count: bins_count, number of bins desired (defaults to 10)
     :type bins_count: int
@@ -389,9 +391,9 @@ def find_by_sample_upper(
 
         :param source_directory: The folder in which the images are
         :type source_directory: directory
-        :param percent_height_of_sample: from where on image to call upper
+        :param percent_height_of_sample: From where on image to call upper
         :type source_directory: integer
-        :param value_for_line: from where in pixel values to call averaged
+        :param value_for_line: From where in pixel values to call averaged
             values abnormal
         :type value_for_line: integer
 
@@ -458,7 +460,7 @@ def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
 
         :param source_directory: The folder in which the images are
         :type source_directory: directory
-        :param percentage_to_say_outliers: percentage to capture
+        :param percentage_to_say_outliers: Percentage to capture
         :type percentage_to_say_outliers: integer
 
 
@@ -489,7 +491,7 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
 
         :param source_directory: The folder in which the images are
         :type source_directory: directory
-        :param percentage_to_say_outliers: percentage to capture
+        :param percentage_to_say_outliers: Percentage to capture
         :type percentage_to_say_outliers: integer
 
 
@@ -563,11 +565,11 @@ def create_matrix(width, height, default_element):
         Takes width, height then creates a matrix populated by the default
         element. Super handy for advanced image manipulation.
 
-        :param width: width of matrix to be created
+        :param width: Width of matrix to be created
         :type width: integer
-        :param height: height of matrix to be created
+        :param height: Height of matrix to be created
         :type height: integer
-        :param default_element: element to populate the matrix with
+        :param default_element: Element to populate the matrix with
         :type default_element: float or integer or string
 
         :return: 2D matrix populated
@@ -593,7 +595,7 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     :type directory: Directory
     :param s: legnth to make the sides of the tiny image for comparison
     :type s: integer
-    :param percentile: percentil to mark as abnormal
+    :param percentile: percentile to mark as abnormal
     :type percentile: integer
 
     :return: Dataframe with a column that notes mismatches
@@ -665,7 +667,7 @@ def find_suspect_text(directory, label_word):
 
     :param directory: Directory (folder).
     :type directory: Directory
-    :param label_word: label word
+    :param label_word: Label word
     :type label_word: string
 
     :return: Dataframe with a column of text found over the legnth
@@ -701,7 +703,7 @@ def find_suspect_text_by_legnth(directory, legnth):
 
     :param directory: Directory (folder).
     :type directory: Directory
-    :param legnth: legnth to find above, inclusive
+    :param legnth: Legnth to find above, inclusive
     :type legnth: integer
 
     :return: Dataframe with a column of text found
@@ -890,9 +892,9 @@ def show_images_in_df(iter_ob, legnth_name):
     Shows images by taking them off a dataframe column, and puths them up
     but smaller, so they can be compared quickly
 
-    :param inter_ob: list, should be a dataframe column
+    :param inter_ob: List, should be a dataframe column
     :type iter_ob: list
-    :param legnth_name: size of image name going from end
+    :param legnth_name: Size of image name going from end
     :type legnth_name: integer
 
     :return: techically no return but makes a plot of images with names
@@ -932,7 +934,7 @@ def dataframe_up_my_pics(directory, diagnosis_string):
 
     :param directory: Directory (folder).
     :type directory: Directory
-    :param diagnosis_string: usually a label, may be any string
+    :param diagnosis_string: Usually a label, may be any string
     :type diagnosis_string: string
 
     :return: Dataframe of pictures and label
