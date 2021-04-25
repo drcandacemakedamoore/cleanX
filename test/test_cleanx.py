@@ -54,6 +54,13 @@ def test_dimensions_to_df():
 #     # this testing remains undone... the function returns basically the line bwlo, and testing will be difficult     
 #     plt.show()
 
+def test_dimensions_to_histo():
+    output = cleanX.dimensions_to_histo(image_directory, 10)
+    assert len(output) > 1
+
+def proportions_ht_wt_to_histo():
+    output =  cleanX.proportions_ht_wt_to_histo(image_directory, 10)
+    assert len(output) > 1
 
 def test_tesseract_specific():
     lettered = cleanX.tesseract_specific(image_directory)
