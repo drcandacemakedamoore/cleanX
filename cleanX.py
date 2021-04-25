@@ -232,7 +232,7 @@ def dimensions_to_df(folder_name):
     return new_datafrm
 
 
-def dimensions_to_histosax(folder_name, bins_count=10):
+def dimensions_to_histo(folder_name, bins_count=10):
     """
     Looks in the directory given, and produces a histogram of variosu widths
     and heights.Important information as many neural nets take images all the
