@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+      # GITHUB_REPOSITORY
+jobs:
+  tagged-release:
+    if: ${{ github.repository == 'drcandacemakedamoore/cleanX' }}
+    name: Tagged Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - uses: s-weigand/setup-conda@v1
+        with:
+          conda-channels: conda-forge
+      - run: conda install conda-build anaconda-client conda-verify
+      - run: which anaconda
+      - run: conda build -c conda-forge --output-folder ./dist ./conda-pkg/
+      - run: conda convert -p osx-64 -o ./dist ./dist/linux-64/*.tar.bz2
+      - run: conda convert -p win-64 -o ./dist ./dist/linux-64/*.tar.bz2
+      - run: >
+          ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
+          anaconda upload --label main ./dist/linux-64/*.tar.bz2
+      - run: >
+          ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
+          anaconda upload --label main ./dist/osx-64/*.tar.bz2
+
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            ./dist/linux-64/cleanx-*.tar.bz2

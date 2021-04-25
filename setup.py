@@ -1,6 +1,7 @@
 import sys
 import shlex
 import os
+import subprocess
 
 from glob import glob
 
@@ -80,9 +81,16 @@ class SphinxApiDoc(Command):
 with open('README.md', 'r') as f:
     readme = f.read()
 
-
 name = 'cleanX'
-version = '0.0.4'
+try:
+    version = subprocess.check_output([
+        'git',
+        'describe',
+        '--abbrev=0',
+        '--tags',
+    ]).strip()[1:].decode()
+except subprocess.CalledProcessError:
+    version = '0.0.0'
 
 setup(
     name=name,
