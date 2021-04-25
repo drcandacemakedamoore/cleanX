@@ -1,9 +1,9 @@
 package:
   name: cleanx
-  version: 0.0.4
+  version: ${version}
 
 source:
-  git_rev: v0.0.4
+  git_rev: ${tag}
   git_url: https://github.com/drcandacemakedamoore/cleanX.git
 
 requirements:

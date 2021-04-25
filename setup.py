@@ -1,6 +1,7 @@
 import sys
 import shlex
 import os
+import subprocess
 
 from glob import glob
 
@@ -15,6 +16,24 @@ project_dir = os.path.dirname(os.path.realpath(__file__))
 # _Note_ you _must_ install the project
 # before you generate documentation, otherwise it will not work.
 sys.path = [x for x in sys.path if not x == project_dir]
+
+
+with open('README.md', 'r') as f:
+    readme = f.read()
+
+name = 'cleanX'
+
+try:
+    tag = subprocess.check_output([
+        'git',
+        'describe',
+        '--abbrev=0',
+        '--tags',
+    ]).strip().decode()
+except subprocess.CalledProcessError:
+    tag = 'v0.0.0'
+
+version = tag[1:]
 
 
 class PyTest(TestCommand):
@@ -77,12 +96,31 @@ class SphinxApiDoc(Command):
         ]))
 
 
-with open('README.md', 'r') as f:
-    readme = f.read()
+class GenerateCondaYaml(Command):
 
+    user_options = []
 
-name = 'cleanX'
-version = '0.0.4'
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        from string import Template
+
+        tpl_path = os.path.join(project_dir, 'conda-pkg/meta.yaml.in')
+
+        with open(tpl_path) as f:
+            tpl = Template(f.read())
+
+        dst_path = tpl_path[:-3]
+        with open(dst_path, 'w') as f:
+            f.write(tpl.substitute(
+                version=version,
+                tag=tag,
+            ))
+
 
 setup(
     name=name,
@@ -101,6 +139,7 @@ setup(
         'test': PyTest,
         'lint': Pep8,
         'apidoc': SphinxApiDoc,
+        'genconda': GenerateCondaYaml,
     },
     tests_require=['pytest', 'pycodestyle'],
     command_options={

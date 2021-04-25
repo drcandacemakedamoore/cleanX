@@ -56,6 +56,8 @@ jobs:
           python-version: 3.8
       - uses: s-weigand/setup-conda@v1
         with:
-          conda-channesl: conda-forge
+          conda-channels: conda-forge
+      - run: python3.8 -m venv .venv
+      - run: .venv/bin/python setup.py genconda
       - run: conda install conda-build
       - run: conda build -c conda-forge ./conda-pkg/
