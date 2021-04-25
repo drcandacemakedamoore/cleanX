@@ -232,6 +232,54 @@ def dimensions_to_df(folder_name):
     return new_datafrm
 
 
+def dimensions_to_histosax(folder_name, bins_count=10):
+    """
+    Looks in the directory given, and produces a histogram of variosu widths
+    and heights.Important information as many neural nets take images all the
+    same size. Clasically most chestXrays are 2500*2000 or 2500 *2048;
+    however the dataset may be different and/or varied
+
+    :param folder_name: folder_name, directory name
+    :type folder_name: string
+    :param bins_count: bins_count, number of bins desired (defaults to 10)
+    :type bins_count: int
+
+    :return: histo_ht_wt, a labeled histogram
+    :rtype: nd.array
+
+    """
+    non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
+    picy_list, list_ht, list_wt = [], [], []
+
+    for picy in non_suspects:
+        picy_list.append(picy)
+        image = cv2.imread(picy, cv2.IMREAD_GRAYSCALE)
+        ht, wt = image.shape
+        list_ht.append(ht)
+        list_wt.append(wt)
+        new_datafrme = pd.DataFrame({
+            'images': picy_list,
+            'height': list_ht,
+            'width': list_wt
+        })
+    new_datafrme['proportion'] = new_datafrme['height']/new_datafrme['width']
+    fig, ax = plt.subplots(1, 1)
+
+    # Add axis labels
+    ax.set_xlabel('dimension size')
+    ax.set_ylabel('count')
+
+    # Generate the histogram
+    histo_ht_wt = ax.hist(
+        (new_datafrme.height, new_datafrme.width),
+        bins=bins_count
+    )
+
+    # Add a legend
+    ax.legend(('height', 'width'), loc='upper right')
+    return histo_ht_wt
+
+
 def crop_them_all(origin_folder, target_folder):
     """
     Crops all images and moves them to a target folder
