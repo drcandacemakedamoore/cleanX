@@ -57,7 +57,7 @@ def see_part_potential_bias(df, label, sensitive_column_list):
     :param label: The name of the column with the labels
     :type label: string
     :param sensitive_column_list: List of names of sensitive columns on your
-    dataframe
+        dataframe
     :type sensitive_column_list: list
 
     :return: tab_fight_bias2, a neatly sorted dataframe
