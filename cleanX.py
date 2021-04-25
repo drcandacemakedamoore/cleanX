@@ -38,7 +38,8 @@ def check_paths_for_group_leakage(train_df, test_df, unique_id):
     :return: duplications of any image into both sets as a new dataframe
     :rtype: DataFrame
     """
-
+    pics_in_both_groups = train_df.merge(test_df, on = unique_id, how='inner')
+    return pics_in_both_groups
 
 def see_part_potential_bias(df, label, sensitive_column_list):
     """
