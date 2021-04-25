@@ -59,8 +59,9 @@ def test_dimensions_to_df():
 
 def test_see_part_potential_bias():
     e2 = (os.path.join(image_directory,'example_for_bias.csv'))
-    donwa = cleanX.see_part_potential_bias(e2,"Label", ["Gender", "Race"])
-    assert len(donway) > 1
+    e3 = pd.read_csv(e2)
+    donwa = cleanX.see_part_potential_bias(e3,"Label", ["Gender", "Race"])
+    assert len(donwa) > 1
 # def test_show_images_in_df():
 
 #     # this testing remains undone... the function returns basically the line bwlo, and testing will be difficult     

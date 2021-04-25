@@ -59,7 +59,7 @@ def see_part_potential_bias(df, label, sensitive_column_list):
 
     label_and_sensitive = [label]+sensitive_column_list
     tab_fight_bias = pd.DataFrame(
-        example[label_and_sensitive].value_counts()
+        df[label_and_sensitive].value_counts()
     )
     tab_fight_bias2 = tab_fight_bias.groupby(label_and_sensitive).sum()
     tab_fight_bias2 = tab_fight_bias2.rename(columns={0: 'sums'})
