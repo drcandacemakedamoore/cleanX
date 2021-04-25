@@ -233,6 +233,29 @@ data analysis</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="cleanX.dimensions_to_histosax">
+<code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">dimensions_to_histosax</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dimensions_to_histosax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks in the directory given, and produces a histogram of variosu widths
+and heights.Important information as many neural nets take images all the
+same size. Clasically most chestXrays are 2500*2000 or 2500 <a href="#id1"><span class="problematic" id="id2">*</span></a>2048;
+however the dataset may be different and/or varied</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folder_name</strong> (<em>string</em>) – folder_name, directory name</p></li>
+<li><p><strong>bins_count</strong> (<em>int</em>) – bins_count, number of bins desired (defaults to 10)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>histo_ht_wt, a labeled histogram</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>nd.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="cleanX.find_by_sample_upper">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">find_by_sample_upper</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_for_line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_by_sample_upper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes average of upper pixels, and can show you outliers defined by a
