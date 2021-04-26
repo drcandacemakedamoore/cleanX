@@ -38,7 +38,7 @@ applications</p>
 <dl class="py function">
 <dt id="cleanX.augment_and_move">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">augment_and_move</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.augment_and_move" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes images, and applies the same list of augmentations to all of them</p>
+<dd><p>Takes images and applies the same list of augmentations to all of them</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -104,8 +104,8 @@ element. Super handy for advanced image manipulation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>width</strong> (<em>integer</em>) – Width of matrix to be created</p></li>
-<li><p><strong>height</strong> (<em>integer</em>) – Height of matrix to be created</p></li>
+<li><p><strong>width</strong> (<em>integer</em>) – Width of the matrix to be created</p></li>
+<li><p><strong>height</strong> (<em>integer</em>) – The height of matrix to be created</p></li>
 <li><p><strong>default_element</strong> (<em>float</em><em> or </em><em>integer</em><em> or </em><em>string</em>) – Element to populate the matrix with</p></li>
 </ul>
 </dd>
@@ -224,7 +224,7 @@ data analysis</p>
 <dd class="field-odd"><p><strong>folder_name</strong> (<em>Folder/directory</em>) – Adress of folder with images.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>image height, width and proportion heigth/width as a new dataframe</p>
+<dd class="field-even"><p>image height, width and proportion height/width as a new dataframe</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>DataFrame</p>
@@ -235,9 +235,9 @@ data analysis</p>
 <dl class="py function">
 <dt id="cleanX.dimensions_to_histo">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">dimensions_to_histo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dimensions_to_histo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Looks in the directory given, and produces a histogram of variosu widths
-and heights.Important information as many neural nets take images all the
-same size. Clasically most chestXrays are 2500*2000 or 2500 <a href="#id1"><span class="problematic" id="id2">*</span></a>2048;
+<dd><p>Looks in the directory given, and produces a histogram of various widths
+and heights. Important information as many neural nets take images all the
+same size. Classically most chest-X-rays are 2500*2000 or 2500 <a href="#id1"><span class="problematic" id="id2">*</span></a>2048;
 however the dataset may be different and/or varied</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -259,8 +259,8 @@ however the dataset may be different and/or varied</p>
 <dt id="cleanX.find_by_sample_upper">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">find_by_sample_upper</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_for_line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_by_sample_upper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes average of upper pixels, and can show you outliers defined by a
-percentage e.g. shows images with averge of top pixels in top x % where
-x is the percent height of the sample.</p>
+percentage, e.g. shows images with an average of top pixels in top x % 
+where x is the percent height of the sample.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -338,9 +338,9 @@ the same mean are in and out of normal range if the knife so falls</p>
 <dl class="py function">
 <dt id="cleanX.find_outliers_by_total_mean">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">find_outliers_by_total_mean</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_outliers_by_total_mean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes the average of all pixels in image, returns a dataframe with
+<dd><p>Takes the average of all pixels in an image, returns a dataframe with
 those images that are outliers by mean…should catch some inverted or
-or problem images</p>
+problem images</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -530,7 +530,7 @@ there were fewer Xrays of women in the datasets they built on did not help</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>set_of_images</strong> – Set_of_images</p></li>
-<li><p><strong>s</strong> (<em>integer</em>) – legnth of sides in image made</p></li>
+<li><p><strong>s</strong> (<em>integer</em>) – length of sides in the image made</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -552,7 +552,7 @@ duplicated rows</p>
 <dl class="py function">
 <dt id="cleanX.show_images_in_df">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">show_images_in_df</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iter_ob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legnth_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.show_images_in_df" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shows images by taking them off a dataframe column, and puths them up
+<dd><p>Shows images by taking them off a dataframe column, and puts them up
 but smaller, so they can be compared quickly</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -562,7 +562,7 @@ but smaller, so they can be compared quickly</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>techically no return but makes a plot of images with names</p>
+<dd class="field-even"><p>technically no return but makes a plot of images with names</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>none</p>
@@ -611,7 +611,7 @@ np.min(x_nonzero):np.max(x_nonzero))</p>
 <dt id="cleanX.understand_df">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">understand_df</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.understand_df" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes a dataframe (if you have a dataframe for images) and prints
-information including legnth, data types, nulls and number of
+information including length, data types, nulls and number of
 duplicated rows</p>
 </dd></dl>
 
