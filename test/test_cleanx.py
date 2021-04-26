@@ -106,6 +106,12 @@ def test_crop_them_all():
     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
     assert os.path.isfile(vovo) 
 
+def test_reasonable_rotation_augmentation():
+    imageE = (os.path.join(image_directory,'testtocrop.jpg'))
+    dman = cleanX.reasonable_rotation_augmentation(0, 12, 3, imageE)
+    assert len(dman) > 1
+    
+
 def test_find_by_sample_upper():
     lovereturned = cleanX.find_by_sample_upper(image_directory, 10, 10)
     assert len(lovereturned) >= 1

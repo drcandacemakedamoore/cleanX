@@ -181,6 +181,44 @@ def blur_out_edges(image):
     blurred_edge_image = example * (msk / 255) + filtered * ((255 - msk) / 255)
     return blurred_edge_image
 
+
+def reasonable_rotation_augmentation(angle1, angle2, number_slices, image):
+    """
+    Works on a single image, and returns a list of augmented images which are
+    based on twisting the angle from angle1 to angle2 with 'number_slices' as
+    the number of augmented images to be made from the original. It is not
+    realistic or desirable to augment images of most Xrays by flipping them. In
+    abdominal or chest X-rays that would create an augmentation that could
+    imply specific pathologies e.g. situs inversus. We suggest augmenting
+    between angles -5 to 5.
+
+    :param angle1: angle1 is the angle from the original to the first augmented
+    :type angle1: float
+    :param angle2: angle2 is the angle from the original to the last augmented
+    :type angle2: float
+    :param number_slices: number of images to be produced
+    :type number_slices: int
+    :param image: Image
+    :type image: Image (JPEG)
+
+    :return: list of PIL images
+    :rtype: list
+
+    """
+    increment = abs(angle1-angle2)/number_slices
+    angle1f = float(angle1)
+    angle2f = float(angle2)
+    number_slicesf = float(number_slices)
+    increment = abs(angle1f-angle2f)/number_slicesf
+    num_list = np.arange(angle1f, angle2f,  increment)
+    image4R = Image.open(image)
+    augmentos = []
+    for i in num_list:
+        augmentos.append(image4R.rotate(i))
+
+    return augmentos
+
+
 # to run on a list to make a prototype tiny Xray
 
 
@@ -385,7 +423,7 @@ def find_by_sample_upper(
 ):
     """
         Takes average of upper pixels, and can show you outliers defined by a
-        percentage, e.g. shows images with an average of top pixels in top x % 
+        percentage, e.g. shows images with an average of top pixels in top x %
         where x is the percent height of the sample.
 
         :param source_directory: The folder in which the images are
