@@ -190,7 +190,7 @@ def seperate_image_averger(set_of_images, s=5):
 
     :param set_of_images: Set_of_images
     :type set_of_images:
-    :param s: legnth of sides in image made
+    :param s: length of sides in the image made
     :type s: integer
 
     :return: image
@@ -209,7 +209,7 @@ def seperate_image_averger(set_of_images, s=5):
 def augment_and_move(origin_folder, target_folder, transformations):
 
     """
-    Takes images, and applies the same list of augmentations to all of them
+    Takes images and applies the same list of augmentations to all of them
 
     :param origin_folder: The folder in which the images are
     :type origin_folder: directory
@@ -242,7 +242,7 @@ def dimensions_to_df(folder_name):
     :type folder_name: Folder/directory
 
 
-    :return: image height, width and proportion heigth/width as a new dataframe
+    :return: image height, width and proportion height/width as a new dataframe
     :rtype: DataFrame
     """
     non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
@@ -265,9 +265,9 @@ def dimensions_to_df(folder_name):
 
 def dimensions_to_histo(folder_name, bins_count=10):
     """
-    Looks in the directory given, and produces a histogram of variosu widths
-    and heights.Important information as many neural nets take images all the
-    same size. Clasically most chestXrays are 2500*2000 or 2500 *2048;
+    Looks in the directory given, and produces a histogram of various widths
+    and heights. Important information as many neural nets take images all the
+    same size. Classically most chest-X-rays are 2500*2000 or 2500 *2048;
     however the dataset may be different and/or varied
 
     :param folder_name: Folder_name, directory name.
@@ -385,8 +385,8 @@ def find_by_sample_upper(
 ):
     """
         Takes average of upper pixels, and can show you outliers defined by a
-        percentage e.g. shows images with averge of top pixels in top x % where
-        x is the percent height of the sample.
+        percentage, e.g. shows images with an average of top pixels in top x % 
+        where x is the percent height of the sample.
 
         :param source_directory: The folder in which the images are
         :type source_directory: directory
@@ -453,9 +453,9 @@ def find_sample_upper_greater_than_lower(
 
 def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
     """
-        Takes the average of all pixels in image, returns a dataframe with
+        Takes the average of all pixels in an image, returns a dataframe with
         those images that are outliers by mean...should catch some inverted or
-        or problem images
+        problem images
 
         :param source_directory: The folder in which the images are
         :type source_directory: directory
@@ -521,7 +521,7 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
 def understand_df(df):
     """
         Takes a dataframe (if you have a dataframe for images) and prints
-        information including legnth, data types, nulls and number of
+        information including length, data types, nulls and number of
         duplicated rows
         """
 
@@ -564,9 +564,9 @@ def create_matrix(width, height, default_element):
         Takes width, height then creates a matrix populated by the default
         element. Super handy for advanced image manipulation.
 
-        :param width: Width of matrix to be created
+        :param width: Width of the matrix to be created
         :type width: integer
-        :param height: Height of matrix to be created
+        :param height: The height of matrix to be created
         :type height: integer
         :param default_element: Element to populate the matrix with
         :type default_element: float or integer or string
@@ -888,7 +888,7 @@ def find_duplicated_images_todf(directory):
 
 def show_images_in_df(iter_ob, legnth_name):
     """
-    Shows images by taking them off a dataframe column, and puths them up
+    Shows images by taking them off a dataframe column, and puts them up
     but smaller, so they can be compared quickly
 
     :param inter_ob: List, should be a dataframe column
@@ -896,7 +896,7 @@ def show_images_in_df(iter_ob, legnth_name):
     :param legnth_name: Size of image name going from end
     :type legnth_name: integer
 
-    :return: techically no return but makes a plot of images with names
+    :return: technically no return but makes a plot of images with names
     :rtype: none
 
         """
