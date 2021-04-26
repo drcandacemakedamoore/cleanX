@@ -259,7 +259,7 @@ however the dataset may be different and/or varied</p>
 <dt id="cleanX.find_by_sample_upper">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">find_by_sample_upper</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_for_line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_by_sample_upper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes average of upper pixels, and can show you outliers defined by a
-percentage, e.g. shows images with an average of top pixels in top x % 
+percentage, e.g. shows images with an average of top pixels in top x %
 where x is the percent height of the sample.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -491,6 +491,34 @@ however the dataset may be different and/or varied</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="cleanX.reasonable_rotation_augmentation">
+<code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">reasonable_rotation_augmentation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.reasonable_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Works on a single image, and returns a list of augmented images which are
+based on twisting the angle from angle1 to angle2 with ‘number_slices’ as
+the number of augmented images to be made from the original. It is not
+realistic or desirable to augment images of most Xrays by flipping them. In
+abdominal or chest X-rays that would create an augmentation that could
+imply specific pathologies e.g. situs inversus. We suggest augmenting
+between angles -5 to 5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>angle1</strong> (<em>float</em>) – angle1 is the angle from the original to the first augmented</p></li>
+<li><p><strong>angle2</strong> (<em>float</em>) – angle2 is the angle from the original to the last augmented</p></li>
+<li><p><strong>number_slices</strong> (<em>int</em>) – number of images to be produced</p></li>
+<li><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of PIL images</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
 </dd>
 </dl>
 </dd></dl>
