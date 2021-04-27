@@ -38,7 +38,12 @@ def harsh_sharpie_enhance():
     image = os.path.join(image_directory, 'testtocrop.jpg')
     ho = cleanX.harsh_sharpie_enhance(image)
     assert ho.shape[0] >1
-   
+
+def test_salting():
+    lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
+    salt = cleanX.salting(lindo_image)
+    assert salt.shape[0] > 1
+
 def test_simple_rotation_augmentation():
     lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
     lindo_rotated = cleanX.simple_rotation_augmentation(6, lindo_image)

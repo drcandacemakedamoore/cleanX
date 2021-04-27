@@ -197,6 +197,25 @@ def harsh_sharpie_enhance(image):
     return new_image_array
 
 
+def salting(img):
+    """
+    This function adds some noise to an image.
+
+    :param img_name: String for image name
+    :type img_name: string
+
+    :return: new_image_array, with noise
+    :rtype: nd.array
+
+    """
+    kernel = (5, 5)
+    img = cv2.imread(img)
+    erosion = cv2.erode(img, kernel, iterations=90)
+    dilation = cv2.dilate(erosion, kernel, iterations=10)
+    salty_noised = (img + (erosion - dilation))
+    return salty_noised
+
+
 def simple_rotation_augmentation(angle_list1, image):
     """
     This function takes one picture and rotates is by a number
