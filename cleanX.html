@@ -38,7 +38,8 @@ applications</p>
 <dl class="py function">
 <dt id="cleanX.augment_and_move">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">augment_and_move</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.augment_and_move" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes images and applies the same list of augmentations to all of them</p>
+<dd><p>Takes images and applies the same list of augmentations, which can include
+the cleanX function crop, to all of them</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -603,17 +604,17 @@ but smaller, so they can be compared quickly</p>
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">simple_rotation_augmentation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_list1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.simple_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes one picture and rotates is by a number
 of degress is angle_list1.This function can be used with the
-augment_and_move function as follows (example):</p>
-<dl class="simple">
-<dt>augment_and_move(</dt><dd><p>‘D:/my_academia/dataset/random_within_domain’,
+augment_and_move function as follows (example):
+augment_and_move(</p>
+<blockquote>
+<div><p>‘D:/my_academia/dataset/random_within_domain’,
 ‘D:/my_academia/elo’,
 [partial(simple_rotation_augmentation,5)],</p>
-</dd>
-</dl>
+</div></blockquote>
 <p>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image</p>
+<dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>rotated image</p>
