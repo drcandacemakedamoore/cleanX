@@ -434,6 +434,24 @@ is approximate, may be a tad more</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="cleanX.harsh_sharpie_enhance">
+<code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">harsh_sharpie_enhance</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.harsh_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a new image that is very sharper to the human eye,
+and has new values in most of the pixels(besides the background)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>string</em>) – String for image name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>new_image_array, a sharpened image for humans</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>nd.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="cleanX.histogram_difference_for_inverts">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">histogram_difference_for_inverts</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.histogram_difference_for_inverts" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function looks for images by a spike on the end of thier pixel
@@ -643,6 +661,24 @@ np.min(x_nonzero):np.max(x_nonzero))</p>
 </dd>
 </dl>
 <p>]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="cleanX.subtle_sharpie_enhance">
+<code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">subtle_sharpie_enhance</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.subtle_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a new image that is very subtly sharper to the human eye,
+but has new values in most of the pixels(besides the background)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>string</em>) – String for image name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>new_image_array, a nearly imperceptibly sharpened image for humans</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>nd.array</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
