@@ -93,6 +93,11 @@ def test_dimensions_to_histo():
     output = cleanX.dimensions_to_histo(image_directory, 10)
     assert len(output) > 1
 
+def test_find_very_hazy():
+    found = cleanX.find_very_hazy(image_directory)
+    assert len(found) > 0    
+     
+
 def proportions_ht_wt_to_histo():
     output =  cleanX.proportions_ht_wt_to_histo(image_directory, 10)
     assert len(output) > 1

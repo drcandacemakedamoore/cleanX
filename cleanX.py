@@ -501,6 +501,31 @@ def crop_them_all(origin_folder, target_folder):
     )
 
 
+def find_very_hazy(directory):
+    suspects = glob.glob(os.path.join(directory, '*.jpg'))
+    hazy, lined = [], []
+    for pic in suspects:
+        image2 = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
+        edges = cv2.Canny(image2, 400, 200)
+        z = edges[edges[:] > 0]
+        asumy = z.sum()
+        f = image2.shape[0]*image2.shape[1]
+        sumdivf = z.sum()/f
+        if sumdivf == 0:
+            hazy.append(pic)
+
+        else:
+            lined.append(pic)
+
+    dfr = pd.DataFrame(hazy)
+    dfr['label'] = 'hazy'
+    dfh = pd.DataFrame(lined)
+    dfh['label'] = 'lined'
+    df = pd.concat([dfr, dfh])
+
+    return df
+
+
 def find_by_sample_upper(
     source_directory,
     percent_height_of_sample,
