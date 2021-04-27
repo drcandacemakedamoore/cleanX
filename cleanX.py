@@ -159,6 +159,44 @@ def crop(image):
         return crop_np(image)
 
 
+def subtle_sharpie_enhance(image):
+    """
+    Makes a new image that is very subtly sharper to the human eye,
+    but has new values in most of the pixels(besides the background)
+
+    :param image: String for image name
+    :type image: string
+
+    :return: new_image_array, a nearly imperceptibly sharpened image for humans
+    :rtype: nd.array
+
+    """
+    ksize = (2, 2)
+    image_body = cv2.imread(image)
+    blur_mask = cv2.blur(image_body, ksize)
+    new_image_array = (2*image_body) - (blur_mask)
+    return new_image_array
+
+
+def harsh_sharpie_enhance(image):
+
+    """
+    Makes a new image that is very sharper to the human eye,
+    and has new values in most of the pixels(besides the background)
+
+    :param image: String for image name
+    :type image: string
+
+    :return: new_image_array, a sharpened image for humans
+    :rtype: nd.array
+    """
+    ksize = (20, 20)
+    image_body = cv2.imread(image)
+    blur_mask = cv2.blur(image_body, ksize)
+    new_image_array = (2*image_body) - (blur_mask)
+    return new_image_array
+
+
 def simple_rotation_augmentation(angle_list1, image):
     """
     This function takes one picture and rotates is by a number
