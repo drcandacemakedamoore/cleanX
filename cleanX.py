@@ -502,6 +502,19 @@ def crop_them_all(origin_folder, target_folder):
 
 
 def find_very_hazy(directory):
+    """
+    Finds pictures that are really "hazy" i.e. there is no real straight line
+    because they are blurred. Usually, at least the left or right tag
+    should give straight lines, thus this function finds image of a certain
+    questionable technique level. 
+
+    :param directory: The folder where the images are
+    :type directory: directory
+
+
+    :return: dataframe with imgs sorted as hazy or regular under label_for_haze
+    :rtype: Dataframe
+    """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     hazy, lined = [], []
     for pic in suspects:
@@ -518,9 +531,9 @@ def find_very_hazy(directory):
             lined.append(pic)
 
     dfr = pd.DataFrame(hazy)
-    dfr['label'] = 'hazy'
+    dfr['label_for_haze'] = 'hazy'
     dfh = pd.DataFrame(lined)
-    dfh['label'] = 'lined'
+    dfh['label_for_haze'] = 'lined'
     df = pd.concat([dfr, dfh])
 
     return df
