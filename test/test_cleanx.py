@@ -8,6 +8,7 @@ import cv2
 from PIL import Image, ImageOps
 import numpy as np
 import pytest
+from functools import partial
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
 target_directory = os.path.join(os.path.dirname(__file__), 'target')
@@ -27,6 +28,13 @@ def test_blur_out_edges():
     image = os.path.join(image_directory, 'testtocrop.jpg')
     defblur = cleanX.blur_out_edges(image)
     assert type(defblur) == np.ndarray 
+
+
+def test_simple_rotation_augmentation():
+    lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
+    lindo_rotated = cleanX.simple_rotation_augmentation(6, lindo_image)
+    assert np.array(lindo_rotated).shape[0] > 1
+
 
 # def test_check_paths_for_group_leakage():
 #     train_dfE = (os.path.join(image_directory,'train_sample_df.csv'))

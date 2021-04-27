@@ -20,6 +20,7 @@ from tesserocr import PyTessBaseAPI
 from filecmp import cmp
 from pathlib import Path
 import re
+from functools import partial
 
 
 # to run on dataframes
@@ -156,6 +157,32 @@ def crop(image):
         return crop_pil(image)
     if isinstance(image, np.ndarray):
         return crop_np(image)
+
+
+def simple_rotation_augmentation(angle_list1, image):
+    """
+    This function takes one picture and rotates is by a number
+    of degress is angle_list1.This function can be used with the
+    augment_and_move function as follows (example):
+    
+    augment_and_move(
+        'D:/my_academia/dataset/random_within_domain',
+        'D:/my_academia/elo',
+        [partial(simple_rotation_augmentation,5)],
+    )
+    
+    :param image: Image
+    :type image: Image (JPEG)
+
+    :return: rotated image
+    :rtype: PIL image
+    """
+    if isinstance(image, str):
+        image4R = Image.open(image)
+    else:
+        image4R = image
+    rotated1 = image4R.rotate(angle_list1)
+    return rotated1
 
 
 def blur_out_edges(image):
