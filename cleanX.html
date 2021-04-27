@@ -436,7 +436,22 @@ is approximate, may be a tad more</p>
 <dl class="py function">
 <dt id="cleanX.find_very_hazy">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">find_very_hazy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_very_hazy" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Finds pictures that are really “hazy” i.e. there is no real straight line
+because they are blurred. Usually, at least the left or right tag
+should give straight lines, thus this function finds image of a certain
+questionable technique level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>directory</em>) – The folder where the images are</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dataframe with imgs sorted as hazy or regular under label_for_haze</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="cleanX.harsh_sharpie_enhance">
