@@ -164,18 +164,18 @@ def simple_rotation_augmentation(angle_list1, image):
     This function takes one picture and rotates is by a number
     of degress is angle_list1.This function can be used with the
     augment_and_move function as follows (example):
-    
     augment_and_move(
         'D:/my_academia/dataset/random_within_domain',
         'D:/my_academia/elo',
         [partial(simple_rotation_augmentation,5)],
     )
-    
-    :param image: Image
+
+    :param image: Image.
     :type image: Image (JPEG)
 
     :return: rotated image
     :rtype: PIL image
+
     """
     if isinstance(image, str):
         image4R = Image.open(image)
@@ -274,7 +274,8 @@ def seperate_image_averger(set_of_images, s=5):
 def augment_and_move(origin_folder, target_folder, transformations):
 
     """
-    Takes images and applies the same list of augmentations to all of them
+    Takes images and applies the same list of augmentations, which can include
+    the cleanX function crop, to all of them
 
     :param origin_folder: The folder in which the images are
     :type origin_folder: directory
