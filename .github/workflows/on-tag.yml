@@ -25,7 +25,7 @@ jobs:
       - run: >-
           TWINE_USERNAME=__token__
           TWINE_PASSWORD=${{ secrets.PYPI_TOKEN }}
-          .venv/bin/python -m twine upload ./dist/*
+          .venv/bin/python -m twine upload --skip-existing ./dist/*
 
       - uses: s-weigand/setup-conda@v1
         with:
