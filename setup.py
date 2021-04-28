@@ -30,7 +30,8 @@ try:
         '--abbrev=0',
         '--tags',
     ]).strip().decode()
-except subprocess.CalledProcessError:
+except subprocess.CalledProcessError as e:
+    print(e.output)
     tag = 'v0.0.0'
 
 version = tag[1:]
