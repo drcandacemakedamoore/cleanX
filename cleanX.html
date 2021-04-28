@@ -101,7 +101,10 @@ train assets.</p></li>
 <dt id="cleanX.create_matrix">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">create_matrix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_element</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.create_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes width, height then creates a matrix populated by the default
-element. Super handy for advanced image manipulation.</p>
+element. Super handy for advanced image manipulation. Note you can not
+create matrices bigger than your computer memory can handle making.
+Therefore the function will work on matrices with dimensions up to
+maybe 500*500 depending</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -650,6 +653,24 @@ but smaller, so they can be compared quickly</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>none</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="cleanX.show_major_lines_on_image">
+<code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">show_major_lines_on_image</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pic_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.show_major_lines_on_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that takes individual images and shows suspect lines i.e.
+lines more likely to be non-biological.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pic_name</strong> (<em>string</em>) – String of image full name e.g. “C:/folder/image.jpg”</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>shows image but technically returns a matplotlib plotted image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.image.AxesImage</p>
 </dd>
 </dl>
 </dd></dl>
