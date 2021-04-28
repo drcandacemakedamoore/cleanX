@@ -10,6 +10,7 @@ requirements:
   build:
     - python
     - setuptools
+    - sphinx
 
   run:
     - python
