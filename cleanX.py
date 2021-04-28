@@ -303,6 +303,36 @@ def reasonable_rotation_augmentation(angle1, angle2, number_slices, image):
     return augmentos
 
 
+def show_major_lines_on_image(pic_name):
+    """
+    A function that takes individual images and shows suspect lines i.e.
+    lines more likely to be non-biological.
+
+    :param pic_name: String of image full name e.g. "C:/folder/image.jpg"
+    :type pic_name: string
+
+    :return: shows image but technically returns a matplotlib plotted image
+    :rtype: matplotlib.image.AxesImage
+    """
+    img = cv2.imread(pic_name, cv2.IMREAD_GRAYSCALE)
+    max_slider = 6
+# Find the edges in the image using canny detector
+    edges = cv2.Canny(img, 3, 100)
+# Detect points that form a line
+    lines = cv2.HoughLinesP(
+        edges,
+        1,
+        np.pi/180,
+        max_slider,
+        minLineLength=30,
+        maxLineGap=20
+    )
+# Draw lines on the image
+    for line in lines:
+        x1, y1, x2, y2 = line[0]
+    # if abs(math.sqrt((x2 - x1)**2 + (y2 - y1)**2)) > 0:
+        imag_lined = cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 3)
+    return plt.imshow(imag_lined)
 # to run on a list to make a prototype tiny Xray
 
 
@@ -506,7 +536,7 @@ def find_very_hazy(directory):
     Finds pictures that are really "hazy" i.e. there is no real straight line
     because they are blurred. Usually, at least the left or right tag
     should give straight lines, thus this function finds image of a certain
-    questionable technique level. 
+    questionable technique level.
 
     :param directory: The folder where the images are
     :type directory: directory
@@ -723,7 +753,10 @@ def create_matrix(width, height, default_element):
     # In python Sequence * Number = Sequence repeated Number of times
     """
         Takes width, height then creates a matrix populated by the default
-        element. Super handy for advanced image manipulation.
+        element. Super handy for advanced image manipulation. Note you can not
+        create matrices bigger than your computer memory can handle making.
+        Therefore the function will work on matrices with dimensions up to
+        maybe 500*500 depending
 
         :param width: Width of the matrix to be created
         :type width: integer

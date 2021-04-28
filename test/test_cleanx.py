@@ -96,7 +96,11 @@ def test_dimensions_to_histo():
 def test_find_very_hazy():
     found = cleanX.find_very_hazy(image_directory)
     assert len(found) > 0    
-     
+
+def test_show_major_lines_on_image():
+    pic_name1 = os.path.join(image_directory, 'testtocrop.jpg')
+    deflop = cleanX.show_major_lines_on_image(pic_name1)
+    assert deflop
 
 def proportions_ht_wt_to_histo():
     output =  cleanX.proportions_ht_wt_to_histo(image_directory, 10)
