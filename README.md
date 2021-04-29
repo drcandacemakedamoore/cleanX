@@ -52,8 +52,10 @@ automatically as new functions are added.
 
 - activate  the environment
 ### Anaconda Installation
--use command for conda as below 
-        conda install -c doctormakeda -c conda-forge cleanx
+
+- use command for conda as below
+
+        conda install -c doctormakeda -c conda-forge cleanx       
 
 You need to specify both channels because there are some cleanX
 dependencies that exist in both Anaconda main channel and in
