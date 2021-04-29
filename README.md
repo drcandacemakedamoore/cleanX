@@ -28,8 +28,7 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 - a [python](https://www.python.org/downloads/) installation
 - ability to create virtual environments (reccomended, not absolutely neccesary)
 - tesseract-ocr and opencv
-- Anaconda is not supported. If using Anaconda to install,
-     try to use python 3.8, but we are currently working through issues
+- anaconda is now supported, but not technically neccesary
 
 
 ## Documentation
@@ -52,6 +51,15 @@ automatically as new functions are added.
 - setting up a virtual environment is desirable, but not absolutely neccesary
 
 - activate  the environment
+### Anaconda Installation
+-use command for conda as below 
+        conda install -c doctormakeda -c conda-forge cleanx
+
+You need to specify both channels because there are some cleanX
+dependencies that exist in both Anaconda main channel and in
+conda-forge
+
+### pip installation
 - use pip as below
 
         pip install cleanX
