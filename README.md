@@ -28,7 +28,8 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 - a [python](https://www.python.org/downloads/) installation
 - ability to create virtual environments (reccomended, not absolutely neccesary)
 - tesseract-ocr and opencv
-- if using Anaconda to install, use python 3.8 (temporary issue)
+- Anaconda is not supported. If using Anaconda to install,
+     try to use python 3.8, but we are currently working through issues
 
 
 ## Documentation
