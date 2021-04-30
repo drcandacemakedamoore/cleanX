@@ -9,7 +9,8 @@ is a python library
 for exploring, cleaning and augmenting large datasets of Xrays as JPEG files.
 (JPEG files can be extracted from DICOM files.)
 
-[![DOI](https://zenodo.org/badge/drcandacemakedamoore/cleanX.svg)](https://zenodo.org/badge/latestdoi/drcandacemakedamoore/cleanX)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg)](https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg)
 
 ### The latest official release:
 
