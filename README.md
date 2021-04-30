@@ -20,6 +20,7 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 ## Continous Integration (CI) status
 
 ![ci workflow](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/github-actions-on-commit.yml/badge.svg)
+![ci workflow](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/main.yml/badge.svg)
 
 
 ## Requirements
