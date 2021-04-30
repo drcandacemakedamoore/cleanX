@@ -22,6 +22,8 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 ![ci workflow](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/github-actions-on-commit.yml/badge.svg)
 ![ci workflow](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/main.yml/badge.svg)
 
+![ci workflow](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml/badge.svg)
+
 
 ## Requirements
 
