@@ -341,9 +341,9 @@ def find_big_lines(directory, line_length):
     Finds number of lines in images at or over the length of 'line_legnth',
     gives back a dataframe with this information
 
-    :param directory: directory with set_of_images
+    :param directory: Directory with set_of_images.
     :type directory: directory
-    :param line_length: length of lines at or above which to pay attention to
+    :param line_length: Minimal length of lines for the function to count.
     :type line_length: integer
 
     :return: dataframe with column for line count at or above line_legnth
