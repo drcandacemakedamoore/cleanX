@@ -339,7 +339,8 @@ def show_major_lines_on_image(pic_name):
 def find_big_lines(directory, line_length):
     """
     Finds number of lines in images at or over the length of 'line_legnth',
-    gives back a dataframe with this information
+    gives back a dataframe with this information. Note lines can fold back on
+    themselves, and every pixel is counted if they are all contiguous
 
     :param directory: Directory with set_of_images.
     :type directory: directory
