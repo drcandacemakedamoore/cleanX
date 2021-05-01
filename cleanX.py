@@ -336,6 +336,48 @@ def show_major_lines_on_image(pic_name):
 # to run on a list to make a prototype tiny Xray
 
 
+def find_big_lines(directory, line_length):
+    """
+    Finds number of lines in images at or over the length of 'line_legnth',
+    gives back a dataframe with this information
+
+    :param directory: directory with set_of_images
+    :type directory: directory
+    :param line_length: length of lines at or above which to pay attention to
+    :type line_length: integer
+
+    :return: dataframe with column for line count at or above line_legnth
+    :rtype: Dataframe
+
+    """
+    suspects = glob.glob(os.path.join(directory, '*.jpg'))
+    pic_to_nlines = {}
+    for pic in suspects:
+        img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
+        edges = cv2.Canny(img, 3, 100)
+        minLineLength = 50
+        maxLineGap = 2
+        max_slider = 6
+        lines = cv2.HoughLinesP(
+            edges, 1, np.pi/180,
+            max_slider,
+            minLineLength=1,
+            maxLineGap=25
+        )
+        nlines = 0
+        for line in lines:
+            # why line[0]- want tocheck all lines in a picture
+            if np.linalg.norm(line[0][:2] - line[0][2:]) > line_length:
+                nlines += 1
+        pic_to_nlines[pic] = nlines
+
+    return pd.DataFrame.from_dict(
+                pic_to_nlines,
+                columns=['nlines'],
+                orient='index'
+            )
+
+
 def seperate_image_averger(set_of_images, s=5):
     """
     To run on a list to make a prototype tiny Xray that is an averages image
