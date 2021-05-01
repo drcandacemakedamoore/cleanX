@@ -100,7 +100,11 @@ def test_find_very_hazy():
 def test_show_major_lines_on_image():
     pic_name1 = os.path.join(image_directory, 'testtocrop.jpg')
     deflop = cleanX.show_major_lines_on_image(pic_name1)
-    assert deflop
+    assert deflop # needs a much better test
+
+def test_find_big_lines():
+    lined = cleanX.find_big_lines(image_directory, 2)
+    assert len(lined) > 0    
 
 def proportions_ht_wt_to_histo():
     output =  cleanX.proportions_ht_wt_to_histo(image_directory, 10)
