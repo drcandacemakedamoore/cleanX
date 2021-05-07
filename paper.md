@@ -16,7 +16,7 @@ authors:
     affiliation: 2    
 
   - name: Oleg Sivokon
-    affiliation:   
+    affiliation: 3  
      
 
 affiliations:
@@ -25,6 +25,9 @@ affiliations:
 
  - name: Department of Medical Imaging, Princess Alexandra Hospital, Brisbane, QLD, Australia
    index: 2   
+
+ - name: CMHM/cmhm.info, Israel
+   index: 3   
 
 date: 18 April 2021
 bibliography: paper.bib
