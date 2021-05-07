@@ -16,6 +16,7 @@ authors:
     affiliation: 2    
 
   - name: Oleg Sivokon
+    affiliation: None.  
      
 
 affiliations:
