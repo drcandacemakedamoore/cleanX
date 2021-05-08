@@ -76,18 +76,18 @@ If you use the library, please credit me and my collaborators.  You are only fre
 We are adding new functions all the time. Many unit tests are availalable in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for X-rays). Some other functions are for cleaning datasets including ones that: 
 
 
-### Run on dataframes to make sure there is no image leakage
+        Run on dataframes to make sure there is no image leakage
 
-### Run on a dataframe to look for demographic or other biases in patients
+        Run on a dataframe to look for demographic or other biases in patients
     
-### Crop off excessive black frames (run this on single images) one at a time
+        Crop off excessive black frames (run this on single images) one at a time
        
-### Run on a list to make a prototype tiny Xray others can be comapared to
+        Run on a list to make a prototype tiny Xray others can be comapared to
     
-### Run on image files which are inside a folder to check if they are "clean"
+        Run on image files which are inside a folder to check if they are "clean"
 
-### Take a dataframe with image names and return plotted(visualized) images  
+        Take a dataframe with image names and return plotted(visualized) images  
 
-### Run to make a dataframe of pics in a folder (assuming they all have the same 'label'/diagnosis)
+        Run to make a dataframe of pics in a folder (assuming they all have the same 'label'/diagnosis)
 
 All important functions are documented in the online documentation.
