@@ -49,9 +49,9 @@ def see_part_potential_bias(df, label, sensitive_column_list):
     gender, race, or whichever you think are relevant,
     in terms of a labels (put in the label column name).
     You may discover all your pathologically labeled sample are of one ethnic
-    group, gender or other category in your dataframe. Remeber some early
-    neural nets for chest-Xrays were less accurate in women and the fact that
-    there were fewer Xrays of women in the datasets they built on did not help
+    group, gender or other category in your dataframe. Remember some early
+    neural nets for chest-Gary's were less accurate in women and the fact that
+    there were fewer Cry's of women in the datasets they built on did not help
 
     :param df: Dataframe including sample IDs, labels, and sensitive columns
     :type df: Dataframe
@@ -83,10 +83,7 @@ def simpler_crop(image):
     :type image: Image (JPEG)
 
     :return: image cropped of black edges
-    :rtype: image[
-        np.min(y_nonzero):np.max(y_nonzero),
-        np.min(x_nonzero):np.max(x_nonzero))
-    ]
+    :rtype: numpy.ndarray
     """
     nonzero = np.nonzero(image)
     y_nonzero = nonzero[0]
@@ -106,11 +103,8 @@ def crop_np(image_array):
     :type image_array: array
 
 
-    :return: image_array[
-        np.min(y_nonzero):np.max(y_nonzero),
-        np.min(x_nonzero):np.max(x_nonzero),
-    ]
-    :rtype: ndarray
+    :return: NumPy array with the image data with the black margins cropped.
+    :rtype: numpy.ndarray
     """
     nonzero = np.nonzero(image_array)
     y_nonzero = nonzero[0]
@@ -130,8 +124,8 @@ def crop_pil(image):
     :type image_array: image
 
 
-    :return: image_array
-    :rtype: array
+    :return: PIL Image with black margins cropped.
+    :rtype: PIL.Image
     """
     mode = image.mode
     return Image.fromarray(
@@ -145,13 +139,11 @@ def crop(image):
     Crops an image of a black frame: does both PIL and opencv2 images
 
     :param image: Image
-    :type image: Image (JPEG)
+    :type image: This can be either a NumPy array holding image data,
+                 or a PIL image.
 
-    :return: image cropped of black edges
-    :rtype: image[
-        np.min(y_nonzero):np.max(y_nonzero),
-        np.min(x_nonzero):np.max(x_nonzero))
-    ]
+    :return: Image cropped of black edges
+    :rtype: Same as input type.
     """
     if isinstance(image, Image.Image):
         return crop_pil(image)
@@ -168,27 +160,25 @@ def subtle_sharpie_enhance(image):
     :type image: string
 
     :return: new_image_array, a nearly imperceptibly sharpened image for humans
-    :rtype: nd.array
-
+    :rtype: numpy.ndarray
     """
     ksize = (2, 2)
     image_body = cv2.imread(image)
     blur_mask = cv2.blur(image_body, ksize)
-    new_image_array = (2*image_body) - (blur_mask)
+    new_image_array = 2 * image_body - blur_mask
     return new_image_array
 
 
 def harsh_sharpie_enhance(image):
-
     """
     Makes a new image that is very sharper to the human eye,
-    and has new values in most of the pixels(besides the background)
+    and has new values in most of the pixels (besides the background).
 
     :param image: String for image name
     :type image: string
 
     :return: new_image_array, a sharpened image for humans
-    :rtype: nd.array
+    :rtype: numpy.ndarray
     """
     ksize = (20, 20)
     image_body = cv2.imread(image)
@@ -206,7 +196,6 @@ def salting(img):
 
     :return: new_image_array, with noise
     :rtype: nd.array
-
     """
     kernel = (5, 5)
     img = cv2.imread(img)
@@ -219,20 +208,21 @@ def salting(img):
 def simple_rotation_augmentation(angle_list1, image):
     """
     This function takes one picture and rotates is by a number
-    of degress is angle_list1.This function can be used with the
+    of degrees is angle_list1.This function can be used with the
     augment_and_move function as follows (example):
-    augment_and_move(
-        'D:/my_academia/dataset/random_within_domain',
-        'D:/my_academia/elo',
-        [partial(simple_rotation_augmentation,5)],
-    )
+    .. code-block:: python
+
+       augment_and_move(
+           'D:/my_academia/dataset/random_within_domain',
+           'D:/my_academia/elo',
+           [partial(simple_rotation_augmentation, 5)],
+       )
 
     :param image: Image.
     :type image: Image (JPEG)
 
     :return: rotated image
     :rtype: PIL image
-
     """
     if isinstance(image, str):
         image4R = Image.open(image)
@@ -250,7 +240,7 @@ def blur_out_edges(image):
     :type image: Image (JPEG)
 
     :return: blurred_edge_image an array of an image blurred around the edges
-    :rtype: ndarray
+    :rtype: numpy.ndarray
     """
     example = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
     msk = np.zeros(example.shape)
@@ -271,8 +261,8 @@ def reasonable_rotation_augmentation(angle1, angle2, number_slices, image):
     Works on a single image, and returns a list of augmented images which are
     based on twisting the angle from angle1 to angle2 with 'number_slices' as
     the number of augmented images to be made from the original. It is not
-    realistic or desirable to augment images of most Xrays by flipping them. In
-    abdominal or chest X-rays that would create an augmentation that could
+    realistic or desirable to augment images of most X-rays by flipping them.
+    In abdominal or chest X-rays that would create an augmentation that could
     imply specific pathologies e.g. situs inversus. We suggest augmenting
     between angles -5 to 5.
 
@@ -287,7 +277,6 @@ def reasonable_rotation_augmentation(angle1, angle2, number_slices, image):
 
     :return: list of PIL images
     :rtype: list
-
     """
     increment = abs(angle1-angle2)/number_slices
     angle1f = float(angle1)
@@ -316,9 +305,9 @@ def show_major_lines_on_image(pic_name):
     """
     img = cv2.imread(pic_name, cv2.IMREAD_GRAYSCALE)
     max_slider = 6
-# Find the edges in the image using canny detector
+    # Find the edges in the image using canny detector
     edges = cv2.Canny(img, 3, 100)
-# Detect points that form a line
+    # Detect points that form a line
     lines = cv2.HoughLinesP(
         edges,
         1,
@@ -327,13 +316,13 @@ def show_major_lines_on_image(pic_name):
         minLineLength=30,
         maxLineGap=20
     )
-# Draw lines on the image
+    # Draw lines on the image
     for line in lines:
         x1, y1, x2, y2 = line[0]
-    # if abs(math.sqrt((x2 - x1)**2 + (y2 - y1)**2)) > 0:
+        # if abs(math.sqrt((x2 - x1)**2 + (y2 - y1)**2)) > 0:
         imag_lined = cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 3)
     return plt.imshow(imag_lined)
-# to run on a list to make a prototype tiny Xray
+# to run on a list to make a prototype tiny X-ray
 
 
 def find_big_lines(directory, line_length):
@@ -349,7 +338,6 @@ def find_big_lines(directory, line_length):
 
     :return: dataframe with column for line count at or above line_length
     :rtype: Dataframe
-
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     pic_to_nlines = {}
@@ -379,9 +367,9 @@ def find_big_lines(directory, line_length):
             )
 
 
-def seperate_image_averger(set_of_images, s=5):
+def separate_image_averager(set_of_images, s=5):
     """
-    To run on a list to make a prototype tiny Xray that is an averages image
+    To run on a list to make a prototype tiny X-ray that is an averages image
 
     :param set_of_images: Set_of_images
     :type set_of_images:
@@ -402,7 +390,6 @@ def seperate_image_averger(set_of_images, s=5):
 
 
 def augment_and_move(origin_folder, target_folder, transformations):
-
     """
     Takes images and applies the same list of augmentations, which can include
     the cleanX function crop, to all of them
@@ -414,9 +401,8 @@ def augment_and_move(origin_folder, target_folder, transformations):
     :param transformations: A list of augmentation functions to apply
     :type transformations: list
 
-    :return: technically a nonreturning function, but new images will be made
+    :return: technically a non returning function, but new images will be made
     :rtype: none
-
     """
     non_suspects = glob.glob(os.path.join(origin_folder, '*.jpg'))
     for picy in non_suspects:
@@ -436,7 +422,6 @@ def dimensions_to_df(folder_name):
 
     :param folder_name: Adress of folder with images.
     :type folder_name: Folder/directory
-
 
     :return: image height, width and proportion height/width as a new dataframe
     :rtype: DataFrame
@@ -474,7 +459,6 @@ def dimensions_to_histo(folder_name, bins_count=10):
 
     :return: histo_ht_wt, a labeled histogram
     :rtype: tuple
-
     """
     non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
     picy_list, list_ht, list_wt = [], [], []
@@ -513,7 +497,7 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     Looks in the directory given, produces a histogram of various proportions
     of the images by dividing their height by widths.
     Important information as many neural nets take images all the
-    same size. Clasically most chestXrays are 2500*2000 or 2500 *2048;
+    same size. Classically most chest X-rays are 2500*2000 or 2500 *2048;
     however the dataset may be different and/or varied
 
     :param folder_name: Folder_name, directory name.
@@ -584,8 +568,8 @@ def find_very_hazy(directory):
     :param directory: The folder where the images are
     :type directory: directory
 
-
-    :return: dataframe with imgs sorted as hazy or regular under label_for_haze
+    :return: dataframe with images sorted as hazy or regular under
+             :code:`label_for_haze`
     :rtype: Dataframe
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
@@ -618,23 +602,21 @@ def find_by_sample_upper(
     value_for_line
 ):
     """
-        Takes average of upper pixels, and can show you outliers defined by a
-        percentage, e.g. shows images with an average of top pixels in top x %
-        where x is the percent height of the sample.
+    Takes average of upper pixels, and can show you outliers defined by a
+    percentage, e.g. shows images with an average of top pixels in top x %
+    where x is the percent height of the sample.
 
-        :param source_directory: The folder in which the images are
-        :type source_directory: directory
-        :param percent_height_of_sample: From where on image to call upper
-        :type source_directory: integer
-        :param value_for_line: From where in pixel values to call averaged
-            values abnormal
-        :type value_for_line: integer
+    :param source_directory: The folder in which the images are
+    :type source_directory: directory
+    :param percent_height_of_sample: From where on image to call upper
+    :type source_directory: integer
+    :param value_for_line: From where in pixel values to call averaged
+        values abnormal
+    :type value_for_line: integer
 
-
-        :return: Dataframe with images labeled
-        :rtype: Dataframe
-         """
-
+    :return: Dataframe with images labeled
+    :rtype: Dataframe
+    """
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     estimates, piclist = [], []
     for pic in suspects:
@@ -661,11 +643,11 @@ def find_sample_upper_greater_than_lower(
     percent_height_of_sample
 ):
     """
-        Takes average of upper pixels, average of lower (you define what
-        percent of picture should be considered upper and lower) and compares.
-        In a CXR if lower average is greater than upper it may be upside down
-        or otherwise bizzare, as the neck is smaller than the abdomen.
-        """
+    Takes average of upper pixels, average of lower (you define what
+    percent of picture should be considered upper and lower) and compares.
+    In a CXR if lower average is greater than upper it may be upside down
+    or otherwise bizarre, as the neck is smaller than the abdomen.
+    """
     estup, estdown, piclist = [], [], []
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     for pic in suspects:
@@ -687,20 +669,18 @@ def find_sample_upper_greater_than_lower(
 
 def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
     """
-        Takes the average of all pixels in an image, returns a dataframe with
-        those images that are outliers by mean...should catch some inverted or
-        problem images
+    Takes the average of all pixels in an image, returns a dataframe with
+    those images that are outliers by mean. Should catch some inverted or
+    problem images
 
-        :param source_directory: The folder in which the images are
-        :type source_directory: directory
-        :param percentage_to_say_outliers: Percentage to capture
-        :type percentage_to_say_outliers: integer
+    :param source_directory: The folder in which the images are
+    :type source_directory: directory
+    :param percentage_to_say_outliers: Percentage to capture
+    :type percentage_to_say_outliers: integer
 
-
-        :return: Dataframe made up of outliers only
-        :rtype: Dataframe
-
-        """
+    :return: Dataframe made up of outliers only
+    :rtype: Dataframe
+    """
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
     for pic in suspects:
@@ -718,19 +698,18 @@ def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
 
 def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     """
-        Important note: approximate, and it can by chance cut the group
-        so images with
-        the same mean are in and out of normal range if the knife so falls
+    Important note: approximate, and it can by chance cut the group
+    so images with
+    the same mean are in and out of normal range if the knife so falls
 
-        :param source_directory: The folder in which the images are
-        :type source_directory: directory
-        :param percentage_to_say_outliers: Percentage to capture
-        :type percentage_to_say_outliers: integer
+    :param source_directory: The folder in which the images are
+    :type source_directory: directory
+    :param percentage_to_say_outliers: Percentage to capture
+    :type percentage_to_say_outliers: integer
 
-
-        :return: Dataframe all images, marked as high, low or within range
-        :rtype: Dataframe
-        """
+    :return: Dataframe all images, marked as high, low or within range
+    :rtype: Dataframe
+    """
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
     for pic in suspects:
@@ -754,11 +733,10 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
 
 def understand_df(df):
     """
-        Takes a dataframe (if you have a dataframe for images) and prints
-        information including length, data types, nulls and number of
-        duplicated rows
-        """
-
+    Takes a dataframe (if you have a dataframe for images) and prints
+    information including length, data types, nulls and number of
+    duplicated rows
+    """
     print("The dataframe has", len(df.columns), "columns, named", df.columns)
     print("")
     print("The dataframe has", len(df), "rows")
@@ -778,9 +756,9 @@ def understand_df(df):
 
 def show_duplicates(df):
     """
-        Takes a dataframe (if you have a dataframe for images) and prints
-        duplicated rows
-        """
+    Takes a dataframe (if you have a dataframe for images) and prints
+    duplicated rows
+    """
     if df.duplicated().any():
         print(
             "This dataframe table has",
@@ -795,23 +773,22 @@ def show_duplicates(df):
 def create_matrix(width, height, default_element):
     # In python Sequence * Number = Sequence repeated Number of times
     """
-        Takes width, height then creates a matrix populated by the default
-        element. Super handy for advanced image manipulation. Note you can not
-        create matrices bigger than your computer memory can handle making.
-        Therefore the function will work on matrices with dimensions up to
-        maybe 500*500 depending
+    Takes width, height then creates a matrix populated by the default
+    element. Super handy for advanced image manipulation. Note you can not
+    create matrices bigger than your computer memory can handle making.
+    Therefore the function will work on matrices with dimensions up to
+    maybe 500*500 depending
 
-        :param width: Width of the matrix to be created
-        :type width: integer
-        :param height: The height of matrix to be created
-        :type height: integer
-        :param default_element: Element to populate the matrix with
-        :type default_element: float or integer or string
+    :param width: Width of the matrix to be created
+    :type width: integer
+    :param height: The height of matrix to be created
+    :type height: integer
+    :param default_element: Element to populate the matrix with
+    :type default_element: float or integer or string
 
-        :return: 2D matrix populated
-        :rtype: matrix
-
-        """
+    :return: 2D matrix populated
+    :rtype: matrix
+    """
     result = [0] * width
 
     for i in range(width):
@@ -835,12 +812,11 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     :type percentile: integer
 
     :return: Dataframe with a column that notes mismatches
-    and within range images
+             and within range images
     :rtype: Dataframe
-
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
-    avg_image = seperate_image_averger(suspects, s)  # np.zeros((5, 5)) + 128
+    avg_image = separate_image_averager(suspects, s)  # np.zeros((5, 5)) + 128
     images, sums = [], []
     for pic in suspects:
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
@@ -872,7 +848,6 @@ def tesseract_specific(directory):
 
     :return: Dataframe with a column of text found
     :rtype: Dataframe
-
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     texts, clean_texts, confidences = [], [], []
@@ -908,7 +883,6 @@ def find_suspect_text(directory, label_word):
 
     :return: Dataframe with a column of text found over the length
     :rtype: Dataframe
-
     """
 
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
@@ -931,7 +905,7 @@ def find_suspect_text(directory, label_word):
 
 def find_suspect_text_by_length(directory, length):
     # this function finds all texts above a specified length
-    # (length is number of charecters)
+    # (length is number of characters)
     """
     Finds images with text over a specific length you ask for.
     Useful if you know you do not care about R and L or SUP.
@@ -944,8 +918,6 @@ def find_suspect_text_by_length(directory, length):
 
     :return: Dataframe with a column of text found
     :rtype: Dataframe
-
-
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     images, texts, clean_texts = [], [], []
@@ -972,16 +944,16 @@ def histogram_difference_for_inverts(directory):
     # this function looks for images by a spike on the end of pixel
     # value histogram to find inverted images
     """
-        This function looks for images by a spike on the end of thier pixel
-        value histogram to find inverted images. Note we assume classical
-        X-rays, not inverted floroscopy images.
+    This function looks for images by a spike on the end of their pixel
+    value histogram to find inverted images. Note we assume classical
+    X-rays, not inverted fluoroscopy images.
 
-        :param directory: Directory (folder).
-        :type directory: Directory
+    :param directory: Directory (folder).
+    :type directory: Directory
 
-        :return: a list of images suspected to be inverted
-        :rtype: list
-        """
+    :return: a list of images suspected to be inverted
+    :rtype: list
+    """
 
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     regulars, inverts, unclear = [], [], []
@@ -1002,17 +974,17 @@ def histogram_difference_for_inverts(directory):
 def histogram_difference_for_inverts_todf(directory):
     # looks for inverted and returns a dataframe
     """
-        This function looks for images by a spike on the end of thier pixel
-        value histogram to find inverted images, then puts what it found into
-        a dataframe. Images are listed as regulars, inverts of unclear (the
-        unclear have equal spikes on both ends)
+    This function looks for images by a spike on the end of their pixel
+    value histogram to find inverted images, then puts what it found into
+    a dataframe. Images are listed as regulars, inverts of unclear (the
+    unclear have equal spikes on both ends)
 
-        :param directory: Directory (folder).
-        :type directory: Directory
+    :param directory: Directory (folder).
+    :type directory: Directory
 
-        :return: a dataframe with images categorized
-        :rtype: DataFrame
-        """
+    :return: a dataframe with images categorized
+    :rtype: DataFrame
+    """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     regulars, inverts, unclear = [], [], []
     for pic in suspects:
@@ -1047,7 +1019,6 @@ def find_duplicated_images(directory):
 
     :return: a list of duplicated images
     :rtype: list
-
     """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
@@ -1084,7 +1055,6 @@ def find_duplicated_images_todf(directory):
 
     :return: a dataframe of duplicated images
     :rtype: Dataframe
-
     """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
@@ -1133,8 +1103,7 @@ def show_images_in_df(iter_ob, length_name):
 
     :return: technically no return but makes a plot of images with names
     :rtype: none
-
-        """
+    """
 
     width = int(math.sqrt(len(iter_ob)))
     height = int(math.ceil(len(iter_ob) / width))
@@ -1173,8 +1142,7 @@ def dataframe_up_my_pics(directory, diagnosis_string):
 
     :return: Dataframe of pictures and label
     :rtype: Dataframe
-
-        """
+    """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
     dupli = []
@@ -1187,19 +1155,32 @@ def dataframe_up_my_pics(directory, diagnosis_string):
 
 
 class Rotator:
-    """Class Rotator contains the class RotationIterator. """
+    """Class for rotating OpenCV images. """
 
     class RotationIterator:
-        """Class RotationIterator is to build a generator for rotated images"""
+        """
+        Class RotationIterator iterator implementation of a range of
+        rotated images
+        """
 
         def __init__(self, rotator, start, end, step):
-            """Class method docstrings go here."""
+            """Creates an instance of RotationIterator.
+
+            :param rotator: The Rotator object for which this is an iterator.
+            :type rotator: Rotator
+            :param start: The initial angle (in degrees).
+            :type start: numeric
+            :param end: The final angle (in degrees).
+            :type end: numeric
+            :param step: Increment (in degrees).
+            :type step: numeric
+            """
             self.rotator = rotator
             self.seq = np.arange(start, end, step)
             self.pos = 0
 
         def __next__(self):
-            """Class method docstrings go here."""
+            """Necessary iterator implementation."""
             if self.pos >= len(self.seq):
                 raise StopIteration()
             result = self.rotator[self.seq[self.pos]]
@@ -1207,11 +1188,21 @@ class Rotator:
             return result
 
         def __iter__(self):
-            """Class method __iter__ returns self"""
+            """Implementation of iteratble protocol"""
             return self
 
     def __init__(self, image, center=None, scale=1.0):
-        """Class method docstrings go here."""
+        """
+        Creates a wrapper object that allows creation of ranges of
+        rotation of the given image.
+
+        :param image: OpenCV image
+        :type image: cv2.Image
+        :param center: Coordinate of the center of rotation
+                       (defaults to the middle of the image).
+        :param scale: Scale ratio of the resulting image
+                      (after rotation, defaults to 1.0).
+        """
         self.image = image
         self.center = center
         self.scale = scale
@@ -1220,21 +1211,29 @@ class Rotator:
             self.center = (self.w / 2, self.h / 2)
 
     def __getitem__(self, angle):
-        """credits to: https://stackoverflow.com/a/32929315/5691066
-        for this approach to cv2 rotation"""
-        # credits to: https://stackoverflow.com/a/32929315/5691066
+        """
+        Generates an image rotated by :code:`angle` degrees.
+        credits to: https://stackoverflow.com/a/32929315/5691066
+        for this approach to cv2 rotation.
+        """
         matrix = cv2.getRotationMatrix2D(self.center, angle, self.scale)
         rotated = cv2.warpAffine(self.image, matrix, (self.w, self.h))
         return rotated
 
     def iter(self, start=0, end=360, step=1):
-        """Class method iter returns a generator group of images that are on
-        angles from start to stop with steps of step.
+        """
+        Class method :code:`iter` returns a generator group of images that
+        are on angles from :code:`start` to :code:`stop` with increment of
+        :code:`step`.
         Usage example:
-         image = cv2.imread('normal-frontal-chest-x-ray.jpg')
-         rotator = Rotator(image)
-         for rotated in rotator.iter(0, 360, 10):
-             print(rotated) #shows the np arrays for the 36 (step=10) images"""
+        .. code-block:: python
+
+           image = cv2.imread('normal-frontal-chest-x-ray.jpg')
+           rotator = Rotator(image)
+           for rotated in rotator.iter(0, 360, 10):
+                # shows the np arrays for the 36 (step=10) images
+               print(rotated)
+        """
         return self.RotationIterator(self, start, end, step)
 
 
@@ -1252,19 +1251,20 @@ def simple_spinning_template(
     :param greys_template: The image array of the template,
     :type greys_template: numpy.ndarray
     :param angle_start: angle to spin template to, it would normally start at
-    zero if picking up exact template itself is desired
+                        zero if picking up exact template itself is desired
     :type angle_start: float
     :param angle_stop: last angle to spin template to,
     :type angle_stop: float
     :param slices: number of different templates to make between angles
     :type slices: float
     :param threshold4: A number between zero and one which sets the precision
-    of matching. NB: .999 is stringent, .1 will pick up to much
+                       of matching. NB: .999 is stringent, .1 will pick up
+                       too much
     :type threshold4: float
 
     :return: copy_image, a copy of base image with the template areas caught
-        outlined in blue rectangeles
-    :rtype: nd.array
+        outlined in blue rectangles
+    :rtype: numpy.ndarray
     """
 
     pic = picy
@@ -1272,11 +1272,8 @@ def simple_spinning_template(
     copy_image = cv2.imread(pic)
     img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
     # rotator_generator = generator
-    for element in Rotator(greys_template).iter(
-                                            angle_start,
-                                            angle_stop,
-                                            slices,
-                                            ):
+    rotator = Rotator(greys_template)
+    for element in rotator.iter(angle_start, angle_stop, slices):
         template = element
         w, h = template.shape[::-1]
         res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
@@ -1284,12 +1281,12 @@ def simple_spinning_template(
         loc = np.where(res >= threshold)
         for pt in zip(*loc[::-1]):
             cv2.rectangle(
-                            copy_image,
-                            pt,
-                            (pt[0] + w, pt[1] + h),
-                            (0, 0, 255),
-                            2,
-                        )
+                copy_image,
+                pt,
+                (pt[0] + w, pt[1] + h),
+                (0, 0, 255),
+                2,
+            )
     return copy_image
 
 

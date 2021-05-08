@@ -68,11 +68,11 @@ def test_check_paths_for_group_leakage():
     checked_example = cleanX.check_paths_for_group_leakage(train_df, test_df, uniqueIDE)
     assert len(checked_example) > 1 
 
-def test_seperate_image_averager():
+def test_separate_image_averager():
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
     test_df = pd.read_csv(test_dfE)
     images = image_directory + '/' + test_df.image_path.dropna()
-    blended =  cleanX.seperate_image_averger(images, s=5)
+    blended =  cleanX.separate_image_averager(images, s=5)
     assert type(blended) is np.ndarray
 
 def test_dimensions_to_df():
