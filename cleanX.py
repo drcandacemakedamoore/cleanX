@@ -1184,3 +1184,54 @@ def dataframe_up_my_pics(directory, diagnosis_string):
     df['diagnosis'] = diagnosis_string
     df = df.rename(columns={0: 'identifier_pic_name'})
     return df
+
+class Rotator:
+     """Class Rotator contains the class RotationIterator. """
+
+    class RotationIterator:
+         """Class RotationIterator is to build a generator for rotated images"""
+
+        def __init__(self, rotator, start, end, step):
+             """Class method docstrings go here."""
+            self.rotator = rotator
+            self.seq = np.arange(start, end, step)
+            self.pos = 0
+
+        def __next__(self):
+             """Class method docstrings go here."""
+            if self.pos >= len(self.seq):
+                raise StopIteration()
+            result = self.rotator[self.seq[self.pos]]
+            self.pos += 1
+            return result
+
+        def __iter__(self):
+             """Class method __iter__ returns self"""
+            return self
+
+    def __init__(self, image, center=None, scale=1.0):
+        """Class method docstrings go here."""
+        self.image = image
+        self.center = center
+        self.scale = scale
+        self.h, self.w = self.image.shape[:2]
+        if self.center is None:
+            self.center = (self.w / 2, self.h / 2)
+
+    def __getitem__(self, angle):
+        """credits to: https://stackoverflow.com/a/32929315/5691066
+        for this approach to cv2 rotation"""
+        # credits to: https://stackoverflow.com/a/32929315/5691066
+        matrix = cv2.getRotationMatrix2D(self.center, angle, self.scale)
+        rotated = cv2.warpAffine(self.image, matrix, (self.w, self.h))
+        return rotated
+
+    def iter(self, start=0, end=360, step=1):
+         """Class method iter returns a generator group of images that are on angles from start
+         to stop with steps of step.
+          Usage example:
+         image = cv2.imread('normal-frontal-chest-x-ray.jpg')
+         rotator = Rotator(image)
+         for rotated in rotator.iter(0, 360, 10):
+             print(rotated) # shows the np arrays for all 36 (step of 10) images"""
+        return self.RotationIterator(self, start, end, step)
