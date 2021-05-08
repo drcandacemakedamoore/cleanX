@@ -338,7 +338,7 @@ def show_major_lines_on_image(pic_name):
 
 def find_big_lines(directory, line_length):
     """
-    Finds number of lines in images at or over the length of 'line_legnth',
+    Finds number of lines in images at or over the length of 'line_length',
     gives back a dataframe with this information. Note lines can fold back on
     themselves, and every pixel is counted if they are all contiguous
 
@@ -347,7 +347,7 @@ def find_big_lines(directory, line_length):
     :param line_length: Minimal length of lines for the function to count.
     :type line_length: integer
 
-    :return: dataframe with column for line count at or above line_legnth
+    :return: dataframe with column for line count at or above line_length
     :rtype: Dataframe
 
     """
@@ -829,7 +829,7 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
 
     :param directory: Directory (folder).
     :type directory: Directory
-    :param s: legnth to make the sides of the tiny image for comparison
+    :param s: length to make the sides of the tiny image for comparison
     :type s: integer
     :param percentile: percentile to mark as abnormal
     :type percentile: integer
@@ -906,7 +906,7 @@ def find_suspect_text(directory, label_word):
     :param label_word: Label word
     :type label_word: string
 
-    :return: Dataframe with a column of text found over the legnth
+    :return: Dataframe with a column of text found over the length
     :rtype: Dataframe
 
     """
@@ -929,18 +929,18 @@ def find_suspect_text(directory, label_word):
     return df
 
 
-def find_suspect_text_by_legnth(directory, legnth):
-    # this function finds all texts above a specified legnth
-    # (legnth is number of charecters)
+def find_suspect_text_by_length(directory, length):
+    # this function finds all texts above a specified length
+    # (length is number of charecters)
     """
-    Finds images with text over a specific legnth you ask for.
+    Finds images with text over a specific length you ask for.
     Useful if you know you do not care about R and L or SUP.
     Multi-lingual including English. Accuracy is very high, but not perfect.
 
     :param directory: Directory (folder).
     :type directory: Directory
-    :param legnth: Legnth to find above, inclusive
-    :type legnth: integer
+    :param length: Length to find above, inclusive
+    :type length: integer
 
     :return: Dataframe with a column of text found
     :rtype: Dataframe
@@ -960,10 +960,8 @@ def find_suspect_text_by_legnth(directory, legnth):
             images.append(pic)
     # n = len(label_word_list)#return grabbed, pic
     df = pd.DataFrame({'images': images, 'text': clean_texts})
-#     if df['text'].str.len() < legnth:
-#         df['text'] = 'shorter'
-    yes = df[df['text'].str.len() >= legnth]
-    no = df[df['text'].str.len() < legnth]
+    yes = df[df['text'].str.len() >= length]
+    no = df[df['text'].str.len() < length]
     no['text'] = 'shorter'
     df = pd.concat([yes, no])
     # df.reset_index(drop=True, inplace=True)
@@ -1123,15 +1121,15 @@ def find_duplicated_images_todf(directory):
 # takes a dataframe
 
 
-def show_images_in_df(iter_ob, legnth_name):
+def show_images_in_df(iter_ob, length_name):
     """
     Shows images by taking them off a dataframe column, and puts them up
     but smaller, so they can be compared quickly
 
     :param inter_ob: List, should be a dataframe column
     :type iter_ob: list
-    :param legnth_name: Size of image name going from end
-    :type legnth_name: integer
+    :param length_name: Size of image name going from end
+    :type length_name: integer
 
     :return: technically no return but makes a plot of images with names
     :rtype: none
@@ -1146,7 +1144,7 @@ def show_images_in_df(iter_ob, legnth_name):
             for y in range(height):
                 element = iter_ob[x * width + y]
                 fname = os.path.splitext(element)[0]
-                title = fname[-legnth_name:]
+                title = fname[-length_name:]
                 exop = cv2.imread(element, cv2.IMREAD_GRAYSCALE)
                 axarr[x, y].set_title(title)
                 axarr[x, y].imshow(exop, cmap='gray')
@@ -1156,7 +1154,7 @@ def show_images_in_df(iter_ob, legnth_name):
             element = iter_ob[y]
             exop = cv2.imread(element, cv2.IMREAD_GRAYSCALE)
             fname = os.path.splitext(element)[0]
-            title = fname[-legnth_name:]
+            title = fname[-length_name:]
             axarr[y].set_title(title)
             axarr[y].imshow(exop, cmap='gray')
             # plt.title('Outlier images')

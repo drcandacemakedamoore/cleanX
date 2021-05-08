@@ -118,8 +118,8 @@ def test_find_suspect_text():
     letters_spec = cleanX.find_suspect_text(image_directory, 'SUPINE')
     assert len(letters_spec) >= 1     
 
-def test_find_suspect_text_by_legnth():   
-    jobs = cleanX.find_suspect_text_by_legnth(image_directory, 3)
+def test_find_suspect_text_by_length():   
+    jobs = cleanX.find_suspect_text_by_length(image_directory, 3)
     assert len(jobs) > 1    
 
     

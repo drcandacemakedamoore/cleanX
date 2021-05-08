@@ -73,7 +73,7 @@ conda-forge
 ## About using this library
 If you use the library, please credit me and my collaborators.  You are only free to use this library according to license. We hope that if you use the library you will open source your entire code base, and send us modifications.  You can get in touch with me by email (doctormakeda@gmail.com) if you have a legitamate reason to use my library without open-sourcing your code base, or following other conditions, and I can make you specifically a different license.
 
-We are adding new functions all the time. Some unit tests are availalable in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for X-rays). Some other functions are for cleaning datasets including ones that: 
+We are adding new functions all the time. Many unit tests are availalable in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for X-rays). Some other functions are for cleaning datasets including ones that: 
 
 
 ### Run on dataframes to make sure there is no image leakage: 
@@ -230,10 +230,10 @@ find_suspect_text(directory, label_word):
      
     """
 
-find_suspect_text_by_legnth(directory, legnth):
+find_suspect_text_by_length(directory, length):
  
     """
-     this function finds all texts above a specified legnth (number of charecters)
+     this function finds all texts above a specified length (number of charecters)
       
     """
    
