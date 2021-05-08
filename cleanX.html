@@ -39,26 +39,32 @@ applications</p>
 <dt id="cleanX.Rotator">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">Rotator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.Rotator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Class Rotator contains the class RotationIterator.</p>
+<p>Class for rotating OpenCV images.</p>
 <dl class="py class">
 <dt id="cleanX.Rotator.RotationIterator">
 <em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">RotationIterator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.Rotator.RotationIterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Class RotationIterator is to build a generator for rotated images</p>
+<p>Class RotationIterator iterator implementation of a range of
+rotated images</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="cleanX.Rotator.iter">
 <code class="sig-name descname"><span class="pre">iter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">360</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.Rotator.iter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class method iter returns a generator group of images that are on
-angles from start to stop with steps of step.
-Usage example:</p>
+<dd><p>Class method <code class="code docutils literal notranslate"><span class="pre">iter</span></code> returns a generator group of images that
+are on angles from <code class="code docutils literal notranslate"><span class="pre">start</span></code> to <code class="code docutils literal notranslate"><span class="pre">stop</span></code> with increment of
+<code class="code docutils literal notranslate"><span class="pre">step</span></code>.
+Usage example:
+.. code-block:: python</p>
 <blockquote>
 <div><p>image = cv2.imread(‘normal-frontal-chest-x-ray.jpg’)
 rotator = Rotator(image)
 for rotated in rotator.iter(0, 360, 10):</p>
 <blockquote>
-<div><p>print(rotated) #shows the np arrays for the 36 (step=10) images</p>
+<div><blockquote>
+<div><p># shows the np arrays for the 36 (step=10) images</p>
+</div></blockquote>
+<p>print(rotated)</p>
 </div></blockquote>
 </div></blockquote>
 </dd></dl>
@@ -79,7 +85,7 @@ the cleanX function crop, to all of them</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>technically a nonreturning function, but new images will be made</p>
+<dd class="field-even"><p>technically a non returning function, but new images will be made</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>none</p>
@@ -99,7 +105,7 @@ the cleanX function crop, to all of them</p>
 <dd class="field-even"><p>blurred_edge_image an array of an image blurred around the edges</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray</p>
+<dd class="field-odd"><p>numpy.ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -158,18 +164,16 @@ maybe 500*500 depending</p>
 <dd><p>Crops an image of a black frame: does both PIL and opencv2 images</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image</p>
+<dd class="field-odd"><p><strong>image</strong> (<em>This can be either a NumPy array holding image data</em><em>,
+or </em><em>a PIL image.</em>) – Image</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>image cropped of black edges</p>
+<dd class="field-even"><p>Image cropped of black edges</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>image[
-np.min(y_nonzero):np.max(y_nonzero),
-np.min(x_nonzero):np.max(x_nonzero))</p>
+<dd class="field-odd"><p>Same as input type.</p>
 </dd>
 </dl>
-<p>]</p>
 </dd></dl>
 
 <dl class="py function">
@@ -181,13 +185,12 @@ np.min(x_nonzero):np.max(x_nonzero))</p>
 <dd class="field-odd"><p><strong>image_array</strong> (<em>array</em>) – Image array.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>image_array[
-np.min(y_nonzero):np.max(y_nonzero),
-np.min(x_nonzero):np.max(x_nonzero),</p>
+<dd class="field-even"><p>NumPy array with the image data with the black margins cropped.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
 </dd>
 </dl>
-<p>]
-:rtype: ndarray</p>
 </dd></dl>
 
 <dl class="py function">
@@ -199,10 +202,10 @@ np.min(x_nonzero):np.max(x_nonzero),</p>
 <dd class="field-odd"><p><strong>image_array</strong> (<em>image</em>) – Image.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>image_array</p>
+<dd class="field-even"><p>PIL Image with black margins cropped.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>array</p>
+<dd class="field-odd"><p>PIL.Image</p>
 </dd>
 </dl>
 </dd></dl>
@@ -395,7 +398,7 @@ the same mean are in and out of normal range if the knife so falls</p>
 <dt id="cleanX.find_outliers_by_total_mean">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">find_outliers_by_total_mean</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_outliers_by_total_mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes the average of all pixels in an image, returns a dataframe with
-those images that are outliers by mean…should catch some inverted or
+those images that are outliers by mean. Should catch some inverted or
 problem images</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -419,7 +422,7 @@ problem images</p>
 <dd><p>Takes average of upper pixels, average of lower (you define what
 percent of picture should be considered upper and lower) and compares.
 In a CXR if lower average is greater than upper it may be upside down
-or otherwise bizzare, as the neck is smaller than the abdomen.</p>
+or otherwise bizarre, as the neck is smaller than the abdomen.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -481,11 +484,13 @@ is approximate, may be a tad more</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe with a column that notes mismatches</p>
+<dd class="field-even"><p>Dataframe with a column that notes mismatches
+and within range images</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dataframe</p>
 </dd>
 </dl>
-<p>and within range images
-:rtype: Dataframe</p>
 </dd></dl>
 
 <dl class="py function">
@@ -500,7 +505,8 @@ questionable technique level.</p>
 <dd class="field-odd"><p><strong>directory</strong> (<em>directory</em>) – The folder where the images are</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>dataframe with imgs sorted as hazy or regular under label_for_haze</p>
+<dd class="field-even"><p>dataframe with images sorted as hazy or regular under
+<code class="code docutils literal notranslate"><span class="pre">label_for_haze</span></code></p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Dataframe</p>
@@ -512,7 +518,7 @@ questionable technique level.</p>
 <dt id="cleanX.harsh_sharpie_enhance">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">harsh_sharpie_enhance</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.harsh_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a new image that is very sharper to the human eye,
-and has new values in most of the pixels(besides the background)</p>
+and has new values in most of the pixels (besides the background).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image</strong> (<em>string</em>) – String for image name</p>
@@ -521,7 +527,7 @@ and has new values in most of the pixels(besides the background)</p>
 <dd class="field-even"><p>new_image_array, a sharpened image for humans</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>nd.array</p>
+<dd class="field-odd"><p>numpy.ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -529,9 +535,9 @@ and has new values in most of the pixels(besides the background)</p>
 <dl class="py function">
 <dt id="cleanX.histogram_difference_for_inverts">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">histogram_difference_for_inverts</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.histogram_difference_for_inverts" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function looks for images by a spike on the end of thier pixel
+<dd><p>This function looks for images by a spike on the end of their pixel
 value histogram to find inverted images. Note we assume classical
-X-rays, not inverted floroscopy images.</p>
+X-rays, not inverted fluoroscopy images.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p>
@@ -548,7 +554,7 @@ X-rays, not inverted floroscopy images.</p>
 <dl class="py function">
 <dt id="cleanX.histogram_difference_for_inverts_todf">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">histogram_difference_for_inverts_todf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.histogram_difference_for_inverts_todf" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function looks for images by a spike on the end of thier pixel
+<dd><p>This function looks for images by a spike on the end of their pixel
 value histogram to find inverted images, then puts what it found into
 a dataframe. Images are listed as regulars, inverts of unclear (the
 unclear have equal spikes on both ends)</p>
@@ -587,7 +593,7 @@ unclear have equal spikes on both ends)</p>
 <dd><p>Looks in the directory given, produces a histogram of various proportions
 of the images by dividing their height by widths.
 Important information as many neural nets take images all the
-same size. Clasically most chestXrays are 2500*2000 or 2500 <a href="#id3"><span class="problematic" id="id4">*</span></a>2048;
+same size. Classically most chest X-rays are 2500*2000 or 2500 <a href="#id3"><span class="problematic" id="id4">*</span></a>2048;
 however the dataset may be different and/or varied</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -611,8 +617,8 @@ however the dataset may be different and/or varied</p>
 <dd><p>Works on a single image, and returns a list of augmented images which are
 based on twisting the angle from angle1 to angle2 with ‘number_slices’ as
 the number of augmented images to be made from the original. It is not
-realistic or desirable to augment images of most Xrays by flipping them. In
-abdominal or chest X-rays that would create an augmentation that could
+realistic or desirable to augment images of most X-rays by flipping them.
+In abdominal or chest X-rays that would create an augmentation that could
 imply specific pathologies e.g. situs inversus. We suggest augmenting
 between angles -5 to 5.</p>
 <dl class="field-list simple">
@@ -657,9 +663,9 @@ between angles -5 to 5.</p>
 gender, race, or whichever you think are relevant,
 in terms of a labels (put in the label column name).
 You may discover all your pathologically labeled sample are of one ethnic
-group, gender or other category in your dataframe. Remeber some early
-neural nets for chest-Xrays were less accurate in women and the fact that
-there were fewer Xrays of women in the datasets they built on did not help</p>
+group, gender or other category in your dataframe. Remember some early
+neural nets for chest-Gary’s were less accurate in women and the fact that
+there were fewer Cry’s of women in the datasets they built on did not help</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -678,9 +684,9 @@ there were fewer Xrays of women in the datasets they built on did not help</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="cleanX.seperate_image_averger">
-<code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">seperate_image_averger</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.seperate_image_averger" title="Permalink to this definition">¶</a></dt>
-<dd><p>To run on a list to make a prototype tiny Xray that is an averages image</p>
+<dt id="cleanX.separate_image_averager">
+<code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">separate_image_averager</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.separate_image_averager" title="Permalink to this definition">¶</a></dt>
+<dd><p>To run on a list to make a prototype tiny X-ray that is an averages image</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -747,15 +753,18 @@ lines more likely to be non-biological.</p>
 <dt id="cleanX.simple_rotation_augmentation">
 <code class="sig-prename descclassname"><span class="pre">cleanX.</span></code><code class="sig-name descname"><span class="pre">simple_rotation_augmentation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_list1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.simple_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes one picture and rotates is by a number
-of degress is angle_list1.This function can be used with the
+of degrees is angle_list1.This function can be used with the
 augment_and_move function as follows (example):
-augment_and_move(</p>
+.. code-block:: python</p>
 <blockquote>
-<div><p>‘D:/my_academia/dataset/random_within_domain’,
+<div><dl class="simple">
+<dt>augment_and_move(</dt><dd><p>‘D:/my_academia/dataset/random_within_domain’,
 ‘D:/my_academia/elo’,
-[partial(simple_rotation_augmentation,5)],</p>
-</div></blockquote>
+[partial(simple_rotation_augmentation, 5)],</p>
+</dd>
+</dl>
 <p>)</p>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image.</p>
@@ -777,26 +786,21 @@ augment_and_move(</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>picy</strong> (<em>string</em>) – String for image name of base image</p></li>
 <li><p><strong>greys_template</strong> (<em>numpy.ndarray</em>) – The image array of the template,</p></li>
-<li><p><strong>angle_start</strong> – angle to spin template to, it would normally start at</p></li>
+<li><p><strong>angle_start</strong> (<em>float</em>) – angle to spin template to, it would normally start at
+zero if picking up exact template itself is desired</p></li>
+<li><p><strong>angle_stop</strong> (<em>float</em>) – last angle to spin template to,</p></li>
+<li><p><strong>slices</strong> (<em>float</em>) – number of different templates to make between angles</p></li>
+<li><p><strong>threshold4</strong> (<em>float</em>) – A number between zero and one which sets the precision
+of matching. NB: .999 is stringent, .1 will pick up
+too much</p></li>
 </ul>
 </dd>
-</dl>
-<p>zero if picking up exact template itself is desired
-:type angle_start: float
-:param angle_stop: last angle to spin template to,
-:type angle_stop: float
-:param slices: number of different templates to make between angles
-:type slices: float
-:param threshold4: A number between zero and one which sets the precision
-of matching. NB: .999 is stringent, .1 will pick up to much
-:type threshold4: float</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>copy_image, a copy of base image with the template areas caught
-outlined in blue rectangeles</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>copy_image, a copy of base image with the template areas caught
+outlined in blue rectangles</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>nd.array</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -813,12 +817,9 @@ outlined in blue rectangeles</p>
 <dd class="field-even"><p>image cropped of black edges</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>image[
-np.min(y_nonzero):np.max(y_nonzero),
-np.min(x_nonzero):np.max(x_nonzero))</p>
+<dd class="field-odd"><p>numpy.ndarray</p>
 </dd>
 </dl>
-<p>]</p>
 </dd></dl>
 
 <dl class="py function">
@@ -834,7 +835,7 @@ but has new values in most of the pixels(besides the background)</p>
 <dd class="field-even"><p>new_image_array, a nearly imperceptibly sharpened image for humans</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>nd.array</p>
+<dd class="field-odd"><p>numpy.ndarray</p>
 </dd>
 </dl>
 </dd></dl>
