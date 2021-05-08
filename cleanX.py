@@ -1185,20 +1185,21 @@ def dataframe_up_my_pics(directory, diagnosis_string):
     df = df.rename(columns={0: 'identifier_pic_name'})
     return df
 
+
 class Rotator:
-     """Class Rotator contains the class RotationIterator. """
+    """Class Rotator contains the class RotationIterator. """
 
     class RotationIterator:
-         """Class RotationIterator is to build a generator for rotated images"""
+        """Class RotationIterator is to build a generator for rotated images"""
 
         def __init__(self, rotator, start, end, step):
-             """Class method docstrings go here."""
+            """Class method docstrings go here."""
             self.rotator = rotator
             self.seq = np.arange(start, end, step)
             self.pos = 0
 
         def __next__(self):
-             """Class method docstrings go here."""
+            """Class method docstrings go here."""
             if self.pos >= len(self.seq):
                 raise StopIteration()
             result = self.rotator[self.seq[self.pos]]
@@ -1206,7 +1207,7 @@ class Rotator:
             return result
 
         def __iter__(self):
-             """Class method __iter__ returns self"""
+            """Class method __iter__ returns self"""
             return self
 
     def __init__(self, image, center=None, scale=1.0):
@@ -1227,11 +1228,66 @@ class Rotator:
         return rotated
 
     def iter(self, start=0, end=360, step=1):
-         """Class method iter returns a generator group of images that are on angles from start
-         to stop with steps of step.
-          Usage example:
+        """Class method iter returns a generator group of images that are on
+        angles from start to stop with steps of step.
+        Usage example:
          image = cv2.imread('normal-frontal-chest-x-ray.jpg')
          rotator = Rotator(image)
          for rotated in rotator.iter(0, 360, 10):
-             print(rotated) # shows the np arrays for all 36 (step of 10) images"""
+             print(rotated) #shows the np arrays for the 36 (step=10) images"""
         return self.RotationIterator(self, start, end, step)
+
+
+def simple_spinning_template(
+    picy,
+    greys_template,
+    angle_start,
+    angle_stop,
+    slices,
+    threshold4=.7,
+):
+    """
+    :param picy: String for image name of base image
+    :type picy: string
+    :param greys_template: The image array of the template,
+    :type greys_template: numpy.ndarray
+    :param angle_start: angle to spin template to, it would normally start at
+    zero if picking up exact template itself is desired
+    :type angle_start: float
+    :param angle_stop: last angle to spin template to,
+    :type angle_stop: float
+    :param slices: number of different templates to make between angles
+    :type slices: float
+    :param threshold4: A number between zero and one which sets the precision
+    of matching. NB: .999 is stringent, .1 will pick up to much
+    :type threshold4: float
+
+    :return: copy_image, a copy of base image with the template areas caught
+        outlined in blue rectangeles
+    :rtype: nd.array
+    """
+
+    pic = picy
+    img_rgb = cv2.imread(pic)
+    copy_image = cv2.imread(pic)
+    img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
+    rotator_generator = generator
+    for element in Rotator(greys_template).iter(
+                                            angle_start,
+                                            angle_stop,
+                                            slices,
+                                            ):
+        template = element
+        w, h = template.shape[::-1]
+        res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
+        threshold = threshold4
+        loc = np.where(res >= threshold)
+        for pt in zip(*loc[::-1]):
+            cv2.rectangle(
+                            copy_image,
+                            pt,
+                            (pt[0] + w, pt[1] + h),
+                            (0, 0, 255),
+                            2,
+                        )
+    return copy_image
