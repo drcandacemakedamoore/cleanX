@@ -1291,3 +1291,39 @@ def simple_spinning_template(
                             2,
                         )
     return copy_image
+
+
+def make_contour_image(im):
+
+    """
+    Makes an image into a contour image
+    :param im: image name
+    :type im: string
+
+    :return: drawing, the contour image
+    :rtype: nd.array
+    """
+    imgL = cv2.imread(im)
+    cv2_vers = cv2.__version__
+    major_cv2 = int(cv2.__version__.split('.')[0])
+    edges = cv2.Canny(imgL, 0, 12)
+    thresh = 128
+    # get threshold image
+    ret, thresh_img = cv2.threshold(edges, thresh, 255, cv2.THRESH_BINARY)
+    # find contours
+    if major_cv2 > 3:
+        contours, hierarchy = cv2.findContours(
+                                edges,
+                                cv2.RETR_EXTERNAL,
+                                cv2.CHAIN_APPROX_SIMPLE,
+                                )
+    else:
+        ret2, contours, hierarchy = cv2.findContours(
+                                        edges,
+                                        cv2.RETR_EXTERNAL,
+                                        cv2.CHAIN_APPROX_SIMPLE,
+                                        )
+    # create an empty image for contours
+    img_contours = np.zeros(imgL.shape)
+    drawing = cv2.drawContours(img_contours, contours, -1, (0, 255, 0), 3)
+    return drawing

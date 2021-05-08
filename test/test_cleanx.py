@@ -191,4 +191,10 @@ def test_simple_spinning_template():
         slices1,
     )
     assert len(lanter) > 0
+
+def test_def_make_contour_image():
+    vovo = os.path.join(image_directory, 'testtocrop.jpg')
+    picy1 = vovo
+    defMkcont = cleanX.make_contour_image(picy1)
+    assert len(defMkcont) > 0
         
