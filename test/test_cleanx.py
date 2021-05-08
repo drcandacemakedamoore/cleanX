@@ -175,5 +175,20 @@ def test_dataframe_up_my_pics():
     dfy = cleanX.dataframe_up_my_pics(image_directory, 'diagnosis_string')
     assert len(dfy) > 0
     
-
+def test_simple_spinning_template():
+    vovo = os.path.join(image_directory, 'testtocrop.jpg')
+    picy1 = vovo
+    img = cv2.imread(vovo, cv2.IMREAD_GRAYSCALE)
+    greys_template1 = img[90:110, 200:350]
+    angle_start1 = 0
+    angle_stop1 = 30
+    slices1 = 3
+    lanter = cleanX.simple_spinning_template(
+        picy1,
+        greys_template1,
+        angle_start1,
+        angle_stop1,
+        slices1,
+    )
+    assert len(lanter) > 0
         

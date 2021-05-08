@@ -1271,7 +1271,7 @@ def simple_spinning_template(
     img_rgb = cv2.imread(pic)
     copy_image = cv2.imread(pic)
     img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
-    rotator_generator = generator
+    #rotator_generator = generator
     for element in Rotator(greys_template).iter(
                                             angle_start,
                                             angle_stop,
