@@ -9,7 +9,7 @@ tags:
 authors:
   - name: Candace Makeda Moore, MD
     orcid: 0000-0003-1672-7565
-    affiliation: 1
+    affiliation: 1,3
 
   - name: Andrew Murphy, MMIS BMedImagingSc RT(R)
     orcid: 0000-0002-7710-6095
