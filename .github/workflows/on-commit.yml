@@ -124,3 +124,20 @@ jobs:
       - uses: EnricoMi/publish-unit-test-result-action@v1
         with:
           files: "*/report-*.xml"
+
+  Paper:
+    runs-on: ubuntu-latest
+    name: Paper Draft
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build draft PDF
+        uses: openjournals/openjournals-draft-action@master
+        with:
+          journal: joss
+          paper-path: paper.md
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: paper
+          path: paper.pdf
