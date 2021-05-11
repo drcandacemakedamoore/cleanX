@@ -736,6 +736,12 @@ def understand_df(df):
     Takes a dataframe (if you have a dataframe for images) and prints
     information including length, data types, nulls and number of
     duplicated rows
+
+    :param df: DataFrame you are interested in getting features of.
+    :type df: DataFrame
+
+    :return: Prints out information on dataframe.
+    :rtype: NoneType
     """
     print("The dataframe has", len(df.columns), "columns, named", df.columns)
     print("")
