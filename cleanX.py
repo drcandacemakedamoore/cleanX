@@ -6,21 +6,22 @@ applications
 
 # imported libraries
 import cv2
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import glob
-import os
+import pandas as pd
+
 from PIL import Image
 from PIL import Image, ImageOps
-import math
-import filecmp
-import tesserocr
 from tesserocr import PyTessBaseAPI
+
+import glob
+import filecmp
+import math
+import os
+import re
+
 from filecmp import cmp
 from pathlib import Path
-import re
-from functools import partial
 
 
 # to run on dataframes
