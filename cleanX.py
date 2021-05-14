@@ -30,15 +30,16 @@ def check_paths_for_group_leakage(train_df, test_df, unique_id):
     Finds train samples that have been accidentally leaked into test
     samples
 
-    :param train_df: Pandas DataFrame containing information about
+    :param train_df: Pandas :code:`DataFrame` containing information about
                      train assets.
-    :type train_df: DataFrame
-    :param test_df: Pandas DataFrame containing information about
+    :type train_df: :pd:`DataFrame`
+    :param test_df: Pandas :code:`DataFrame` containing information about
                     train assets.
-    :type test_df: DataFrame
+    :type test_df: :pd:`DataFrame`
 
-    :return: duplications of any image into both sets as a new DataFrame
-    :rtype: DataFrame
+    :return: duplications of any image into both sets as a new
+             :code:`DataFrame`
+    :rtype: :pd:`DataFrame`
     """
     pics_in_both_groups = train_df.merge(test_df, on=unique_id, how='inner')
     return pics_in_both_groups
@@ -46,23 +47,26 @@ def check_paths_for_group_leakage(train_df, test_df, unique_id):
 
 def see_part_potential_bias(df, label, sensitive_column_list):
     """
-    This function gives you a tabulated DataFrame of sensitive columns e.g.
-    gender, race, or whichever you think are relevant,
+    This function gives you a tabulated :code:`DataFrame` of sensitive columns
+    e.g. gender, race, or whichever you think are relevant,
     in terms of a labels (put in the label column name).
     You may discover all your pathologically labeled sample are of one ethnic
-    group, gender or other category in your DataFrame. Remember some early
-    neural nets for chest-Gary's were less accurate in women and the fact that
-    there were fewer Cry's of women in the datasets they built on did not help
+    group, gender or other category in your :code:`DataFrame`. Remember some
+    early neural nets for chest-Gary's were less accurate in women and the
+    fact that there were fewer Cry's of women in the datasets they built on
+    did not help
 
-    :param df: DataFrame including sample IDs, labels, and sensitive columns
-    :type df: DataFrame
+    :param df: :code:`DataFrame` including sample IDs, labels, and sensitive
+               columns
+    :type df: :pd:`DataFrame`
     :param label: The name of the column with the labels
     :type label: string
-    :param sensitive_column_list: List names sensitive columns on DataFrame
+    :param sensitive_column_list: List names sensitive columns on
+                                  :code:`DataFrame`
     :type sensitive_column_list: list
 
-    :return: tab_fight_bias2, a neatly sorted DataFrame
-    :rtype: DataFrame
+    :return: tab_fight_bias2, a neatly sorted :code:`DataFrame`
+    :rtype: :pd:`DataFrame`
     """
 
     label_and_sensitive = [label]+sensitive_column_list
@@ -329,17 +333,19 @@ def show_major_lines_on_image(pic_name):
 
 def find_big_lines(directory, line_length):
     """
-    Finds number of lines in images at or over the length of 'line_length',
-    gives back a DataFrame with this information. Note lines can fold back on
-    themselves, and every pixel is counted if they are all contiguous
+    Finds number of lines in images at or over the length of
+    :code:`line_length`, gives back a :code:`DataFrame` with this information.
+    Note lines can fold back on themselves, and every pixel is counted if they
+    are all contiguous
 
     :param directory: Directory with set_of_images.
     :type directory: directory
     :param line_length: Minimal length of lines for the function to count.
     :type line_length: integer
 
-    :return: DataFrame with column for line count at or above line_length
-    :rtype: DataFrame
+    :return: :code:`DataFrame` with column for line count at or above
+             :code:`line_length`
+    :rtype: :pd:`DataFrame`
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     pic_to_nlines = {}
@@ -425,8 +431,9 @@ def dimensions_to_df(folder_name):
     :param folder_name: Adress of folder with images.
     :type folder_name: Folder/directory
 
-    :return: image height, width and proportion height/width as a new DataFrame
-    :rtype: DataFrame
+    :return: image height, width and proportion height/width as a new
+             :code:`DataFrame`
+    :rtype: :pd:`DataFrame`
     """
     non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
     picy_list, list_ht, list_wt = [], [], []
@@ -450,8 +457,8 @@ def dimensions_to_histo(folder_name, bins_count=10):
     """
     Looks in the directory given, and produces a histogram of various widths
     and heights. Important information as many neural nets take images all the
-    same size. Classically most chest-X-rays are 2500*2000 or 2500 *2048;
-    however the dataset may be different and/or varied
+    same size. Classically most chest-X-rays are :math:`2500 \\times 2000` or
+    :math:`2500 \\times 2048`; however the dataset may be different and/or varied
 
     :param folder_name: Folder_name, directory name.
     :type folder_name: string
@@ -499,8 +506,8 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     Looks in the directory given, produces a histogram of various proportions
     of the images by dividing their height by widths.
     Important information as many neural nets take images all the
-    same size. Classically most chest X-rays are 2500*2000 or 2500 *2048;
-    however the dataset may be different and/or varied
+    same size. Classically most chest X-rays are :math:`2500 \\times 2000` or
+    :math:`2500 \\times 2048`; however the dataset may be different and/or varied
 
     :param folder_name: Folder_name, directory name.
     :type folder_name: string
@@ -570,9 +577,9 @@ def find_very_hazy(directory):
     :param directory: The folder where the images are
     :type directory: directory
 
-    :return: DataFrame with images sorted as hazy or regular under
+    :return: :code:`DataFrame` with images sorted as hazy or regular under
              :code:`label_for_haze`
-    :rtype: DataFrame
+    :rtype: :pd:`DataFrame`
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     hazy, lined = [], []
@@ -616,8 +623,8 @@ def find_by_sample_upper(
         values abnormal
     :type value_for_line: integer
 
-    :return: DataFrame with images labeled
-    :rtype: DataFrame
+    :return: :code:`DataFrame` with images labeled
+    :rtype: :pd:`DataFrame`
     """
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     estimates, piclist = [], []
@@ -671,17 +678,17 @@ def find_sample_upper_greater_than_lower(
 
 def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
     """
-    Takes the average of all pixels in an image, returns a DataFrame with
-    those images that are outliers by mean. Should catch some inverted or
-    problem images
+    Takes the average of all pixels in an image, returns a :code:`DataFrame`
+    with those images that are outliers by mean. Should catch some inverted
+    or problem images
 
     :param source_directory: The folder in which the images are
     :type source_directory: directory
     :param percentage_to_say_outliers: Percentage to capture
     :type percentage_to_say_outliers: integer
 
-    :return: DataFrame made up of outliers only
-    :rtype: DataFrame
+    :return: :code:`DataFrame` made up of outliers only
+    :rtype: :pd:`DataFrame`
     """
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
@@ -709,8 +716,8 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     :param percentage_to_say_outliers: Percentage to capture
     :type percentage_to_say_outliers: integer
 
-    :return: DataFrame all images, marked as high, low or within range
-    :rtype: DataFrame
+    :return: :code:`DataFrame` all images, marked as high, low or within range
+    :rtype: :pd:`DataFrame`
     """
     suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
@@ -735,14 +742,14 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
 
 def understand_df(df):
     """
-    Takes a DataFrame (if you have a DataFrame for images) and prints
-    information including length, data types, nulls and number of
-    duplicated rows
+    Takes a :code:`DataFrame` (if you have a :code:`DataFrame` for images)
+    and prints information including length, data types, nulls and number
+    of duplicated rows
 
-    :param df: DataFrame you are interested in getting features of.
-    :type df: DataFrame
+    :param df: :code:`DataFrame` you are interested in getting features of.
+    :type df: :pd:`DataFrame`
 
-    :return: Prints out information on DataFrame.
+    :return: Prints out information on :code:`DataFrame`.
     :rtype: NoneType
     """
     print("The DataFrame has", len(df.columns), "columns, named", df.columns)
@@ -764,8 +771,8 @@ def understand_df(df):
 
 def show_duplicates(df):
     """
-    Takes a DataFrame (if you have a DataFrame for images) and prints
-    duplicated rows
+    Takes a :code:`DataFrame` (if you have a :code:`DataFrame` for images)
+    and prints duplicated rows
     """
     if df.duplicated().any():
         print(
@@ -819,9 +826,9 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     :param percentile: percentile to mark as abnormal
     :type percentile: integer
 
-    :return: DataFrame with a column that notes mismatches
+    :return: :code:`DataFrame` with a column that notes mismatches
              and within range images
-    :rtype: DataFrame
+    :rtype: :pd:`DataFrame`
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     avg_image = separate_image_averager(suspects, s)  # np.zeros((5, 5)) + 128
@@ -854,8 +861,8 @@ def tesseract_specific(directory):
     :param directory: Directory (folder).
     :type directory: Directory
 
-    :return: DataFrame with a column of text found
-    :rtype: DataFrame
+    :return: :code:`DataFrame` with a column of text found
+    :rtype: :pd:`DataFrame`
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     texts, clean_texts, confidences = [], [], []
@@ -889,8 +896,8 @@ def find_suspect_text(directory, label_word):
     :param label_word: Label word
     :type label_word: string
 
-    :return: DataFrame with a column of text found over the length
-    :rtype: DataFrame
+    :return: :code:`DataFrame` with a column of text found over the length
+    :rtype: :pd:`DataFrame`
     """
 
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
@@ -924,8 +931,8 @@ def find_suspect_text_by_length(directory, length):
     :param length: Length to find above, inclusive
     :type length: integer
 
-    :return: DataFrame with a column of text found
-    :rtype: DataFrame
+    :return: :code:`DataFrame` with a column of text found
+    :rtype: :pd:`DataFrame`
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     images, texts, clean_texts = [], [], []
@@ -984,14 +991,14 @@ def histogram_difference_for_inverts_todf(directory):
     """
     This function looks for images by a spike on the end of their pixel
     value histogram to find inverted images, then puts what it found into
-    a DataFrame. Images are listed as regulars, inverts of unclear (the
+    a :code:`DataFrame`. Images are listed as regulars, inverts of unclear (the
     unclear have equal spikes on both ends)
 
     :param directory: Directory (folder).
     :type directory: Directory
 
-    :return: a DataFrame with images categorized
-    :rtype: DataFrame
+    :return: a :code:`DataFrame` with images categorized
+    :rtype: :pd:`DataFrame`
     """
     suspects = glob.glob(os.path.join(directory, '*.jpg'))
     regulars, inverts, unclear = [], [], []
@@ -1056,13 +1063,13 @@ def find_duplicated_images(directory):
 def find_duplicated_images_todf(directory):
     # looks for duplicated images, returns DataFrame
     """
-    Finds duplicated images and returns a DataFrame of them.
+    Finds duplicated images and returns a :code:`DataFrame` of them.
 
     :param directory: Directory (folder).
     :type directory: Directory
 
-    :return: a DataFrame of duplicated images
-    :rtype: DataFrame
+    :return: a :code:`DataFrame` of duplicated images
+    :rtype: :pd:`DataFrame`
     """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
@@ -1101,10 +1108,10 @@ def find_duplicated_images_todf(directory):
 
 def show_images_in_df(iter_ob, length_name):
     """
-    Shows images by taking them off a DataFrame column, and puts them up
-    but smaller, so they can be compared quickly
+    Shows images by taking them off a :code:`DataFrame` column, and puts
+    them up but smaller, so they can be compared quickly
 
-    :param inter_ob: List, should be a DataFrame column
+    :param inter_ob: List, should be a :code:`DataFrame` column
     :type iter_ob: list
     :param length_name: Size of image name going from end
     :type length_name: integer
@@ -1141,15 +1148,15 @@ def show_images_in_df(iter_ob, length_name):
 def dataframe_up_my_pics(directory, diagnosis_string):
     """
     Takes images in a directory (should all be with same label), and puts the
-    name (with path) and label into a DataFrame
+    name (with path) and label into a :code:`DataFrame`
 
     :param directory: Directory (folder).
     :type directory: Directory
     :param diagnosis_string: Usually a label, may be any string
     :type diagnosis_string: string
 
-    :return: DataFrame of pictures and label
-    :rtype: DataFrame
+    :return: :code:`DataFrame` of pictures and label
+    :rtype: :pd:`DataFrame`
     """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
