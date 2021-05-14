@@ -458,7 +458,8 @@ def dimensions_to_histo(folder_name, bins_count=10):
     Looks in the directory given, and produces a histogram of various widths
     and heights. Important information as many neural nets take images all the
     same size. Classically most chest-X-rays are :math:`2500 \\times 2000` or
-    :math:`2500 \\times 2048`; however the dataset may be different and/or varied
+    :math:`2500 \\times 2048`; however the dataset may be different and/or
+    varied
 
     :param folder_name: Folder_name, directory name.
     :type folder_name: string
@@ -507,7 +508,8 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     of the images by dividing their height by widths.
     Important information as many neural nets take images all the
     same size. Classically most chest X-rays are :math:`2500 \\times 2000` or
-    :math:`2500 \\times 2048`; however the dataset may be different and/or varied
+    :math:`2500 \\times 2048`; however the dataset may be different and/or
+    varied
 
     :param folder_name: Folder_name, directory name.
     :type folder_name: string
