@@ -55,19 +55,14 @@ rotated images</p>
 <dd><p>Class method <code class="code docutils literal notranslate"><span class="pre">iter</span></code> returns a generator group of images that
 are on angles from <code class="code docutils literal notranslate"><span class="pre">start</span></code> to <code class="code docutils literal notranslate"><span class="pre">stop</span></code> with increment of
 <code class="code docutils literal notranslate"><span class="pre">step</span></code>.
-Usage example:
-.. code-block:: python</p>
-<blockquote>
-<div><p>image = cv2.imread(‘normal-frontal-chest-x-ray.jpg’)
-rotator = Rotator(image)
-for rotated in rotator.iter(0, 360, 10):</p>
-<blockquote>
-<div><blockquote>
-<div><p># shows the np arrays for the 36 (step=10) images</p>
-</div></blockquote>
-<p>print(rotated)</p>
-</div></blockquote>
-</div></blockquote>
+Usage example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;normal-frontal-chest-x-ray.jpg&#39;</span><span class="p">)</span>
+<span class="n">rotator</span> <span class="o">=</span> <span class="n">Rotator</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">rotated</span> <span class="ow">in</span> <span class="n">rotator</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+     <span class="c1"># shows the np arrays for the 36 (step=10) images</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rotated</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -119,17 +114,18 @@ samples</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>train_df</strong> (<em>DataFrame</em>) – Pandas dataframe containing information about
+<li><p><strong>train_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
 train assets.</p></li>
-<li><p><strong>test_df</strong> (<em>DataFrame</em>) – Pandas dataframe containing information about
+<li><p><strong>test_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
 train assets.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>duplications of any image into both sets as a new dataframe</p>
+<dd class="field-even"><p>duplications of any image into both sets as a new
+<code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>DataFrame</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -235,7 +231,7 @@ or </em><em>a PIL image.</em>) – Image</p>
 <dt class="sig sig-object py" id="cleanX.dataframe_up_my_pics">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">dataframe_up_my_pics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagnosis_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataframe_up_my_pics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes images in a directory (should all be with same label), and puts the
-name (with path) and label into a dataframe</p>
+name (with path) and label into a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -244,10 +240,10 @@ name (with path) and label into a dataframe</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe of pictures and label</p>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> of pictures and label</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -262,10 +258,11 @@ data analysis</p>
 <dd class="field-odd"><p><strong>folder_name</strong> (<em>Folder/directory</em>) – Adress of folder with images.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>image height, width and proportion height/width as a new dataframe</p>
+<dd class="field-even"><p>image height, width and proportion height/width as a new
+<code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>DataFrame</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -275,8 +272,9 @@ data analysis</p>
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">dimensions_to_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dimensions_to_histo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Looks in the directory given, and produces a histogram of various widths
 and heights. Important information as many neural nets take images all the
-same size. Classically most chest-X-rays are 2500*2000 or 2500 <a href="#id1"><span class="problematic" id="id2">*</span></a>2048;
-however the dataset may be different and/or varied</p>
+same size. Classically most chest-X-rays are <span class="math">2500 \times 2000</span> or
+<span class="math">2500 \times 2048</span>; however the dataset may be different and/or
+varied</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -296,9 +294,10 @@ however the dataset may be different and/or varied</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.find_big_lines">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_big_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_big_lines" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds number of lines in images at or over the length of ‘line_length’,
-gives back a dataframe with this information. Note lines can fold back on
-themselves, and every pixel is counted if they are all contiguous</p>
+<dd><p>Finds number of lines in images at or over the length of
+<code class="code docutils literal notranslate"><span class="pre">line_length</span></code>, gives back a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with this information.
+Note lines can fold back on themselves, and every pixel is counted if they
+are all contiguous</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -307,10 +306,11 @@ themselves, and every pixel is counted if they are all contiguous</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>dataframe with column for line count at or above line_length</p>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with column for line count at or above
+<code class="code docutils literal notranslate"><span class="pre">line_length</span></code></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -331,10 +331,10 @@ values abnormal</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe with images labeled</p>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with images labeled</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -359,16 +359,16 @@ values abnormal</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.find_duplicated_images_todf">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_duplicated_images_todf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_duplicated_images_todf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds duplicated images and returns a dataframe of them.</p>
+<dd><p>Finds duplicated images and returns a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> of them.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a dataframe of duplicated images</p>
+<dd class="field-even"><p>a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> of duplicated images</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -387,10 +387,10 @@ the same mean are in and out of normal range if the knife so falls</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe all images, marked as high, low or within range</p>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> all images, marked as high, low or within range</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -398,9 +398,9 @@ the same mean are in and out of normal range if the knife so falls</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.find_outliers_by_total_mean">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_outliers_by_total_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_outliers_by_total_mean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes the average of all pixels in an image, returns a dataframe with
-those images that are outliers by mean. Should catch some inverted or
-problem images</p>
+<dd><p>Takes the average of all pixels in an image, returns a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>
+with those images that are outliers by mean. Should catch some inverted
+or problem images</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -409,10 +409,10 @@ problem images</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe made up of outliers only</p>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> made up of outliers only</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -439,10 +439,10 @@ Multi-lingual including English. Accuracy is very high, but not perfect.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe with a column of text found over the length</p>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column of text found over the length</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -461,10 +461,10 @@ Multi-lingual including English. Accuracy is very high, but not perfect.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe with a column of text found</p>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column of text found</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -485,11 +485,11 @@ is approximate, may be a tad more</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe with a column that notes mismatches
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column that notes mismatches
 and within range images</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -506,11 +506,11 @@ questionable technique level.</p>
 <dd class="field-odd"><p><strong>directory</strong> (<em>directory</em>) – The folder where the images are</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>dataframe with images sorted as hazy or regular under
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with images sorted as hazy or regular under
 <code class="code docutils literal notranslate"><span class="pre">label_for_haze</span></code></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -557,17 +557,17 @@ X-rays, not inverted fluoroscopy images.</p>
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">histogram_difference_for_inverts_todf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.histogram_difference_for_inverts_todf" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function looks for images by a spike on the end of their pixel
 value histogram to find inverted images, then puts what it found into
-a dataframe. Images are listed as regulars, inverts of unclear (the
+a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>. Images are listed as regulars, inverts of unclear (the
 unclear have equal spikes on both ends)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a dataframe with images categorized</p>
+<dd class="field-even"><p>a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with images categorized</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>DataFrame</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -594,8 +594,9 @@ unclear have equal spikes on both ends)</p>
 <dd><p>Looks in the directory given, produces a histogram of various proportions
 of the images by dividing their height by widths.
 Important information as many neural nets take images all the
-same size. Classically most chest X-rays are 2500*2000 or 2500 <a href="#id3"><span class="problematic" id="id4">*</span></a>2048;
-however the dataset may be different and/or varied</p>
+same size. Classically most chest X-rays are <span class="math">2500 \times 2000</span> or
+<span class="math">2500 \times 2048</span>; however the dataset may be different and/or
+varied</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -660,26 +661,29 @@ between angles -5 to 5.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.see_part_potential_bias">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">see_part_potential_bias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_column_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.see_part_potential_bias" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function gives you a tabulated dataframe of sensitive columns e.g.
-gender, race, or whichever you think are relevant,
+<dd><p>This function gives you a tabulated <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> of sensitive columns
+e.g. gender, race, or whichever you think are relevant,
 in terms of a labels (put in the label column name).
 You may discover all your pathologically labeled sample are of one ethnic
-group, gender or other category in your dataframe. Remember some early
-neural nets for chest-Gary’s were less accurate in women and the fact that
-there were fewer Cry’s of women in the datasets they built on did not help</p>
+group, gender or other category in your <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>. Remember some
+early neural nets for chest-Gary’s were less accurate in women and the
+fact that there were fewer Cry’s of women in the datasets they built on
+did not help</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>Dataframe</em>) – Dataframe including sample IDs, labels, and sensitive columns</p></li>
+<li><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> including sample IDs, labels, and sensitive
+columns</p></li>
 <li><p><strong>label</strong> (<em>string</em>) – The name of the column with the labels</p></li>
-<li><p><strong>sensitive_column_list</strong> (<em>list</em>) – List names sensitive columns on dataframe</p></li>
+<li><p><strong>sensitive_column_list</strong> (<em>list</em>) – List names sensitive columns on
+<code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>tab_fight_bias2, a neatly sorted dataframe</p>
+<dd class="field-even"><p>tab_fight_bias2, a neatly sorted <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -707,19 +711,19 @@ there were fewer Cry’s of women in the datasets they built on did not help</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.show_duplicates">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">show_duplicates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.show_duplicates" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes a dataframe (if you have a dataframe for images) and prints
-duplicated rows</p>
+<dd><p>Takes a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> (if you have a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> for images)
+and prints duplicated rows</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.show_images_in_df">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">show_images_in_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iter_ob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.show_images_in_df" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shows images by taking them off a dataframe column, and puts them up
-but smaller, so they can be compared quickly</p>
+<dd><p>Shows images by taking them off a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> column, and puts
+them up but smaller, so they can be compared quickly</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>inter_ob</strong> – List, should be a dataframe column</p></li>
+<li><p><strong>inter_ob</strong> – List, should be a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> column</p></li>
 <li><p><strong>length_name</strong> (<em>integer</em>) – Size of image name going from end</p></li>
 </ul>
 </dd>
@@ -755,17 +759,14 @@ lines more likely to be non-biological.</p>
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">simple_rotation_augmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_list1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.simple_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes one picture and rotates is by a number
 of degrees is angle_list1.This function can be used with the
-augment_and_move function as follows (example):
-.. code-block:: python</p>
-<blockquote>
-<div><dl class="simple">
-<dt>augment_and_move(</dt><dd><p>‘D:/my_academia/dataset/random_within_domain’,
-‘D:/my_academia/elo’,
-[partial(simple_rotation_augmentation, 5)],</p>
-</dd>
-</dl>
-<p>)</p>
-</div></blockquote>
+augment_and_move function as follows (example):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">augment_and_move</span><span class="p">(</span>
+    <span class="s1">&#39;D:/my_academia/dataset/random_within_domain&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;D:/my_academia/elo&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">partial</span><span class="p">(</span><span class="n">simple_rotation_augmentation</span><span class="p">,</span> <span class="mi">5</span><span class="p">)],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image.</p>
@@ -850,10 +851,10 @@ but has new values in most of the pixels(besides the background)</p>
 <dd class="field-odd"><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe with a column of text found</p>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column of text found</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dataframe</p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -861,15 +862,15 @@ but has new values in most of the pixels(besides the background)</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.understand_df">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">understand_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.understand_df" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes a dataframe (if you have a dataframe for images) and prints
-information including length, data types, nulls and number of
-duplicated rows</p>
+<dd><p>Takes a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> (if you have a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> for images)
+and prints information including length, data types, nulls and number
+of duplicated rows</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>df</strong> (<em>DataFrame</em>) – DataFrame you are interested in getting features of.</p>
+<dd class="field-odd"><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> you are interested in getting features of.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Prints out information on dataframe.</p>
+<dd class="field-even"><p>Prints out information on <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>NoneType</p>
