@@ -210,6 +210,7 @@ def simple_rotation_augmentation(angle_list1, image):
     This function takes one picture and rotates is by a number
     of degrees is angle_list1.This function can be used with the
     augment_and_move function as follows (example):
+
     .. code-block:: python
 
        augment_and_move(
@@ -1232,6 +1233,7 @@ class Rotator:
         are on angles from :code:`start` to :code:`stop` with increment of
         :code:`step`.
         Usage example:
+
         .. code-block:: python
 
            image = cv2.imread('normal-frontal-chest-x-ray.jpg')
