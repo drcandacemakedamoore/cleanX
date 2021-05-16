@@ -1358,8 +1358,8 @@ def avg_image_maker(set_of_images):
 
     for example in set_of_images:
         example = cv2.imread(example, cv2.IMREAD_GRAYSCALE)
-        ht = image.shape[0]
-        wt = image.shape[1]
+        ht = example.shape[0]
+        wt = example.shape[1]
         list_h.append(ht)
         list_w.append(wt)
 
