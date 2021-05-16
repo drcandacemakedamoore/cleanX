@@ -1372,3 +1372,28 @@ def avg_image_maker(set_of_images):
         canvas += np.array(example_small)
     final_avg = canvas / len(set_of_images)
     return final_avg
+
+
+def set_image_variability(set_of_images):
+    """
+    :param set_of_images: A set of images,
+    can be read in with glob.glob on a folder of jpgs.
+    :type set_of_images: list
+
+    :return: final_diff, an image that is the average virability per pixel
+    of the image in images in the set
+    :rtype: nd.array
+    """
+    final_avg = avg_image_maker(set_of_images)
+
+    h = final_avg.shape[0]
+    w = final_avg.shape[1]
+    diff = np.zeros((h, w))
+    print("diff image", diff.shape)
+    for example in set_of_images:
+        example = cv2.imread(example, cv2.IMREAD_GRAYSCALE)
+        example_small = cv2.resize(example, (w, h))
+        print("example_small image", example_small.shape)
+        diff += (example_small - final_avg)**2
+    final_diff = diff / len(set_of_images)
+    return final_diff
