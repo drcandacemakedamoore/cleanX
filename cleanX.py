@@ -1346,6 +1346,9 @@ def make_contour_image(im):
 
 def avg_image_maker(set_of_images):
     """
+    This function shows you an average sized image layed over with the average
+    per pixel of all images averaged from the set_of_images group. 
+
     :param set_of_images: A set of images,
     can be read in with glob.glob on a folder of jpgs.
     :type set_of_images: list
@@ -1376,6 +1379,11 @@ def avg_image_maker(set_of_images):
 
 def set_image_variability(set_of_images):
     """
+    This function shows you an average sized image layed over with variability
+    per pixel if all images were averaged and compared. Here you will see where
+    the variability- and therefore in some cases pathologies like
+    pneumonia can be typically located
+
     :param set_of_images: A set of images,
     can be read in with glob.glob on a folder of jpgs.
     :type set_of_images: list

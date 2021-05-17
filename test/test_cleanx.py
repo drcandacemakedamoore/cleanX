@@ -198,11 +198,19 @@ def test_def_make_contour_image():
     defMkcont = cleanX.make_contour_image(picy1)
     assert len(defMkcont) > 0
 
-
 def test_avg_image_maker():
     #set_of_images = glob.glob(*.jpg)
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
     test_df = pd.read_csv(test_dfE)
     set_of_images = image_directory + '/' + test_df.image_path.dropna()
     tab = cleanX.avg_image_maker(set_of_images)  
-    assert tab.shape[0] > 2      
+    assert tab.shape[0] > 2  
+
+
+def test_set_image_variability():
+    #set_of_images = glob.glob(*.jpg)
+    test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
+    test_df = pd.read_csv(test_dfE)
+    set_of_images = image_directory + '/' + test_df.image_path.dropna()
+    tab = cleanX.set_image_variability(set_of_images)  
+    assert tab.shape[0] > 2          
