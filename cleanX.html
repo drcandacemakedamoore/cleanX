@@ -90,6 +90,28 @@ the cleanX function crop, to all of them</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cleanX.avg_image_maker">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">avg_image_maker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.avg_image_maker" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function shows you an average sized image layed over with the average
+per pixel of all images averaged from the set_of_images group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>set_of_images</strong> – A set of images,</p>
+</dd>
+</dl>
+<p>can be read in with glob.glob on a folder of jpgs.
+:type set_of_images: list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>final_avg, an image that is the average image of images in the set</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>nd.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cleanX.blur_out_edges">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">blur_out_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.blur_out_edges" title="Permalink to this definition">¶</a></dt>
 <dd><p>For an individual image, blurs out the edges as an augmentation.</p>
@@ -706,6 +728,29 @@ columns</p></li>
 <dd class="field-odd"><p>image</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.set_image_variability">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">set_image_variability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.set_image_variability" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function shows you an average sized image layed over with variability
+per pixel if all images were averaged and compared. Here you will see where
+the variability- and therefore in some cases pathologies like
+pneumonia can be typically located</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>set_of_images</strong> – A set of images,</p>
+</dd>
+</dl>
+<p>can be read in with glob.glob on a folder of jpgs.
+:type set_of_images: list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>final_diff, an image that is the average virability per pixel</p>
+</dd>
+</dl>
+<p>of the image in images in the set
+:rtype: nd.array</p>
 </dd></dl>
 
 <dl class="py function">
