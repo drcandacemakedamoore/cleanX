@@ -1347,7 +1347,7 @@ def make_contour_image(im):
 def avg_image_maker(set_of_images):
     """
     This function shows you an average sized image layed over with the average
-    per pixel of all images averaged from the set_of_images group. 
+    per pixel of all images averaged from the set_of_images group.
 
     :param set_of_images: A set of images,
     can be read in with glob.glob on a folder of jpgs.
