@@ -1407,45 +1407,57 @@ def set_image_variability(set_of_images):
     return final_diff
 
 
-def avg_image_maker_by_label(master_df,dataframe_image_column, dataframe_label_column, image_folder):
+def avg_image_maker_by_label(
+    master_df,
+    dataframe_image_column,
+    dataframe_label_column,
+    image_folder,
+):
+
     """
-    :param master_df: Dataframe with image location and labels  
-    :type master_df: Dataframe   
-    :param dataframe_image_column: name of dataframe column with image location string
+    This function sorts images by labels and makes an average image per label.
+    If images are all the same size subtracting one from the other should
+    reveal salient differences.
+    :param master_df: Dataframe with image location and labels
+    :type master_df: Dataframe
+    :param dataframe_image_column: name of dataframe column with image location
+    string
     :type dataframe_image_column:string
     :param dataframe_label_column: name of dataframe column with label string
     :type dataframe_label_column:string
     :param image_folder: name of folder where images are
     :type image_folder:string
-    
+
     :return: list of titled average images per label
     :rtype: list
     """
     final_img_list = []
     final_name_list = []
     set_of_labels = master_df[dataframe_label_column].unique()
-    for name in set_of_labels: 
+    for name in set_of_labels:
         sets_of_images = []
-    
+
         list_h = []
         list_w = []
-    
-        for example in master_df[dataframe_image_column][master_df[dataframe_label_column] == name]:
-            example = cv2.imread(image_folder+example, cv2.IMREAD_GRAYSCALE)
-            ht= example.shape[0]
-            wt= example.shape[1]
-            list_h.append(ht)  
+
+        for example in master_df[
+                    dataframe_image_column][master_df[
+                        dataframe_label_column]
+                            == name]:
+            example = cv2.imread(image_folder + example, cv2.IMREAD_GRAYSCALE)
+            ht = example.shape[0]
+            wt = example.shape[1]
+            list_h.append(ht)
             list_w.append(wt)
 
-        
-        h = int(sum(list_h)/len(list_h))    
+        h = int(sum(list_h)/len(list_h))
         w = int(sum(list_w)/len(list_w))
         canvas = np.zeros((h, w))
-        for example in  master_df[dataframe_image_column]:
-            example = cv2.imread(image_folder+example, cv2.IMREAD_GRAYSCALE)    
+        for example in master_df[dataframe_image_column]:
+            example = cv2.imread(image_folder+example, cv2.IMREAD_GRAYSCALE)
             example_small = cv2.resize(example, (w, h))
             canvas += np.array(example_small)
-        final_avg = canvas / len(dataframe_image_column)    
+        final_avg = canvas / len(dataframe_image_column)
         final_img_list.append(final_avg)
         final_name_list.append(name)
     stick = pd.DataFrame(final_name_list)
@@ -1453,7 +1465,5 @@ def avg_image_maker_by_label(master_df,dataframe_image_column, dataframe_label_c
 
     df = pd.DataFrame(data=stick_data)
 
-
     stick['images'] = final_img_list
     return df
-    
