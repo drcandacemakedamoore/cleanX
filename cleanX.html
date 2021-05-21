@@ -112,6 +112,32 @@ per pixel of all images averaged from the set_of_images group.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cleanX.avg_image_maker_by_label">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">avg_image_maker_by_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe_image_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe_label_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.avg_image_maker_by_label" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>master_df</strong> (<em>Dataframe</em>) – Dataframe with image location and labels</p></li>
+<li><p><strong>dataframe_image_column</strong> – name of dataframe column with image location string</p></li>
+</ul>
+</dd>
+</dl>
+<p>:type dataframe_image_column:string
+:param dataframe_label_column: name of dataframe column with label string
+:type dataframe_label_column:string
+:param image_folder: name of folder where images are
+:type image_folder:string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of titled average images per label</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cleanX.blur_out_edges">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">blur_out_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.blur_out_edges" title="Permalink to this definition">¶</a></dt>
 <dd><p>For an individual image, blurs out the edges as an augmentation.</p>
@@ -986,7 +1012,7 @@ of duplicated rows</p>
       &copy;2021, doctormakeda@gmail.com.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
