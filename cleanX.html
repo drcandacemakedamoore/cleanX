@@ -116,7 +116,8 @@ per pixel of all images averaged from the set_of_images group.</p>
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">avg_image_maker_by_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe_image_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe_label_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.avg_image_maker_by_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function sorts images by labels and makes an average image per label.
 If images are all the same size subtracting one from the other should
-reveal salient differences.
+reveal salient differences. N.B. blending different views e.g. PA and
+lateral is not suggested.
 :param master_df: Dataframe with image location and labels
 :type master_df: Dataframe
 :param dataframe_image_column: name of dataframe column with image location
