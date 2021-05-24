@@ -1417,7 +1417,8 @@ def avg_image_maker_by_label(
     """
     This function sorts images by labels and makes an average image per label.
     If images are all the same size subtracting one from the other should
-    reveal salient differences.
+    reveal salient differences. N.B. blending different views e.g. PA and
+    lateral is not suggested.
     :param master_df: Dataframe with image location and labels
     :type master_df: Dataframe
     :param dataframe_image_column: name of dataframe column with image location
