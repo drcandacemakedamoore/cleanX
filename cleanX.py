@@ -475,7 +475,7 @@ def dimensions_to_histo(folder_name, bins_count=10):
     non_suspects1 = glob.glob(os.path.join(image_directory, '*.jpg'))
     non_suspects2 = glob.glob(os.path.join(image_directory, '*.jpeg'))
     non_suspects = non_suspects1 + non_suspects2
-    
+
     picy_list, list_ht, list_wt = [], [], []
 
     for picy in non_suspects:
