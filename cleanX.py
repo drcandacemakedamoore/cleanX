@@ -423,7 +423,7 @@ def augment_and_move(origin_folder, target_folder, transformations):
         example.save(os.path.join(target_folder, novo + ".jpg"))
 
 
-def dimensions_to_df(folder_name):
+def dimensions_to_df(image_directory):
     """
     Finds dimensions on images in a folder, and makes a df for exploratory
     data analysis
@@ -455,7 +455,7 @@ def dimensions_to_df(folder_name):
     return new_datafrm
 
 
-def dimensions_to_histo(folder_name, bins_count=10):
+def dimensions_to_histo(image_directory, bins_count=10):
     """
     Looks in the directory given, and produces a histogram of various widths
     and heights. Important information as many neural nets take images all the
