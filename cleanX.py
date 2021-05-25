@@ -435,7 +435,9 @@ def dimensions_to_df(folder_name):
              :code:`DataFrame`
     :rtype: :pd:`DataFrame`
     """
-    non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
+    non_suspects1 = glob.glob(os.path.join(image_directory, '*.jpg'))
+    non_suspects2 = glob.glob(os.path.join(image_directory, '*.jpeg'))
+    non_suspects = non_suspects1 + non_suspects2
     picy_list, list_ht, list_wt = [], [], []
 
     for picy in non_suspects:
@@ -470,7 +472,10 @@ def dimensions_to_histo(folder_name, bins_count=10):
     :return: histo_ht_wt, a labeled histogram
     :rtype: tuple
     """
-    non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
+    non_suspects1 = glob.glob(os.path.join(image_directory, '*.jpg'))
+    non_suspects2 = glob.glob(os.path.join(image_directory, '*.jpeg'))
+    non_suspects = non_suspects1 + non_suspects2
+    
     picy_list, list_ht, list_wt = [], [], []
 
     for picy in non_suspects:
@@ -479,7 +484,7 @@ def dimensions_to_histo(folder_name, bins_count=10):
         ht, wt = image.shape
         list_ht.append(ht)
         list_wt.append(wt)
-        new_datafrme = pd.DataFrame({
+    new_datafrme = pd.DataFrame({
             'images': picy_list,
             'height': list_ht,
             'width': list_wt
