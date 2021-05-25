@@ -444,7 +444,7 @@ def dimensions_to_df(folder_name):
         ht, wt = image.shape
         list_ht.append(ht)
         list_wt.append(wt)
-        new_datafrm = pd.DataFrame({
+    new_datafrm = pd.DataFrame({
             'images': picy_list,
             'height': list_ht,
             'width': list_wt
