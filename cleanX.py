@@ -412,7 +412,9 @@ def augment_and_move(origin_folder, target_folder, transformations):
     :return: technically a non returning function, but new images will be made
     :rtype: none
     """
-    non_suspects = glob.glob(os.path.join(origin_folder, '*.jpg'))
+    non_suspects1 = glob.glob(os.path.join(origin_folder, '*.jpg'))
+    non_suspects2 = glob.glob(os.path.join(origin_folder, '*.jpeg'))
+    non_suspects = non_suspects2 + non_suspects1
     for picy in non_suspects:
         example = Image.open(picy)
         if example.mode == 'RGBA':
