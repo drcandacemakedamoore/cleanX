@@ -347,7 +347,10 @@ def find_big_lines(directory, line_length):
              :code:`line_length`
     :rtype: :pd:`DataFrame`
     """
-    suspects = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
+    # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     pic_to_nlines = {}
     for pic in suspects:
         img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
@@ -525,7 +528,10 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     :return: histo_ht_wt_p, a labeled histogram
     :rtype: tuple
     """
-    non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
+    non_suspects1 = glob.glob(os.path.join(image_directory, '*.jpg'))
+    non_suspects2 = glob.glob(os.path.join(image_directory, '*.jpeg'))
+    non_suspects = non_suspects1 + non_suspects2
+    # non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
     picy_list, list_ht, list_wt = [], [], []
 
     for picy in non_suspects:
@@ -590,7 +596,9 @@ def find_very_hazy(directory):
              :code:`label_for_haze`
     :rtype: :pd:`DataFrame`
     """
-    suspects = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
     hazy, lined = [], []
     for pic in suspects:
         image2 = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
@@ -635,7 +643,9 @@ def find_by_sample_upper(
     :return: :code:`DataFrame` with images labeled
     :rtype: :pd:`DataFrame`
     """
-    suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(source_directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(source_directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
     estimates, piclist = [], []
     for pic in suspects:
         piclist.append(pic)
@@ -667,7 +677,10 @@ def find_sample_upper_greater_than_lower(
     or otherwise bizarre, as the neck is smaller than the abdomen.
     """
     estup, estdown, piclist = [], [], []
-    suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(source_directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(source_directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
+    # suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     for pic in suspects:
         piclist.append(pic)
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
@@ -699,7 +712,10 @@ def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
     :return: :code:`DataFrame` made up of outliers only
     :rtype: :pd:`DataFrame`
     """
-    suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(source_directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(source_directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
+    # suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
     for pic in suspects:
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
@@ -728,7 +744,10 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     :return: :code:`DataFrame` all images, marked as high, low or within range
     :rtype: :pd:`DataFrame`
     """
-    suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(source_directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(source_directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
+    # suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
     for pic in suspects:
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
@@ -839,7 +858,10 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
              and within range images
     :rtype: :pd:`DataFrame`
     """
-    suspects = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(source_directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(source_directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
+    # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     avg_image = separate_image_averager(suspects, s)  # np.zeros((5, 5)) + 128
     images, sums = [], []
     for pic in suspects:
@@ -873,7 +895,10 @@ def tesseract_specific(directory):
     :return: :code:`DataFrame` with a column of text found
     :rtype: :pd:`DataFrame`
     """
-    suspects = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
+    # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     texts, clean_texts, confidences = [], [], []
 
     with PyTessBaseAPI() as api:
@@ -909,7 +934,10 @@ def find_suspect_text(directory, label_word):
     :rtype: :pd:`DataFrame`
     """
 
-    suspects = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
+    # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     images, texts, clean_texts = [], [], []
 
     with PyTessBaseAPI() as api:
@@ -943,7 +971,10 @@ def find_suspect_text_by_length(directory, length):
     :return: :code:`DataFrame` with a column of text found
     :rtype: :pd:`DataFrame`
     """
-    suspects = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
+    # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     images, texts, clean_texts = [], [], []
     with PyTessBaseAPI() as api:
         for pic in suspects:
@@ -979,7 +1010,10 @@ def histogram_difference_for_inverts(directory):
     :rtype: list
     """
 
-    suspects = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
+    # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     regulars, inverts, unclear = [], [], []
     for pic in suspects:
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
@@ -1009,7 +1043,10 @@ def histogram_difference_for_inverts_todf(directory):
     :return: a :code:`DataFrame` with images categorized
     :rtype: :pd:`DataFrame`
     """
-    suspects = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects = suspects1 + suspects2
+    # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     regulars, inverts, unclear = [], [], []
     for pic in suspects:
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
@@ -1452,7 +1489,10 @@ def avg_image_maker_by_label(
                     dataframe_image_column][master_df[
                         dataframe_label_column]
                             == name]:
-            example = cv2.imread(image_folder + example, cv2.IMREAD_GRAYSCALE)
+            example = cv2.imread(
+                (os.path.join(image_folder, example)),
+                cv2.IMREAD_GRAYSCALE,
+            )
             ht = example.shape[0]
             wt = example.shape[1]
             list_h.append(ht)
@@ -1462,7 +1502,10 @@ def avg_image_maker_by_label(
         w = int(sum(list_w)/len(list_w))
         canvas = np.zeros((h, w))
         for example in master_df[dataframe_image_column]:
-            example = cv2.imread(image_folder+example, cv2.IMREAD_GRAYSCALE)
+            example = cv2.imread(
+                (os.path.join(image_folder, example)),
+                cv2.IMREAD_GRAYSCALE,
+            )
             example_small = cv2.resize(example, (w, h))
             canvas += np.array(example_small)
         final_avg = canvas / len(dataframe_image_column)

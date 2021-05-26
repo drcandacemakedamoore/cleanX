@@ -50,15 +50,7 @@ def test_simple_rotation_augmentation():
     assert np.array(lindo_rotated).shape[0] > 1
 
 
-# def test_check_paths_for_group_leakage():
-#     train_dfE = (os.path.join(image_directory,'train_sample_df.csv'))
-#     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
-#     train_df= pd.read_csv(train_dfE)
-#     test_df = pd.read_csv(test_dfE)
-#     uniqueIDE = 'image_path'
-#     checked_example = cleanX.check_paths_for_group_leakage(train_df, test_df, uniqueIDE)
-#     assert len(checked_example) > 1 
-
+#
 def test_check_paths_for_group_leakage():
     train_dfE = (os.path.join(image_directory,'train_sample_df.csv'))
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
@@ -74,11 +66,11 @@ def test_separate_image_averager():
     images = image_directory + '/' + test_df.image_path.dropna()
     blended =  cleanX.separate_image_averager(images, s=5)
     assert type(blended) is np.ndarray
-
+#
 def test_dimensions_to_df():
     deflep = cleanX.dimensions_to_df(image_directory)
     assert len(deflep) > 1    
-
+#
 def test_see_part_potential_bias():
     e2 = (os.path.join(image_directory,'example_for_bias.csv'))
     e3 = pd.read_csv(e2)
@@ -88,11 +80,11 @@ def test_see_part_potential_bias():
 
 #     # this testing remains undone... the function returns basically the line bwlo, and testing will be difficult     
 #     plt.show()
-
+#
 def test_dimensions_to_histo():
     output = cleanX.dimensions_to_histo(image_directory, 10)
     assert len(output) > 1
-
+#
 def test_find_very_hazy():
     found = cleanX.find_very_hazy(image_directory)
     assert len(found) > 0    
@@ -170,7 +162,7 @@ def test_histogram_difference_for_inverts():
 def test_histogram_difference_for_inverts_todf():
     histos = cleanX.histogram_difference_for_inverts_todf(image_directory)
     assert len(histos) >0
-
+#
 def test_dataframe_up_my_pics():
     dfy = cleanX.dataframe_up_my_pics(image_directory, 'diagnosis_string')
     assert len(dfy) > 0
@@ -213,4 +205,11 @@ def test_set_image_variability():
     test_df = pd.read_csv(test_dfE)
     set_of_images = image_directory + '/' + test_df.image_path.dropna()
     tab = cleanX.set_image_variability(set_of_images)  
-    assert tab.shape[0] > 2          
+    assert tab.shape[0] > 2      
+
+def test_avg_image_maker_by_label():
+    test_dfE = (os.path.join(image_directory,'alt_test_labeled.csv'))
+    test_df = pd.read_csv(test_dfE)
+    #set_of_images = image_directory + '/' + test_df.image_path.dropna()
+    lotus = cleanX.avg_image_maker_by_label(test_df,'imageID','path_label',image_directory)
+    assert len(lotus) > 0        
