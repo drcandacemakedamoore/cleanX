@@ -1035,7 +1035,7 @@ def histogram_difference_for_inverts_todf(directory):
     This function looks for images by a spike on the end of their pixel
     value histogram to find inverted images, then puts what it found into
     a :code:`DataFrame`. Images are listed as regulars, inverts of unclear (the
-    unclear have equal spikes on both ends)
+    unclear have equal spikes on both ends). #histo
 
     :param directory: Directory (folder).
     :type directory: Directory
