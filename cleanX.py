@@ -528,8 +528,8 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     :return: histo_ht_wt_p, a labeled histogram
     :rtype: tuple
     """
-    non_suspects1 = glob.glob(os.path.join(image_directory, '*.jpg'))
-    non_suspects2 = glob.glob(os.path.join(image_directory, '*.jpeg'))
+    non_suspects1 = glob.glob(os.path.join(folder_name, '*.jpg'))
+    non_suspects2 = glob.glob(os.path.join(folder_name, '*.jpeg'))
     non_suspects = non_suspects1 + non_suspects2
     # non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
     picy_list, list_ht, list_wt = [], [], []
@@ -1464,6 +1464,7 @@ def avg_image_maker_by_label(
     reveal salient differences. N.B. blending different views e.g. PA and
     lateral is not suggested.
     :param master_df: Dataframe with image location and labels
+    (must be in image folder)
     :type master_df: Dataframe
     :param dataframe_image_column: name of dataframe column with image location
     string
