@@ -115,7 +115,7 @@ def test_find_suspect_text_by_length():
     jobs = cleanX.find_suspect_text_by_length(image_directory, 3)
     assert len(jobs) > 1    
 
-    
+#~    
 def test_augment_and_move():
     try:
         os.makedirs(target_directory)
@@ -124,7 +124,7 @@ def test_augment_and_move():
     cleanX.augment_and_move(image_directory, target_directory, [ImageOps.mirror, ImageOps.flip])
     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
     assert os.path.isfile(vovo) 
-
+#
 def test_crop_them_all():
     try:
         os.makedirs(target_directory)
@@ -190,7 +190,7 @@ def test_def_make_contour_image():
     picy1 = vovo
     defMkcont = cleanX.make_contour_image(picy1)
     assert len(defMkcont) > 0
-
+#
 def test_avg_image_maker():
     #set_of_images = glob.glob(*.jpg)
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
@@ -199,7 +199,7 @@ def test_avg_image_maker():
     tab = cleanX.avg_image_maker(set_of_images)  
     assert tab.shape[0] > 2  
 
-
+#
 def test_set_image_variability():
     #set_of_images = glob.glob(*.jpg)
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
@@ -207,14 +207,19 @@ def test_set_image_variability():
     set_of_images = image_directory + '/' + test_df.image_path.dropna()
     tab = cleanX.set_image_variability(set_of_images)  
     assert tab.shape[0] > 2      
-
+#
 def test_avg_image_maker_by_label():
     test_dfE = (os.path.join(image_directory,'alt_test_labeled.csv'))
     test_df = pd.read_csv(test_dfE)
     #set_of_images = image_directory + '/' + test_df.image_path.dropna()
     lotus = cleanX.avg_image_maker_by_label(test_df,'imageID','path_label',image_directory)
     assert len(lotus) > 0       
-
+#
 def test_find_tiny_image_differences():
     defleper = cleanX.find_tiny_image_differences(image_directory)
     assert len(defleper) > 0
+
+def test_zero_to_twofivefive_simplest_norming():
+    vovo = os.path.join(image_directory, 'testtocrop.jpg')
+    test_norm1 = cleanX.zero_to_twofivefive_simplest_norming(vovo)
+    assert test_norm1.max() == 255

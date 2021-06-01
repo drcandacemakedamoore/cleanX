@@ -1519,3 +1519,30 @@ def avg_image_maker_by_label(
 
     stick['images'] = final_img_list
     return df
+
+
+def zero_to_twofivefive_simplest_norming(img_pys):
+    """
+    This function takes an image  and makes the highest pixel value 255,
+    and the lowest zero. Note that this will not give anything like
+    a true normalization, but will put all images
+    into 0 to 255 values
+    
+    :param img_py: image name
+    :type img_py: string
+    
+    :return: list of titled average images per label
+    :rtype: list
+    """
+    img_py = cv2.imread(img_pys, cv2.IMREAD_GRAYSCALE)
+
+    new_max_value = 255
+
+    max_value = np.amax(img_py)
+    min_value = np.amin(img_py) 
+
+    img_py = img_py - min_value
+    multiplier_ratio = new_max_value/max_value
+    img_py = img_py*multiplier_ratio
+   
+    return img_py
