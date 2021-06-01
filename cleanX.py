@@ -1530,7 +1530,7 @@ def zero_to_twofivefive_simplest_norming(img_pys):
 
     :param img_py: image name
     :type img_py: string
-    
+
     :return: list of titled average images per label
     :rtype: list
     """
