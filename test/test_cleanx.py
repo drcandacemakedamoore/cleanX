@@ -76,6 +76,7 @@ def test_see_part_potential_bias():
     e3 = pd.read_csv(e2)
     donwa = cleanX.see_part_potential_bias(e3,"Label", ["Gender", "Race"])
     assert len(donwa) > 1
+
 # def test_show_images_in_df():
 
 #     # this testing remains undone... the function returns basically the line bwlo, and testing will be difficult     
@@ -97,11 +98,11 @@ def test_show_major_lines_on_image():
 def test_find_big_lines():
     lined = cleanX.find_big_lines(image_directory, 2)
     assert len(lined) > 0    
-
+#
 def proportions_ht_wt_to_histo():
     output =  cleanX.proportions_ht_wt_to_histo(image_directory, 10)
     assert len(output) > 1
-
+#
 def test_tesseract_specific():
     lettered = cleanX.tesseract_specific(image_directory)
     assert len(lettered) > 1 
@@ -138,11 +139,11 @@ def test_reasonable_rotation_augmentation():
     dman = cleanX.reasonable_rotation_augmentation(0, 12, 3, imageE)
     assert len(dman) > 1
     
-
+#
 def test_find_by_sample_upper():
     lovereturned = cleanX.find_by_sample_upper(image_directory, 10, 10)
     assert len(lovereturned) >= 1
-
+#
 def test_find_sample_upper_greater_than_lower():
     lovereturnee = cleanX.find_sample_upper_greater_than_lower(image_directory, 10)
     assert len(lovereturnee) >= 1
@@ -150,7 +151,7 @@ def test_find_sample_upper_greater_than_lower():
 def test_find_duplicated_images():
     found = cleanX.find_duplicated_images(image_directory)
     assert len(found) > 0     
-    
+#    
 def test_find_duplicated_images_todf():
     found = cleanX.find_duplicated_images_todf(image_directory)
     assert len(found) > 0       
@@ -212,4 +213,8 @@ def test_avg_image_maker_by_label():
     test_df = pd.read_csv(test_dfE)
     #set_of_images = image_directory + '/' + test_df.image_path.dropna()
     lotus = cleanX.avg_image_maker_by_label(test_df,'imageID','path_label',image_directory)
-    assert len(lotus) > 0        
+    assert len(lotus) > 0       
+
+def test_find_tiny_image_differences():
+    defleper = cleanX.find_tiny_image_differences(image_directory)
+    assert len(defleper) > 0
