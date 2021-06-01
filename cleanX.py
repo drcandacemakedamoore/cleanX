@@ -1157,7 +1157,7 @@ def show_images_in_df(iter_ob, length_name):
     Shows images by taking them off a :code:`DataFrame` column, and puts
     them up but smaller, so they can be compared quickly
 
-    :param inter_ob: List, should be a :code:`DataFrame` column
+    :param inter_ob: List, chould be a :code:`DataFrame` column, use .to_list()
     :type iter_ob: list
     :param length_name: Size of image name going from end
     :type length_name: integer
