@@ -1527,7 +1527,7 @@ def zero_to_twofivefive_simplest_norming(img_pys):
     and the lowest zero. Note that this will not give anything like
     a true normalization, but will put all images
     into 0 to 255 values
-    
+
     :param img_py: image name
     :type img_py: string
     
@@ -1539,10 +1539,10 @@ def zero_to_twofivefive_simplest_norming(img_pys):
     new_max_value = 255
 
     max_value = np.amax(img_py)
-    min_value = np.amin(img_py) 
+    min_value = np.amin(img_py)
 
     img_py = img_py - min_value
     multiplier_ratio = new_max_value/max_value
     img_py = img_py*multiplier_ratio
-   
+
     return img_py
