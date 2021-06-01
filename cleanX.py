@@ -858,8 +858,8 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
              and within range images
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(source_directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(source_directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
+    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     avg_image = separate_image_averager(suspects, s)  # np.zeros((5, 5)) + 128
