@@ -347,7 +347,7 @@ def find_big_lines(directory, line_length):
              :code:`line_length`
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]')) 
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(directory, '*.jpg'))
@@ -416,7 +416,8 @@ def augment_and_move(origin_folder, target_folder, transformations):
     :rtype: none
     """
     non_suspects1 = glob.glob(os.path.join(origin_folder, '*.[Jj][Pp][Gg]'))
-    non_suspects2 = glob.glob(os.path.join(origin_folder, '*.[Jj][Pp][Ee][Gg]'))
+    non_suspects2 = glob.glob(
+        os.path.join(origin_folder, '*.[Jj][Pp][Ee][Gg]'))
     non_suspects = non_suspects2 + non_suspects1
     for picy in non_suspects:
         example = Image.open(picy)
@@ -441,7 +442,8 @@ def dimensions_to_df(image_directory):
     :rtype: :pd:`DataFrame`
     """
     non_suspects1 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Gg]'))
-    non_suspects2 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Ee][Gg]'))
+    non_suspects2 = glob.glob(
+        os.path.join(image_directory, '*.[Jj][Pp][Ee][Gg]'))
     non_suspects = non_suspects1 + non_suspects2
     picy_list, list_ht, list_wt = [], [], []
 
@@ -478,7 +480,9 @@ def dimensions_to_histo(image_directory, bins_count=10):
     :rtype: tuple
     """
     non_suspects1 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Gg]'))
-    non_suspects2 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Ee][Gg]'))
+    non_suspects2 = glob.glob(
+                            os.path.join(image_directory, '*.[Jj][Pp][Ee][Gg]')
+                    )
     non_suspects = non_suspects1 + non_suspects2
 
     picy_list, list_ht, list_wt = [], [], []
