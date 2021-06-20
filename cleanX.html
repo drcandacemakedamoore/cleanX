@@ -691,6 +691,28 @@ between angles -5 to 5.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cleanX.rescale_to_range_for_q">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">rescale_to_range_for_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.rescale_to_range_for_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes an image  and makes the highest pixel value 255,
+and the lowest zero. It also normalizes based on the histogram 
+distribution of values, such that the lowest 5% all become zero.
+The new histogram will be more sparse, but resamples
+should fix the problem (presumably you will have to sample down
+in size for a neural net anyways)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img_pys</strong> – image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>img_py</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cleanX.salting">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">salting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.salting" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function adds some noise to an image.</p>
