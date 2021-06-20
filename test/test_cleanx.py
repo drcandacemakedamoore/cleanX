@@ -224,8 +224,8 @@ def test_zero_to_twofivefive_simplest_norming():
     test_norm1 = cleanX.zero_to_twofivefive_simplest_norming(vovo)
     assert test_norm1.max() == 255
 
-# def test_rescale_to_range_for_MRI():
-#     image_path = os.path.join(image_directory, 'testtocrop.jpg')
-#     image_from_path = cv2.imread(image_path)
-#     defmax = cleanX.rescale_to_range_for_MRI(image_from_path)
-#     assert defmax.max() == 255
+def test_rescale_to_range_for_q():
+    image_path = os.path.join(image_directory, 'testtocrop.jpg')
+    image_from_path = cv2.imread(image_path)
+    defmax = cleanX.rescale_to_range_for_q(image_from_path)
+    assert defmax.max() == 255

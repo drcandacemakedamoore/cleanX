@@ -1552,3 +1552,56 @@ def zero_to_twofivefive_simplest_norming(img_pys):
     img_py = img_py*multiplier_ratio
 
     return img_py
+
+
+def rescale_to_range_for_q(img):
+    """
+    This function takes an image  and makes the highest pixel value 255,
+    and the lowest zero. It also normalizes based on the histogram 
+    distribution of values, such that the lowest 5% all become zero.
+    The new histogram will be more sparse, but resamples
+    should fix the problem (presumably you will have to sample down
+    in size for a neural net anyways)
+
+    :param img_pys: image 
+    :type img: numpy.ndarray
+
+    :return: img_py
+    :rtype: numpy.ndarray
+    """
+
+    # set arbitrary variables
+    new_max_value = 255
+    new_min_value = 0
+    img_py = np.array((img), dtype='int64')
+    num_total = img_py.shape[0]*img_py.shape[1]
+
+    # find lowest 5% of pixels cutoff value
+
+    list_from_array = img_py.tolist()
+    gray_hist = np.histogram(img_py, bins=256)[0]
+    area = gray_hist.sum()
+    cutoff = area * 0.05
+    dark_cutoff = 0
+    bright_cutoff = 255
+    area_so_far = 0
+    for i, b in enumerate(gray_hist):
+        area_so_far += b
+        if area_so_far >= cutoff:
+            dark_cutoff = max(0, i - 1)
+            break
+    area_so_far = 0
+    for i, b in enumerate(reversed(gray_hist)):
+        area_so_far += b
+        if area_so_far >= cutoff:
+            bright_cutoff = min(255, 255 - i)
+            break
+
+    img_py = img_py - dark_cutoff
+    img_py[img_py < 0] = 0
+    max_value2 = np.amax(img_py)
+    min_value2 = np.amin(img_py)
+    multiplier_ratio = new_max_value/max_value2
+    img_py = img_py*multiplier_ratio
+
+    return img_py
