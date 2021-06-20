@@ -1552,3 +1552,62 @@ def zero_to_twofivefive_simplest_norming(img_pys):
     img_py = img_py*multiplier_ratio
 
     return img_py
+
+
+def rescale_to_range_for_MRI(img):
+    # This function heavily borrows and has parts "translated" from Dr. Serena
+    # Bonaretti's function rescale_to_range with her permission,
+    # from Pykneer where it was simpleitk
+    # (https://github.com/sbonaretti/pyKNEEr/blob/master/
+    # pykneer/pykneer/sitk_functions.py)
+    # Serena Bonaretti got code from
+    # ksrt by Shan-Niethammer, UNC (translated to python)
+    # The algorithm assumes that the image has only positive values
+
+    # set arbitrary variables
+    new_max_value = 255
+    new_min_value = 0
+    ratio = 0.0
+    num_outliers = 0
+    num_iter = 0
+    max_num_iter = 100
+    thresh = 0.001
+
+    # import pdb
+    # pdb.set_trace()
+    img_py = np.array((img), dtype='int64')
+
+    # get image max and min values
+    max_value = np.amax(img_py)
+    min_value = np.amin(img_py)
+
+    # set other variables
+    cut_value = max_value
+    num_total = img_py.shape[0]*img_py.shape[1]
+    # stretch out orginal image
+    img_py = img_py - min_value
+    multiplier_ratio = new_max_value/max_value
+    img_py = img_py*multiplier_ratio
+    while ((ratio < thresh) and (num_iter < max_num_iter)):
+
+        num_iter = num_iter + 1
+        num_outliers = 0
+
+        # calculate cut_value
+        cut_value = (cut_value) * 0.95
+        # no -->low_cut_value = cut_value *0.05
+
+        # get the number of voxels that are above the cut_value (outliers)
+        outliers = img_py[img_py > cut_value]
+        num_outliers = num_outliers + len(outliers)
+
+        # calculate the new proportion of outlier voxels
+        # over the total number of voxles
+        ratio = num_outliers / num_total
+
+    # assign new voxel values
+    shorten_text_variable = img_py[img_py < cut_value] / cut_value
+    img_py[img_py < cut_value] = shorten_text_variable * new_max_value
+    img_py[img_py >= cut_value] = new_max_value
+
+    return img_py
