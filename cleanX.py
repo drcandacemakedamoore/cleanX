@@ -1557,13 +1557,13 @@ def zero_to_twofivefive_simplest_norming(img_pys):
 def rescale_to_range_for_q(img):
     """
     This function takes an image  and makes the highest pixel value 255,
-    and the lowest zero. It also normalizes based on the histogram 
+    and the lowest zero. It also normalizes based on the histogram
     distribution of values, such that the lowest 5% all become zero.
     The new histogram will be more sparse, but resamples
     should fix the problem (presumably you will have to sample down
     in size for a neural net anyways)
 
-    :param img_pys: image 
+    :param img_pys: image
     :type img: numpy.ndarray
 
     :return: img_py
