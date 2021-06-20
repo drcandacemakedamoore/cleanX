@@ -417,7 +417,8 @@ def augment_and_move(origin_folder, target_folder, transformations):
     """
     non_suspects1 = glob.glob(os.path.join(origin_folder, '*.[Jj][Pp][Gg]'))
     non_suspects2 = glob.glob(
-        os.path.join(origin_folder, '*.[Jj][Pp][Ee][Gg]'))
+        os.path.join(origin_folder, '*.[Jj][Pp][Ee][Gg]'),
+    )
     non_suspects = non_suspects2 + non_suspects1
     for picy in non_suspects:
         example = Image.open(picy)
@@ -443,7 +444,8 @@ def dimensions_to_df(image_directory):
     """
     non_suspects1 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Gg]'))
     non_suspects2 = glob.glob(
-        os.path.join(image_directory, '*.[Jj][Pp][Ee][Gg]'))
+        os.path.join(image_directory, '*.[Jj][Pp][Ee][Gg]'),
+    )
     non_suspects = non_suspects1 + non_suspects2
     picy_list, list_ht, list_wt = [], [], []
 
@@ -481,8 +483,8 @@ def dimensions_to_histo(image_directory, bins_count=10):
     """
     non_suspects1 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Gg]'))
     non_suspects2 = glob.glob(
-                            os.path.join(image_directory, '*.[Jj][Pp][Ee][Gg]')
-                    )
+        os.path.join(image_directory, '*.[Jj][Pp][Ee][Gg]'),
+    )
     non_suspects = non_suspects1 + non_suspects2
 
     picy_list, list_ht, list_wt = [], [], []
