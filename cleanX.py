@@ -347,8 +347,8 @@ def find_big_lines(directory, line_length):
              :code:`line_length`
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]')) 
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     pic_to_nlines = {}
@@ -415,8 +415,8 @@ def augment_and_move(origin_folder, target_folder, transformations):
     :return: technically a non returning function, but new images will be made
     :rtype: none
     """
-    non_suspects1 = glob.glob(os.path.join(origin_folder, '*.jpg'))
-    non_suspects2 = glob.glob(os.path.join(origin_folder, '*.jpeg'))
+    non_suspects1 = glob.glob(os.path.join(origin_folder, '*.[Jj][Pp][Gg]'))
+    non_suspects2 = glob.glob(os.path.join(origin_folder, '*.[Jj][Pp][Ee][Gg]'))
     non_suspects = non_suspects2 + non_suspects1
     for picy in non_suspects:
         example = Image.open(picy)
@@ -440,8 +440,8 @@ def dimensions_to_df(image_directory):
              :code:`DataFrame`
     :rtype: :pd:`DataFrame`
     """
-    non_suspects1 = glob.glob(os.path.join(image_directory, '*.jpg'))
-    non_suspects2 = glob.glob(os.path.join(image_directory, '*.jpeg'))
+    non_suspects1 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Gg]'))
+    non_suspects2 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Ee][Gg]'))
     non_suspects = non_suspects1 + non_suspects2
     picy_list, list_ht, list_wt = [], [], []
 
@@ -477,8 +477,8 @@ def dimensions_to_histo(image_directory, bins_count=10):
     :return: histo_ht_wt, a labeled histogram
     :rtype: tuple
     """
-    non_suspects1 = glob.glob(os.path.join(image_directory, '*.jpg'))
-    non_suspects2 = glob.glob(os.path.join(image_directory, '*.jpeg'))
+    non_suspects1 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Gg]'))
+    non_suspects2 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Ee][Gg]'))
     non_suspects = non_suspects1 + non_suspects2
 
     picy_list, list_ht, list_wt = [], [], []
@@ -528,8 +528,8 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     :return: histo_ht_wt_p, a labeled histogram
     :rtype: tuple
     """
-    non_suspects1 = glob.glob(os.path.join(folder_name, '*.jpg'))
-    non_suspects2 = glob.glob(os.path.join(folder_name, '*.jpeg'))
+    non_suspects1 = glob.glob(os.path.join(folder_name, '*.[Jj][Pp][Gg]'))
+    non_suspects2 = glob.glob(os.path.join(folder_name, '*.[Jj][Pp][Ee][Gg]'))
     non_suspects = non_suspects1 + non_suspects2
     # non_suspects = glob.glob(os.path.join(folder_name, '*.jpg'))
     picy_list, list_ht, list_wt = [], [], []
@@ -596,8 +596,8 @@ def find_very_hazy(directory):
              :code:`label_for_haze`
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     hazy, lined = [], []
     for pic in suspects:
@@ -643,8 +643,8 @@ def find_by_sample_upper(
     :return: :code:`DataFrame` with images labeled
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(source_directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(source_directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     estimates, piclist = [], []
     for pic in suspects:
@@ -677,8 +677,8 @@ def find_sample_upper_greater_than_lower(
     or otherwise bizarre, as the neck is smaller than the abdomen.
     """
     estup, estdown, piclist = [], [], []
-    suspects1 = glob.glob(os.path.join(source_directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(source_directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     for pic in suspects:
@@ -712,8 +712,8 @@ def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
     :return: :code:`DataFrame` made up of outliers only
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(source_directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(source_directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
@@ -744,8 +744,8 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     :return: :code:`DataFrame` all images, marked as high, low or within range
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(source_directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(source_directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
@@ -858,8 +858,8 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
              and within range images
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     avg_image = separate_image_averager(suspects, s)  # np.zeros((5, 5)) + 128
@@ -895,8 +895,8 @@ def tesseract_specific(directory):
     :return: :code:`DataFrame` with a column of text found
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     texts, clean_texts, confidences = [], [], []
@@ -934,8 +934,8 @@ def find_suspect_text(directory, label_word):
     :rtype: :pd:`DataFrame`
     """
 
-    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     images, texts, clean_texts = [], [], []
@@ -971,8 +971,8 @@ def find_suspect_text_by_length(directory, length):
     :return: :code:`DataFrame` with a column of text found
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     images, texts, clean_texts = [], [], []
@@ -1010,8 +1010,8 @@ def histogram_difference_for_inverts(directory):
     :rtype: list
     """
 
-    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     regulars, inverts, unclear = [], [], []
@@ -1043,8 +1043,8 @@ def histogram_difference_for_inverts_todf(directory):
     :return: a :code:`DataFrame` with images categorized
     :rtype: :pd:`DataFrame`
     """
-    suspects1 = glob.glob(os.path.join(directory, '*.jpg'))
-    suspects2 = glob.glob(os.path.join(directory, '*.jpeg'))
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
     # suspects = glob.glob(os.path.join(directory, '*.jpg'))
     regulars, inverts, unclear = [], [], []
