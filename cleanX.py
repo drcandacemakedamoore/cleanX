@@ -1552,4 +1552,3 @@ def zero_to_twofivefive_simplest_norming(img_pys):
     img_py = img_py*multiplier_ratio
 
     return img_py
-
