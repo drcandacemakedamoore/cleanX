@@ -1534,11 +1534,11 @@ def zero_to_twofivefive_simplest_norming(img_pys):
     a true normalization, but will put all images
     into 0 to 255 values
 
-    :param img_py: image name
-    :type img_py: string
+    :param img_pys: image name
+    :type img_pys: string
 
-    :return: list of titled average images per label
-    :rtype: list
+    :return: img_py
+    :rtype: numpy.ndarray
     """
     img_py = cv2.imread(img_pys, cv2.IMREAD_GRAYSCALE)
 
@@ -1563,6 +1563,20 @@ def rescale_to_range_for_MRI(img):
     # Serena Bonaretti got code from
     # ksrt by Shan-Niethammer, UNC (translated to python)
     # The algorithm assumes that the image has only positive values
+    """
+    his function heavily borrows and has parts "translated" from Dr. Serena
+    Bonaretti.
+    This function is made for a single image which is read in as such
+    This function takes an image  and makes the highest pixel value 255,
+    and the lowest zero. It has a type of normalization which ignores
+    the extreme values
+
+    :param img: image 
+    :type img: numpy.ndarray
+
+    :return: img_py
+    :rtype: numpy.ndarray
+    """
 
     # set arbitrary variables
     new_max_value = 255
