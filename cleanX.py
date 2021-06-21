@@ -1608,3 +1608,36 @@ def rescale_range_from_histogram_low_end(img, tail_cut_percent):
     img_py = img_py*multiplier_ratio
 
     return img_py
+
+
+def make_histo_scaled_folder(imgs_folder, tail_cut_percent, target_folder):
+    """
+    This function takes each image inside a folder and normalizes them by the
+    histogram. It then puts the new normalized images in to a folder
+    which is called the target folder (to be made by user)
+
+    :param imgs_folder: imgs_folder
+    :type imgs_folder: string
+    :param tail_cut_percent: percent of histogram to be discarded from low end
+    :type tail_cut_percent: integer
+
+
+    :return: target_name, but your images go into target folder with
+    target_name
+    :rtype: string
+    """
+
+    suspects1 = glob.glob(os.path.join(imgs_folder, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(imgs_folder, '*.[Jj][Pp][Ee][Gg]'))
+    suspects = suspects2 + suspects1
+
+    for individual_pic in suspects:
+        individual_img = cv2.imread(individual_pic, cv2.IMREAD_GRAYSCALE)
+        results = rescale_range_from_histogram_low_end(
+            individual_img, tail_cut_percent,
+        )
+        basename = os.path.basename(individual_pic)
+        target_name = os.path.join(target_folder, basename)
+        cv2.imwrite(target_name, results)
+
+    return target_name

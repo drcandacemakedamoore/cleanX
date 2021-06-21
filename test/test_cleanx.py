@@ -229,3 +229,9 @@ def test_rescale_range_from_histogram_low_end():
     image_from_path = cv2.imread(image_path)
     defmax = cleanX.rescale_range_from_histogram_low_end(image_from_path, 5)
     assert defmax.max() == 255
+
+def test_make_histo_scaled_folder():
+    A= image_directory
+    targy = target_directory
+    d = cleanX.make_histo_scaled_folder(A, 5, targy)
+    assert len(d) > 0
