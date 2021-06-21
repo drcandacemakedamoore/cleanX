@@ -1558,13 +1558,17 @@ def rescale_range_from_histogram_low_end(img, tail_cut_percent):
     """
     This function takes an image  and makes the highest pixel value 255,
     and the lowest zero. It also normalizes based on the histogram
-    distribution of values, such that the lowest 5% all become zero.
+    distribution of values, such that the lowest percent
+    (specified by tail_cut_percent) all become zero.
     The new histogram will be more sparse, but resamples
     should fix the problem (presumably you will have to sample down
     in size for a neural net anyways)
 
     :param img_pys: image
     :type img: numpy.ndarray
+    :param tail_cut_percent: percent of histogram to be discarded from low end
+    :type tail_cut_percent: integer
+
 
     :return: img_py
     :rtype: numpy.ndarray
