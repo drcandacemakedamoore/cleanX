@@ -1554,7 +1554,7 @@ def zero_to_twofivefive_simplest_norming(img_pys):
     return img_py
 
 
-def rescale_to_range_for_q(img):
+def rescale_range_from_histogram_low_end(img, tail_cut_percent):
     """
     This function takes an image  and makes the highest pixel value 255,
     and the lowest zero. It also normalizes based on the histogram
@@ -1569,19 +1569,18 @@ def rescale_to_range_for_q(img):
     :return: img_py
     :rtype: numpy.ndarray
     """
-
     # set arbitrary variables
     new_max_value = 255
     new_min_value = 0
-    img_py = np.array((img), dtype='int64')
-    num_total = img_py.shape[0]*img_py.shape[1]
 
-    # find lowest 5% of pixels cutoff value
+    img_py = np.array((img), dtype='int64')
+
+    num_total = img_py.shape[0]*img_py.shape[1]
 
     list_from_array = img_py.tolist()
     gray_hist = np.histogram(img_py, bins=256)[0]
     area = gray_hist.sum()
-    cutoff = area * 0.05
+    cutoff = area * (tail_cut_percent/100)
     dark_cutoff = 0
     bright_cutoff = 255
     area_so_far = 0
