@@ -638,6 +638,27 @@ unclear have equal spikes on both ends). #histo</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cleanX.make_histo_scaled_folder">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">make_histo_scaled_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.make_histo_scaled_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes each image inside a folder and normalizes them by the
+histogram. It then puts the new normalized images in to a folder
+which is called the target folder (to be made by user)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imgs_folder</strong> (<em>string</em>) – imgs_folder</p></li>
+<li><p><strong>tail_cut_percent</strong> (<em>integer</em>) – percent of histogram to be discarded from low end</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>target_name, but your images go into target folder with</p>
+</dd>
+</dl>
+<p>target_name
+:rtype: string</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cleanX.proportions_ht_wt_to_histo">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">proportions_ht_wt_to_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.proportions_ht_wt_to_histo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Looks in the directory given, produces a histogram of various proportions
