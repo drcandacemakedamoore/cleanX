@@ -691,8 +691,8 @@ between angles -5 to 5.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.rescale_to_range_for_q">
-<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">rescale_to_range_for_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.rescale_to_range_for_q" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.rescale_range_from_histogram_low_end">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">rescale_range_from_histogram_low_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.rescale_range_from_histogram_low_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes an image  and makes the highest pixel value 255,
 and the lowest zero. It also normalizes based on the histogram
 distribution of values, such that the lowest 5% all become zero.
