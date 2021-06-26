@@ -5,7 +5,7 @@
   installation easier:
 
   #+BEGIN_SRC sh
-    curl https://github.com/drcandacemakedamoore/cleanX/raw/main/scripts/linux-install.sh | sh
+    curl -L https://github.com/drcandacemakedamoore/cleanX/raw/main/scripts/linux-install.sh | sh
   #+END_SRC
 
   Very generally, in order to install =cleanX=, you will need these
