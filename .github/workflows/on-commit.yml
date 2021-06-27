@@ -47,7 +47,25 @@ jobs:
           branch: gh-pages
           folder: build/sphinx/html
 
-  CondaBuild:
+  CondaBuild3_7:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - uses: s-weigand/setup-conda@v1
+        with:
+          conda-channels: conda-forge
+      - run: python3.7 -m venv .venv
+      - run: .venv/bin/python setup.py genconda
+      - run: conda install conda-build
+      - run: conda build -c conda-forge ./conda-pkg/
+
+  CondaBuild3_8:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

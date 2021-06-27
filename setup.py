@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 import shlex
 import os
@@ -22,10 +24,10 @@ with open('README.md', 'r') as f:
     readme = f.read()
 
 name = 'cleanX'
-
 try:
     tag = subprocess.check_output([
         'git',
+        '--no-pager',
         'describe',
         '--abbrev=0',
         '--tags',
@@ -99,13 +101,20 @@ class SphinxApiDoc(Command):
 
 class GenerateCondaYaml(Command):
 
-    user_options = []
+    user_options = [(
+        'target-python=',
+        't',
+        'Python version to build the package for',
+    )]
 
     def initialize_options(self):
-        pass
+        self.target_python = None
 
     def finalize_options(self):
-        pass
+        if self.target_python is None:
+            maj, min, patch = sys.version.split(maxsplit=1)[0].split('.')
+            
+            self.target_python = '{}.{}'.format(maj, min)
 
     def run(self):
         from string import Template
@@ -120,6 +129,7 @@ class GenerateCondaYaml(Command):
             f.write(tpl.substitute(
                 version=version,
                 tag=tag,
+                python_version=self.target_python,
             ))
 
 

@@ -32,19 +32,32 @@ jobs:
         with:
           conda-channels: conda-forge
       - run: conda install conda-build anaconda-client conda-verify
-      - run: .venv/bin/python setup.py genconda
+      - run: .venv/bin/python setup.py genconda -t 3.7
+      - run: conda build -c conda-forge --output-folder ./dist ./conda-pkg/
+      - run: conda convert -p osx-64 -o ./dist ./dist/linux-64/*py37_0.tar.bz2
+      - run: conda convert -p win-64 -o ./dist ./dist/linux-64/*py37_0.tar.bz2
+      - run: >
+          ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
+          anaconda upload --label main ./dist/linux-64/*py37_0.tar.bz2
+      - run: >
+          ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
+          anaconda upload --label main ./dist/osx-64/*py37_0.tar.bz2
+      - run: >
+          ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
+          anaconda upload --label main ./dist/win-64/*py37_0.tar.bz2
+      - run: .venv/bin/python setup.py genconda -t 3.8
       - run: conda build -c conda-forge --output-folder ./dist ./conda-pkg/
       - run: conda convert -p osx-64 -o ./dist ./dist/linux-64/*.tar.bz2
       - run: conda convert -p win-64 -o ./dist ./dist/linux-64/*.tar.bz2
       - run: >
           ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
-          anaconda upload --label main ./dist/linux-64/*.tar.bz2
+          anaconda upload --label main ./dist/linux-64/*py38_0.tar.bz2
       - run: >
           ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
-          anaconda upload --label main ./dist/osx-64/*.tar.bz2
+          anaconda upload --label main ./dist/osx-64/*py38_0.tar.bz2
       - run: >
           ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
-          anaconda upload --label main ./dist/win-64/*.tar.bz2
+          anaconda upload --label main ./dist/win-64/*py38_0.tar.bz2
 
       - uses: marvinpinto/action-automatic-releases@latest
         with:

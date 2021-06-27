@@ -8,12 +8,12 @@ source:
 
 requirements:
   build:
-    - python
+    - python==${python_version}
     - setuptools
     - sphinx
 
   run:
-    - python
+    - python==${python_version}
     - numpy
     - pandas
     - matplotlib
