@@ -55,7 +55,7 @@ Automated data cleaning can improve dataset quality on some parameters. This wor
 
 # Acknowledgements
 
-We acknowledge many contributions from Oleg Sivokon (wvxvw) during the testing and documentation of the code related to this project. We did not receive any financial support for this project. 
+We acknowledge many contributions from Eliane Birba (delwende)  and Oleg Sivokon (wvxvw) during the testing and documentation of the code related to this project. We did not receive any financial support for this project. 
 
 # References
 
