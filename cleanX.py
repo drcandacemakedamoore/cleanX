@@ -338,7 +338,7 @@ def find_big_lines(directory, line_length):
     Note lines can fold back on themselves, and every pixel is counted if they
     are all contiguous
 
-    :param directory: Directory with set_of_images.
+    :param directory: Directory with set_of_images (should include final '/').
     :type directory: directory
     :param line_length: Minimal length of lines for the function to count.
     :type line_length: integer
@@ -405,7 +405,7 @@ def augment_and_move(origin_folder, target_folder, transformations):
     Takes images and applies the same list of augmentations, which can include
     the cleanX function crop, to all of them
 
-    :param origin_folder: The folder in which the images are
+    :param origin_folder: folder the images are in (should include final '/')
     :type origin_folder: directory
     :param target_folder: The folder where augmented images will be sent
     :type target_folder: directory
@@ -435,7 +435,7 @@ def dimensions_to_df(image_directory):
     Finds dimensions on images in a folder, and makes a df for exploratory
     data analysis
 
-    :param folder_name: Adress of folder with images.
+    :param folder_name: Adress of folder with images (should include final '/')
     :type folder_name: Folder/directory
 
     :return: image height, width and proportion height/width as a new
@@ -472,7 +472,7 @@ def dimensions_to_histo(image_directory, bins_count=10):
     :math:`2500 \\times 2048`; however the dataset may be different and/or
     varied
 
-    :param folder_name: Folder_name, directory name.
+    :param folder_name: Folder_name, directory name.(should include final '/')
     :type folder_name: string
 
     :param bins_count: bins_count, number of bins desired (defaults to 10)
@@ -527,7 +527,7 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     :math:`2500 \\times 2048`; however the dataset may be different and/or
     varied
 
-    :param folder_name: Folder_name, directory name.
+    :param folder_name: Folder_name, directory name. (should include final '/')
     :type folder_name: string
     :param bins_count: bins_count, number of bins desired (defaults to 10)
     :type bins_count: int
@@ -595,7 +595,7 @@ def find_very_hazy(directory):
     should give straight lines, thus this function finds image of a certain
     questionable technique level.
 
-    :param directory: The folder where the images are
+    :param directory: The folder the images are in (should include final '/')
     :type directory: directory
 
     :return: :code:`DataFrame` with images sorted as hazy or regular under
@@ -638,10 +638,10 @@ def find_by_sample_upper(
     percentage, e.g. shows images with an average of top pixels in top x %
     where x is the percent height of the sample.
 
-    :param source_directory: The folder in which the images are
+    :param source_directory: folder the images are in(should include final '/')
     :type source_directory: directory
     :param percent_height_of_sample: From where on image to call upper
-    :type source_directory: integer
+    :type percent_height_of_sample: integer
     :param value_for_line: From where in pixel values to call averaged
         values abnormal
     :type value_for_line: integer
@@ -681,6 +681,15 @@ def find_sample_upper_greater_than_lower(
     percent of picture should be considered upper and lower) and compares.
     In a CXR if lower average is greater than upper it may be upside down
     or otherwise bizarre, as the neck is smaller than the abdomen.
+
+    :param source_directory: folder the images are in(should include final '/')
+    :type source_directory: directory
+    :param percent_height_of_sample: From where on image to call upper or lower
+    :type percent_height_of_sample: integer
+
+
+    :return: :code:`DataFrame` with images labeled
+    :rtype: :pd:`DataFrame`
     """
     estup, estdown, piclist = [], [], []
     suspects1 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Gg]'))
@@ -710,7 +719,7 @@ def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
     with those images that are outliers by mean. Should catch some inverted
     or problem images
 
-    :param source_directory: The folder in which the images are
+    :param source_directory: folder images in (include final /)
     :type source_directory: directory
     :param percentage_to_say_outliers: Percentage to capture
     :type percentage_to_say_outliers: integer
