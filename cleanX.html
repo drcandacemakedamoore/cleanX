@@ -75,7 +75,7 @@ the cleanX function crop, to all of them</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>origin_folder</strong> (<em>directory</em>) – The folder in which the images are</p></li>
+<li><p><strong>origin_folder</strong> (<em>directory</em>) – folder the images are in (should include final ‘/’)</p></li>
 <li><p><strong>target_folder</strong> (<em>directory</em>) – The folder where augmented images will be sent</p></li>
 <li><p><strong>transformations</strong> (<em>list</em>) – A list of augmentation functions to apply</p></li>
 </ul>
@@ -304,7 +304,7 @@ name (with path) and label into a <code class="code docutils literal notranslate
 data analysis</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>folder_name</strong> (<em>Folder/directory</em>) – Adress of folder with images.</p>
+<dd class="field-odd"><p><strong>folder_name</strong> (<em>Folder/directory</em>) – Adress of folder with images (should include final ‘/’)</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>image height, width and proportion height/width as a new
@@ -327,7 +327,7 @@ varied</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>folder_name</strong> (<em>string</em>) – Folder_name, directory name.</p></li>
+<li><p><strong>folder_name</strong> (<em>string</em>) – Folder_name, directory name.(should include final ‘/’)</p></li>
 <li><p><strong>bins_count</strong> (<em>int</em>) – bins_count, number of bins desired (defaults to 10)</p></li>
 </ul>
 </dd>
@@ -350,7 +350,7 @@ are all contiguous</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>directory</strong> (<em>directory</em>) – Directory with set_of_images.</p></li>
+<li><p><strong>directory</strong> (<em>directory</em>) – Directory with set_of_images (should include final ‘/’).</p></li>
 <li><p><strong>line_length</strong> (<em>integer</em>) – Minimal length of lines for the function to count.</p></li>
 </ul>
 </dd>
@@ -373,8 +373,8 @@ where x is the percent height of the sample.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>source_directory</strong> (<em>integer</em>) – The folder in which the images are</p></li>
-<li><p><strong>percent_height_of_sample</strong> – From where on image to call upper</p></li>
+<li><p><strong>source_directory</strong> (<em>directory</em>) – folder the images are in(should include final ‘/’)</p></li>
+<li><p><strong>percent_height_of_sample</strong> (<em>integer</em>) – From where on image to call upper</p></li>
 <li><p><strong>value_for_line</strong> (<em>integer</em>) – From where in pixel values to call averaged
 values abnormal</p></li>
 </ul>
@@ -453,7 +453,7 @@ or problem images</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>source_directory</strong> (<em>directory</em>) – The folder in which the images are</p></li>
+<li><p><strong>source_directory</strong> (<em>directory</em>) – folder images in (include final /)</p></li>
 <li><p><strong>percentage_to_say_outliers</strong> (<em>integer</em>) – Percentage to capture</p></li>
 </ul>
 </dd>
@@ -473,6 +473,20 @@ or problem images</p>
 percent of picture should be considered upper and lower) and compares.
 In a CXR if lower average is greater than upper it may be upside down
 or otherwise bizarre, as the neck is smaller than the abdomen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_directory</strong> (<em>directory</em>) – folder the images are in(should include final ‘/’)</p></li>
+<li><p><strong>percent_height_of_sample</strong> (<em>integer</em>) – From where on image to call upper or lower</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with images labeled</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -552,7 +566,7 @@ should give straight lines, thus this function finds image of a certain
 questionable technique level.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>directory</strong> (<em>directory</em>) – The folder where the images are</p>
+<dd class="field-odd"><p><strong>directory</strong> (<em>directory</em>) – The folder the images are in (should include final ‘/’)</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with images sorted as hazy or regular under
@@ -670,7 +684,7 @@ varied</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>folder_name</strong> (<em>string</em>) – Folder_name, directory name.</p></li>
+<li><p><strong>folder_name</strong> (<em>string</em>) – Folder_name, directory name. (should include final ‘/’)</p></li>
 <li><p><strong>bins_count</strong> (<em>int</em>) – bins_count, number of bins desired (defaults to 10)</p></li>
 </ul>
 </dd>
