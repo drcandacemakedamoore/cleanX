@@ -92,4 +92,6 @@ We are adding new functions all the time. Many unit tests are availalable in the
 
         Run to make a dataframe of pics in a folder (assuming they all have the same 'label'/diagnosis)
 
+        Normalize images in terms of pixel values (multiple methods)
+
 All important functions are documented in the online documentation.
