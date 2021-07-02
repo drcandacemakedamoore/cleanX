@@ -246,5 +246,5 @@ def test_rip_out_jpgs_sitk():
         os.path.dirname(__file__),
         'dicom_target',
     )
-    jpegs_made = rip_out_jpgs_sitk(dicomfile_directory1,output_directory1) 
+    jpegs_made = cleanX.rip_out_jpgs_sitk(dicomfile_directory1,output_directory1) 
     assert len(jpegs_made) > 0    
