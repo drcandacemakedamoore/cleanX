@@ -9,6 +9,7 @@ from PIL import Image, ImageOps
 import numpy as np
 import pytest
 from functools import partial
+# import simpleITK as sitk
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
 target_directory = os.path.join(os.path.dirname(__file__), 'target')
@@ -237,6 +238,15 @@ def test_make_histo_scaled_folder():
     assert len(d) > 0
 
 
+def sitk_exists():
+    try:
+        import SimpleITK
+        return True
+    except ModuleNotFoundError:
+        
+        return False
+
+@pytest.mark.skipif(sitk_exists() , reason="no simpleITK available")
 def test_rip_out_jpgs_sitk():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
