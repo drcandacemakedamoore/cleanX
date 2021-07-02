@@ -31,7 +31,7 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 
 - a [python](https://www.python.org/downloads/) installation
 - ability to create virtual environments (reccomended, not absolutely neccesary)
-- tesseract-ocr and opencv
+- tesseract-ocr, matplotlib, pandas, pillow and/or opencv
 - anaconda is now supported, but not technically neccesary
 
 
