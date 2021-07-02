@@ -238,15 +238,15 @@ def test_make_histo_scaled_folder():
     assert len(d) > 0
 
 
-def sitk_exists():
+def sitk_missing():
     try:
         import SimpleITK
-        return True
+        return False
     except ModuleNotFoundError:
         
-        return False
+        return True
 
-@pytest.mark.skipif(sitk_exists() , reason="no simpleITK available")
+@pytest.mark.skipif(sitk_missing() , reason="no simpleITK available")
 def test_rip_out_jpgs_sitk():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
