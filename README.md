@@ -32,6 +32,7 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 - a [python](https://www.python.org/downloads/) installation
 - ability to create virtual environments (reccomended, not absolutely neccesary)
 - tesseract-ocr, matplotlib, pandas, pillow and/or opencv
+- optional reccomendation of simpleITK for dicom to jpg conversion
 - anaconda is now supported, but not technically neccesary
 
 

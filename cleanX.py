@@ -1650,7 +1650,7 @@ def make_histo_scaled_folder(imgs_folder, tail_cut_percent, target_folder):
         cv2.imwrite(target_name, results)
 
     return target_name
-    
+
 
 def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
     """
@@ -1679,9 +1679,9 @@ def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
         reader.SetFileName(dicom_files[i])
         # use the reader to read the image
         image = reader.Execute()
-        image_np =sitk.GetArrayFromImage(image)
+        image_np = sitk.GetArrayFromImage(image)
         saved_images.append(image_np)
         target_base = output_directory + os.path.basename(dicom_files[i])
         target_name = target_base + ".jpg"
         cv2.imwrite(target_name, image_np[0])
-    return saved_images    
+    return saved_images
