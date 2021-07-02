@@ -235,3 +235,16 @@ def test_make_histo_scaled_folder():
     targy = target_directory
     d = cleanX.make_histo_scaled_folder(A, 5, targy)
     assert len(d) > 0
+
+
+def test_rip_out_jpgs_sitk():
+    dicomfile_directory1 = os.path.join(
+        os.path.dirname(__file__),
+        'dicom_example_folder',
+    )
+    output_directory1 = os.path.join(
+        os.path.dirname(__file__),
+        'dicom_target',
+    )
+    jpegs_made = rip_out_jpgs_sitk(dicomfile_directory1,output_directory1) 
+    assert len(jpegs_made) > 0    
