@@ -147,24 +147,38 @@ class Install(InstallCommand):
 
     def run(self):
         if os.environ.get('CONDA_DEFAULT_ENV'):
-            subprocess.call([
+            packages = subprocess.check_output(['conda', 'list', '--export'])
+            cmd = ['conda', 'install', '-y', 'conda-build']
+            for line in packages.split(b'\n'):
+                if line.startswith(b'conda-build='):
+                    break
+            else:
+                if subprocess.call(cmd):
+                    raise RuntimeError('Cannot install conda-build')
+            cmd = [
                 'conda',
                 'build',
                 '-c', 'conda-forge',
                 os.path.join(project_dir, 'conda-pkg'),
-            ])
-            subprocess.call([
+            ]
+            if subprocess.call(cmd):
+                raise RuntimeError('Couldn\'t build {} package'.format(name))
+            cmd = [
                 'conda',
                 'install',
                 '--use-local',
                 '--update-deps',
                 '-y',
                 'cleanx',
-            ])
+            ]
+            if subprocess.call(cmd):
+                raise RuntimeError('Couldn\'t install {} package'.format(name))
         else:
-            subprocess.call([sys.executable, __file__, 'bdist_egg'])
+            if subprocess.call([sys.executable, __file__, 'bdist_egg']):
+                raise RuntimeError('Couldn\'t build {} package'.format(name))
             egg = glob(os.path.join(project_dir, 'dist', '*.egg'))[0]
-            subprocess.call([sys.executable, '-m', 'easy_install', egg])
+            if subprocess.call([sys.executable, '-m', 'easy_install', egg]):
+                raise RuntimeError('Couldn\'t install {} package'.format(name))
 
 
 def install_requires():

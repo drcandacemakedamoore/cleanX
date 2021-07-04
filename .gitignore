@@ -10,3 +10,4 @@ test/target/
 /source/cleanX.rst
 /source/modules.rst
 /conda-pkg/meta.yaml
+/conda-pkg/bld.bat
