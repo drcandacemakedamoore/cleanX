@@ -1,0 +1,4 @@
+"%PYTHON%" setup.py setup.py bdist_egg
+if errorlevel 1 exit 1
+"%PYTHON%" -m easy_install --record=record.txt --no-deps ${egg}
+if errorlevel 1 exit 1

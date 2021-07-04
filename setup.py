@@ -9,6 +9,7 @@ from glob import glob
 
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
+from setuptools.command.install import install as InstallCommand
 from setuptools import Command
 
 
@@ -119,18 +120,71 @@ class GenerateCondaYaml(Command):
     def run(self):
         from string import Template
 
-        tpl_path = os.path.join(project_dir, 'conda-pkg/meta.yaml.in')
+        tpls = glob(os.path.join(project_dir, 'conda-pkg/*.in'))
+        try:
+            egg = glob(os.path.join(project_dir, './dist/*.egg'))[0]
+        except IndexError as e:
+            raise RuntimeError(
+                'You need to run `setup.py bdist_egg\' first',
+            ) from e
 
-        with open(tpl_path) as f:
-            tpl = Template(f.read())
+        for tpl_path in tpls:
+            with open(tpl_path) as f:
+                tpl = Template(f.read())
 
-        dst_path = tpl_path[:-3]
-        with open(dst_path, 'w') as f:
-            f.write(tpl.substitute(
-                version=version,
-                tag=tag,
-                python_version=self.target_python,
-            ))
+            dst_path = tpl_path[:-3]
+
+            with open(dst_path, 'w') as f:
+                f.write(tpl.substitute(
+                    version=version,
+                    tag=tag,
+                    python_version=self.target_python,
+                    egg=egg,
+                ))
+
+
+class Install(InstallCommand):
+
+    def run(self):
+        if os.environ.get('CONDA_DEFAULT_ENV'):
+            subprocess.call([
+                'conda',
+                'build',
+                '-c', 'conda-forge',
+                os.path.join(project_dir, 'conda-pkg'),
+            ])
+            subprocess.call([
+                'conda',
+                'install',
+                '--use-local',
+                '--update-deps',
+                '-y',
+                'cleanx',
+            ])
+        else:
+            subprocess.call([sys.executable, __file__, 'bdist_egg'])
+            egg = glob(os.path.join(project_dir, 'dist', '*.egg'))[0]
+            subprocess.call([sys.executable, '-m', 'easy_install', egg])
+
+
+def install_requires():
+    if os.environ.get('CONDA_DEFAULT_ENV'):
+        return [
+            'pandas',
+            'numpy',
+            'matplotlib',
+            'pillow',
+            'tesserocr',
+            'opencv',
+        ]
+    return [
+        'pandas',
+        'numpy',
+        'matplotlib',
+        'pillow',
+        'tesserocr',
+        'opencv-python',
+    ]
 
 
 setup(
@@ -151,6 +205,7 @@ setup(
         'lint': Pep8,
         'apidoc': SphinxApiDoc,
         'genconda': GenerateCondaYaml,
+        'install': Install
     },
     tests_require=['pytest', 'pycodestyle'],
     command_options={
@@ -161,13 +216,6 @@ setup(
             'config_dir': ('setup.py', './source'),
         },
     },
-    setup_requires = ['sphinx'],
-    install_requires=[
-        "pandas",
-        'numpy',
-        "matplotlib",
-        "pillow",
-        "tesserocr",
-        "opencv-python",
-    ],
+    setup_requires=['sphinx'],
+    install_requires=install_requires(),
 )

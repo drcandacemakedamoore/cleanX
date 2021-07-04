@@ -3,14 +3,15 @@ package:
   version: ${version}
 
 source:
-  git_rev: ${tag}
-  git_url: https://github.com/drcandacemakedamoore/cleanX.git
+  path: ..
 
 requirements:
-  build:
+  host:
     - python==${python_version}
-    - setuptools
     - sphinx
+
+  build:
+    - setuptools
 
   run:
     - python==${python_version}
