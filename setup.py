@@ -198,6 +198,7 @@ class Install(InstallCommand):
                 '-c', 'conda-forge',
                 '--use-local',
                 '--update-deps',
+                '--force-reinstall',
                 '-y',
                 'cleanx',
             ]
@@ -263,4 +264,5 @@ setup(
     },
     setup_requires=['sphinx'],
     install_requires=install_requires(),
+    zip_safe=False,
 )
