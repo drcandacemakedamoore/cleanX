@@ -8,8 +8,9 @@ import subprocess
 from glob import glob
 
 from setuptools import setup
-from setuptools.command.test import test as TestCommand
 from setuptools.command.install import install as InstallCommand
+from setuptools.command.easy_install import easy_install as EZInstallCommand
+from setuptools.dist import Distribution
 from setuptools import Command
 
 
@@ -40,29 +41,43 @@ except subprocess.CalledProcessError as e:
 version = tag[1:]
 
 
-class PyTest(TestCommand):
+class PyTest(Command):
 
     user_options = [('pytest-args=', 'a', "Arguments to pass into py.test")]
 
     def initialize_options(self):
-        TestCommand.initialize_options(self)
         self.pytest_args = ''
 
     def finalize_options(self):
-        TestCommand.finalize_options(self)
         self.test_args = []
         self.test_suite = True
 
-    def run_tests(self):
+    def run(self):
+        recs = self.distribution.tests_require
+
+        if os.environ.get('CONDA_DEFAULT_ENV'):
+            if recs:
+                result = subprocess.call(['conda', 'install', '-y'] + recs)
+                if result:
+                    raise RuntimeError('Cannot install test requirements')
+        else:
+            test_dist = Distribution()
+            test_dist.install_requires = recs
+            ezcmd = EZInstallCommand(test_dist)
+            ezcmd.initialize_options()
+            ezcmd.args = recs
+            ezcmd.finalize_options()
+            ezcmd.run()
+
         import pytest
 
         errno = pytest.main(shlex.split(self.pytest_args))
         sys.exit(errno)
 
 
-class Pep8(TestCommand):
+class Pep8(Command):
 
-    def run_tests(self):
+    def run(self):
         from pycodestyle import StyleGuide
 
         package_dir = os.path.dirname(os.path.abspath(__file__))
