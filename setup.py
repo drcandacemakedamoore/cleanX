@@ -4,6 +4,7 @@ import sys
 import shlex
 import os
 import subprocess
+import site
 
 from glob import glob
 
@@ -41,7 +42,7 @@ except subprocess.CalledProcessError as e:
 version = tag[1:]
 
 
-class PyTest(Command):
+class TestCommand(Command):
 
     user_options = [('pytest-args=', 'a', "Arguments to pass into py.test")]
 
@@ -68,16 +69,23 @@ class PyTest(Command):
             ezcmd.args = recs
             ezcmd.finalize_options()
             ezcmd.run()
+            site.main()
 
+        self.run_tests()
+
+
+class PyTest(TestCommand):
+
+    def run_tests(self):
         import pytest
 
         errno = pytest.main(shlex.split(self.pytest_args))
         sys.exit(errno)
 
 
-class Pep8(Command):
+class Pep8(TestCommand):
 
-    def run(self):
+    def run_tests(self):
         from pycodestyle import StyleGuide
 
         package_dir = os.path.dirname(os.path.abspath(__file__))
