@@ -143,6 +143,20 @@ class GenerateCondaYaml(Command):
                 ))
 
 
+class FindEgg(Command):
+
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        print(glob('./dist/*.egg')[0])
+
+
 class Install(InstallCommand):
 
     def run(self):
@@ -166,6 +180,7 @@ class Install(InstallCommand):
             cmd = [
                 'conda',
                 'install',
+                '-c', 'conda-forge',
                 '--use-local',
                 '--update-deps',
                 '-y',
@@ -219,7 +234,8 @@ setup(
         'lint': Pep8,
         'apidoc': SphinxApiDoc,
         'genconda': GenerateCondaYaml,
-        'install': Install
+        'install': Install,
+        'find_egg': FindEgg,
     },
     tests_require=['pytest', 'pycodestyle'],
     command_options={

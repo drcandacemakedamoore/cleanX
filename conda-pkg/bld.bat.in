@@ -1,4 +1,6 @@
-"%PYTHON%" setup.py setup.py bdist_egg
+"%PYTHON%" setup.py bdist_egg
 if errorlevel 1 exit 1
-"%PYTHON%" -m easy_install --record=record.txt --no-deps ${egg}
+for /f "delims=" %%a in ('D:\bin\anaconda3\envs\cleanx\python.exe setup.py find_egg') do @set egg=%%a
+if errorlevel 1 exit 1
+"%PYTHON%" -m easy_install --record=record.txt --no-deps %egg%
 if errorlevel 1 exit 1
