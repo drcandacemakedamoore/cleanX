@@ -1687,7 +1687,7 @@ def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
     return saved_images
 
 
-def get_jpg_with_pydicom(dicom_folder_path,jpeg_folder_path):
+def get_jpg_with_pydicom(dicom_folder_path, jpeg_folder_path):
     """
     This function is for users with pydicom library only.
     If you do not have the library it will throw an error.
@@ -1716,4 +1716,3 @@ def get_jpg_with_pydicom(dicom_folder_path,jpeg_folder_path):
 
     print('{} image converted'.format(n))
     return love
-
