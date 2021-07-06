@@ -1661,10 +1661,10 @@ def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
     an out put directory. It also returns the images for inspection (as arrays)
     , which you can look at the [0] layer with matplotlib
 
-    :param tail_cut_percent: dicomfile_directory, directory with dicom/.dcm
-    :type tail_cut_percent: string
-    :param tail_cut_percent: output_directory, where they should be placed
-    :type tail_cut_percent: string
+    :param dicomfile_directory: dicomfile_directory, directory with dicom/.dcm
+    :type dicomfile_directory: string
+    :param output_directory: output_directory, where they should be placed
+    :type output_directory: string
 
     :return: saved_images
     :rtype: list
@@ -1685,3 +1685,31 @@ def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
         target_name = target_base + ".jpg"
         cv2.imwrite(target_name, image_np[0])
     return saved_images
+
+def get_jpg_with_pydicom(dicom_folder_path,jpeg_folder_path):
+    """
+    This function is for users with pydicom library only.
+    If you do not have the library it will throw an error.
+    The funuction function jpeg files out of a dicom file directory,
+    one by one, each of them (not just the first series as), and puts them in
+    an out put directory. 
+
+    :param dicom_folder_path: dicomfile_directory, directory with dicom/.dcm
+    :type dicom_folder_path: string
+    :param jpeg_folder_path: output_directory, where they should be placed
+    :type jpeg_folder_path: string
+
+    :return: love (will put your images in the new folder but not return them)
+    :rtype: bool
+    """
+    import pydicom
+    images_path = os.listdir(dicom_folder_path)
+    for n, image in enumerate(images_path):
+        ds = dicom.dcmread(os.path.join(dicom_folder_path, image))
+        pixel_array_numpy = ds.pixel_array
+        image = image.replace('.dcm', '.jpg')
+        love = cv2.imwrite(os.path.join(jpg_folder_path, image), pixel_array_numpy)
+    #if n #% 50 == 0:
+    print('{} image converted'.format(n))
+    return love
+    
