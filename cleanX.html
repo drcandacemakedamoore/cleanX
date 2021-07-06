@@ -579,6 +579,30 @@ questionable technique level.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cleanX.get_jpg_with_pydicom">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">get_jpg_with_pydicom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dicom_folder_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jpeg_folder_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.get_jpg_with_pydicom" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is for users with pydicom library only.
+If you do not have the library it will throw an error.
+The funuction function jpeg files out of a dicom file directory,
+one by one, each of them (not just the first series as), and puts them in
+an out put directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dicom_folder_path</strong> (<em>string</em>) – dicomfile_directory, directory with dicom/.dcm</p></li>
+<li><p><strong>jpeg_folder_path</strong> (<em>string</em>) – output_directory, where they should be placed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>love (will put your images in the new folder but not return them)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cleanX.harsh_sharpie_enhance">
 <span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">harsh_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.harsh_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a new image that is very sharper to the human eye,
@@ -763,8 +787,8 @@ an out put directory. It also returns the images for inspection (as arrays)
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tail_cut_percent</strong> (<em>string</em>) – dicomfile_directory, directory with dicom/.dcm</p></li>
-<li><p><strong>tail_cut_percent</strong> – output_directory, where they should be placed</p></li>
+<li><p><strong>dicomfile_directory</strong> (<em>string</em>) – dicomfile_directory, directory with dicom/.dcm</p></li>
+<li><p><strong>output_directory</strong> (<em>string</em>) – output_directory, where they should be placed</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
