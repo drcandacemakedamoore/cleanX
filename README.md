@@ -32,7 +32,7 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 - a [python](https://www.python.org/downloads/) installation (3.7, 3.8 or 3.9)
 - ability to create virtual environments (reccomended, not absolutely neccesary)
 - tesseract-ocr, matplotlib, pandas, pillow and/or opencv
-- optional reccomendation of simpleITK for dicom to jpg conversion
+- optional reccomendation of simpleITK or pydicom for dicom to jpg conversion
 - anaconda is now supported, but not technically neccesary
 
 
