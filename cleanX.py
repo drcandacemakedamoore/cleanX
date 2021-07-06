@@ -1686,13 +1686,14 @@ def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
         cv2.imwrite(target_name, image_np[0])
     return saved_images
 
+
 def get_jpg_with_pydicom(dicom_folder_path,jpeg_folder_path):
     """
     This function is for users with pydicom library only.
     If you do not have the library it will throw an error.
     The funuction function jpeg files out of a dicom file directory,
     one by one, each of them (not just the first series as), and puts them in
-    an out put directory. 
+    an out put directory.
 
     :param dicom_folder_path: dicomfile_directory, directory with dicom/.dcm
     :type dicom_folder_path: string
@@ -1708,8 +1709,11 @@ def get_jpg_with_pydicom(dicom_folder_path,jpeg_folder_path):
         ds = dicom.dcmread(os.path.join(dicom_folder_path, image))
         pixel_array_numpy = ds.pixel_array
         image = image.replace('.dcm', '.jpg')
-        love = cv2.imwrite(os.path.join(jpg_folder_path, image), pixel_array_numpy)
-    #if n #% 50 == 0:
+        love = cv2.imwrite(
+            os.path.join(jpg_folder_path, image),
+            pixel_array_numpy,
+        )
+
     print('{} image converted'.format(n))
     return love
-    
+
