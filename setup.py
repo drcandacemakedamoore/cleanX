@@ -5,6 +5,7 @@ import shlex
 import os
 import subprocess
 import site
+import shutil
 
 from glob import glob
 
@@ -58,7 +59,13 @@ class TestCommand(Command):
 
         if os.environ.get('CONDA_DEFAULT_ENV'):
             if recs:
-                result = subprocess.call(['conda', 'install', '-y'] + recs)
+                result = subprocess.call([
+                    'conda',
+                    'install',
+                    '-y',
+                    '-c', 'conda-forge',
+                    ] + recs
+                )
                 if result:
                     raise RuntimeError('Cannot install test requirements')
         else:
@@ -145,7 +152,7 @@ class GenerateCondaYaml(Command):
 
         tpls = glob(os.path.join(project_dir, 'conda-pkg/*.in'))
         try:
-            egg = glob(os.path.join(project_dir, './dist/*.egg'))[0]
+            egg = glob(os.path.join(project_dir, 'dist/*.egg'))[0]
         except IndexError as e:
             raise RuntimeError(
                 'You need to run `setup.py bdist_egg\' first',
@@ -185,13 +192,15 @@ class Install(InstallCommand):
     def run(self):
         if os.environ.get('CONDA_DEFAULT_ENV'):
             packages = subprocess.check_output(['conda', 'list', '--export'])
-            cmd = ['conda', 'install', '-y', 'conda-build']
+            cmd = ['conda', 'install', '-y', 'conda-build', 'conda-verify']
             for line in packages.split(b'\n'):
                 if line.startswith(b'conda-build='):
                     break
             else:
                 if subprocess.call(cmd):
                     raise RuntimeError('Cannot install conda-build')
+            shutil.rmtree(os.path.join(project_dir, 'dist'))
+            shutil.rmtree(os.path.join(project_dir, 'build'))
             cmd = [
                 'conda',
                 'build',
