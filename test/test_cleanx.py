@@ -258,3 +258,24 @@ def test_rip_out_jpgs_sitk():
     )
     jpegs_made = cleanX.rip_out_jpgs_sitk(dicomfile_directory1,output_directory1) 
     assert len(jpegs_made) > 0    
+
+# def pydicom_missing():
+#     try:
+#         import pydicom
+#         return False
+#     except ModuleNotFoundError:
+        
+#         return True
+
+# @pytest.mark.skipif(pydicom_missing() , reason="no pydicom available")
+# def test_get_jpg_with_pydicom():
+#     dicomfile_directory1 = os.path.join(
+#         os.path.dirname(__file__),
+#         'dicom_example_folder',
+#     )
+#     output_directory1 = os.path.join(
+#         os.path.dirname(__file__),
+#         'dicom_target',
+#     )
+#     jpegs_made = cleanX.test_get_jpg_with_pydicom(dicomfile_directory1,output_directory1) 
+#     assert len(jpegs_made) == True    
