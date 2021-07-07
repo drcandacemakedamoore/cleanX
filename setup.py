@@ -199,8 +199,15 @@ class Install(InstallCommand):
             else:
                 if subprocess.call(cmd):
                     raise RuntimeError('Cannot install conda-build')
-            shutil.rmtree(os.path.join(project_dir, 'dist'))
-            shutil.rmtree(os.path.join(project_dir, 'build'))
+            shutil.rmtree(
+                os.path.join(project_dir, 'dist'),
+                ignore_errors=True,
+            )
+            shutil.rmtree(
+                os.path.join(project_dir, 'build'),
+                ignore_errors=True,
+            )
+
             cmd = [
                 'conda',
                 'build',
