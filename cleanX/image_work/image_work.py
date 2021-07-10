@@ -47,8 +47,8 @@ from pathlib import Path
 
 # def see_part_potential_bias(df, label, sensitive_column_list):
 #     """
-#     This function gives you a tabulated :code:`DataFrame` of sensitive columns
-#     e.g. gender, race, or whichever you think are relevant,
+#     This function gives you a tabulated :code:`DataFrame` of sensitive
+#     columns e.g. gender, race, or whichever you think are relevant,
 #     in terms of a labels (put in the label column name).
 #     You may discover all your pathologically labeled sample are of one ethnic
 #     group, gender or other category in your :code:`DataFrame`. Remember some
@@ -801,7 +801,8 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
 #     print("")
 #     print("The types of data:\n", df.dtypes)
 #     print("")
-#     print("In terms of nulls, the DataFrame has: \n", df[df.isnull()].count())
+#     print("In terms of nulls, the DataFrame has: \n",
+#           df[df.isnull()].count())
 #     print("")
 #     print(
 #         "Number of duplicated rows in the data is ",
@@ -1658,10 +1659,11 @@ def make_histo_scaled_folder(imgs_folder, tail_cut_percent, target_folder):
 #     If you do not have the library it will throw an error.
 #     The funuction function jpeg files out of a dicom file directory,
 #     one by one, each of them (not just the first series as), and puts them in
-#     an out put directory. It also returns the images for inspection (as arrays)
-#     , which you can look at the [0] layer with matplotlib
+#     an out put directory. It also returns the images for inspection
+#     (as arrays), which you can look at the [0] layer with matplotlib
 
-#     :param dicomfile_directory: dicomfile_directory, directory with dicom/.dcm
+#     :param dicomfile_directory: dicomfile_directory, directory with
+#                                 dicom/.dcm
 #     :type dicomfile_directory: string
 #     :param output_directory: output_directory, where they should be placed
 #     :type output_directory: string
@@ -1700,7 +1702,8 @@ def make_histo_scaled_folder(imgs_folder, tail_cut_percent, target_folder):
 #     :param jpeg_folder_path: output_directory, where they should be placed
 #     :type jpeg_folder_path: string
 
-#     :return: love (will put your images in the new folder but not return them)
+#     :return: love
+#     (will put your images in the new folder but not return them)
 #     :rtype: bool
 #     """
 #     import pydicom

@@ -96,7 +96,10 @@ class Pep8(TestCommand):
         from pycodestyle import StyleGuide
 
         package_dir = os.path.dirname(os.path.abspath(__file__))
-        sources = [os.path.join(package_dir, 'cleanX.py')]
+        sources = glob(
+            os.path.join(package_dir, 'cleanX', '**/*.py'),
+            recursive=True,
+        )
         style_guide = StyleGuide(paths=sources)
         options = style_guide.options
 

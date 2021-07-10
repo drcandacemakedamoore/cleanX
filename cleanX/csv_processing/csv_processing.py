@@ -76,8 +76,8 @@ def see_part_potential_bias(df, label, sensitive_column_list):
     tab_fight_bias2 = tab_fight_bias.groupby(label_and_sensitive).sum()
     tab_fight_bias2 = tab_fight_bias2.rename(columns={0: 'sums'})
     return tab_fight_bias2
-    
-    
+
+
 def understand_df(df):
     """
     Takes a :code:`DataFrame` (if you have a :code:`DataFrame` for images)
@@ -121,4 +121,3 @@ def show_duplicates(df):
         print("They are: \n", df[df.duplicated()])
     else:
         print("There are no duplicated rows")
-

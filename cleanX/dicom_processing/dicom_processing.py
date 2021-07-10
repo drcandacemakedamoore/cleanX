@@ -24,7 +24,6 @@ from filecmp import cmp
 from pathlib import Path
 
 
-
 def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
     """
     This function is for users with simpleITK library only.
