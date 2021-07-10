@@ -124,9 +124,7 @@ class SphinxApiDoc(Command):
         sys.exit(main([
             '-o', os.path.join(project_dir, 'source'),
             '-f',
-            project_dir,
-            '.*',
-            'setup.py',
+            os.path.join(project_dir, 'cleanX'),
         ]))
 
 
@@ -266,13 +264,13 @@ setup(
     author_email='doctormakeda@gmail.com',
     maintainer='doctormakeda@gmail.com',
     maintainer_email= 'doctormakeda@gmail.com',
-    url="https://github.com/drcandacemakedamoore/cleanX",
-    license="MIT",
+    url='https://github.com/drcandacemakedamoore/cleanX',
+    license='MIT',
     packages=[
-        "cleanX",
-        "cleanX.csv_processing",
-        "cleanX.dicom_processing",
-        "cleanX.image_work",
+        'cleanX',
+        'cleanX.csv_processing',
+        'cleanX.dicom_processing',
+        'cleanX.image_work',
     ],
     cmdclass={
         'test': PyTest,

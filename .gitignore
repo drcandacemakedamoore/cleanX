@@ -11,3 +11,4 @@ test/target/
 /source/modules.rst
 /conda-pkg/meta.yaml
 /conda-pkg/bld.bat
+/source/cleanX.*.rst
