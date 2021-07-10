@@ -268,7 +268,12 @@ setup(
     maintainer_email= 'doctormakeda@gmail.com',
     url="https://github.com/drcandacemakedamoore/cleanX",
     license="MIT",
-    py_modules=["cleanX"],
+    packages=[
+        "cleanX",
+        "cleanX.csv_processing",
+        "cleanX.dicom_processing",
+        "cleanX.image_work",
+    ],
     cmdclass={
         'test': PyTest,
         'lint': Pep8,
