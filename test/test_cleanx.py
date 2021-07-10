@@ -1,15 +1,23 @@
 # testing for cleanX
 
 import os
+
+from functools import partial
+
+import cv2
+import pytest
 import pandas as pd
 import matplotlib as plt
-import cleanX
-import cv2
-from PIL import Image, ImageOps
 import numpy as np
-import pytest
-from functools import partial
-# import simpleITK as sitk
+
+from PIL import Image, ImageOps
+
+from cleanX import (
+    csv_processing as csvp,
+    dicom_processing as dicomp,
+    image_work as iwork,
+)
+
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
 target_directory = os.path.join(os.path.dirname(__file__), 'target')
@@ -17,37 +25,37 @@ target_directory = os.path.join(os.path.dirname(__file__), 'target')
 
 def test_crop():
     example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
-    cropped_example = cleanX.crop(example)
+    cropped_example = iwork.crop(example)
     assert cropped_example.shape < example.shape
 
 def test_simpler_crop():
     example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
-    cropped_example = cleanX.simpler_crop(example)
+    cropped_example = iwork.simpler_crop(example)
     assert cropped_example.shape < example.shape
 
 def test_blur_out_edges():
     image = os.path.join(image_directory, 'testtocrop.jpg')
-    defblur = cleanX.blur_out_edges(image)
+    defblur = iwork.blur_out_edges(image)
     assert type(defblur) == np.ndarray 
 
 def test_subtle_sharpie_enhance():
     image = os.path.join(image_directory, 'testtocrop.jpg')
-    lo = cleanX.subtle_sharpie_enhance(image)
+    lo = iwork.subtle_sharpie_enhance(image)
     assert lo.shape[0] >1
     
 def harsh_sharpie_enhance():
     image = os.path.join(image_directory, 'testtocrop.jpg')
-    ho = cleanX.harsh_sharpie_enhance(image)
+    ho = iwork.harsh_sharpie_enhance(image)
     assert ho.shape[0] >1
 
 def test_salting():
     lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
-    salt = cleanX.salting(lindo_image)
+    salt = iwork.salting(lindo_image)
     assert salt.shape[0] > 1
 
 def test_simple_rotation_augmentation():
     lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
-    lindo_rotated = cleanX.simple_rotation_augmentation(6, lindo_image)
+    lindo_rotated = iwork.simple_rotation_augmentation(6, lindo_image)
     assert np.array(lindo_rotated).shape[0] > 1
 
 
@@ -58,62 +66,66 @@ def test_check_paths_for_group_leakage():
     train_df= pd.read_csv(train_dfE)
     test_df = pd.read_csv(test_dfE)
     uniqueIDE = 'image_path'
-    checked_example = cleanX.check_paths_for_group_leakage(train_df, test_df, uniqueIDE)
+    checked_example = csvp.check_paths_for_group_leakage(
+        train_df,
+        test_df,
+        uniqueIDE,
+    )
     assert len(checked_example) > 1 
 
 def test_separate_image_averager():
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
     test_df = pd.read_csv(test_dfE)
     images = image_directory + '/' + test_df.image_path.dropna()
-    blended =  cleanX.separate_image_averager(images, s=5)
+    blended =  iwork.separate_image_averager(images, s=5)
     assert type(blended) is np.ndarray
 #
 def test_dimensions_to_df():
-    deflep = cleanX.dimensions_to_df(image_directory)
+    deflep = iwork.dimensions_to_df(image_directory)
     assert len(deflep) > 1    
 #
 def test_see_part_potential_bias():
     e2 = (os.path.join(image_directory,'example_for_bias.csv'))
     e3 = pd.read_csv(e2)
-    donwa = cleanX.see_part_potential_bias(e3,"Label", ["Gender", "Race"])
+    donwa = csvp.see_part_potential_bias(e3,"Label", ["Gender", "Race"])
     assert len(donwa) > 1
 
 # def test_show_images_in_df():
 
-#     # this testing remains undone... the function returns basically the line bwlo, and testing will be difficult     
-#     plt.show()
+#     # this testing remains undone... the function returns basically
+#     the line bwlo, and testing will be difficult plt.show()
 #
 def test_dimensions_to_histo():
-    output = cleanX.dimensions_to_histo(image_directory, 10)
+    output = iwork.dimensions_to_histo(image_directory, 10)
     assert len(output) > 1
 #
 def test_find_very_hazy():
-    found = cleanX.find_very_hazy(image_directory)
+    found = iwork.find_very_hazy(image_directory)
     assert len(found) > 0    
 
 def test_show_major_lines_on_image():
     pic_name1 = os.path.join(image_directory, 'testtocrop.jpg')
-    deflop = cleanX.show_major_lines_on_image(pic_name1)
+    deflop = iwork.show_major_lines_on_image(pic_name1)
     assert deflop # needs a much better test
 
 def test_find_big_lines():
-    lined = cleanX.find_big_lines(image_directory, 2)
+    lined = iwork.find_big_lines(image_directory, 2)
     assert len(lined) > 0    
 #
 def proportions_ht_wt_to_histo():
-    output =  cleanX.proportions_ht_wt_to_histo(image_directory, 10)
+    output =  iwork.proportions_ht_wt_to_histo(image_directory, 10)
     assert len(output) > 1
 #
 def test_tesseract_specific():
-    lettered = cleanX.tesseract_specific(image_directory)
+    lettered = iwork.tesseract_specific(image_directory)
     assert len(lettered) > 1 
 
 def test_find_suspect_text():
-    letters_spec = cleanX.find_suspect_text(image_directory, 'SUPINE')
+    letters_spec = iwork.find_suspect_text(image_directory, 'SUPINE')
     assert len(letters_spec) >= 1     
 
 def test_find_suspect_text_by_length():   
-    jobs = cleanX.find_suspect_text_by_length(image_directory, 3)
+    jobs = iwork.find_suspect_text_by_length(image_directory, 3)
     assert len(jobs) > 1    
 
 #~    
@@ -122,7 +134,7 @@ def test_augment_and_move():
         os.makedirs(target_directory)
     except FileExistsError:
         pass
-    cleanX.augment_and_move(image_directory, target_directory, [ImageOps.mirror, ImageOps.flip])
+    iwork.augment_and_move(image_directory, target_directory, [ImageOps.mirror, ImageOps.flip])
     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
     assert os.path.isfile(vovo) 
 #
@@ -131,42 +143,42 @@ def test_crop_them_all():
         os.makedirs(target_directory)
     except FileExistsError:
         pass
-    cleanX.crop_them_all(image_directory, target_directory)
+    iwork.crop_them_all(image_directory, target_directory)
     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
     assert os.path.isfile(vovo) 
 
 def test_reasonable_rotation_augmentation():
     imageE = (os.path.join(image_directory,'testtocrop.jpg'))
-    dman = cleanX.reasonable_rotation_augmentation(0, 12, 3, imageE)
+    dman = iwork.reasonable_rotation_augmentation(0, 12, 3, imageE)
     assert len(dman) > 1
     
 #
 def test_find_by_sample_upper():
-    lovereturned = cleanX.find_by_sample_upper(image_directory, 10, 10)
+    lovereturned = iwork.find_by_sample_upper(image_directory, 10, 10)
     assert len(lovereturned) >= 1
 #
 def test_find_sample_upper_greater_than_lower():
-    lovereturnee = cleanX.find_sample_upper_greater_than_lower(image_directory, 10)
+    lovereturnee = iwork.find_sample_upper_greater_than_lower(image_directory, 10)
     assert len(lovereturnee) >= 1
 
 def test_find_duplicated_images():
-    found = cleanX.find_duplicated_images(image_directory)
+    found = iwork.find_duplicated_images(image_directory)
     assert len(found) > 0     
 #    
 def test_find_duplicated_images_todf():
-    found = cleanX.find_duplicated_images_todf(image_directory)
+    found = iwork.find_duplicated_images_todf(image_directory)
     assert len(found) > 0       
 
 def test_histogram_difference_for_inverts():
-    histosy = cleanX.histogram_difference_for_inverts(image_directory)
+    histosy = iwork.histogram_difference_for_inverts(image_directory)
     assert len(histosy) > 0
 
 def test_histogram_difference_for_inverts_todf():
-    histos = cleanX.histogram_difference_for_inverts_todf(image_directory)
+    histos = iwork.histogram_difference_for_inverts_todf(image_directory)
     assert len(histos) >0
 #
 def test_dataframe_up_my_pics():
-    dfy = cleanX.dataframe_up_my_pics(image_directory, 'diagnosis_string')
+    dfy = iwork.dataframe_up_my_pics(image_directory, 'diagnosis_string')
     assert len(dfy) > 0
     
 def test_simple_spinning_template():
@@ -177,7 +189,7 @@ def test_simple_spinning_template():
     angle_start1 = 0
     angle_stop1 = 30
     slices1 = 3
-    lanter = cleanX.simple_spinning_template(
+    lanter = iwork.simple_spinning_template(
         picy1,
         greys_template1,
         angle_start1,
@@ -189,7 +201,7 @@ def test_simple_spinning_template():
 def test_def_make_contour_image():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
     picy1 = vovo
-    defMkcont = cleanX.make_contour_image(picy1)
+    defMkcont = iwork.make_contour_image(picy1)
     assert len(defMkcont) > 0
 #
 def test_avg_image_maker():
@@ -197,7 +209,7 @@ def test_avg_image_maker():
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
     test_df = pd.read_csv(test_dfE)
     set_of_images = image_directory + '/' + test_df.image_path.dropna()
-    tab = cleanX.avg_image_maker(set_of_images)  
+    tab = iwork.avg_image_maker(set_of_images)  
     assert tab.shape[0] > 2  
 
 #
@@ -206,35 +218,35 @@ def test_set_image_variability():
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
     test_df = pd.read_csv(test_dfE)
     set_of_images = image_directory + '/' + test_df.image_path.dropna()
-    tab = cleanX.set_image_variability(set_of_images)  
+    tab = iwork.set_image_variability(set_of_images)  
     assert tab.shape[0] > 2      
 #
 def test_avg_image_maker_by_label():
     test_dfE = (os.path.join(image_directory,'alt_test_labeled.csv'))
     test_df = pd.read_csv(test_dfE)
     #set_of_images = image_directory + '/' + test_df.image_path.dropna()
-    lotus = cleanX.avg_image_maker_by_label(test_df,'imageID','path_label',image_directory)
+    lotus = iwork.avg_image_maker_by_label(test_df,'imageID','path_label',image_directory)
     assert len(lotus) > 0       
 #
 def test_find_tiny_image_differences():
-    defleper = cleanX.find_tiny_image_differences(image_directory)
+    defleper = iwork.find_tiny_image_differences(image_directory)
     assert len(defleper) > 0
 
 def test_zero_to_twofivefive_simplest_norming():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    test_norm1 = cleanX.zero_to_twofivefive_simplest_norming(vovo)
+    test_norm1 = iwork.zero_to_twofivefive_simplest_norming(vovo)
     assert test_norm1.max() == 255
 
 def test_rescale_range_from_histogram_low_end():
     image_path = os.path.join(image_directory, 'testtocrop.jpg')
     image_from_path = cv2.imread(image_path)
-    defmax = cleanX.rescale_range_from_histogram_low_end(image_from_path, 5)
+    defmax = iwork.rescale_range_from_histogram_low_end(image_from_path, 5)
     assert defmax.max() == 255
 
 def test_make_histo_scaled_folder():
     A= image_directory
     targy = target_directory
-    d = cleanX.make_histo_scaled_folder(A, 5, targy)
+    d = iwork.make_histo_scaled_folder(A, 5, targy)
     assert len(d) > 0
 
 
@@ -256,7 +268,7 @@ def test_rip_out_jpgs_sitk():
         os.path.dirname(__file__),
         'dicom_target',
     )
-    jpegs_made = cleanX.rip_out_jpgs_sitk(dicomfile_directory1,output_directory1) 
+    jpegs_made = iwork.rip_out_jpgs_sitk(dicomfile_directory1,output_directory1) 
     assert len(jpegs_made) > 0    
 
 def pydicom_missing():
