@@ -268,7 +268,10 @@ def test_rip_out_jpgs_sitk():
         os.path.dirname(__file__),
         'dicom_target',
     )
-    jpegs_made = iwork.rip_out_jpgs_sitk(dicomfile_directory1,output_directory1) 
+    jpegs_made = dicomp.rip_out_jpgs_sitk(
+        dicomfile_directory1,
+        output_directory1,
+    )
     assert len(jpegs_made) > 0    
 
 def pydicom_missing():
@@ -289,5 +292,8 @@ def test_get_jpg_with_pydicom():
         os.path.dirname(__file__),
         'dicom_target',
     )
-    jpegs_made = cleanX.test_get_jpg_with_pydicom(dicomfile_directory1,output_directory1) 
+    jpegs_made = dicomp.test_get_jpg_with_pydicom(
+        dicomfile_directory1,
+        output_directory1,
+    )
     assert jpegs_made == True    
