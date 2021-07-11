@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>cleanX package &#8212; cleanX 0.0.4 documentation</title>
+    <title>cleanX module &#8212; cleanX 0.0.4 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -15,7 +15,6 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="cleanX.csv_processing package" href="cleanX.csv_processing.html" />
     <link rel="prev" title="cleanX" href="modules.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -33,36 +32,1054 @@
 
           <div class="body" role="main">
             
-  <section id="cleanx-package">
-<h1>cleanX package<a class="headerlink" href="#cleanx-package" title="Permalink to this headline">¶</a></h1>
-<section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.csv_processing.html">cleanX.csv_processing package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cleanX.csv_processing.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cleanX.csv_processing.html#module-cleanX.csv_processing.csv_processing">cleanX.csv_processing.csv_processing module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cleanX.csv_processing.html#module-cleanX.csv_processing">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.dicom_processing.html">cleanX.dicom_processing package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.html#module-cleanX.dicom_processing.dicom_processing">cleanX.dicom_processing.dicom_processing module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.html#module-cleanX.dicom_processing">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.image_work.html">cleanX.image_work package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.html#module-cleanX.image_work.image_work">cleanX.image_work.image_work module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.html#module-cleanX.image_work">Module contents</a></li>
-</ul>
-</li>
-</ul>
+  <section id="module-cleanX">
+<span id="cleanx-module"></span><h1>cleanX module<a class="headerlink" href="#module-cleanX" title="Permalink to this headline">¶</a></h1>
+<p>Library for cleaning radiological data used in machine learning
+applications</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.Rotator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">Rotator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.Rotator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for rotating OpenCV images.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.Rotator.RotationIterator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">RotationIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.Rotator.RotationIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class RotationIterator iterator implementation of a range of
+rotated images</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.Rotator.iter">
+<span class="sig-name descname"><span class="pre">iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">360</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.Rotator.iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class method <code class="code docutils literal notranslate"><span class="pre">iter</span></code> returns a generator group of images that
+are on angles from <code class="code docutils literal notranslate"><span class="pre">start</span></code> to <code class="code docutils literal notranslate"><span class="pre">stop</span></code> with increment of
+<code class="code docutils literal notranslate"><span class="pre">step</span></code>.
+Usage example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;normal-frontal-chest-x-ray.jpg&#39;</span><span class="p">)</span>
+<span class="n">rotator</span> <span class="o">=</span> <span class="n">Rotator</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">rotated</span> <span class="ow">in</span> <span class="n">rotator</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+     <span class="c1"># shows the np arrays for the 36 (step=10) images</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rotated</span><span class="p">)</span>
+</pre></div>
 </div>
-</section>
-<section id="module-cleanX">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cleanX" title="Permalink to this headline">¶</a></h2>
-</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.augment_and_move">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">augment_and_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.augment_and_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes images and applies the same list of augmentations, which can include
+the cleanX function crop, to all of them</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>origin_folder</strong> (<em>directory</em>) – folder the images are in (should include final ‘/’)</p></li>
+<li><p><strong>target_folder</strong> (<em>directory</em>) – The folder where augmented images will be sent</p></li>
+<li><p><strong>transformations</strong> (<em>list</em>) – A list of augmentation functions to apply</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>technically a non returning function, but new images will be made</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>none</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.avg_image_maker">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">avg_image_maker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.avg_image_maker" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function shows you an average sized image layed over with the average
+per pixel of all images averaged from the set_of_images group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>set_of_images</strong> – A set of images,</p>
+</dd>
+</dl>
+<p>can be read in with glob.glob on a folder of jpgs.
+:type set_of_images: list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>final_avg, an image that is the average image of images in the set</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>nd.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.avg_image_maker_by_label">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">avg_image_maker_by_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe_image_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe_label_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.avg_image_maker_by_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function sorts images by labels and makes an average image per label.
+If images are all the same size subtracting one from the other should
+reveal salient differences. N.B. blending different views e.g. PA and
+lateral is not suggested.
+:param master_df: Dataframe with image location and labels
+(must be in image folder)
+:type master_df: Dataframe
+:param dataframe_image_column: name of dataframe column with image location
+string
+:type dataframe_image_column:string
+:param dataframe_label_column: name of dataframe column with label string
+:type dataframe_label_column:string
+:param image_folder: name of folder where images are
+:type image_folder:string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of titled average images per label</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.blur_out_edges">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">blur_out_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.blur_out_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>For an individual image, blurs out the edges as an augmentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>blurred_edge_image an array of an image blurred around the edges</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.check_paths_for_group_leakage">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">check_paths_for_group_leakage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.check_paths_for_group_leakage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds train samples that have been accidentally leaked into test
+samples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
+train assets.</p></li>
+<li><p><strong>test_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
+train assets.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>duplications of any image into both sets as a new
+<code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.create_matrix">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">create_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_element</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.create_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes width, height then creates a matrix populated by the default
+element. Super handy for advanced image manipulation. Note you can not
+create matrices bigger than your computer memory can handle making.
+Therefore the function will work on matrices with dimensions up to
+maybe 500*500 depending</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<em>integer</em>) – Width of the matrix to be created</p></li>
+<li><p><strong>height</strong> (<em>integer</em>) – The height of matrix to be created</p></li>
+<li><p><strong>default_element</strong> (<em>float</em><em> or </em><em>integer</em><em> or </em><em>string</em>) – Element to populate the matrix with</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>2D matrix populated</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.crop">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">crop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.crop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crops an image of a black frame: does both PIL and opencv2 images</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>This can be either a NumPy array holding image data</em><em>,
+or </em><em>a PIL image.</em>) – Image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Image cropped of black edges</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Same as input type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.crop_np">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">crop_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.crop_np" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crops black edges of an image array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_array</strong> (<em>array</em>) – Image array.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>NumPy array with the image data with the black margins cropped.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.crop_pil">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">crop_pil</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.crop_pil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crops black edges of an Pil/Pillow image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_array</strong> (<em>image</em>) – Image.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>PIL Image with black margins cropped.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>PIL.Image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.crop_them_all">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">crop_them_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.crop_them_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crops all images and moves them to a target folder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>origin_folder</strong> (<em>directory</em>) – The folder in which the images are</p></li>
+<li><p><strong>target_folder</strong> (<em>directory</em>) – The folder where augmented images will be sent</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>technically nothing returned, but new images will be made</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>none</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.dataframe_up_my_pics">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">dataframe_up_my_pics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagnosis_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataframe_up_my_pics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes images in a directory (should all be with same label), and puts the
+name (with path) and label into a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p></li>
+<li><p><strong>diagnosis_string</strong> (<em>string</em>) – Usually a label, may be any string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> of pictures and label</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.dimensions_to_df">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">dimensions_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dimensions_to_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds dimensions on images in a folder, and makes a df for exploratory
+data analysis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>folder_name</strong> (<em>Folder/directory</em>) – Adress of folder with images (should include final ‘/’)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>image height, width and proportion height/width as a new
+<code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.dimensions_to_histo">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">dimensions_to_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dimensions_to_histo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks in the directory given, and produces a histogram of various widths
+and heights. Important information as many neural nets take images all the
+same size. Classically most chest-X-rays are <span class="math">2500 \times 2000</span> or
+<span class="math">2500 \times 2048</span>; however the dataset may be different and/or
+varied</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folder_name</strong> (<em>string</em>) – Folder_name, directory name.(should include final ‘/’)</p></li>
+<li><p><strong>bins_count</strong> (<em>int</em>) – bins_count, number of bins desired (defaults to 10)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>histo_ht_wt, a labeled histogram</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_big_lines">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_big_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_big_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds number of lines in images at or over the length of
+<code class="code docutils literal notranslate"><span class="pre">line_length</span></code>, gives back a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with this information.
+Note lines can fold back on themselves, and every pixel is counted if they
+are all contiguous</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<em>directory</em>) – Directory with set_of_images (should include final ‘/’).</p></li>
+<li><p><strong>line_length</strong> (<em>integer</em>) – Minimal length of lines for the function to count.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with column for line count at or above
+<code class="code docutils literal notranslate"><span class="pre">line_length</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_by_sample_upper">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_by_sample_upper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_for_line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_by_sample_upper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes average of upper pixels, and can show you outliers defined by a
+percentage, e.g. shows images with an average of top pixels in top x %
+where x is the percent height of the sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_directory</strong> (<em>directory</em>) – folder the images are in(should include final ‘/’)</p></li>
+<li><p><strong>percent_height_of_sample</strong> (<em>integer</em>) – From where on image to call upper</p></li>
+<li><p><strong>value_for_line</strong> (<em>integer</em>) – From where in pixel values to call averaged
+values abnormal</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with images labeled</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_duplicated_images">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_duplicated_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_duplicated_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds duplicated images and returns a list of them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of duplicated images</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_duplicated_images_todf">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_duplicated_images_todf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_duplicated_images_todf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds duplicated images and returns a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> of them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> of duplicated images</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_outliers_by_mean_to_df">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_outliers_by_mean_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_outliers_by_mean_to_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Important note: approximate, and it can by chance cut the group
+so images with
+the same mean are in and out of normal range if the knife so falls</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_directory</strong> (<em>directory</em>) – The folder in which the images are</p></li>
+<li><p><strong>percentage_to_say_outliers</strong> (<em>integer</em>) – Percentage to capture</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> all images, marked as high, low or within range</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_outliers_by_total_mean">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_outliers_by_total_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_outliers_by_total_mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the average of all pixels in an image, returns a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>
+with those images that are outliers by mean. Should catch some inverted
+or problem images</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_directory</strong> (<em>directory</em>) – folder images in (include final /)</p></li>
+<li><p><strong>percentage_to_say_outliers</strong> (<em>integer</em>) – Percentage to capture</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> made up of outliers only</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_sample_upper_greater_than_lower">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_sample_upper_greater_than_lower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_sample_upper_greater_than_lower" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes average of upper pixels, average of lower (you define what
+percent of picture should be considered upper and lower) and compares.
+In a CXR if lower average is greater than upper it may be upside down
+or otherwise bizarre, as the neck is smaller than the abdomen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_directory</strong> (<em>directory</em>) – folder the images are in(should include final ‘/’)</p></li>
+<li><p><strong>percent_height_of_sample</strong> (<em>integer</em>) – From where on image to call upper or lower</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with images labeled</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_suspect_text">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_suspect_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_word</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_suspect_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds images with a specific text you ask for on them.
+Multi-lingual including English. Accuracy is very high, but not perfect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p></li>
+<li><p><strong>label_word</strong> (<em>string</em>) – Label word</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column of text found over the length</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_suspect_text_by_length">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_suspect_text_by_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_suspect_text_by_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds images with text over a specific length you ask for.
+Useful if you know you do not care about R and L or SUP.
+Multi-lingual including English. Accuracy is very high, but not perfect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p></li>
+<li><p><strong>length</strong> (<em>integer</em>) – Length to find above, inclusive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column of text found</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_tiny_image_differences">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_tiny_image_differences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_tiny_image_differences" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds differences between a manufactured tiny image, and all your images at
+that size. If you return the outliers they are inverted,
+or dramatically different in some way. Note: percentile returned
+is approximate, may be a tad more</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p></li>
+<li><p><strong>s</strong> (<em>integer</em>) – length to make the sides of the tiny image for comparison</p></li>
+<li><p><strong>percentile</strong> (<em>integer</em>) – percentile to mark as abnormal</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column that notes mismatches
+and within range images</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.find_very_hazy">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">find_very_hazy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.find_very_hazy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds pictures that are really “hazy” i.e. there is no real straight line
+because they are blurred. Usually, at least the left or right tag
+should give straight lines, thus this function finds image of a certain
+questionable technique level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>directory</em>) – The folder the images are in (should include final ‘/’)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with images sorted as hazy or regular under
+<code class="code docutils literal notranslate"><span class="pre">label_for_haze</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.get_jpg_with_pydicom">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">get_jpg_with_pydicom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dicom_folder_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jpeg_folder_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.get_jpg_with_pydicom" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is for users with pydicom library only.
+If you do not have the library it will throw an error.
+The funuction function jpeg files out of a dicom file directory,
+one by one, each of them (not just the first series as), and puts them in
+an out put directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dicom_folder_path</strong> (<em>string</em>) – dicomfile_directory, directory with dicom/.dcm</p></li>
+<li><p><strong>jpeg_folder_path</strong> (<em>string</em>) – output_directory, where they should be placed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>love (will put your images in the new folder but not return them)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.harsh_sharpie_enhance">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">harsh_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.harsh_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a new image that is very sharper to the human eye,
+and has new values in most of the pixels (besides the background).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>string</em>) – String for image name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>new_image_array, a sharpened image for humans</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.histogram_difference_for_inverts">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">histogram_difference_for_inverts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.histogram_difference_for_inverts" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function looks for images by a spike on the end of their pixel
+value histogram to find inverted images. Note we assume classical
+X-rays, not inverted fluoroscopy images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of images suspected to be inverted</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.histogram_difference_for_inverts_todf">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">histogram_difference_for_inverts_todf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.histogram_difference_for_inverts_todf" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function looks for images by a spike on the end of their pixel
+value histogram to find inverted images, then puts what it found into
+a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>. Images are listed as regulars, inverts of unclear (the
+unclear have equal spikes on both ends). #histo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with images categorized</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.make_contour_image">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">make_contour_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.make_contour_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes an image into a contour image
+:param im: image name
+:type im: string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>drawing, the contour image</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>nd.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.make_histo_scaled_folder">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">make_histo_scaled_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.make_histo_scaled_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes each image inside a folder and normalizes them by the
+histogram. It then puts the new normalized images in to a folder
+which is called the target folder (to be made by user)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imgs_folder</strong> (<em>string</em>) – imgs_folder</p></li>
+<li><p><strong>tail_cut_percent</strong> (<em>integer</em>) – percent of histogram to be discarded from low end</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>target_name, but your images go into target folder with</p>
+</dd>
+</dl>
+<p>target_name
+:rtype: string</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.proportions_ht_wt_to_histo">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">proportions_ht_wt_to_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.proportions_ht_wt_to_histo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks in the directory given, produces a histogram of various proportions
+of the images by dividing their height by widths.
+Important information as many neural nets take images all the
+same size. Classically most chest X-rays are <span class="math">2500 \times 2000</span> or
+<span class="math">2500 \times 2048</span>; however the dataset may be different and/or
+varied</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folder_name</strong> (<em>string</em>) – Folder_name, directory name. (should include final ‘/’)</p></li>
+<li><p><strong>bins_count</strong> (<em>int</em>) – bins_count, number of bins desired (defaults to 10)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>histo_ht_wt_p, a labeled histogram</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.reasonable_rotation_augmentation">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">reasonable_rotation_augmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.reasonable_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Works on a single image, and returns a list of augmented images which are
+based on twisting the angle from angle1 to angle2 with ‘number_slices’ as
+the number of augmented images to be made from the original. It is not
+realistic or desirable to augment images of most X-rays by flipping them.
+In abdominal or chest X-rays that would create an augmentation that could
+imply specific pathologies e.g. situs inversus. We suggest augmenting
+between angles -5 to 5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>angle1</strong> (<em>float</em>) – angle1 is the angle from the original to the first augmented</p></li>
+<li><p><strong>angle2</strong> (<em>float</em>) – angle2 is the angle from the original to the last augmented</p></li>
+<li><p><strong>number_slices</strong> (<em>int</em>) – number of images to be produced</p></li>
+<li><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of PIL images</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.rescale_range_from_histogram_low_end">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">rescale_range_from_histogram_low_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.rescale_range_from_histogram_low_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes an image  and makes the highest pixel value 255,
+and the lowest zero. It also normalizes based on the histogram
+distribution of values, such that the lowest percent
+(specified by tail_cut_percent) all become zero.
+The new histogram will be more sparse, but resamples
+should fix the problem (presumably you will have to sample down
+in size for a neural net anyways)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_pys</strong> – image</p></li>
+<li><p><strong>tail_cut_percent</strong> (<em>integer</em>) – percent of histogram to be discarded from low end</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>img_py</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.rip_out_jpgs_sitk">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">rip_out_jpgs_sitk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dicomfile_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.rip_out_jpgs_sitk" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is for users with simpleITK library only.
+If you do not have the library it will throw an error.
+The funuction function jpeg files out of a dicom file directory,
+one by one, each of them (not just the first series as), and puts them in
+an out put directory. It also returns the images for inspection (as arrays)
+, which you can look at the [0] layer with matplotlib</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dicomfile_directory</strong> (<em>string</em>) – dicomfile_directory, directory with dicom/.dcm</p></li>
+<li><p><strong>output_directory</strong> (<em>string</em>) – output_directory, where they should be placed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>saved_images</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.salting">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">salting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.salting" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function adds some noise to an image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img_name</strong> (<em>string</em>) – String for image name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>new_image_array, with noise</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>nd.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.see_part_potential_bias">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">see_part_potential_bias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_column_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.see_part_potential_bias" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function gives you a tabulated <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> of sensitive columns
+e.g. gender, race, or whichever you think are relevant,
+in terms of a labels (put in the label column name).
+You may discover all your pathologically labeled sample are of one ethnic
+group, gender or other category in your <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>. Remember some
+early neural nets for chest-Gary’s were less accurate in women and the
+fact that there were fewer Cry’s of women in the datasets they built on
+did not help</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> including sample IDs, labels, and sensitive
+columns</p></li>
+<li><p><strong>label</strong> (<em>string</em>) – The name of the column with the labels</p></li>
+<li><p><strong>sensitive_column_list</strong> (<em>list</em>) – List names sensitive columns on
+<code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tab_fight_bias2, a neatly sorted <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.separate_image_averager">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">separate_image_averager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.separate_image_averager" title="Permalink to this definition">¶</a></dt>
+<dd><p>To run on a list to make a prototype tiny X-ray that is an averages image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>set_of_images</strong> – Set_of_images</p></li>
+<li><p><strong>s</strong> (<em>integer</em>) – length of sides in the image made</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.set_image_variability">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">set_image_variability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.set_image_variability" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function shows you an average sized image layed over with variability
+per pixel if all images were averaged and compared. Here you will see where
+the variability- and therefore in some cases pathologies like
+pneumonia can be typically located</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>set_of_images</strong> – A set of images,</p>
+</dd>
+</dl>
+<p>can be read in with glob.glob on a folder of jpgs.
+:type set_of_images: list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>final_diff, an image that is the average virability per pixel</p>
+</dd>
+</dl>
+<p>of the image in images in the set
+:rtype: nd.array</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.show_duplicates">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">show_duplicates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.show_duplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> (if you have a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> for images)
+and prints duplicated rows</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.show_images_in_df">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">show_images_in_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iter_ob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.show_images_in_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows images by taking them off a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> column, and puts
+them up but smaller, so they can be compared quickly</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inter_ob</strong> – List, chould be a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> column, use .to_list()</p></li>
+<li><p><strong>length_name</strong> (<em>integer</em>) – Size of image name going from end</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>technically no return but makes a plot of images with names</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>none</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.show_major_lines_on_image">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">show_major_lines_on_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pic_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.show_major_lines_on_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that takes individual images and shows suspect lines i.e.
+lines more likely to be non-biological.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pic_name</strong> (<em>string</em>) – String of image full name e.g. “C:/folder/image.jpg”</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>shows image but technically returns a matplotlib plotted image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.image.AxesImage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.simple_rotation_augmentation">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">simple_rotation_augmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_list1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.simple_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes one picture and rotates is by a number
+of degrees is angle_list1.This function can be used with the
+augment_and_move function as follows (example):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">augment_and_move</span><span class="p">(</span>
+    <span class="s1">&#39;D:/my_academia/dataset/random_within_domain&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;D:/my_academia/elo&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">partial</span><span class="p">(</span><span class="n">simple_rotation_augmentation</span><span class="p">,</span> <span class="mi">5</span><span class="p">)],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>rotated image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>PIL image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.simple_spinning_template">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">simple_spinning_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">greys_template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.simple_spinning_template" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>picy</strong> (<em>string</em>) – String for image name of base image</p></li>
+<li><p><strong>greys_template</strong> (<em>numpy.ndarray</em>) – The image array of the template,</p></li>
+<li><p><strong>angle_start</strong> (<em>float</em>) – angle to spin template to, it would normally start at
+zero if picking up exact template itself is desired</p></li>
+<li><p><strong>angle_stop</strong> (<em>float</em>) – last angle to spin template to,</p></li>
+<li><p><strong>slices</strong> (<em>float</em>) – number of different templates to make between angles</p></li>
+<li><p><strong>threshold4</strong> (<em>float</em>) – A number between zero and one which sets the precision
+of matching. NB: .999 is stringent, .1 will pick up
+too much</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>copy_image, a copy of base image with the template areas caught
+outlined in blue rectangles</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.simpler_crop">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">simpler_crop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.simpler_crop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crops an image of a black frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>image cropped of black edges</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.subtle_sharpie_enhance">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">subtle_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.subtle_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a new image that is very subtly sharper to the human eye,
+but has new values in most of the pixels(besides the background)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>string</em>) – String for image name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>new_image_array, a nearly imperceptibly sharpened image for humans</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.tesseract_specific">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">tesseract_specific</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.tesseract_specific" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds images with text on them. Multi-lingual including English.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>Directory</em>) – Directory (folder).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with a column of text found</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.understand_df">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">understand_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.understand_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> (if you have a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> for images)
+and prints information including length, data types, nulls and number
+of duplicated rows</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> you are interested in getting features of.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Prints out information on <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>NoneType</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.zero_to_twofivefive_simplest_norming">
+<span class="sig-prename descclassname"><span class="pre">cleanX.</span></span><span class="sig-name descname"><span class="pre">zero_to_twofivefive_simplest_norming</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_pys</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.zero_to_twofivefive_simplest_norming" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes an image  and makes the highest pixel value 255,
+and the lowest zero. Note that this will not give anything like
+a true normalization, but will put all images
+into 0 to 255 values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img_pys</strong> (<em>string</em>) – image name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>img_py</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -85,7 +1102,7 @@
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">cleanX</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">cleanX package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cleanX module</a></li>
 </ul>
 </li>
 </ul>
@@ -96,7 +1113,6 @@
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="modules.html">cleanX</a><ul>
       <li>Previous: <a href="modules.html" title="previous chapter">cleanX</a></li>
-      <li>Next: <a href="cleanX.csv_processing.html" title="next chapter">cleanX.csv_processing package</a></li>
   </ul></li>
   </ul></li>
 </ul>
