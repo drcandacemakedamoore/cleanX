@@ -659,15 +659,15 @@ def find_by_sample_upper(
         height = example.shape[0]
         height_of_sample = int((percent_height_of_sample / 100) * height)
         estimates.append(np.mean(example[0:height_of_sample, :]))
-        lovereturn = pd.DataFrame({
-            'images': piclist,
-            'estimates_b_find_by_sample_upper': estimates,
-        })
-        lovereturn['where'] = 'less'
-        lovereturn.loc[
-            lovereturn.estimates_b_find_by_sample_upper >= value_for_line,
-            'where'
-        ] = 'same or more'
+    lovereturn = pd.DataFrame({
+        'images': piclist,
+        'estimates_b_find_by_sample_upper': estimates,
+    })
+    lovereturn['where'] = 'less'
+    lovereturn.loc[
+        lovereturn.estimates_b_find_by_sample_upper >= value_for_line,
+        'where'
+    ] = 'same or more'
 
     return lovereturn
 
