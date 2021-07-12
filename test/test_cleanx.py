@@ -3,6 +3,7 @@
 import os
 
 from functools import partial
+from tempfile import TemporaryDirectory
 
 import cv2
 import pytest
@@ -274,6 +275,7 @@ def test_rip_out_jpgs_sitk():
     )
     assert len(jpegs_made) > 0    
 
+
 def pydicom_missing():
     try:
         import pydicom
@@ -282,18 +284,30 @@ def pydicom_missing():
         
         return True
 
+
 @pytest.mark.skipif(pydicom_missing() , reason="no pydicom available")
 def test_get_jpg_with_pydicom():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
         'dicom_example_folder',
     )
-    output_directory1 = os.path.join(
+    with TemporaryDirectory() as td:
+        jpegs_made = dicomp.pydicom_adapter.get_jpg_with_pydicom(
+            dicomfile_directory1,
+            td,
+        )
+    assert jpegs_made
+
+
+@pytest.mark.skipif(pydicom_missing() , reason="no pydicom available")
+def test_read_dicoms_with_pydicom():
+    dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
-        'dicom_target',
+        'dicom_example_folder',
     )
-    jpegs_made = dicomp.test_get_jpg_with_pydicom(
-        dicomfile_directory1,
-        output_directory1,
-    )
-    assert jpegs_made == True    
+    tag = 'file'
+    reader = dicomp.pydicom_adapter.PydicomDicomReader()
+    source = dicomp.DirectorySource(dicomfile_directory1, tag)
+    df = reader.read(source)
+    assert tag in df.columns
+    assert set(os.listdir(dicomfile_directory1)) == set(df[tag].to_list())
