@@ -16,12 +16,14 @@ class PydicomDicomReader:
     exclude_field_types = (Sequence, MultiValue, bytes)
     date_fields = ('ContentDate', 'SeriesDate', 'ContentDate', 'StudyDate')
     time_fields = ('ContentTime', 'StudyTime')
+    exclude_fields = ()
 
     def __init__(
             self,
             exclude_field_types=None,
             date_fields=None,
             time_fields=None,
+            exclude_fields=None,
     ):
         if exclude_field_types:
             self.exclude_field_types = exclude_field_types
@@ -29,6 +31,8 @@ class PydicomDicomReader:
             self.date_fields = date_fields
         if time_fields:
             self.time_fields = time_fields
+        if exclude_fields:
+            self.exclude_fields = exclude_fields
 
     def dicom_date_to_date(self, source):
         year = int(source[:4])
@@ -53,6 +57,7 @@ class PydicomDicomReader:
                 if isinstance(val, self.exclude_field_types):
                     excluded_columns.add(field)
         colnames -= excluded_columns
+        colnames -= set(self.exclude_fields)
         for key, parsed in source.items(dicom.dcmread, os.path.basename):
             columns[tag].append(key)
             for field in colnames:

@@ -311,3 +311,24 @@ def test_read_dicoms_with_pydicom():
     df = reader.read(source)
     assert tag in df.columns
     assert set(os.listdir(dicomfile_directory1)) == set(df[tag].to_list())
+
+
+@pytest.mark.skipif(pydicom_missing() , reason="no pydicom available")
+def test_read_dicoms_options_with_pydicom():
+    dicomfile_directory1 = os.path.join(
+        os.path.dirname(__file__),
+        'dicom_example_folder',
+    )
+    source_column = 'file'
+    reader = dicomp.pydicom_adapter.PydicomDicomReader(
+        exclude_fields=('PatientName',),
+    )
+    source = dicomp.DirectorySource(dicomfile_directory1, source_column)
+    df = reader.read(source)
+
+    assert 'PatientName' not in df.columns
+    assert source_column in df.columns
+    assert (
+        set(os.listdir(dicomfile_directory1)) ==
+        set(df[source_column].to_list())
+    )
