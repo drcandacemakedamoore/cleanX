@@ -4,10 +4,26 @@ cleanX.dicom\_processing package
 Submodules
 ----------
 
-cleanX.dicom\_processing.dicom\_processing module
--------------------------------------------------
+cleanX.dicom\_processing.pydicom\_adapter module
+------------------------------------------------
 
-.. automodule:: cleanX.dicom_processing.dicom_processing
+.. automodule:: cleanX.dicom_processing.pydicom_adapter
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+cleanX.dicom\_processing.simpleitk\_adapter module
+--------------------------------------------------
+
+.. automodule:: cleanX.dicom_processing.simpleitk_adapter
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+cleanX.dicom\_processing.source module
+--------------------------------------
+
+.. automodule:: cleanX.dicom_processing.source
    :members:
    :undoc-members:
    :show-inheritance:
