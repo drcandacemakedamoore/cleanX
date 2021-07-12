@@ -1,0 +1,21 @@
+cleanX.dicom\_processing package
+================================
+
+Submodules
+----------
+
+cleanX.dicom\_processing.dicom\_processing module
+-------------------------------------------------
+
+.. automodule:: cleanX.dicom_processing.dicom_processing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: cleanX.dicom_processing
+   :members:
+   :undoc-members:
+   :show-inheritance:

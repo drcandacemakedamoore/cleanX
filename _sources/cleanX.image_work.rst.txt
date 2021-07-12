@@ -1,0 +1,21 @@
+cleanX.image\_work package
+==========================
+
+Submodules
+----------
+
+cleanX.image\_work.image\_work module
+-------------------------------------
+
+.. automodule:: cleanX.image_work.image_work
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: cleanX.image_work
+   :members:
+   :undoc-members:
+   :show-inheritance:

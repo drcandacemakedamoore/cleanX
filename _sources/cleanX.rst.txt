@@ -1,5 +1,18 @@
-cleanX module
-=============
+cleanX package
+==============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cleanX.csv_processing
+   cleanX.dicom_processing
+   cleanX.image_work
+
+Module contents
+---------------
 
 .. automodule:: cleanX
    :members:
