@@ -79,6 +79,8 @@ If you use the library, please credit me and my collaborators.  You are only fre
 We are adding new functions all the time. Many unit tests are availalable in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for X-rays). Some other functions are for cleaning datasets including ones that: 
 
 
+        Get jpeg and csv filess out of dicom files
+        
         Run on dataframes to make sure there is no image leakage
 
         Run on a dataframe to look for demographic or other biases in patients

@@ -727,7 +727,6 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     return(df)
 
 
-
 def create_matrix(width, height, default_element):
     # In python Sequence * Number = Sequence repeated Number of times
     """
