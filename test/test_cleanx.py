@@ -3,6 +3,7 @@
 import os
 import csv
 import json
+import subprocess
 
 from functools import partial
 from tempfile import TemporaryDirectory
@@ -430,3 +431,24 @@ def test_dataset_creation():
         assert len(m2) == common
         all_df = setup.concat_dataframe()
         assert len(m1) == len(all_df.columns)
+
+
+@pytest.mark.skipif(pydicom_missing() , reason="no pydicom available")
+def test_cli_pydicom():
+    dicomfile_directory1 = os.path.join(
+        os.path.dirname(__file__),
+        'dicom_example_folder',
+    )
+    with TemporaryDirectory() as td:
+        result = subprocess.call(
+            [
+                'python', '-m', 'cleanX',
+                'dicom', 'extract-images',
+                '-i', 'dir', dicomfile_directory1,
+                '-o', td,
+            ]
+        )
+        assert not result
+        df = pd.read_csv(os.path.join(td, 'report.csv'))
+        assert 'source' in df.columns
+        assert len(os.listdir(dicomfile_directory1)) == len(df)
