@@ -81,7 +81,7 @@ def dicom(cfg):
     nargs=2,
     multiple=True,
     help='''
-    Repeatable.  Takes two arguments.  First argument is a type of source, 
+    Repeatable.  Takes two arguments.  First argument is a type of source,
     the second is the source description.
 
     Supported source types are:
@@ -90,11 +90,11 @@ def dicom(cfg):
     * dir
     * glob
 
-    If source type is `dir', then the source description must be a path 
+    If source type is `dir', then the source description must be a path
     to a directory.
 
-    If source type is `glob', then the source description must be a glob 
-    pattern as used by Python's builtin glob function.  Whether glob 
+    If source type is `glob', then the source description must be a glob
+    pattern as used by Python's builtin glob function.  Whether glob
     pattern will be interpreted as recursive is controlled by configuration
     setting GLOB_IS_RECURSIVE.
     ''',
