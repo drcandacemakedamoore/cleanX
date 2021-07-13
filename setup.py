@@ -291,6 +291,7 @@ setup(
         'cleanX.dataset_processing',
         'cleanX.dicom_processing',
         'cleanX.image_work',
+        'cleanX.cli',
     ],
     cmdclass={
         'test': PyTest,
