@@ -275,6 +275,21 @@ def test_rip_out_jpgs_sitk():
     )
     assert len(jpegs_made) > 0    
 
+@pytest.mark.skipif(sitk_missing() , reason="no simpleITK available")
+def test_read_dicoms_with_sitk():
+    dicomfile_directory1 = os.path.join(
+        os.path.dirname(__file__),
+        'dicom_example_folder',
+    )
+    source_column = 'file'
+    reader = dicomp.simpleitk_adapter.SimpleITKDicomReader(
+        exclude_fields=('PatientName',),
+    )
+    source = dicomp.DirectorySource(dicomfile_directory1, source_column)
+    df = reader.read(source)
+
+    assert source_column in df.columns
+     
 
 def pydicom_missing():
     try:

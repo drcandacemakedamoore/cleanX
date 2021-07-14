@@ -42,8 +42,8 @@ class SimpleITKDicomReader:
             time_fields=None,
             exclude_fields=None,
     ):
-    #         if exclude_field_types:
-    #             self.exclude_field_types = exclude_field_types
+        #         if exclude_field_types:
+        #             self.exclude_field_types = exclude_field_types
         if date_fields:
             self.date_fields = date_fields
         if time_fields:
