@@ -238,14 +238,18 @@ class Install(InstallCommand):
                 raise RuntimeError('Couldn\'t install {} package'.format(name))
             package_dir = os.path.dirname(os.path.abspath(__file__))
             egg_info = os.path.join(package_dir, 'cleanX.egg-info')
-            make_pypa_happy = os.path.join(
-                package_dir,
-                self.root,
-                'cleanX-{}.egg-info'.format(version),
-            )
+
             if self.root:
                 # Apparently, this is only set if we are in bdist_xxx
-                py_version = 'py{}'.format(sys.version_info[0])
+                make_pypa_happy = os.path.join(
+                    package_dir,
+                    self.root,
+                    'cleanX-{}.egg-info'.format(version),
+                )
+                py_version = 'py{}.{}'.format(
+                    sys.version_info[0],
+                    sys.version_info[1],
+                )
                 make_pypa_happy_2 = os.path.join(
                     package_dir,
                     self.root,
