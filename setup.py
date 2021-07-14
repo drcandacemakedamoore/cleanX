@@ -243,7 +243,14 @@ class Install(InstallCommand):
                 self.root,
                 'cleanX-{}.egg-info'.format(version),
             )
+            py_version = 'py{}'.format(sys.version_info[0])
+            make_pypa_happy_2 = os.path.join(
+                package_dir,
+                self.root,
+                'cleanX-{}-{}.egg-info'.format(version, py_version),
+            )
             copy_tree(egg_info, make_pypa_happy)
+            copy_tree(egg_info, make_pypa_happy_2)
 
 
 def install_requires():
