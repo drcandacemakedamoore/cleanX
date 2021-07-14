@@ -259,21 +259,21 @@ def sitk_missing():
         
         return True
 
+
 @pytest.mark.skipif(sitk_missing() , reason="no simpleITK available")
 def test_rip_out_jpgs_sitk():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
         'dicom_example_folder',
     )
-    output_directory1 = os.path.join(
-        os.path.dirname(__file__),
-        'dicom_target',
-    )
-    jpegs_made = dicomp.rip_out_jpgs_sitk(
-        dicomfile_directory1,
-        output_directory1,
-    )
+    with TemporaryDirectory() as td:
+        import cleanX.dicom_processing.simpleitk_adapter as sitk_adapter
+        jpegs_made = sitk_adapter.rip_out_jpgs_sitk(
+            dicomfile_directory1,
+            td,
+        )
     assert len(jpegs_made) > 0    
+
 
 @pytest.mark.skipif(sitk_missing() , reason="no simpleITK available")
 def test_read_dicoms_with_sitk():
@@ -282,14 +282,17 @@ def test_read_dicoms_with_sitk():
         'dicom_example_folder',
     )
     source_column = 'file'
-    reader = dicomp.simpleitk_adapter.SimpleITKDicomReader(
-        exclude_fields=('PatientName',),
+    import cleanX.dicom_processing.simpleitk_adapter as sitk_adapter
+    reader = sitk_adapter.SimpleITKDicomReader(
+        exclude_fields=('Patients Name',),
     )
     source = dicomp.DirectorySource(dicomfile_directory1, source_column)
     df = reader.read(source)
 
     assert source_column in df.columns
-     
+    assert 'Patients Name' not in df.columns
+    assert 'Protocol Name' in df.columns
+
 
 def pydicom_missing():
     try:
