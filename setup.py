@@ -233,7 +233,7 @@ class Install(InstallCommand):
             if subprocess.call([sys.executable, __file__, 'bdist_egg']):
                 raise RuntimeError('Couldn\'t build {} package'.format(name))
             egg = glob(os.path.join(project_dir, 'dist', '*.egg'))[0]
-            if subprocess.call([sys.executable, '-m', 'easy_install', egg]):
+            if subprocess.call([sys.executable, __file__, 'easy_install', egg]):
                 raise RuntimeError('Couldn\'t install {} package'.format(name))
 
 
