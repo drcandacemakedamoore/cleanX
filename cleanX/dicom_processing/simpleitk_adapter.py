@@ -3,9 +3,30 @@
 import os
 
 from glob import glob
-
+import pandas as pd
+from datetime import datetime, date
 import SimpleITK as sitk
 import cv2
+
+
+class MakedaReader:
+    def __init__(self, reader):
+            self.reader = reader
+        
+    def fetch_metadata(self, dicom_file):
+        
+
+        self.reader.SetFileName(dicom_file)
+
+
+        self.reader.LoadPrivateTagsOn()
+
+        self.reader.ReadImageInformation()
+        parsed = {}
+        for k in self.reader.GetMetaDataKeys():
+            parsed[k] = self.reader.GetMetaData(k)
+
+        return parsed
 
 
 class SimpleITKDicomReader:
