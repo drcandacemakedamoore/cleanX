@@ -9,7 +9,7 @@ import SimpleITK as sitk
 import cv2
 
 
-tag_dictionary = { # 'key' , 'datapoint_name' 
+tag_dictionary = {   # 'key' , 'datapoint_name'
     '0002, 0000': 'File Meta Information Group Length',
     '0002, 0001': 'File Meta Information Version',
     '0002, 0002': 'Media Storage SOP Class UID',
@@ -17,14 +17,14 @@ tag_dictionary = { # 'key' , 'datapoint_name'
     '0002, 0010': 'Transfer Syntax UID',
     '0002, 0012': 'Implementation Class UID',
     '0002, 0013': 'Implementation Version Name',
-    #---------above is extra meta ?!
-    '0008, 0005': 'Specific Character Set',    
+    # ---------above is extra meta ?!
+    '0008, 0005': 'Specific Character Set',
     '0008, 0008': 'Image Type',
     '0008, 0016': 'SOP Class UID',
     '0008, 0018': 'SOP Instance UID',
     '0008, 0020': 'Study Date',
     '0008, 0021': 'Series Date',
-    '0008, 0022': 'Acquisition Date',  
+    '0008, 0022': 'Acquisition Date',
     '0008, 0023': 'Content Date',
     '0008, 0030': 'Study Time',
     '0008, 0031': 'Series Time',
@@ -38,7 +38,7 @@ tag_dictionary = { # 'key' , 'datapoint_name'
     '0008, 1030': 'Study Description',
     '0008, 103e': 'Series Description',
     '0008, 1090': 'Manufacturers Model Name',
-    '0008, 2218': 'Anatomic Region Sequence',  
+    '0008, 2218': 'Anatomic Region Sequence',
     '0008, 0100': 'Code Value',
     '0008, 0102': 'Coding Scheme Designator',
     '0008, 0104': 'Code Meaning ',
@@ -58,7 +58,7 @@ tag_dictionary = { # 'key' , 'datapoint_name'
     '0018, 1030': 'Protocol Name',
     '0018, 1200': 'Date of Last Calibration',
     '0018, 1201': 'Time of Last Calibration',
-    '0018, 1242': 'Actual Frame Duration ',   
+    '0018, 1242': 'Actual Frame Duration ',
     '0019, 0010': 'Private Creator',
     '0019, 100f': '[Siemens ICON Data Type]',
     '0020, 000d': 'Study Instance UID ',
@@ -87,10 +87,10 @@ tag_dictionary = { # 'key' , 'datapoint_name'
     '0029, 1009': '[CSA Image Header Version]',
     '0029, 1010': '[CSA Image Header Info] ',
     '0029, 1120': '[MedCom History Information]',
-    '0029, 1131': '[PMTF Information 1]', 
+    '0029, 1131': '[PMTF Information 1]',
     '0029, 1132': '[PMTF Information 2]',
-    '0029, 1133': '[PMTF Information 3]',     
-    '0029, 1134': '[PMTF Information 4]',     
+    '0029, 1133': '[PMTF Information 3]', 
+    '0029, 1134': '[PMTF Information 4]',
     '0033, 0010': 'Private Creator',
     '0033, 1029': '[Crystal thickness]',
     '0033, 1031': '[Camera config angle]',
