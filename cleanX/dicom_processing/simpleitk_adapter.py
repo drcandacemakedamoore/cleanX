@@ -89,7 +89,7 @@ tag_dictionary = {   # 'key' , 'datapoint_name'
     '0029, 1120': '[MedCom History Information]',
     '0029, 1131': '[PMTF Information 1]',
     '0029, 1132': '[PMTF Information 2]',
-    '0029, 1133': '[PMTF Information 3]', 
+    '0029, 1133': '[PMTF Information 3]',
     '0029, 1134': '[PMTF Information 4]',
     '0033, 0010': 'Private Creator',
     '0033, 1029': '[Crystal thickness]',
