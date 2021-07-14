@@ -8,6 +8,55 @@ import SimpleITK as sitk
 import cv2
 
 
+class SimpleITKDicomReader:
+    """Class for reading DICOM metadata with SimpleITK."""
+
+    #exclude_field_types = (Sequence, MultiValue, bytes)
+    date_fields = ('ContentDate', 'SeriesDate', 'ContentDate', 'StudyDate')
+    time_fields = ('ContentTime', 'StudyTime')
+    exclude_fields = ()
+
+    def __init__(
+            self,
+            #exclude_field_types=None,
+            date_fields=None,
+            time_fields=None,
+            exclude_fields=None,
+    ):
+#         if exclude_field_types:
+#             self.exclude_field_types = exclude_field_types
+        if date_fields:
+            self.date_fields = date_fields
+        if time_fields:
+            self.time_fields = time_fields
+        if exclude_fields:
+            self.exclude_fields = exclude_fields
+
+    def dicom_date_to_date(self, source):
+        year = int(source[:4])
+        month = int(source[4:6])
+        day = int(source[6:])
+        return date(year=year, month=month, day=day)
+
+    def dicom_time_to_time(self, source):
+        #     seconds, milis = source.split('.')
+        # TODO: We don't know how to conver this yet
+        return source
+
+    def read(self, source):
+        reader = sitk.ImageFileReader()
+        m_reader = MakedaReader(reader)
+        tag = source.get_tag()
+        columns = {tag: []}
+        for entry, parsed in source.items(m_reader.fetch_metadata):
+            columns[tag].append(entry)
+            for k, v in parsed.items():
+                col = columns.get(k, [])
+                col.append(v)
+                columns[k] = col
+        return pd.DataFrame(columns)
+
+
 def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
     """
     This function is for users with simpleITK library only.
