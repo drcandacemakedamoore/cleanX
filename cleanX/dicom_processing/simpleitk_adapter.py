@@ -11,13 +11,11 @@ import cv2
 
 class MakedaReader:
     def __init__(self, reader):
-            self.reader = reader
-        
+        self.reader = reader
+
     def fetch_metadata(self, dicom_file):
-        
 
         self.reader.SetFileName(dicom_file)
-
 
         self.reader.LoadPrivateTagsOn()
 
@@ -32,20 +30,20 @@ class MakedaReader:
 class SimpleITKDicomReader:
     """Class for reading DICOM metadata with SimpleITK."""
 
-    #exclude_field_types = (Sequence, MultiValue, bytes)
+    # exclude_field_types = (Sequence, MultiValue, bytes)
     date_fields = ('ContentDate', 'SeriesDate', 'ContentDate', 'StudyDate')
     time_fields = ('ContentTime', 'StudyTime')
     exclude_fields = ()
 
     def __init__(
             self,
-            #exclude_field_types=None,
+            # exclude_field_types=None,
             date_fields=None,
             time_fields=None,
             exclude_fields=None,
     ):
-#         if exclude_field_types:
-#             self.exclude_field_types = exclude_field_types
+    #         if exclude_field_types:
+    #             self.exclude_field_types = exclude_field_types
         if date_fields:
             self.date_fields = date_fields
         if time_fields:
