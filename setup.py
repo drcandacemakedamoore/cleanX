@@ -8,6 +8,7 @@ import site
 import shutil
 
 from glob import glob
+from distutils.dir_util import copy_tree
 
 from setuptools import setup
 from setuptools.command.install import install as InstallCommand
@@ -235,6 +236,14 @@ class Install(InstallCommand):
             egg = glob(os.path.join(project_dir, 'dist', '*.egg'))[0]
             if subprocess.call([sys.executable, __file__, 'easy_install', egg]):
                 raise RuntimeError('Couldn\'t install {} package'.format(name))
+            package_dir = os.path.dirname(os.path.abspath(__file__))
+            egg_info = os.path.join(package_dir, 'cleanX.egg-info')
+            make_pypa_happy = os.path.join(
+                package_dir,
+                self.root,
+                'cleanX-{}.egg-info'.format(version),
+            )
+            copy_tree(egg_info, make_pypa_happy)
 
 
 def install_requires():
