@@ -10,13 +10,13 @@ import cv2
 
 
 tag_dictionary = { # 'key' , 'datapoint_name' 
-    '0002, 0000':'File Meta Information Group Length',
-    '0002, 0001':'File Meta Information Version',
-    '0002, 0002':'Media Storage SOP Class UID',
-    '0002, 0003':'Media Storage SOP Instance UID',
-    '0002, 0010':'Transfer Syntax UID',
-    '0002, 0012':'Implementation Class UID',
-    '0002, 0013':'Implementation Version Name',
+    '0002, 0000': 'File Meta Information Group Length',
+    '0002, 0001': 'File Meta Information Version',
+    '0002, 0002': 'Media Storage SOP Class UID',
+    '0002, 0003': 'Media Storage SOP Instance UID',
+    '0002, 0010': 'Transfer Syntax UID',
+    '0002, 0012': 'Implementation Class UID',
+    '0002, 0013': 'Implementation Version Name',
     #---------above is extra meta ?!
     '0008, 0005': 'Specific Character Set',    
     '0008, 0008': 'Image Type',
