@@ -15,6 +15,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+        # Unfortunately, wheel will try to do setup.py install to
+        # build a wheel... and we need this stuff to be able to build
+        # for CPython.
+      - run: >-
+          sudo apt-get install -y libleptonica-dev tesseract-ocr-all
+          libtesseract-dev
+          python3-opencv
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
