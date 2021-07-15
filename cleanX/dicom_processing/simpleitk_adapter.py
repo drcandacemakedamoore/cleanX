@@ -149,7 +149,7 @@ tag_dictionary = {   # 'key' , 'datapoint_name'
 }
 
 
-class MakedaReader:
+class MetadataHelper:
     """Class for getting DICOM metadata with SimpleITK."""
     def __init__(self, reader):
         self.reader = reader
@@ -206,7 +206,7 @@ class SimpleITKDicomReader:
 
     def read(self, source):
         reader = sitk.ImageFileReader()
-        m_reader = MakedaReader(reader)
+        m_reader = MetadataHelper(reader)
         tag = source.get_tag()
         columns = {tag: []}
         known_names = set([])

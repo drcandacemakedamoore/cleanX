@@ -47,6 +47,17 @@ class PydicomDicomReader:
         return source
 
     def read(self, source):
+        """
+        This function allows reading of metadata in what source gives.
+
+        :param source: object with method .items()
+        :type source: object 
+
+        :return: dataframe with metadata from dicoms
+        :rtype: dataframe
+        """
+        # TODO: add an abstract class that describes source
+
         tag = source.get_tag()
         columns = {tag: []}
         colnames = set([])
