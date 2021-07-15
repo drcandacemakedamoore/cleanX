@@ -6,10 +6,8 @@
 
 CleanX <a href="https://doi.org/10.5281/zenodo.4725904"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg" alt="(DOI)"></a> <a href="https://github.com/drcandacemakedamoore/cleanX/blob/master/LICENSE"><img alt="License: GPL-3" src="https://img.shields.io/github/license/drcandacemakedamoore/cleanX"></a>
 is an open source python library
-for exploring, cleaning and augmenting large datasets of Xrays as JPEG files.
-Please note you should have the file extension (.jpg or .jpeg) in lower case
-for some functions to work.
-(JPEG files can be extracted from DICOM files.)
+for exploring, cleaning and augmenting large datasets of X-rays, or certain other types of radiological images.
+JPEG files can be extracted from DICOM files or used directly.
 
 
 ### The latest official release:
@@ -30,10 +28,10 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 ## Requirements
 
 - a [python](https://www.python.org/downloads/) installation (3.7, 3.8 or 3.9)
-- ability to create virtual environments (reccomended, not absolutely neccesary)
+- ability to create virtual environments (recommended, not absolutely necessary)
 - tesseract-ocr, matplotlib, pandas, pillow and/or opencv
-- optional reccomendation of simpleITK or pydicom for dicom to jpg conversion
-- anaconda is now supported, but not technically neccesary
+- optional recommendation of simpleITK or pydicom for dicom to jpg conversion
+- anaconda is now supported, but not technically necessary
 
 
 ## Documentation
@@ -53,7 +51,7 @@ The documentation will be generated in `./build/sphinx/html` directory. Document
 automatically as new functions are added.  
 
 # Installation
-- setting up a virtual environment is desirable, but not absolutely neccesary
+- setting up a virtual environment is desirable, but not absolutely necessary
 
 - activate  the environment
 ### Anaconda Installation
@@ -74,9 +72,9 @@ conda-forge
     
 
 ## About using this library
-If you use the library, please credit me and my collaborators.  You are only free to use this library according to license. We hope that if you use the library you will open source your entire code base, and send us modifications.  You can get in touch with me by email (doctormakeda@gmail.com) if you have a legitamate reason to use my library without open-sourcing your code base, or following other conditions, and I can make you specifically a different license.
+If you use the library, please credit me and my collaborators.  You are only free to use this library according to license. We hope that if you use the library you will open source your entire code base, and send us modifications.  You can get in touch with me by email (doctormakeda@gmail.com) if you have a legitimate reason to use my library without open-sourcing your code base, or following other conditions, and I can make you specifically a different license.
 
-We are adding new functions all the time. Many unit tests are availalable in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for X-rays). Some other functions are for cleaning datasets including ones that: 
+We are adding new functions all the time. Many unit tests are available in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for X-rays). Some other functions are for cleaning datasets including ones that: 
 
 
         Get image and metadata out of dicom files into jpeg and csv files 
@@ -87,7 +85,7 @@ We are adding new functions all the time. Many unit tests are availalable in the
     
         Crop off excessive black frames (run this on single images) one at a time
        
-        Run on a list to make a prototype tiny Xray others can be comapared to
+        Run on a list to make a prototype tiny Xray others can be compared to
     
         Run on image files which are inside a folder to check if they are "clean"
 
