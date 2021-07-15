@@ -3,7 +3,7 @@
 import os
 
 from glob import glob
-from abs import ABC, abstractmethod
+from abc import ABC, abstractmethod
 
 
 class Source(ABC):
@@ -28,7 +28,7 @@ class Source(ABC):
     def items(self, reader, transformer=None):
         """
         This function will be expected to produce file names or file-like
-        objects of DICOM files.  The results will be then fed to either 
+        objects of DICOM files.  The results will be then fed to either
         pydicom or SimpleITK libraries for metadata extraction.
 
         This function should return a generator yielding a tuple of two
