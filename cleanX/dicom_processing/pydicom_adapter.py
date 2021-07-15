@@ -50,13 +50,13 @@ class PydicomDicomReader:
         """
         This function allows reading of metadata in what source gives.
 
-        :param source: object with method .items()
-        :type source: object 
+        :param source: A source generator.  For extended explanation see
+                       :ref:`cleanX.dicom_processing.Source`.
+        :type cleanX.dicom_processing.Source:
 
         :return: dataframe with metadata from dicoms
         :rtype: dataframe
         """
-        # TODO: add an abstract class that describes source
 
         tag = source.get_tag()
         columns = {tag: []}
