@@ -44,11 +44,104 @@
 <section id="cleanx-dicom-processing-simpleitk-adapter-module">
 <h2>cleanX.dicom_processing.simpleitk_adapter module<a class="headerlink" href="#cleanx-dicom-processing-simpleitk-adapter-module" title="Permalink to this headline">¶</a></h2>
 </section>
-<section id="cleanx-dicom-processing-source-module">
-<h2>cleanX.dicom_processing.source module<a class="headerlink" href="#cleanx-dicom-processing-source-module" title="Permalink to this headline">¶</a></h2>
+<section id="module-cleanX.dicom_processing.source">
+<span id="cleanx-dicom-processing-source-module"></span><h2>cleanX.dicom_processing.source module<a class="headerlink" href="#module-cleanX.dicom_processing.source" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.DirectorySource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">DirectorySource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.DirectorySource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to aid reading DICOMs, package agnostically</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.DirectorySource.get_tag">
+<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.DirectorySource.get_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.DirectorySource.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.DirectorySource.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.GlobSource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">GlobSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.GlobSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to aid finding files from path (for later reading out DICOM)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.GlobSource.get_tag">
+<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.GlobSource.get_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.GlobSource.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.GlobSource.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.MultiSource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">MultiSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.MultiSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.MultiSource.get_tag">
+<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.MultiSource.get_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.MultiSource.items">
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.MultiSource.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.Source">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">Source</span></span><a class="headerlink" href="#cleanX.dicom_processing.source.Source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>This class is provided as a helper for those who want to implement
+their own sources.</p>
+<p>It is not necessary to extend this class.  cleanX code doesn’t do
+type checking, but if you want to ensure type checking on your side,
+you may inherit from this class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.Source.get_tag">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.Source.get_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value returned from this function should be suitable for
+pandas to name a column.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.source.Source.items">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.Source.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will be expected to produce file names or file-like
+objects of DICOM files.  The results will be then fed to either
+pydicom or SimpleITK libraries for metadata extraction.</p>
+<p>This function should return a generator yielding a tuple of two
+elements.  First element will be inserted into the source colum
+(the one labeled by <code class="code docutils literal notranslate"><span class="pre">get_tag()</span></code> method), the second is the
+result of calling <code class="code docutils literal notranslate"><span class="pre">reader</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reader</strong> – A function that takes an individual source, either
+a file path or a file-like object, and returns the
+processed metadata.</p></li>
+<li><p><strong>transformer</strong> – Optionally, the caller of this function will
+supply a transformer function that needs to
+be called on the value that will be stored
+in the source column of the resulting DataFrame</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<section id="module-cleanX.dicom_processing">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cleanX.dicom_processing" title="Permalink to this headline">¶</a></h2>
 </section>
 </section>
 
