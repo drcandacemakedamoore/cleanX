@@ -40,6 +40,7 @@ jobs:
           conda-channels: conda-forge
       - run: conda install conda-build anaconda-client conda-verify
       - run: .venv/bin/python setup.py genconda -t 3.7
+      - run: rm -rf ./build ./dist ./*.egg-info ./.eggs
       - run: conda build -c conda-forge --output-folder ./dist ./conda-pkg/
       - run: conda convert -p osx-64 -o ./dist ./dist/linux-64/*py37_0.tar.bz2
       - run: conda convert -p win-64 -o ./dist ./dist/linux-64/*py37_0.tar.bz2
