@@ -29,7 +29,7 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 
 - a [python](https://www.python.org/downloads/) installation (3.7, 3.8 or 3.9)
 - ability to create virtual environments (recommended, not absolutely necessary)
-- tesseract-ocr, matplotlib, pandas, pillow and/or opencv
+- tesseract-ocr, matplotlib, pandas, pillow and opencv
 - optional recommendation of simpleITK or pydicom for DICOM/dcm to jpg conversion
 - anaconda is now supported, but not technically necessary
 
@@ -74,10 +74,10 @@ conda-forge
 ## About using this library
 If you use the library, please credit me and my collaborators.  You are only free to use this library according to license. We hope that if you use the library you will open source your entire code base, and send us modifications.  You can get in touch with me by email (doctormakeda@gmail.com) if you have a legitimate reason to use my library without open-sourcing your code base, or following other conditions, and I can make you specifically a different license.
 
-We are adding new functions all the time. Many unit tests are available in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for X-rays). Some other functions are for cleaning datasets including ones that: 
+We are adding new functions all the time. Many unit tests are available in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for radiological data). Some other functions are for cleaning datasets including ones that: 
 
 
-        Get image and metadata out of dcm files into jpeg and csv files 
+        Get image and metadata out of dcm (DICOM) files into jpeg and csv files 
         
         Run on dataframes to make sure there is no image leakage
 
