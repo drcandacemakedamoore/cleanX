@@ -52,8 +52,8 @@ def see_part_potential_bias(df, label, sensitive_column_list):
     in terms of a labels (put in the label column name).
     You may discover all your pathologically labeled sample are of one ethnic
     group, gender or other category in your :code:`DataFrame`. Remember some
-    early neural nets for chest-Gary's were less accurate in women and the
-    fact that there were fewer Cry's of women in the datasets they built on
+    early neural nets for chest X-rays were less accurate in women and the
+    fact that there were fewer X-rays of women in the datasets they built on
     did not help
 
     :param df: :code:`DataFrame` including sample IDs, labels, and sensitive
