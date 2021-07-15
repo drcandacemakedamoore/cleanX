@@ -12,6 +12,7 @@ from datetime import datetime, date
 
 
 class PydicomDicomReader:
+    """Class for reading DICOM metadata with pydicom."""
 
     exclude_field_types = (Sequence, MultiValue, bytes)
     date_fields = ('ContentDate', 'SeriesDate', 'ContentDate', 'StudyDate')

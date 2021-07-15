@@ -150,6 +150,7 @@ tag_dictionary = {   # 'key' , 'datapoint_name'
 
 
 class MakedaReader:
+    """Class for getting DICOM metadata with SimpleITK."""
     def __init__(self, reader):
         self.reader = reader
 

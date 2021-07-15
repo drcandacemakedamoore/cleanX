@@ -6,6 +6,7 @@ from glob import glob
 
 
 class DirectorySource:
+    """Class to aid reading DICOM package agnostically"""
 
     def __init__(self, directory, tag):
         self.directory = directory
@@ -24,6 +25,7 @@ class DirectorySource:
 
 
 class GlobSource:
+    """Class to aid taking file from path for later reading out DICOM"""
 
     def __init__(self, exp, tag):
         self.exp = exp
