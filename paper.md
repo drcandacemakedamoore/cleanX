@@ -1,5 +1,5 @@
 ---
-title: 'CleanX: A Python library for data cleaning of large sets of X-rays'
+title: 'CleanX: A Python library for data cleaning of large sets of radiology images'
 tags:
   - Python
   - radiology

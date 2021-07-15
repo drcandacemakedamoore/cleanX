@@ -1486,7 +1486,7 @@ def rescale_range_from_histogram_low_end(img, tail_cut_percent):
     """
     # set arbitrary variables
     new_max_value = 255
-    new_min_value = 0
+    # new_min_value = 0
 
     img_py = np.array((img), dtype='int64')
 
