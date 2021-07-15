@@ -1,27 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Library for cleaning radiological data used in machine learning
+clean X : Library for cleaning radiological data used in machine learning
 applications
+module csv_processing: processing of csvs related to images
 """
 
 # imported libraries
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
+
 import pandas as pd
-
-from PIL import Image
-from PIL import Image, ImageOps
-from tesserocr import PyTessBaseAPI
-
-import glob
-import filecmp
-import math
-import os
-import re
-
-from filecmp import cmp
-from pathlib import Path
 
 
 # to run on dataframes
