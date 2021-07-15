@@ -97,8 +97,9 @@ the cleanX function crop, to all of them</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_work.avg_image_maker">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">avg_image_maker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.avg_image_maker" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function shows you an average sized image layed over with the average
-per pixel of all images averaged from the set_of_images group.</p>
+<dd><p>This function shows you an average sized image that has been made with the
+average per pixel place (in a normalized matrix) of all images averaged
+from the set_of_images group.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>set_of_images</strong> – A set of images,</p>
@@ -772,10 +773,12 @@ in size for a neural net anyways)</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_work.set_image_variability">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">set_image_variability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.set_image_variability" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function shows you an average sized image layed over with variability
-per pixel if all images were averaged and compared. Here you will see where
-the variability- and therefore in some cases pathologies like
-pneumonia can be typically located</p>
+<dd><p>This function shows you an average sized image created to show variability
+per pixel if all images were averaged (in terms of size) and compared.
+Here you will see where the variability- and therefore in some cases
+pathologies like pneumonia can be typically located, as well as patient-
+air interface (not all subjects same size) and other obviously variable
+aspects of your image set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>set_of_images</strong> – A set of images,</p>
