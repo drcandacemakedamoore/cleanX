@@ -153,12 +153,6 @@ class GenerateCondaYaml(Command):
         from string import Template
 
         tpls = glob(os.path.join(project_dir, 'conda-pkg/*.in'))
-        try:
-            egg = glob(os.path.join(project_dir, 'dist/*.egg'))[0]
-        except IndexError as e:
-            raise RuntimeError(
-                'You need to run `setup.py bdist_egg\' first',
-            ) from e
 
         for tpl_path in tpls:
             with open(tpl_path) as f:
@@ -171,7 +165,6 @@ class GenerateCondaYaml(Command):
                     version=version,
                     tag=tag,
                     python_version=self.target_python,
-                    egg=egg,
                 ))
 
 
