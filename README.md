@@ -7,7 +7,7 @@
 CleanX <a href="https://doi.org/10.5281/zenodo.4725904"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg" alt="(DOI)"></a> <a href="https://github.com/drcandacemakedamoore/cleanX/blob/master/LICENSE"><img alt="License: GPL-3" src="https://img.shields.io/github/license/drcandacemakedamoore/cleanX"></a>
 is an open source python library
 for exploring, cleaning and augmenting large datasets of X-rays, or certain other types of radiological images.
-JPEG files can be extracted from DICOM files or used directly.
+JPEG files can be extracted from [DICOM](https://www.dicomstandard.org/) files or used directly.
 
 
 ### The latest official release:
@@ -30,7 +30,7 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 - a [python](https://www.python.org/downloads/) installation (3.7, 3.8 or 3.9)
 - ability to create virtual environments (recommended, not absolutely necessary)
 - tesseract-ocr, matplotlib, pandas, pillow and/or opencv
-- optional recommendation of simpleITK or pydicom for dicom to jpg conversion
+- optional recommendation of simpleITK or pydicom for DICOM/dcm to jpg conversion
 - anaconda is now supported, but not technically necessary
 
 
@@ -77,7 +77,7 @@ If you use the library, please credit me and my collaborators.  You are only fre
 We are adding new functions all the time. Many unit tests are available in the test folder. Test coverage is currently partial. The library includes many functions. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for X-rays). Some other functions are for cleaning datasets including ones that: 
 
 
-        Get image and metadata out of dicom files into jpeg and csv files 
+        Get image and metadata out of dcm files into jpeg and csv files 
         
         Run on dataframes to make sure there is no image leakage
 
