@@ -44,8 +44,58 @@
 applications
 module csv_processing: processing of csvs related to images</p>
 <dl class="py class">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.CSVSource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">CSVSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.CSVSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="cleanX.dataset_processing.dataframes.ColumnsSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.dataset_processing.dataframes.ColumnsSource</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.CSVSource.to_dataframe">
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.CSVSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.ColumnsSource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">ColumnsSource</span></span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.ColumnsSource.to_dataframe">
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.ColumnsSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.DFSource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">DFSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.DFSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="cleanX.dataset_processing.dataframes.ColumnsSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.dataset_processing.dataframes.ColumnsSource</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.DFSource.to_dataframe">
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.DFSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.GuesserError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">GuesserError</span></span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.GuesserError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.JSONSource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">JSONSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.JSONSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="cleanX.dataset_processing.dataframes.ColumnsSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.dataset_processing.dataframes.ColumnsSource</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.JSONSource.to_dataframe">
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.JSONSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">MLSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">MLSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class allows configuration of the train and test datasets
 organized into a pandas dataframe
@@ -62,8 +112,29 @@ put in multiple output options.</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.guess_source">
+<span class="sig-name descname"><span class="pre">guess_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.guess_source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.known_sources">
+<span class="sig-name descname"><span class="pre">known_sources</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{&lt;class</span> <span class="pre">'str'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">string_source&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">string_source&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'pathlib.Path'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">string_source&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'pandas.core.frame.DataFrame'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">MLSetup.&lt;lambda&gt;&gt;}</span></em><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.known_sources" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.metadata">
 <span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MultiSource">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">MultiSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MultiSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="cleanX.dataset_processing.dataframes.ColumnsSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.dataset_processing.dataframes.ColumnsSource</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MultiSource.to_dataframe">
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MultiSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -128,6 +199,11 @@ columns</p></li>
 <dd><p>Takes a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> (if you have a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> for images)
 and prints duplicated rows</p>
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.string_source">
+<span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">string_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.string_source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.understand_df">
