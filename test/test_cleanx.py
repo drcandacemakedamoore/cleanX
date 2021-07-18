@@ -14,7 +14,7 @@ import numpy as np
 from PIL import Image, ImageOps
 
 from cleanX import (
-    csv_processing as csvp,
+    dataset_processing as csvp,
     dicom_processing as dicomp,
     image_work as iwork,
 )

@@ -286,7 +286,7 @@ setup(
     license='MIT',
     packages=[
         'cleanX',
-        'cleanX.csv_processing',
+        'cleanX.dataset_processing',
         'cleanX.dicom_processing',
         'cleanX.image_work',
     ],
