@@ -2,7 +2,8 @@
 """
 clean X : Library for cleaning radiological data used in machine learning
 applications
-module csv_processing: processing of csvs related to images
+module dataframes: processing of datasetss related to images
+ 
 """
 
 import os
@@ -105,7 +106,6 @@ class MLSetup:
             return MultiSource(self.guess_source(src) for src in raw_src)
         elif isinstance(raw_src, ColumnsSource):
             return raw_src
-        
 
     def metadata(self):
         return (
