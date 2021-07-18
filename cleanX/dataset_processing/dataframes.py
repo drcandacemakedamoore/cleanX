@@ -5,20 +5,20 @@ applications
 module csv_processing: processing of csvs related to images
 """
 
-# imported libraries
-
 import pandas as pd
 
-# class machine_learning_setup
-#class MLSetup:
-    
-"""
-This class allows configuration of the train and test datasets
-organized into a pandas dataframe
-to be checked for problems, and creates reports, which can be 
-put in multiple output options.
-"""
-# init function
+
+class MLSetup:
+    """
+    This class allows configuration of the train and test datasets
+    organized into a pandas dataframe
+    to be checked for problems, and creates reports, which can be 
+    put in multiple output options.
+    """
+    def __init__(self):
+        # TODO: Implement
+        pass
+
 
 # to run on dataframes
 def check_paths_for_group_leakage(train_df, test_df, unique_id):
