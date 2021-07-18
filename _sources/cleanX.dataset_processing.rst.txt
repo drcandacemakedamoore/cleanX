@@ -1,0 +1,21 @@
+cleanX.dataset\_processing package
+==================================
+
+Submodules
+----------
+
+cleanX.dataset\_processing.dataframes module
+--------------------------------------------
+
+.. automodule:: cleanX.dataset_processing.dataframes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: cleanX.dataset_processing
+   :members:
+   :undoc-members:
+   :show-inheritance:
