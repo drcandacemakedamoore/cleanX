@@ -19,15 +19,15 @@ class MLSetup:
         # TODO: Implement
         self.train_df = train_df
         self.test_df = test_df
-        
+
     # def train_maker():
 
     def metadata(self):
         return self.train_df.columns, self.test_df.columns
-    
+
     def concat_dataframe(self):
         return self.train_df.concatenate(self.test_df)
-    
+
     def duplicated(self):
         return self.concat_dataframe().duplicated()
 
