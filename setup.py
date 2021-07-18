@@ -232,24 +232,26 @@ class Install(InstallCommand):
             package_dir = os.path.dirname(os.path.abspath(__file__))
             egg_info = os.path.join(package_dir, 'cleanX.egg-info')
 
+            # Apparently, this is only set if we are in bdist_xxx
             if self.root:
-                # Apparently, this is only set if we are in bdist_xxx
-                make_pypa_happy = os.path.join(
-                    package_dir,
-                    self.root,
-                    'cleanX-{}.egg-info'.format(version),
+                # PyPA idiots run setup.py install inside setup.py
+                # bdist_wheel.  Because we don't do what a typical
+                # install command would, and they rely on a bunch of
+                # side effects of a typical install command, we need
+                # to preted that install happened in a way that they
+                # expect.
+                egg_info_cmd = self.distribution.get_command_obj(
+                    'install_egg_info',
                 )
-                py_version = 'py{}.{}'.format(
-                    sys.version_info[0],
-                    sys.version_info[1],
-                )
-                make_pypa_happy_2 = os.path.join(
+                egg_info_cmd.ensure_finalized()
+                make_pypa_happy = egg_info_cmd.target
+                package_contents = os.path.join(
                     package_dir,
-                    self.root,
-                    'cleanX-{}-{}.egg-info'.format(version, py_version),
+                    'build',
+                    'lib',
                 )
                 copy_tree(egg_info, make_pypa_happy)
-                copy_tree(egg_info, make_pypa_happy_2)
+                copy_tree(package_contents, self.root)
 
 
 def install_requires():
