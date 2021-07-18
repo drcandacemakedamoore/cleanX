@@ -5,7 +5,74 @@ applications
 module csv_processing: processing of csvs related to images
 """
 
+import os
+
+from abc import ABC
+from collections.abc import Iterable
+from pathlib import Path
+
 import pandas as pd
+
+
+class GuesserError(TypeError):
+    pass
+
+
+class ColumnsSource(ABC):
+
+    def to_dataframe(self):
+        raise NotImplementedError()
+
+
+class CSVSource(ColumnsSource):
+
+    def __init__(self, csv, **pd_args):
+        self.csv = csv
+        self.pd_args = pd_args or {}
+
+    def to_dataframe(self):
+        return pd.read_csv(self.csv, **self.pd_args)
+
+
+class JSONSource(ColumnsSource):
+
+    def __init__(self, json, **pd_args):
+        self.json = json
+        self.pd_args = pd_args or {}
+
+    def to_dataframe(self):
+        return pd.read_json(self.json, **self.pd_args)
+
+
+class DFSource(ColumnsSource):
+
+    def __init__(self, df):
+        self.df = df
+
+    def to_dataframe(self):
+        return self.df
+
+
+class MultiSource(ColumnsSource):
+
+    def __init__(self, *sources):
+        self.sources = sources
+
+    def to_dataframe(self):
+        return pd.concat(s.to_dataframe() for s in self.sources)
+
+
+def string_source(raw_src):
+    ext = os.path.splitext(raw_src)[1]
+    if isinstance(ext, bytes):
+        ext = ext.decode()
+    ext = ext.lower()
+    if ext == '.csv':
+        return CSVSource(raw_src)
+    elif ext == '.json':
+        return JSONSource(raw_src)
+
+    raise GuesserError('Cannot guess source of {}'.format(raw_src))
 
 
 class MLSetup:
@@ -15,18 +82,42 @@ class MLSetup:
     to be checked for problems, and creates reports, which can be
     put in multiple output options.
     """
-    def __init__(self, train_df, test_df):
+
+    known_sources = {
+        str: string_source,
+        bytes: string_source,
+        Path: string_source,
+        pd.DataFrame: lambda _: DFSource,
+    }
+
+    def __init__(self, train_src, test_src):
         # TODO: Implement
-        self.train_df = train_df
-        self.test_df = test_df
+        self.train_src = self.guess_source(train_src)
+        self.test_src = self.guess_source(test_src)
 
     # def train_maker():
 
+    def guess_source(self, raw_src):
+        guesser = self.known_sources.get(type(raw_src))
+        if guesser:
+            return guesser(raw_src)
+        if isinstance(raw_src, Iterable):
+            return MultiSource(self.guess_source(src) for src in raw_src)
+        elif isinstance(raw_src, ColumnsSource):
+            return raw_src
+        
+
     def metadata(self):
-        return self.train_df.columns, self.test_df.columns
+        return (
+            self.train_src.to_dataframe().columns,
+            self.test_src.to_dataframe().columns,
+        )
 
     def concat_dataframe(self):
-        return self.train_df.concatenate(self.test_df)
+        return pd.concat((
+            self.train_src.to_dataframe(),
+            self.test_src.to_dataframe(),
+        ))
 
     def duplicated(self):
         return self.concat_dataframe().duplicated()

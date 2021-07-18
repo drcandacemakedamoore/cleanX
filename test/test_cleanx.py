@@ -1,9 +1,12 @@
 # testing for cleanX
 
 import os
+import csv
+import json
 
 from functools import partial
 from tempfile import TemporaryDirectory
+from random import Random
 
 import cv2
 import pytest
@@ -29,30 +32,36 @@ def test_crop():
     cropped_example = iwork.crop(example)
     assert cropped_example.shape < example.shape
 
+
 def test_simpler_crop():
     example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
     cropped_example = iwork.simpler_crop(example)
     assert cropped_example.shape < example.shape
+
 
 def test_blur_out_edges():
     image = os.path.join(image_directory, 'testtocrop.jpg')
     defblur = iwork.blur_out_edges(image)
     assert type(defblur) == np.ndarray 
 
+
 def test_subtle_sharpie_enhance():
     image = os.path.join(image_directory, 'testtocrop.jpg')
     lo = iwork.subtle_sharpie_enhance(image)
     assert lo.shape[0] >1
-    
+
+
 def harsh_sharpie_enhance():
     image = os.path.join(image_directory, 'testtocrop.jpg')
     ho = iwork.harsh_sharpie_enhance(image)
     assert ho.shape[0] >1
 
+
 def test_salting():
     lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
     salt = iwork.salting(lindo_image)
     assert salt.shape[0] > 1
+
 
 def test_simple_rotation_augmentation():
     lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
@@ -60,7 +69,6 @@ def test_simple_rotation_augmentation():
     assert np.array(lindo_rotated).shape[0] > 1
 
 
-#
 def test_check_paths_for_group_leakage():
     train_dfE = (os.path.join(image_directory,'train_sample_df.csv'))
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
@@ -74,17 +82,20 @@ def test_check_paths_for_group_leakage():
     )
     assert len(checked_example) > 1 
 
+
 def test_separate_image_averager():
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
     test_df = pd.read_csv(test_dfE)
     images = image_directory + '/' + test_df.image_path.dropna()
     blended =  iwork.separate_image_averager(images, s=5)
     assert type(blended) is np.ndarray
-#
+
+
 def test_dimensions_to_df():
     deflep = iwork.dimensions_to_df(image_directory)
     assert len(deflep) > 1    
-#
+
+
 def test_see_part_potential_bias():
     e2 = (os.path.join(image_directory,'example_for_bias.csv'))
     e3 = pd.read_csv(e2)
@@ -99,37 +110,44 @@ def test_see_part_potential_bias():
 def test_dimensions_to_histo():
     output = iwork.dimensions_to_histo(image_directory, 10)
     assert len(output) > 1
-#
+
+
 def test_find_very_hazy():
     found = iwork.find_very_hazy(image_directory)
     assert len(found) > 0    
+
 
 def test_show_major_lines_on_image():
     pic_name1 = os.path.join(image_directory, 'testtocrop.jpg')
     deflop = iwork.show_major_lines_on_image(pic_name1)
     assert deflop # needs a much better test
 
+
 def test_find_big_lines():
     lined = iwork.find_big_lines(image_directory, 2)
     assert len(lined) > 0    
-#
+
+
 def proportions_ht_wt_to_histo():
     output =  iwork.proportions_ht_wt_to_histo(image_directory, 10)
     assert len(output) > 1
-#
+
+
 def test_tesseract_specific():
     lettered = iwork.tesseract_specific(image_directory)
     assert len(lettered) > 1 
+
 
 def test_find_suspect_text():
     letters_spec = iwork.find_suspect_text(image_directory, 'SUPINE')
     assert len(letters_spec) >= 1     
 
+
 def test_find_suspect_text_by_length():   
     jobs = iwork.find_suspect_text_by_length(image_directory, 3)
     assert len(jobs) > 1    
 
-#~    
+
 def test_augment_and_move():
     try:
         os.makedirs(target_directory)
@@ -138,7 +156,8 @@ def test_augment_and_move():
     iwork.augment_and_move(image_directory, target_directory, [ImageOps.mirror, ImageOps.flip])
     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
     assert os.path.isfile(vovo) 
-#
+
+
 def test_crop_them_all():
     try:
         os.makedirs(target_directory)
@@ -148,16 +167,18 @@ def test_crop_them_all():
     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
     assert os.path.isfile(vovo) 
 
+
 def test_reasonable_rotation_augmentation():
     imageE = (os.path.join(image_directory,'testtocrop.jpg'))
     dman = iwork.reasonable_rotation_augmentation(0, 12, 3, imageE)
     assert len(dman) > 1
-    
-#
+
+
 def test_find_by_sample_upper():
     lovereturned = iwork.find_by_sample_upper(image_directory, 10, 10)
     assert len(lovereturned) >= 1
-#
+
+
 def test_find_sample_upper_greater_than_lower():
     lovereturnee = iwork.find_sample_upper_greater_than_lower(image_directory, 10)
     assert len(lovereturnee) >= 1
@@ -165,23 +186,28 @@ def test_find_sample_upper_greater_than_lower():
 def test_find_duplicated_images():
     found = iwork.find_duplicated_images(image_directory)
     assert len(found) > 0     
-#    
+
+
 def test_find_duplicated_images_todf():
     found = iwork.find_duplicated_images_todf(image_directory)
     assert len(found) > 0       
+
 
 def test_histogram_difference_for_inverts():
     histosy = iwork.histogram_difference_for_inverts(image_directory)
     assert len(histosy) > 0
 
+
 def test_histogram_difference_for_inverts_todf():
     histos = iwork.histogram_difference_for_inverts_todf(image_directory)
     assert len(histos) >0
-#
+
+
 def test_dataframe_up_my_pics():
     dfy = iwork.dataframe_up_my_pics(image_directory, 'diagnosis_string')
     assert len(dfy) > 0
     
+
 def test_simple_spinning_template():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
     picy1 = vovo
@@ -199,12 +225,14 @@ def test_simple_spinning_template():
     )
     assert len(lanter) > 0
 
+
 def test_def_make_contour_image():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
     picy1 = vovo
     defMkcont = iwork.make_contour_image(picy1)
     assert len(defMkcont) > 0
-#
+
+
 def test_avg_image_maker():
     #set_of_images = glob.glob(*.jpg)
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
@@ -213,7 +241,7 @@ def test_avg_image_maker():
     tab = iwork.avg_image_maker(set_of_images)  
     assert tab.shape[0] > 2  
 
-#
+
 def test_set_image_variability():
     #set_of_images = glob.glob(*.jpg)
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
@@ -221,28 +249,33 @@ def test_set_image_variability():
     set_of_images = image_directory + '/' + test_df.image_path.dropna()
     tab = iwork.set_image_variability(set_of_images)  
     assert tab.shape[0] > 2      
-#
+
+
 def test_avg_image_maker_by_label():
     test_dfE = (os.path.join(image_directory,'alt_test_labeled.csv'))
     test_df = pd.read_csv(test_dfE)
     #set_of_images = image_directory + '/' + test_df.image_path.dropna()
     lotus = iwork.avg_image_maker_by_label(test_df,'imageID','path_label',image_directory)
     assert len(lotus) > 0       
-#
+
+
 def test_find_tiny_image_differences():
     defleper = iwork.find_tiny_image_differences(image_directory)
     assert len(defleper) > 0
+
 
 def test_zero_to_twofivefive_simplest_norming():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
     test_norm1 = iwork.zero_to_twofivefive_simplest_norming(vovo)
     assert test_norm1.max() == 255
 
+
 def test_rescale_range_from_histogram_low_end():
     image_path = os.path.join(image_directory, 'testtocrop.jpg')
     image_from_path = cv2.imread(image_path)
     defmax = iwork.rescale_range_from_histogram_low_end(image_from_path, 5)
     assert defmax.max() == 255
+
 
 def test_make_histo_scaled_folder():
     A= image_directory
@@ -350,3 +383,50 @@ def test_read_dicoms_options_with_pydicom():
         set(os.listdir(dicomfile_directory1)) ==
         set(df[source_column].to_list())
     )
+
+
+def gen_row(columns, rnd):
+    result = list(range(columns))
+    rnd.shuffle(result)
+    return result
+
+
+def gen_csv(directory, name, rows, columns, rnd):
+    with open(os.path.join(directory, name), 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        colnames = ['c{}'.format(c) for c in gen_row(columns, rnd)]
+        writer.writerow(colnames)
+        for _ in range(rows):
+            writer.writerow(gen_row(columns, rnd))
+
+
+def gen_json(directory, name, rows, columns, rnd):
+    with open(os.path.join(directory, name), 'w') as jsonfile:
+        colnames = ['c{}'.format(c) for c in range(columns)]
+        rnd.shuffle(colnames)
+        data = {c: [] for c in colnames}
+        for i in range(rows):
+            for j, v in zip(data.keys(), gen_row(columns, rnd)):
+                data[j].append(v)
+        json.dump(data, jsonfile)
+
+
+def test_dataset_creation():
+    rnd = Random()
+    with TemporaryDirectory() as td:
+        rows, columns = rnd.randint(10, 100), rnd.randint(10, 100)
+        csvfile = 'file.csv'
+        jsonfile = 'file.json'
+
+        gen_csv(td, csvfile, rows, columns, rnd)
+        gen_json(td, jsonfile, rows, columns // 2, rnd)
+        setup = csvp.MLSetup(
+            os.path.join(td, csvfile),
+            os.path.join(td, jsonfile),
+        )
+        m1, m2 = setup.metadata()
+        m1, m2 = set(m1), set(m2)
+        common = len(m1.intersection(m2))
+        assert len(m2) == common
+        all_df = setup.concat_dataframe()
+        assert len(m1) == len(all_df.columns)
