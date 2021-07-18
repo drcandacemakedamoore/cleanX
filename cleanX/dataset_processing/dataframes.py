@@ -3,7 +3,6 @@
 clean X : Library for cleaning radiological data used in machine learning
 applications
 module dataframes: processing of datasetss related to images
- 
 """
 
 import os
