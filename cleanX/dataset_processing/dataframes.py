@@ -120,6 +120,45 @@ class MLSetup:
 
     def duplicated(self):
         return self.concat_dataframe().duplicated()
+    
+    def generate_report(
+        self,
+        duplicates=True,
+        leakage=True,
+        bias=True,
+        understand=True,
+    ):
+        return Report(
+        self,
+        duplicates,
+        leakage,
+        bias,
+        understand,
+    )
+
+class Report:
+    def __init__(
+        self, 
+        mlsetup, 
+        duplicates=True,
+        leakage=True,
+        bias=True,
+        understand=True,
+    ):
+
+        doubles = self.duplicated()
+    # bad_bias
+    # leaked
+    # knowledge
+
+    # method that generates data
+    # method that prints to terminal
+    # method that prints to json
+    # method that generates an email message
+    # method that controls verbosity
+    
+    
+        
 
 
 # to run on dataframes
