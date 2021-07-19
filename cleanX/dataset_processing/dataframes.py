@@ -4,7 +4,7 @@ clean X : Library for cleaning radiological data used in machine learning
 applications
 module dataframes: processing of datasetss related to images
 This module can be implemented by functions,
-or can be implemented with classes 
+or can be implemented with classes
 """
 
 import os
@@ -128,37 +128,21 @@ class MLSetup:
             self.train_src.to_dataframe().duplicated().sum(),
             self.test_src.to_dataframe().duplicated().sum(),
         )
-    
+
     def pics_in_both_groups(self, unique_id):
         train_df = self.train_src.to_dataframe()
-        test_df = self.test_src.to_dataframe() 
-        return train_df.merge(test_df, on=unique_id, how='inner')
-    
-    #def bad_bias(self):
-
-    def knowledge(self):
-        train_df = self.train_src.to_dataframe()
         test_df = self.test_src.to_dataframe()
-        both_df = [test_df, train_df]
-        for df in both_df:
-            names = df.columns
-            # print("The training ataFrame has", len(df.columns), "columns, named", df.columns)
-            # print("")
-            # print("The DataFrame has", len(df), "rows")
-            # print("")
-            # print("The types of data:\n", df.dtypes)
-            # print("")
-            # print("In terms of nulls, the DataFrame has: \n", df[df.isnull()].count())
-            # print("")
-            # print(
-            # "Number of duplicated rows in the data is ",
-            # df.duplicated().sum(),
-            # ".",
-            #  )
-            # print("")
-            # print("Numeric qualities of numeric data: \n", df.describe())
+        return train_df.merge(test_df, on=unique_id, how='inner')
 
-    
+    # def bad_bias(self):
+
+    # def knowledge(self):
+    #     train_df = self.train_src.to_dataframe()
+    #     test_df = self.test_src.to_dataframe()
+    #     both_df = [test_df, train_df]
+    #     for df in both_df:
+    #         names = df.columns
+            
     def generate_report(
         self,
         duplicates=True,
@@ -203,10 +187,10 @@ class Report:
 
     def report_leakage(self, unique_id):
         train_df = self.train_src.to_dataframe()
-        test_df = self.test_src.to_dataframe() 
+        test_df = self.test_src.to_dataframe()
         leaked =  train_df.merge(test_df, on=unique_id, how='inner')
         self.sections['Leakage'] = {
-           'Leaked entries': leaked, 
+           'Leaked entries': leaked,
         }
     
     def report_bias(self, sensitive_list):
@@ -214,18 +198,18 @@ class Report:
         #
         help = 'help'
         self.sections['Value Count'] = {
-           'Value counts of categorty 1': help, 
+           'Value counts of categorty 1': help,
         } 
         
     def report_understand(self):
         train_df = self.train_src.to_dataframe()
-        test_df = self.test_src.to_dataframe() 
+        test_df = self.test_src.to_dataframe()
         train_columns = train_df.columns
         test_columns = test_df.columns
         columns = train_columns + test_columns
         train_rows = len(train_df)
         test_rows = len(test_df)
-        rows = train_rows + test_rows 
+        rows = train_rows + test_rows
         train_nulls = train_df[test_df.isnull()].count()
         test_nulls = test_df[test_df.isnull()].count()
         nulls = train_nulls + test_nulls
@@ -237,34 +221,27 @@ class Report:
         description = train_description + test_description
         self.sections['Knowledge'] = {
            'Columns': columns,
-           'Train columns' : train_columns,
-           'Test columns' : test_columns, 
+           'Train columns': train_columns,
+           'Test columns': test_columns, 
            'Rows': rows,
-           'Train rows' : train_rows,
-           'Test rows' : test_rows,   
+           'Train rows': train_rows,
+           'Test rows': test_rows,   
            'Nulls': nulls,
-           'Train nulls' : train_nulls,
-           'Test nulls' : test_nulls, 
+           'Train nulls': train_nulls,
+           'Test nulls': test_nulls, 
            'Datatypes': datatypes,
-           'Train datatypes' : train_dtypes,
-           'Test datatypes' : test_dtypes, 
+           'Train datatypes': train_dtypes,
+           'Test datatypes': test_dtypes, 
            'Descriptions': description,
-           'Train description' : train_description,
-           'Test description' : test_description, 
+           'Train description': train_description,
+           'Test description': test_description, 
         }     
-    # bad_bias
-    # leaked
-    # knowledge
 
     # method that generates data
     # method that prints to terminal
     # method that prints to json
     # method that generates an email message
     # method that controls verbosity
-    
-    
-        
-
 
 # to run on dataframes
 def check_paths_for_group_leakage(train_df, test_df, unique_id):
