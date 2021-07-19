@@ -97,12 +97,17 @@ or can be implemented with classes</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">MLSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">MLSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class allows configuration of the train and test datasets
 organized into a pandas dataframe
 to be checked for problems, and creates reports, which can be
 put in multiple output options.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.bias">
+<span class="sig-name descname"><span class="pre">bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.bias" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.concat_dataframe">
 <span class="sig-name descname"><span class="pre">concat_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.concat_dataframe" title="Permalink to this definition">¶</a></dt>
@@ -124,6 +129,16 @@ put in multiple output options.</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.get_sensitive_list">
+<span class="sig-name descname"><span class="pre">get_sensitive_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.get_sensitive_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.get_unique_id">
+<span class="sig-name descname"><span class="pre">get_unique_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.get_unique_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.guess_source">
 <span class="sig-name descname"><span class="pre">guess_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.guess_source" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -131,6 +146,11 @@ put in multiple output options.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.known_sources">
 <span class="sig-name descname"><span class="pre">known_sources</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{&lt;class</span> <span class="pre">'str'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">string_source&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">string_source&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'pathlib.Path'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">string_source&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'pandas.core.frame.DataFrame'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">MLSetup.&lt;lambda&gt;&gt;}</span></em><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.known_sources" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.leakage">
+<span class="sig-name descname"><span class="pre">leakage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.leakage" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -162,7 +182,7 @@ put in multiple output options.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.Report.report_bias">
-<span class="sig-name descname"><span class="pre">report_bias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensitive_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.Report.report_bias" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">report_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.Report.report_bias" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -172,12 +192,22 @@ put in multiple output options.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.Report.report_leakage">
-<span class="sig-name descname"><span class="pre">report_leakage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unique_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.Report.report_leakage" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">report_leakage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.Report.report_leakage" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.Report.report_understand">
 <span class="sig-name descname"><span class="pre">report_understand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.Report.report_understand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.Report.subsection_html">
+<span class="sig-name descname"><span class="pre">subsection_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.Report.subsection_html" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.Report.to_ipwidget">
+<span class="sig-name descname"><span class="pre">to_ipwidget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.Report.to_ipwidget" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
