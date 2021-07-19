@@ -8,6 +8,9 @@ or can be implemented with classes
 """
 
 import os
+import html
+import logging
+import re
 
 from abc import ABC
 from collections.abc import Iterable
@@ -92,12 +95,41 @@ class MLSetup:
         pd.DataFrame: lambda _: DFSource,
     }
 
-    def __init__(self, train_src, test_src):
+    def __init__(
+            self,
+            train_src,
+            test_src,
+            unique_id=None,
+            sensitive_list=None,
+    ):
         # TODO: Implement
         self.train_src = self.guess_source(train_src)
         self.test_src = self.guess_source(test_src)
+        self.unique_id = unique_id
+        self.sensitive_list = sensitive_list
 
     # def train_maker():
+
+    def get_unique_id(self):
+        if self.unique_id:
+            return self.unique_id
+        c1, c2 = self.metadata()
+        for a in c1:
+            for b in c2:
+                if a == b:
+                    return a
+        logging.warning('No common column names, cannot guess unique id')
+        return c1[0]
+
+    def get_sensitive_list(self):
+        # TODO(wvxvw): Try to come up with names that might catch some
+        # sensitive category. The names will be interpreted as regular
+        # expressions to match against column names
+        if self.sensitive_list:
+            return self.sensitive_list
+        return [
+            re.compile(r'patient\s*name', re.IGNORECASE),
+        ]
 
     def guess_source(self, raw_src):
         guesser = self.known_sources.get(type(raw_src))
@@ -158,6 +190,31 @@ class MLSetup:
             understand,
         )
 
+    def leakage(self):
+        uid = self.get_unique_id()
+        train_df = self.train_src.to_dataframe()
+        test_df = self.test_src.to_dataframe()
+        return train_df.merge(test_df, on=uid, how='inner')
+
+    def bias(self):
+        sensitive_patterns = self.get_sensitive_list()
+        uid = self.get_unique_id()
+        df = self.train_src.to_dataframe()
+        aggregate_cols = [uid]
+
+        for col in df.columns:
+            col = str(col)
+            for p in sensitive_patterns:
+                if re.fullmatch(p, col):
+                    aggregate_cols.append(col)
+                    break
+        tab_fight_bias = pd.DataFrame(
+            df[aggregate_cols].value_counts()
+        )
+        tab_fight_bias2 = tab_fight_bias.groupby(aggregate_cols).sum()
+        tab_fight_bias2 = tab_fight_bias2.rename(columns={0: 'sums'})
+        return tab_fight_bias2
+
 
 class Report:
     def __init__(
@@ -186,25 +243,22 @@ class Report:
             'Test Duplicates Count': test_dupes,
         }
 
-    def report_leakage(self, unique_id):
-        train_df = self.train_src.to_dataframe()
-        test_df = self.test_src.to_dataframe()
-        leaked = train_df.merge(test_df, on=unique_id, how='inner')
+    def report_leakage(self):
         self.sections['Leakage'] = {
-           'Leaked entries': leaked,
+           'Leaked entries': self.mlsetup.leakage(),
         }
 
-    def report_bias(self, sensitive_list):
-        ###
-        #
-        help = 'help'
+    def report_bias(self):
         self.sections['Value Count'] = {
-           'Value counts of categorty 1': help,
+           'Value counts of categorty 1': self.mlsetup.bias(),
         }
 
     def report_understand(self):
-        train_df = self.train_src.to_dataframe()
-        test_df = self.test_src.to_dataframe()
+        # TODO(wvxvw): The calculation part needs to go into the
+        # MLSetup, only the functionality relevant to reporting needs
+        # to be here.
+        train_df = self.mlsetup.train_src.to_dataframe()
+        test_df = self.mlsetup.test_src.to_dataframe()
         train_columns = train_df.columns
         test_columns = test_df.columns
         columns = train_columns + test_columns
@@ -214,8 +268,8 @@ class Report:
         train_nulls = train_df[test_df.isnull()].count()
         test_nulls = test_df[test_df.isnull()].count()
         nulls = train_nulls + test_nulls
-        train_dtypes = train_df.dtypes
-        test_dtypes = test_df.dtypes
+        train_dtypes = list(train_df.dtypes)
+        test_dtypes = list(test_df.dtypes)
         datatypes = train_dtypes + test_dtypes
         train_description = train_df.describe()
         test_description = test_df.describe()
@@ -237,6 +291,48 @@ class Report:
            'Train description': train_description,
            'Test description': test_description,
         }
+
+    def subsection_html(self, data, level=2):
+        elements = ['<ul>']
+        for k, v in data.items():
+            if type(v) is dict:
+                elements.append(
+                    '<li><h{}>{}</h{}></li>'.format(
+                        level,
+                        html.escape(k),
+                        level,
+                    ))
+                elements += self.subsection_html(v, level + 1)
+            elif isinstance(v, pd.DataFrame):
+                elements += ['<li>', v._repr_html_(), '</li>']
+            else:
+                elements.append(
+                    '<li><strong>{}: </strong>{}</li>'.format(
+                        html.escape(str(k)),
+                        html.escape(str(v))
+                    ))
+        elements.append('</ul>')
+        return elements
+
+    def to_ipwidget(self):
+        from IPython.display import HTML
+
+        elements = ['<ul>']
+        for k, v in self.sections.items():
+            if type(v) is dict:
+                elements.append('<li><h1>{}</h1></li>'.format(html.escape(k)))
+                elements += self.subsection_html(v)
+            elif isinstance(v, pd.DataFrame):
+                elements += ['<li>', v._repr_html_(), '</li>']
+            else:
+                elements.append(
+                    '<li><strong>{}: </strong>{}</li>'.format(
+                        html.escape(str(k)),
+                        html.escape(str(v))
+                    ))
+        elements.append('</ul>')
+
+        return HTML(''.join(elements))
 
     # method that generates data
     # method that prints to terminal

@@ -12,3 +12,4 @@ test/target/
 /conda-pkg/meta.yaml
 /conda-pkg/bld.bat
 /source/cleanX.*.rst
+.ipynb_checkpoints
