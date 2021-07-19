@@ -142,7 +142,7 @@ class MLSetup:
     #     both_df = [test_df, train_df]
     #     for df in both_df:
     #         names = df.columns
-            
+
     def generate_report(
         self,
         duplicates=True,
@@ -151,17 +151,18 @@ class MLSetup:
         understand=True,
     ):
         return Report(
-        self,
-        duplicates,
-        leakage,
-        bias,
-        understand,
-    )
+            self,
+            duplicates,
+            leakage,
+            bias,
+            understand,
+        )
+
 
 class Report:
     def __init__(
-        self, 
-        mlsetup, 
+        self,
+        mlsetup,
         duplicates=True,
         leakage=True,
         bias=True,
@@ -179,7 +180,7 @@ class Report:
             self.report_understand()
 
     def report_duplicates(self):
-        train_dupes, test_dupes = self.mlsetup.duplicates() 
+        train_dupes, test_dupes = self.mlsetup.duplicates()
         self.sections['Duplicates'] = {
             'Train Duplicates Count': train_dupes,
             'Test Duplicates Count': test_dupes,
@@ -188,18 +189,18 @@ class Report:
     def report_leakage(self, unique_id):
         train_df = self.train_src.to_dataframe()
         test_df = self.test_src.to_dataframe()
-        leaked =  train_df.merge(test_df, on=unique_id, how='inner')
+        leaked = train_df.merge(test_df, on=unique_id, how='inner')
         self.sections['Leakage'] = {
            'Leaked entries': leaked,
         }
-    
+
     def report_bias(self, sensitive_list):
         ###
         #
         help = 'help'
         self.sections['Value Count'] = {
            'Value counts of categorty 1': help,
-        } 
+        }
         
     def report_understand(self):
         train_df = self.train_src.to_dataframe()
@@ -222,20 +223,20 @@ class Report:
         self.sections['Knowledge'] = {
            'Columns': columns,
            'Train columns': train_columns,
-           'Test columns': test_columns, 
+           'Test columns': test_columns,
            'Rows': rows,
            'Train rows': train_rows,
-           'Test rows': test_rows,   
+           'Test rows': test_rows,
            'Nulls': nulls,
            'Train nulls': train_nulls,
-           'Test nulls': test_nulls, 
+           'Test nulls': test_nulls,
            'Datatypes': datatypes,
            'Train datatypes': train_dtypes,
-           'Test datatypes': test_dtypes, 
+           'Test datatypes': test_dtypes,
            'Descriptions': description,
            'Train description': train_description,
-           'Test description': test_description, 
-        }     
+           'Test description': test_description,
+        }
 
     # method that generates data
     # method that prints to terminal
@@ -244,6 +245,7 @@ class Report:
     # method that controls verbosity
 
 # to run on dataframes
+
 def check_paths_for_group_leakage(train_df, test_df, unique_id):
     """
     Finds train samples that have been accidentally leaked into test
