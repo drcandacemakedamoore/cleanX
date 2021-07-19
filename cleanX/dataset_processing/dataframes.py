@@ -3,6 +3,8 @@
 clean X : Library for cleaning radiological data used in machine learning
 applications
 module dataframes: processing of datasetss related to images
+This module can be implemented by functions,
+or can be implemented with classes 
 """
 
 import os
@@ -120,6 +122,42 @@ class MLSetup:
 
     def duplicated(self):
         return self.concat_dataframe().duplicated()
+
+    def duplicates(self):
+        return (
+            self.train_src.to_dataframe().duplicated().sum(),
+            self.test_src.to_dataframe().duplicated().sum(),
+        )
+    
+    def pics_in_both_groups(self, unique_id):
+        train_df = self.train_src.to_dataframe()
+        test_df = self.test_src.to_dataframe() 
+        return train_df.merge(test_df, on=unique_id, how='inner')
+    
+    #def bad_bias(self):
+
+    def knowledge(self):
+        train_df = self.train_src.to_dataframe()
+        test_df = self.test_src.to_dataframe()
+        both_df = [test_df, train_df]
+        for df in both_df:
+            names = df.columns
+            # print("The training ataFrame has", len(df.columns), "columns, named", df.columns)
+            # print("")
+            # print("The DataFrame has", len(df), "rows")
+            # print("")
+            # print("The types of data:\n", df.dtypes)
+            # print("")
+            # print("In terms of nulls, the DataFrame has: \n", df[df.isnull()].count())
+            # print("")
+            # print(
+            # "Number of duplicated rows in the data is ",
+            # df.duplicated().sum(),
+            # ".",
+            #  )
+            # print("")
+            # print("Numeric qualities of numeric data: \n", df.describe())
+
     
     def generate_report(
         self,
@@ -145,8 +183,75 @@ class Report:
         bias=True,
         understand=True,
     ):
+        self.mlsetup = mlsetup
+        self.sections = {}
+        if duplicates:
+            self.report_duplicates()
+        if leakage:
+            self.report_leakage()
+        if bias:
+            self.report_bias()
+        if understand:
+            self.report_understand()
 
-        doubles = self.duplicated()
+    def report_duplicates(self):
+        train_dupes, test_dupes = self.mlsetup.duplicates() 
+        self.sections['Duplicates'] = {
+            'Train Duplicates Count': train_dupes,
+            'Test Duplicates Count': test_dupes,
+        }
+
+    def report_leakage(self, unique_id):
+        train_df = self.train_src.to_dataframe()
+        test_df = self.test_src.to_dataframe() 
+        leaked =  train_df.merge(test_df, on=unique_id, how='inner')
+        self.sections['Leakage'] = {
+           'Leaked entries': leaked, 
+        }
+    
+    def report_bias(self, sensitive_list):
+        ###
+        #
+        help = 'help'
+        self.sections['Value Count'] = {
+           'Value counts of categorty 1': help, 
+        } 
+        
+    def report_understand(self):
+        train_df = self.train_src.to_dataframe()
+        test_df = self.test_src.to_dataframe() 
+        train_columns = train_df.columns
+        test_columns = test_df.columns
+        columns = train_columns + test_columns
+        train_rows = len(train_df)
+        test_rows = len(test_df)
+        rows = train_rows + test_rows 
+        train_nulls = train_df[test_df.isnull()].count()
+        test_nulls = test_df[test_df.isnull()].count()
+        nulls = train_nulls + test_nulls
+        train_dtypes = train_df.dtypes
+        test_dtypes = test_df.dtypes
+        datatypes = train_dtypes + test_dtypes
+        train_description = train_df.describe()
+        test_description = test_df.describe()
+        description = train_description + test_description
+        self.sections['Knowledge'] = {
+           'Columns': columns,
+           'Train columns' : train_columns,
+           'Test columns' : test_columns, 
+           'Rows': rows,
+           'Train rows' : train_rows,
+           'Test rows' : test_rows,   
+           'Nulls': nulls,
+           'Train nulls' : train_nulls,
+           'Test nulls' : test_nulls, 
+           'Datatypes': datatypes,
+           'Train datatypes' : train_dtypes,
+           'Test datatypes' : test_dtypes, 
+           'Descriptions': description,
+           'Train description' : train_description,
+           'Test description' : test_description, 
+        }     
     # bad_bias
     # leaked
     # knowledge
