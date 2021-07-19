@@ -201,7 +201,7 @@ class Report:
         self.sections['Value Count'] = {
            'Value counts of categorty 1': help,
         }
-        
+
     def report_understand(self):
         train_df = self.train_src.to_dataframe()
         test_df = self.test_src.to_dataframe()
@@ -245,6 +245,7 @@ class Report:
     # method that controls verbosity
 
 # to run on dataframes
+
 
 def check_paths_for_group_leakage(train_df, test_df, unique_id):
     """
