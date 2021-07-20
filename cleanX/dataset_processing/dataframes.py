@@ -265,8 +265,8 @@ class Report:
         train_rows = len(train_df)
         test_rows = len(test_df)
         rows = train_rows + test_rows
-        train_nulls = train_df[test_df.isnull()].count()
-        test_nulls = test_df[test_df.isnull()].count()
+        train_nulls = train_df.isna().sum().sum()
+        test_nulls = test_df.isna().sum().sum()
         nulls = train_nulls + test_nulls
         train_dtypes = list(train_df.dtypes)
         test_dtypes = list(test_df.dtypes)
@@ -414,7 +414,7 @@ def understand_df(df):
     print("")
     print("The types of data:\n", df.dtypes)
     print("")
-    print("In terms of nulls, the DataFrame has: \n", df[df.isnull()].count())
+    print("In terms of NaNs, the DataFrame has: \n", df.isna().sum().sum())
     print("")
     print(
         "Number of duplicated rows in the data is ",
