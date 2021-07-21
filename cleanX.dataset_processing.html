@@ -97,7 +97,7 @@ or can be implemented with classes</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">MLSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">MLSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Label'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class allows configuration of the train and test datasets
 organized into a pandas dataframe
@@ -116,6 +116,11 @@ put in multiple output options.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.duplicated">
 <span class="sig-name descname"><span class="pre">duplicated</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.duplicated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.duplicated_frame">
+<span class="sig-name descname"><span class="pre">duplicated_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.duplicated_frame" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -216,15 +221,15 @@ put in multiple output options.</p>
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.check_paths_for_group_leakage">
 <span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">check_paths_for_group_leakage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.check_paths_for_group_leakage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds train samples that have been accidentally leaked into test
-samples</p>
+samples
+:param train_df: Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about</p>
+<blockquote>
+<div><p>train assets.</p>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>train_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
-train assets.</p></li>
-<li><p><strong>test_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
-train assets.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>test_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
+train assets.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>duplications of any image into both sets as a new
@@ -246,12 +251,14 @@ You may discover all your pathologically labeled sample are of one ethnic
 group, gender or other category in your <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>. Remember some
 early neural nets for chest X-rays were less accurate in women and the
 fact that there were fewer X-rays of women in the datasets they built on
-did not help</p>
+did not help
+:param df: <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> including sample IDs, labels, and sensitive</p>
+<blockquote>
+<div><p>columns</p>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> including sample IDs, labels, and sensitive
-columns</p></li>
 <li><p><strong>label</strong> (<em>string</em>) – The name of the column with the labels</p></li>
 <li><p><strong>sensitive_column_list</strong> (<em>list</em>) – List names sensitive columns on
 <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p></li>
@@ -283,18 +290,11 @@ and prints duplicated rows</p>
 <span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">understand_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.understand_df" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> (if you have a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> for images)
 and prints information including length, data types, nulls and number
-of duplicated rows</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>) – <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> you are interested in getting features of.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Prints out information on <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>NoneType</p>
-</dd>
-</dl>
+of duplicated rows
+:param df: <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> you are interested in getting features of.
+:type df: <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">pandas.DataFrame</a>
+:return: Prints out information on <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>.
+:rtype: NoneType</p>
 </dd></dl>
 
 </section>
