@@ -100,12 +100,14 @@ class MLSetup:
             train_src,
             test_src,
             unique_id=None,
+            label_tag='Label',
             sensitive_list=None,
     ):
         # TODO: Implement
         self.train_src = self.guess_source(train_src)
         self.test_src = self.guess_source(test_src)
         self.unique_id = unique_id
+        self.label_tag = label_tag
         self.sensitive_list = sensitive_list
 
     # def train_maker():
@@ -128,7 +130,7 @@ class MLSetup:
         if self.sensitive_list:
             return self.sensitive_list
         return [
-            re.compile(r'patient\s*name', re.IGNORECASE),
+            re.compile(r'gender', re.IGNORECASE),
         ]
 
     def guess_source(self, raw_src):
@@ -155,6 +157,20 @@ class MLSetup:
     def duplicated(self):
         return self.concat_dataframe().duplicated()
 
+    def duplicated_frame(self):
+        train_df = self.train_src.to_dataframe()
+        test_df = self.test_src.to_dataframe()
+        train_dupe_names = train_df[train_df.duplicated()] 
+        test_dupe_names = test_df[test_df.duplicated()]
+           
+        return (
+            train_dupe_names,
+            test_dupe_names,
+            
+
+        )
+
+    
     def duplicates(self):
         return (
             self.train_src.to_dataframe().duplicated().sum(),
@@ -166,14 +182,6 @@ class MLSetup:
         test_df = self.test_src.to_dataframe()
         return train_df.merge(test_df, on=unique_id, how='inner')
 
-    # def bad_bias(self):
-
-    # def knowledge(self):
-    #     train_df = self.train_src.to_dataframe()
-    #     test_df = self.test_src.to_dataframe()
-    #     both_df = [test_df, train_df]
-    #     for df in both_df:
-    #         names = df.columns
 
     def generate_report(
         self,
@@ -198,22 +206,31 @@ class MLSetup:
 
     def bias(self):
         sensitive_patterns = self.get_sensitive_list()
-        uid = self.get_unique_id()
         df = self.train_src.to_dataframe()
-        aggregate_cols = [uid]
-
+        aggregate_cols = set(())
+        print(aggregate_cols)
         for col in df.columns:
             col = str(col)
             for p in sensitive_patterns:
                 if re.fullmatch(p, col):
-                    aggregate_cols.append(col)
+                    aggregate_cols.add(col)
                     break
+        aggregate_cols = [self.label_tag] + list(aggregate_cols)
+        print(aggregate_cols)
         tab_fight_bias = pd.DataFrame(
             df[aggregate_cols].value_counts()
         )
         tab_fight_bias2 = tab_fight_bias.groupby(aggregate_cols).sum()
         tab_fight_bias2 = tab_fight_bias2.rename(columns={0: 'sums'})
         return tab_fight_bias2
+
+    # label_and_sensitive = [label]+sensitive_column_list
+    # tab_fight_bias = pd.DataFrame(
+    #     df[label_and_sensitive].value_counts()
+    # )
+    # tab_fight_bias2 = tab_fight_bias.groupby(label_and_sensitive).sum()
+    # tab_fight_bias2 = tab_fight_bias2.rename(columns={0: 'sums'})
+    # return tab_fight_bias2
 
 
 class Report:
@@ -238,9 +255,14 @@ class Report:
 
     def report_duplicates(self):
         train_dupes, test_dupes = self.mlsetup.duplicates()
+        dupe_names = self.mlsetup.duplicated_frame()
+        train_dupe_names, test_dupe_names = self.mlsetup.duplicated_frame()
         self.sections['Duplicates'] = {
             'Train Duplicates Count': train_dupes,
+            'Duplicated train names': train_dupe_names,
             'Test Duplicates Count': test_dupes,
+            #'Duplicated train names': train_dupe_names,
+            'Duplicated test names': test_dupe_names,
         }
 
     def report_leakage(self):
@@ -249,7 +271,7 @@ class Report:
         }
 
     def report_bias(self):
-        self.sections['Value Count'] = {
+        self.sections['Value Counts on Sensitive Categories'] = {
            'Value counts of categorty 1': self.mlsetup.bias(),
         }
 
@@ -347,14 +369,12 @@ def check_paths_for_group_leakage(train_df, test_df, unique_id):
     """
     Finds train samples that have been accidentally leaked into test
     samples
-
     :param train_df: Pandas :code:`DataFrame` containing information about
                      train assets.
     :type train_df: :pd:`DataFrame`
     :param test_df: Pandas :code:`DataFrame` containing information about
                     train assets.
     :type test_df: :pd:`DataFrame`
-
     :return: duplications of any image into both sets as a new
              :code:`DataFrame`
     :rtype: :pd:`DataFrame`
@@ -373,7 +393,6 @@ def see_part_potential_bias(df, label, sensitive_column_list):
     early neural nets for chest X-rays were less accurate in women and the
     fact that there were fewer X-rays of women in the datasets they built on
     did not help
-
     :param df: :code:`DataFrame` including sample IDs, labels, and sensitive
                columns
     :type df: :pd:`DataFrame`
@@ -382,7 +401,6 @@ def see_part_potential_bias(df, label, sensitive_column_list):
     :param sensitive_column_list: List names sensitive columns on
                                   :code:`DataFrame`
     :type sensitive_column_list: list
-
     :return: tab_fight_bias2, a neatly sorted :code:`DataFrame`
     :rtype: :pd:`DataFrame`
     """
@@ -401,10 +419,8 @@ def understand_df(df):
     Takes a :code:`DataFrame` (if you have a :code:`DataFrame` for images)
     and prints information including length, data types, nulls and number
     of duplicated rows
-
     :param df: :code:`DataFrame` you are interested in getting features of.
     :type df: :pd:`DataFrame`
-
     :return: Prints out information on :code:`DataFrame`.
     :rtype: NoneType
     """
@@ -439,3 +455,5 @@ def show_duplicates(df):
         print("They are: \n", df[df.duplicated()])
     else:
         print("There are no duplicated rows")
+
+    
