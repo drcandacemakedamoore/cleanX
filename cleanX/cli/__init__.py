@@ -140,6 +140,34 @@ def dataset(cfg):
     ''',
 )
 @click.option(
+    '--report-duplicates/--no-report-duplicates',
+    default=True,
+    help='''
+    Whether the report should contain information about ducplicates.
+    ''',
+)
+@click.option(
+    '--report-leakage/--no-report-leakage',
+    default=True,
+    help='''
+    Whether the report should contain information about leakage.
+    ''',
+)
+@click.option(
+    '--report-bias/--no-report-bias',
+    default=True,
+    help='''
+    Whether the report should contain information about leakage.
+    ''',
+)
+@click.option(
+    '--report-understand/--no-report-understand',
+    default=True,
+    help='''
+    Whether the report should contain information about understanding.
+    ''',
+)
+@click.option(
     '-o',
     '--output',
     default=None,
@@ -160,6 +188,10 @@ def generate_report(
         label_tag,
         sensitive_category,
         output,
+        report_duplicates,
+        report_leakage,
+        report_bias,
+        report_understand,
 ):
     mlsetup = MLSetup(
         train_source,
@@ -168,7 +200,12 @@ def generate_report(
         label_tag=label_tag,
         sensitive_list=sensitive_category,
     )
-    report = mlsetup.generate_report()
+    report = mlsetup.generate_report(
+        duplicates=report_duplicates,
+        leakage=report_leakage,
+        bias=report_bias,
+        understand=report_understand,
+    )
     if output is None:
         print(report.to_text())
     else:

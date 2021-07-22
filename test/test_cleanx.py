@@ -8,6 +8,7 @@ import subprocess
 from functools import partial
 from tempfile import TemporaryDirectory
 from random import Random
+from importlib import import_module
 
 import cv2
 import pytest
@@ -26,6 +27,41 @@ from cleanX import (
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
 target_directory = os.path.join(os.path.dirname(__file__), 'target')
+
+
+def missing(*modules):
+    try:
+        for m in modules:
+            import_module(m)
+        return False
+    except ModuleNotFoundError:
+        return True
+
+
+def gen_row(columns, rnd):
+    result = list(range(columns))
+    rnd.shuffle(result)
+    return result
+
+
+def gen_csv(directory, name, rows, columns, rnd):
+    with open(os.path.join(directory, name), 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        colnames = ['c{}'.format(c) for c in gen_row(columns, rnd)]
+        writer.writerow(colnames)
+        for _ in range(rows):
+            writer.writerow(gen_row(columns, rnd))
+
+
+def gen_json(directory, name, rows, columns, rnd):
+    with open(os.path.join(directory, name), 'w') as jsonfile:
+        colnames = ['c{}'.format(c) for c in range(columns)]
+        rnd.shuffle(colnames)
+        data = {c: [] for c in colnames}
+        for i in range(rows):
+            for j, v in zip(data.keys(), gen_row(columns, rnd)):
+                data[j].append(v)
+        json.dump(data, jsonfile)
 
 
 def test_crop():
@@ -100,7 +136,7 @@ def test_dimensions_to_df():
 def test_see_part_potential_bias():
     e2 = (os.path.join(image_directory,'example_for_bias.csv'))
     e3 = pd.read_csv(e2)
-    donwa = csvp.see_part_potential_bias(e3,"Label", ["Gender", "Race"])
+    donwa = csvp.see_part_potential_bias(e3,'Label', ['Gender', 'Race'])
     assert len(donwa) > 1
 
 # def test_show_images_in_df():
@@ -285,16 +321,7 @@ def test_make_histo_scaled_folder():
     assert len(d) > 0
 
 
-def sitk_missing():
-    try:
-        import SimpleITK
-        return False
-    except ModuleNotFoundError:
-        
-        return True
-
-
-@pytest.mark.skipif(sitk_missing() , reason="no simpleITK available")
+@pytest.mark.skipif(missing('SimpleITK'), reason='no simpleITK available')
 def test_rip_out_jpgs_sitk():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -309,7 +336,7 @@ def test_rip_out_jpgs_sitk():
     assert len(jpegs_made) > 0    
 
 
-@pytest.mark.skipif(sitk_missing() , reason="no simpleITK available")
+@pytest.mark.skipif(missing('SimpleITK'), reason='no simpleITK available')
 def test_read_dicoms_with_sitk():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -328,16 +355,7 @@ def test_read_dicoms_with_sitk():
     assert 'Protocol Name' in df.columns
 
 
-def pydicom_missing():
-    try:
-        import pydicom
-        return False
-    except ModuleNotFoundError:
-        
-        return True
-
-
-@pytest.mark.skipif(pydicom_missing() , reason="no pydicom available")
+@pytest.mark.skipif(missing('pydicom') , reason='no pydicom available')
 def test_get_jpg_with_pydicom():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -351,7 +369,7 @@ def test_get_jpg_with_pydicom():
     assert jpegs_made
 
 
-@pytest.mark.skipif(pydicom_missing() , reason="no pydicom available")
+@pytest.mark.skipif(missing('pydicom'), reason='no pydicom available')
 def test_read_dicoms_with_pydicom():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -365,7 +383,7 @@ def test_read_dicoms_with_pydicom():
     assert set(os.listdir(dicomfile_directory1)) == set(df[tag].to_list())
 
 
-@pytest.mark.skipif(pydicom_missing() , reason="no pydicom available")
+@pytest.mark.skipif(missing('pydicom'), reason='no pydicom available')
 def test_read_dicoms_options_with_pydicom():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -384,32 +402,6 @@ def test_read_dicoms_options_with_pydicom():
         set(os.listdir(dicomfile_directory1)) ==
         set(df[source_column].to_list())
     )
-
-
-def gen_row(columns, rnd):
-    result = list(range(columns))
-    rnd.shuffle(result)
-    return result
-
-
-def gen_csv(directory, name, rows, columns, rnd):
-    with open(os.path.join(directory, name), 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        colnames = ['c{}'.format(c) for c in gen_row(columns, rnd)]
-        writer.writerow(colnames)
-        for _ in range(rows):
-            writer.writerow(gen_row(columns, rnd))
-
-
-def gen_json(directory, name, rows, columns, rnd):
-    with open(os.path.join(directory, name), 'w') as jsonfile:
-        colnames = ['c{}'.format(c) for c in range(columns)]
-        rnd.shuffle(colnames)
-        data = {c: [] for c in colnames}
-        for i in range(rows):
-            for j, v in zip(data.keys(), gen_row(columns, rnd)):
-                data[j].append(v)
-        json.dump(data, jsonfile)
 
 
 def test_dataset_creation():
@@ -433,7 +425,7 @@ def test_dataset_creation():
         assert len(m1) == len(all_df.columns)
 
 
-@pytest.mark.skipif(pydicom_missing() , reason="no pydicom available")
+@pytest.mark.skipif(missing('pydicom', 'click'), reason='no pydicom available')
 def test_cli_pydicom():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -452,3 +444,24 @@ def test_cli_pydicom():
         df = pd.read_csv(os.path.join(td, 'report.csv'))
         assert 'source' in df.columns
         assert len(os.listdir(dicomfile_directory1)) == len(df)
+
+
+@pytest.mark.skipif(missing('pydicom', 'click'), reason='no pydicom available')
+def test_cli_datasets():
+    resources = os.path.dirname(__file__)
+    with TemporaryDirectory() as td:
+        result = subprocess.check_output(
+            [
+                'python', '-m', 'cleanX',
+                'dataset', 'generate-report',
+                '-r', os.path.join(resources, 'test_sample_df.csv'),
+                '-t', os.path.join(resources, 'train_sample_df.csv'),
+                # These two sets don't appear to have common columns
+                '--no-report-leakage',
+                '--no-report-bias',
+            ]
+        )
+        result = result.decode()
+        assert 'Duplicates' in result
+        assert 'Knowledge' in result
+        assert 'Value Counts on Sensitive Categories' not in result
