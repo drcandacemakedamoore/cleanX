@@ -160,17 +160,16 @@ class MLSetup:
     def duplicated_frame(self):
         train_df = self.train_src.to_dataframe()
         test_df = self.test_src.to_dataframe()
-        train_dupe_names = train_df[train_df.duplicated()] 
+        train_dupe_names = train_df[train_df.duplicated()]
         test_dupe_names = test_df[test_df.duplicated()]
-           
+
         return (
             train_dupe_names,
             test_dupe_names,
-            
+
 
         )
 
-    
     def duplicates(self):
         return (
             self.train_src.to_dataframe().duplicated().sum(),
@@ -181,7 +180,6 @@ class MLSetup:
         train_df = self.train_src.to_dataframe()
         test_df = self.test_src.to_dataframe()
         return train_df.merge(test_df, on=unique_id, how='inner')
-
 
     def generate_report(
         self,
@@ -261,7 +259,6 @@ class Report:
             'Train Duplicates Count': train_dupes,
             'Duplicated train names': train_dupe_names,
             'Test Duplicates Count': test_dupes,
-            #'Duplicated train names': train_dupe_names,
             'Duplicated test names': test_dupe_names,
         }
 
@@ -455,5 +452,3 @@ def show_duplicates(df):
         print("They are: \n", df[df.duplicated()])
     else:
         print("There are no duplicated rows")
-
-    
