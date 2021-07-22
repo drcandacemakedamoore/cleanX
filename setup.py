@@ -312,5 +312,10 @@ setup(
     },
     setup_requires=['sphinx'],
     install_requires=install_requires(),
+    extras_require={
+        'cli': ['click'],
+        'pydicom': ['pydicom'],
+        'simpleitk': ['SimpleITK'],
+    },
     zip_safe=False,
 )
