@@ -346,7 +346,7 @@ class Report:
                     ))
                 elements += self.subsection_html(v, level + 1)
             elif isinstance(v, pd.DataFrame):
-                elements += [ v]
+                elements += [v]
             else:
                 elements.append(
                     '{}:{}'.format(
@@ -354,7 +354,7 @@ class Report:
                         (str(v))
                     ))
         # elements.append()
-        return elements        
+        return elements
 
     def to_ipwidget(self):
         from IPython.display import HTML
@@ -384,8 +384,8 @@ class Report:
             if type(v) is dict:
                 elements.append('{}'.format((k)))
                 elements += self.subsection_text(v)
-            #elif isinstance(v, pd.DataFrame):
-                #elements += [v._repr_html_()]
+            # elif isinstance(v, pd.DataFrame):
+                # elements += [v._repr_html_()]
             else:
                 elements.append(
                     '{}:{}'.format(
@@ -400,6 +400,7 @@ class Report:
     # method that prints to json
     # method that generates an email message
     # method that controls verbosity
+
 
 def check_paths_for_group_leakage(train_df, test_df, unique_id):
     """
