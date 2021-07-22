@@ -1,0 +1,10 @@
+cleanX.cli package
+==================
+
+Module contents
+---------------
+
+.. automodule:: cleanX.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
