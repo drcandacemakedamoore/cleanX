@@ -17,6 +17,7 @@ from collections.abc import Iterable
 from pathlib import Path
 
 import pandas as pd
+import numpy as np
 
 
 class GuesserError(TypeError):
@@ -206,7 +207,7 @@ class MLSetup:
         sensitive_patterns = self.get_sensitive_list()
         df = self.train_src.to_dataframe()
         aggregate_cols = set(())
-        print(aggregate_cols)
+        # print(aggregate_cols)
         for col in df.columns:
             col = str(col)
             for p in sensitive_patterns:
@@ -214,7 +215,7 @@ class MLSetup:
                     aggregate_cols.add(col)
                     break
         aggregate_cols = [self.label_tag] + list(aggregate_cols)
-        print(aggregate_cols)
+        # print(aggregate_cols)
         tab_fight_bias = pd.DataFrame(
             df[aggregate_cols].value_counts()
         )
@@ -333,6 +334,28 @@ class Report:
         elements.append('</ul>')
         return elements
 
+    def subsection_text(self, data, level=2):
+        elements = []
+        for k, v in data.items():
+            if type(v) is dict:
+                elements.append(
+                    '{}{}{}'.format(
+                        level,
+                        (k),
+                        level,
+                    ))
+                elements += self.subsection_html(v, level + 1)
+            elif isinstance(v, pd.DataFrame):
+                elements += [ v]
+            else:
+                elements.append(
+                    '{}:{}'.format(
+                        (str(k)),
+                        (str(v))
+                    ))
+        # elements.append()
+        return elements        
+
     def to_ipwidget(self):
         from IPython.display import HTML
 
@@ -353,14 +376,30 @@ class Report:
 
         return HTML(''.join(elements))
 
-    # method that generates data
+    def to_text(self):
+        # from IPython.display import HTML
+
+        elements = []
+        for k, v in self.sections.items():
+            if type(v) is dict:
+                elements.append('{}'.format((k)))
+                elements += self.subsection_text(v)
+            #elif isinstance(v, pd.DataFrame):
+                #elements += [v._repr_html_()]
+            else:
+                elements.append(
+                    '{}:{}'.format(
+                        (str(k)),
+                        (str(v))
+                    ))
+        # elements.append('')
+        # lover = np.savetxt(r'D:\projects\np_try.txt', v.values, fmt='%d')
+        return elements
+
     # method that prints to terminal
     # method that prints to json
     # method that generates an email message
     # method that controls verbosity
-
-# to run on dataframes
-
 
 def check_paths_for_group_leakage(train_df, test_df, unique_id):
     """
