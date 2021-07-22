@@ -15,6 +15,7 @@ from cleanX.dicom_processing import (
     GlobSource,
     MultiSource,
 )
+from cleanX.dataset_processing import MLSetup
 
 
 class Config:
@@ -71,6 +72,112 @@ def main(ctx, config, config_file):
 @click.pass_obj
 def dicom(cfg):
     pass
+
+
+@main.group()
+@click.pass_obj
+def dataset(cfg):
+    pass
+
+
+@dataset.command()
+@click.pass_obj
+@click.option(
+    '-r',
+    '--train-source',
+    help='''
+    The source of the test data (usually, a file path).
+
+    Supported source types are:
+
+    \b
+    * json
+    * csv
+    ''',
+)
+@click.option(
+    '-t',
+    '--test-source',
+    help='''
+    The source of the test data (usually, a file path).
+
+    Supported source types are:
+
+    \b
+    * json
+    * csv
+    ''',
+)
+@click.option(
+    '-i',
+    '--unique_id',
+    default=None,
+    help='''
+    The name of the column that uniquely selects cases in the dataset
+    (typically, patient's id).  If not given, the first matching column
+    in the test and train datasets is considered to be the unique id.
+    ''',
+)
+@click.option(
+    '-l',
+    '--label-tag',
+    default='Label',
+    help='''
+    The name of the column that typically has the diagnosis, the propery
+    that is being learned in this machine learning task.  The default
+    value is "Label".
+    ''',
+)
+@click.option(
+    '-s',
+    '--sensitive-category',
+    default=[],
+    multiple=True,
+    help='''
+    Repeatable.  The name of the column that describes the property of the
+    dataset that may potentially exhibit bias, eg. "gender", "ethnicity"
+    etc.
+    ''',
+)
+@click.option(
+    '-o',
+    '--output',
+    default=None,
+    help='''
+    The file to output the report to.  If no file is given, the report will
+    be printed on stdout.  Supported report formats are
+    (inferred from file extension):
+
+    \b
+    * txt
+    ''',
+)
+def generate_report(
+        cfg,
+        train_source,
+        test_source,
+        unique_id,
+        label_tag,
+        sensitive_category,
+        output,
+):
+    mlsetup = MLSetup(
+        train_source,
+        test_source,
+        unique_id=unique_id,
+        label_tag=label_tag,
+        sensitive_list=sensitive_category,
+    )
+    report = mlsetup.generate_report()
+    if output is None:
+        print(report.to_text())
+    else:
+        ext = os.path.splitext(output)[1]
+        if ext.lower() == '.txt':
+            with open(output, 'w') as out:
+                out.write(report.to_text())
+        else:
+            raise ValueError('Unsupported report type: {}'.format(ext))
 
 
 @dicom.command()
@@ -211,7 +318,11 @@ def parse_sources(sources, cfg):
         if st == 'dir':
             raw_result.append(DirectorySource(sv, ''))
         elif st == 'glob':
-            raw_result.append(GlobSource(sv, ''))
+            raw_result.append(GlobSource(
+                sv,
+                '',
+                recursive=cfg.get_setting('GLOB_IS_RECURSIVE'),
+            ))
         else:
             raise LookupError('Unsupported source type: {}'.format(st))
     return MultiSource('source', *raw_result)

@@ -84,15 +84,16 @@ class DirectorySource:
 class GlobSource:
     """Class to aid finding files from path (for later reading out DICOM)"""
 
-    def __init__(self, exp, tag):
+    def __init__(self, exp, tag, recursive=True):
         self.exp = exp
         self.tag = tag
+        self.recursive = recursive
 
     def get_tag(self):
         return self.tag
 
     def items(self, reader, transformer=None):
-        for file in glob(self.exp):
+        for file in glob(self.exp, recursive=self.recursive):
             parsed = reader(file)
             if transformer is not None:
                 full_path = transformer(file)
