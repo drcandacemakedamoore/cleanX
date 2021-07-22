@@ -76,6 +76,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: conda create --name cleanx-build
       - run: conda run -n cleanx-build python setup.py bdist_egg
-      - run: conda run -c cleanx-build python setup.py genconda
+      - run: conda run -n cleanx-build python setup.py genconda
+        # conda-build installation and the build cannot be in an
+        # environment
       - run: conda install conda-build
       - run: conda build -c conda-forge ./conda-pkg/
