@@ -377,8 +377,6 @@ class Report:
         return HTML(''.join(elements))
 
     def to_text(self):
-        # from IPython.display import HTML
-
         elements = []
         for k, v in self.sections.items():
             if type(v) is dict:
