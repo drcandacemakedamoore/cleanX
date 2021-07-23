@@ -32,6 +32,7 @@ class ColumnsSource(ABC):
 
 
 class CSVSource(ColumnsSource):
+    """Class that helps turn csv into a dataframe"""
 
     def __init__(self, csv, **pd_args):
         self.csv = csv
@@ -42,7 +43,7 @@ class CSVSource(ColumnsSource):
 
 
 class JSONSource(ColumnsSource):
-
+    """Class that helps turn json into a dataframe"""
     def __init__(self, json, **pd_args):
         self.json = json
         self.pd_args = pd_args or {}
