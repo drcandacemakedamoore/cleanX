@@ -13,11 +13,12 @@ import logging
 import re
 
 from abc import ABC
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from pathlib import Path
 
 import pandas as pd
 import numpy as np
+import textwrap as tw
 
 
 class GuesserError(TypeError):
@@ -207,7 +208,6 @@ class MLSetup:
         sensitive_patterns = self.get_sensitive_list()
         df = self.train_src.to_dataframe()
         aggregate_cols = set(())
-        # print(aggregate_cols)
         for col in df.columns:
             col = str(col)
             for p in sensitive_patterns:
@@ -215,21 +215,12 @@ class MLSetup:
                     aggregate_cols.add(col)
                     break
         aggregate_cols = [self.label_tag] + list(aggregate_cols)
-        # print(aggregate_cols)
         tab_fight_bias = pd.DataFrame(
             df[aggregate_cols].value_counts()
         )
         tab_fight_bias2 = tab_fight_bias.groupby(aggregate_cols).sum()
         tab_fight_bias2 = tab_fight_bias2.rename(columns={0: 'sums'})
         return tab_fight_bias2
-
-    # label_and_sensitive = [label]+sensitive_column_list
-    # tab_fight_bias = pd.DataFrame(
-    #     df[label_and_sensitive].value_counts()
-    # )
-    # tab_fight_bias2 = tab_fight_bias.groupby(label_and_sensitive).sum()
-    # tab_fight_bias2 = tab_fight_bias2.rename(columns={0: 'sums'})
-    # return tab_fight_bias2
 
 
 class Report:
@@ -336,25 +327,31 @@ class Report:
 
     def subsection_text(self, data, level=2):
         elements = []
+        prefix = '    '
         for k, v in data.items():
             if type(v) is dict:
+                elements.append(str(k))
+                elements.append('-' * len(str(k)))
                 elements.append(
-                    '{}{}{}'.format(
-                        level,
-                        (k),
-                        level,
-                    ))
-                elements += self.subsection_html(v, level + 1)
+                    tw.indent(
+                        self.subsection_text(v, level + 1)),
+                        prefix,
+                )
+                elements.append('')
             elif isinstance(v, pd.DataFrame):
-                elements += [v]
+                elements.append(str(k))
+                elements.append('-' * len(str(k)))
+                elements.append(tw.indent(str(v), prefix))
+                elements.append('')
+            elif isinstance(v, (Sequence, pd.Index)):
+                elements.append(str(k))
+                elements.append('-' * len(str(k)))
+                for i, item in enumerate(v):
+                    elements.append('  {}. {}'.format(i, item))
+                elements.append('')
             else:
-                elements.append(
-                    '{}:{}'.format(
-                        (str(k)),
-                        (str(v))
-                    ))
-        # elements.append()
-        return elements
+                elements.append('{}: {}'.format(k, v))
+        return '\n'.join(elements)
 
     def to_ipwidget(self):
         from IPython.display import HTML
@@ -380,19 +377,15 @@ class Report:
         elements = []
         for k, v in self.sections.items():
             if type(v) is dict:
-                elements.append('{}'.format((k)))
-                elements += self.subsection_text(v)
-            # elif isinstance(v, pd.DataFrame):
-                # elements += [v._repr_html_()]
+                elements.append(str(k))
+                elements.append('=' * len(str(k)))
+                elements.append(tw.indent(self.subsection_text(v), '    '))
+                elements.append('')
             else:
-                elements.append(
-                    '{}:{}'.format(
-                        (str(k)),
-                        (str(v))
-                    ))
+                elements.append('{}: {}'.format(k, str(v)))
         # elements.append('')
         # lover = np.savetxt(r'D:\projects\np_try.txt', v.values, fmt='%d')
-        return elements
+        return '\n'.join(elements)
 
     # method that prints to terminal
     # method that prints to json
