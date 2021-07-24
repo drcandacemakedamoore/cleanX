@@ -247,6 +247,8 @@ class Report:
             self.report_understand()
 
     def report_duplicates(self):
+        """This method extracts information on duplicates in the datasets,
+        once make into dataframes. The information can be reported"""
         train_dupes, test_dupes = self.mlsetup.duplicates()
         dupe_names = self.mlsetup.duplicated_frame()
         train_dupe_names, test_dupe_names = self.mlsetup.duplicated_frame()
@@ -268,6 +270,8 @@ class Report:
         }
 
     def report_understand(self):
+        """This method extracts information on the datasets,
+        once make into dataframes.The information can be reported"""
         # TODO(wvxvw): The calculation part needs to go into the
         # MLSetup, only the functionality relevant to reporting needs
         # to be here.
@@ -307,6 +311,7 @@ class Report:
         }
 
     def subsection_html(self, data, level=2):
+        """This method helps write an html version of the report."""
         elements = ['<ul>']
         for k, v in data.items():
             if type(v) is dict:
@@ -329,6 +334,7 @@ class Report:
         return elements
 
     def subsection_text(self, data, level=2):
+        """This method helps write a text version of the report."""
         elements = []
         prefix = '    '
         for k, v in data.items():
