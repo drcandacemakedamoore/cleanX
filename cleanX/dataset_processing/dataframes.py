@@ -113,8 +113,6 @@ class MLSetup:
         self.label_tag = label_tag
         self.sensitive_list = sensitive_list
 
-    # def train_maker():
-
     def get_unique_id(self):
         if self.unique_id:
             return self.unique_id
@@ -341,7 +339,7 @@ class Report:
                     tw.indent(
                         self.subsection_text(v, level + 1)),
                         prefix,
-                )
+                    )
                 elements.append('')
             elif isinstance(v, pd.DataFrame):
                 elements.append(str(k))
@@ -388,14 +386,7 @@ class Report:
                 elements.append('')
             else:
                 elements.append('{}: {}'.format(k, str(v)))
-        # elements.append('')
-        # lover = np.savetxt(r'D:\projects\np_try.txt', v.values, fmt='%d')
         return '\n'.join(elements)
-
-    # method that prints to terminal
-    # method that prints to json
-    # method that generates an email message
-    # method that controls verbosity
 
 
 def check_paths_for_group_leakage(train_df, test_df, unique_id):
