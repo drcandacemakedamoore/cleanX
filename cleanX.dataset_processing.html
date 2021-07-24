@@ -49,6 +49,7 @@ or can be implemented with classes</p>
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.CSVSource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">CSVSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.CSVSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="cleanX.dataset_processing.dataframes.ColumnsSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.dataset_processing.dataframes.ColumnsSource</span></code></a></p>
+<p>Class that helps turn csv into a dataframe</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.CSVSource.to_dataframe">
 <span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.CSVSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
@@ -88,6 +89,7 @@ or can be implemented with classes</p>
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.JSONSource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">JSONSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.JSONSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="cleanX.dataset_processing.dataframes.ColumnsSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.dataset_processing.dataframes.ColumnsSource</span></code></a></p>
+<p>Class that helps turn json into a dataframe</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.JSONSource.to_dataframe">
 <span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.JSONSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
@@ -106,7 +108,11 @@ put in multiple output options.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.bias">
 <span class="sig-name descname"><span class="pre">bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.bias" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method sorts the data instances by sensitive categories for
+each label e.g. if the ML is instended to diagnose pneumonia then cases
+of pnuemonia and not pnuemonia would get counts of gender or other
+specified sensitive categories.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.concat_dataframe">
