@@ -206,6 +206,10 @@ class MLSetup:
         return train_df.merge(test_df, on=uid, how='inner')
 
     def bias(self):
+        """This method sorts the data instances by sensitive categories for
+        each label e.g. if the ML is instended to diagnose pneumonia then cases
+        of pnuemonia and not pnuemonia would get counts of gender or other
+        specified sensitive categories."""
         sensitive_patterns = self.get_sensitive_list()
         df = self.train_src.to_dataframe()
         aggregate_cols = set(())
