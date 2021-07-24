@@ -43,7 +43,7 @@ class CSVSource(ColumnsSource):
 
 
 class JSONSource(ColumnsSource):
-    """Class that helps turn json into a dataframe"""
+    """Class that helps turn json into a dataframe for later exploration"""
     def __init__(self, json, **pd_args):
         self.json = json
         self.pd_args = pd_args or {}
@@ -53,7 +53,7 @@ class JSONSource(ColumnsSource):
 
 
 class DFSource(ColumnsSource):
-
+    """Class initializes dataframes for later exploration and reporting"""
     def __init__(self, df):
         self.df = df
 
@@ -71,6 +71,7 @@ class MultiSource(ColumnsSource):
 
 
 def string_source(raw_src):
+    """Class that helps process strings for later exploration"""
     ext = os.path.splitext(raw_src)[1]
     if isinstance(ext, bytes):
         ext = ext.decode()
@@ -198,6 +199,8 @@ class MLSetup:
         )
 
     def leakage(self):
+        """This method explores the data in terms of any instances found in
+        both training and test sets."""
         uid = self.get_unique_id()
         train_df = self.train_src.to_dataframe()
         test_df = self.test_src.to_dataframe()
@@ -227,6 +230,7 @@ class MLSetup:
 
 
 class Report:
+    """This class is for a report which can be produced about the data"""
     def __init__(
         self,
         mlsetup,
@@ -345,7 +349,7 @@ class Report:
                     tw.indent(
                         self.subsection_text(v, level + 1)),
                         prefix,
-                    )
+                        )
                 elements.append('')
             elif isinstance(v, pd.DataFrame):
                 elements.append(str(k))
