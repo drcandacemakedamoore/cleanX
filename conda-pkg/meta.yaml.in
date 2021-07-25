@@ -20,7 +20,7 @@ requirements:
     - matplotlib
     # On MacOS with Python 3.9 the shared library for OpenCV is broken
     # in new versions
-    - opencv<4.4.0
+    - opencv
     - tesserocr
 
 test:
