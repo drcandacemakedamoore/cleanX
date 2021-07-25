@@ -18,7 +18,9 @@ requirements:
     - numpy
     - pandas
     - matplotlib
-    - opencv
+    # On MacOS with Python 3.9 the shared library for OpenCV is broken
+    # in new versions
+    - opencv<4.5.0
     - tesserocr
 
 test:
