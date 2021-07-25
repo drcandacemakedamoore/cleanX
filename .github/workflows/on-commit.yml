@@ -61,11 +61,12 @@ jobs:
           folder: build/sphinx/html
 
   CondaBuild:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         python-version: [3.7, 3.8, 3.9]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -81,3 +82,11 @@ jobs:
         # environment
       - run: conda install conda-build
       - run: conda build -c conda-forge ./conda-pkg/
+      - run: conda install -n cleanx-build --use-local cleanx
+      - run: conda install -n cleanx-build pytest
+      - run: >-
+          conda run -n cleanx-build
+          python
+          ./setup.py test
+          --pytest-args
+          "--junit-xml conda-${{ matrix.os }}-${{ matrix.python-version }}junit-report.xml"
