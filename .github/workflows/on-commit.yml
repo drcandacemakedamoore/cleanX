@@ -30,6 +30,7 @@ jobs:
           --pytest-args "--junit-xml
           report-pypi-${{ matrix.python-version }}-${{ matrix.click-pacage }}-${{ matrix.dicom-package }}.xml"
       - uses: actions/upload-artifact@v2
+        if: always()
         with:
           name: pypi-junit-${{ matrix.python-version }}
           path: report-*.xml
@@ -101,6 +102,7 @@ jobs:
           --pytest-args
           "--junit-xml report-conda-${{ matrix.os }}-${{ matrix.python-version }}.xml"
       - uses: actions/upload-artifact@v2
+        if: always()
         with:
           name: conda-junit-${{ matrix.python-version }}-${{ matrix.os }}
           path: report-*.xml
