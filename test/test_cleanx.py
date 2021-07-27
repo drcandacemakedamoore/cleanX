@@ -1,6 +1,7 @@
 # testing for cleanX
 
 import os
+import sys
 import csv
 import json
 import subprocess
@@ -434,7 +435,7 @@ def test_cli_pydicom():
     with TemporaryDirectory() as td:
         result = subprocess.call(
             [
-                'python', '-m', 'cleanX',
+                sys.executable, '-m', 'cleanX',
                 'dicom', 'extract-images',
                 '-i', 'dir', dicomfile_directory1,
                 '-o', td,
@@ -452,7 +453,7 @@ def test_cli_datasets():
     with TemporaryDirectory() as td:
         result = subprocess.check_output(
             [
-                'python', '-m', 'cleanX',
+                sys.executable, '-m', 'cleanX',
                 'dataset', 'generate-report',
                 '-r', os.path.join(resources, 'test_sample_df.csv'),
                 '-t', os.path.join(resources, 'train_sample_df.csv'),
