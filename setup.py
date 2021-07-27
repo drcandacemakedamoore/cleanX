@@ -271,6 +271,7 @@ def install_requires():
         'pillow',
         'tesserocr',
         'opencv-python',
+        'pytz',
     ]
 
 
