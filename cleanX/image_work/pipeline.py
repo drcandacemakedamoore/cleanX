@@ -100,7 +100,10 @@ class Pipeline:
 
     def __init__(self, steps=None, batch_size=None):
         self.steps = steps or []
-        self.batch_size = batch_size or len(os.sched_getaffinity(0))
+        try:
+            self.batch_size = batch_size or len(os.sched_getaffinity(0))
+        except AttributeError:
+            self.batch_size = batch_size or os.cpu_count() or 1
 
     def process(self, source):
         with TemporaryDirectory() as td:
