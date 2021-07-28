@@ -75,6 +75,7 @@ class TestCommand(Command):
             ezcmd = EZInstallCommand(test_dist)
             ezcmd.initialize_options()
             ezcmd.args = recs
+            ezcmd.always_copy = True
             ezcmd.finalize_options()
             ezcmd.run()
             site.main()
@@ -224,9 +225,12 @@ class Install(InstallCommand):
             if subprocess.call(cmd):
                 raise RuntimeError('Couldn\'t install {} package'.format(name))
         else:
+            # TODO(wvxvw): Find a way to avoid using subprocess to do
+            # this
             if subprocess.call([sys.executable, __file__, 'bdist_egg']):
                 raise RuntimeError('Couldn\'t build {} package'.format(name))
             egg = glob(os.path.join(project_dir, 'dist', '*.egg'))[0]
+            # TODO(wvxvw): Use EZInstallCommand instead
             if subprocess.call([
                     sys.executable,
                     __file__,
@@ -244,7 +248,7 @@ class Install(InstallCommand):
                 # bdist_wheel.  Because we don't do what a typical
                 # install command would, and they rely on a bunch of
                 # side effects of a typical install command, we need
-                # to preted that install happened in a way that they
+                # to pretend that install happened in a way that they
                 # expect.
                 egg_info_cmd = self.distribution.get_command_obj(
                     'install_egg_info',
@@ -281,48 +285,51 @@ def install_requires():
     ]
 
 
-setup(
-    name=name,
-    version=version,
-    description="Python library for cleaning data in large datasets of Xrays",
-    long_description=readme,
-    long_description_content_type='text/markdown',
-    author='doctormakeda@gmail.com',
-    author_email='doctormakeda@gmail.com',
-    maintainer='doctormakeda@gmail.com',
-    maintainer_email= 'doctormakeda@gmail.com',
-    url='https://github.com/drcandacemakedamoore/cleanX',
-    license='MIT',
-    packages=[
-        'cleanX',
-        'cleanX.dataset_processing',
-        'cleanX.dicom_processing',
-        'cleanX.image_work',
-        'cleanX.cli',
-    ],
-    cmdclass={
-        'test': PyTest,
-        'lint': Pep8,
-        'apidoc': SphinxApiDoc,
-        'genconda': GenerateCondaYaml,
-        'install': Install,
-        'find_egg': FindEgg,
-    },
-    tests_require=['pytest', 'pycodestyle'],
-    command_options={
-        'build_sphinx': {
-            'project': ('setup.py', name),
-            'version': ('setup.py', version),
-            'source_dir': ('setup.py', './source'),
-            'config_dir': ('setup.py', './source'),
+# If we don't do this, we cannot run tests that involve
+# multiprocessing
+if __name__ == '__main__':
+    setup(
+        name=name,
+        version=version,
+        description="Python library for cleaning data in large datasets of Xrays",
+        long_description=readme,
+        long_description_content_type='text/markdown',
+        author='doctormakeda@gmail.com',
+        author_email='doctormakeda@gmail.com',
+        maintainer='doctormakeda@gmail.com',
+        maintainer_email= 'doctormakeda@gmail.com',
+        url='https://github.com/drcandacemakedamoore/cleanX',
+        license='MIT',
+        packages=[
+            'cleanX',
+            'cleanX.dataset_processing',
+            'cleanX.dicom_processing',
+            'cleanX.image_work',
+            'cleanX.cli',
+        ],
+        cmdclass={
+            'test': PyTest,
+            'lint': Pep8,
+            'apidoc': SphinxApiDoc,
+            'genconda': GenerateCondaYaml,
+            'install': Install,
+            'find_egg': FindEgg,
         },
-    },
-    setup_requires=['sphinx'],
-    install_requires=install_requires(),
-    extras_require={
-        'cli': ['click'],
-        'pydicom': ['pydicom'],
-        'simpleitk': ['SimpleITK'],
-    },
-    zip_safe=False,
-)
+        tests_require=['pytest', 'pycodestyle'],
+        command_options={
+            'build_sphinx': {
+                'project': ('setup.py', name),
+                'version': ('setup.py', version),
+                'source_dir': ('setup.py', './source'),
+                'config_dir': ('setup.py', './source'),
+            },
+        },
+        setup_requires=['sphinx'],
+        install_requires=install_requires(),
+        extras_require={
+            'cli': ['click'],
+            'pydicom': ['pydicom'],
+            'simpleitk': ['SimpleITK'],
+        },
+        zip_safe=False,
+    )

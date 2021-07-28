@@ -3,6 +3,7 @@
 import os
 import shutil
 import logging
+import multiprocessing
 
 from concurrent.futures import ProcessPoolExecutor
 from tempfile import TemporaryDirectory
@@ -156,7 +157,10 @@ class Pipeline:
                         shutil.rmtree(processed_step.cache_dir)
 
     def process_batch(self, batch, step):
-        with ProcessPoolExecutor() as ex:
+        # Forking only works on Linux.  The garbage that Python
+        # multiprocessing is requires a lot of workarounds...
+        ctx = multiprocessing.get_context('spawn')
+        with ProcessPoolExecutor(mp_context=ctx) as ex:
             results, errors = [], []
             batch_names, batch_data = zip(*batch)
             for res, err in ex.map(step.apply, batch_data):
