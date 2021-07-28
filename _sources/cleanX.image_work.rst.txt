@@ -12,6 +12,14 @@ cleanX.image\_work.image\_work module
    :undoc-members:
    :show-inheritance:
 
+cleanX.image\_work.pipeline module
+----------------------------------
+
+.. automodule:: cleanX.image_work.pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
