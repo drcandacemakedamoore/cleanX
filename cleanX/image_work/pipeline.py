@@ -126,6 +126,8 @@ class Pipeline:
                         if (i + 1) % self.batch_size == 0:
                             self.process_batch(batch, step)
                             batch = []
+                    if batch:
+                        self.process_batch(batch, step)
                 else:
                     batch = []
                     for i, f in enumerate(os.listdir(previous_step.cache_dir)):
@@ -140,6 +142,8 @@ class Pipeline:
                         if (i + 1) % self.batch_size == 0:
                             self.process_batch(batch, step)
                             batch = []
+                    if batch:
+                        self.process_batch(batch, step)
 
                 processed_step = previous_step
                 previous_step = step
