@@ -4,10 +4,14 @@ import os
 import shutil
 import logging
 import multiprocessing
+import sqlite3
+import pickle
 
 from concurrent.futures import ProcessPoolExecutor
 from tempfile import TemporaryDirectory
 from glob import glob
+from importlib import import_module
+from uuid import uuid4
 
 import numpy as np
 import cv2
@@ -54,11 +58,11 @@ class Step:
     Use this as the base class if you intend to add custom steps.
     """
 
-    def __init__(self):
+    def __init__(self, cache_dir=None):
         """
         If you extend this class, you need to call its :code:`__init__`.
         """
-        self.cache_dir = None
+        self.cache_dir = cache_dir
         self.position = None
 
     def apply(self, image_data):
@@ -129,6 +133,9 @@ class Step:
             logging.exception(e)
             return e
 
+    def __reduce__(self):
+        return self.__class__, (self.cache_dir,)
+
 
 class Acquire(Step):
     """This class reads in images (to an array) from a path"""
@@ -145,8 +152,8 @@ class Acquire(Step):
 class Save(Step):
     """This class writes the images somewhere"""
 
-    def __init__(self, target, extension='jpg'):
-        super().__init__()
+    def __init__(self, target, extension='jpg', cache_dir=None):
+        super().__init__(cache_dir)
         self.target = target
         self.extension = extension
 
@@ -166,6 +173,14 @@ class Save(Step):
         except Exception as e:
             logging.exception(e)
             return e
+
+    def __reduce__(self):
+        return self.__class__, (
+            self.target,
+            self.extension,
+            self.cache_dir,
+        )
+
 
 
 class Crop(Step):
@@ -210,8 +225,8 @@ class HistogramNormalize(Step):
     """This class allows normalization by throwing off exxtreme values on
     image histogram. """
 
-    def __init__(self, tail_cut_percent=5):
-        super().__init__()
+    def __init__(self, tail_cut_percent=5, cache_dir=None):
+        super().__init__(cache_dir)
         self.tail_cut_percent = tail_cut_percent
 
     def apply(self, image_data):
@@ -250,6 +265,9 @@ class HistogramNormalize(Step):
             logging.exception(e)
             return None, e
 
+    def __reduce__(self):
+        return self.__class__, (self.tail_cut_percent, self.cache_dir)
+
 
 class Pipeline:
     """
@@ -262,7 +280,26 @@ class Pipeline:
     once by specifying :code:`batch_size` parameter.
     """
 
-    def __init__(self, steps=None, batch_size=None):
+    class JournalDirectory:
+
+        def __init__(self, journal_dir, keep=False):
+            self.journal_dir = journal_dir
+            self.keep = keep
+
+        def __enter__(self):
+            return self.journal_dir
+
+        def __exit__(self, x, y, z):
+            if not self.keep:
+                shutil.rmtree(self.journal_dir)
+
+    def __init__(
+            self,
+            steps=None,
+            batch_size=None,
+            journal=None,
+            keep_journal=False,
+    ):
         """
         Initializes this pipeline, but doesn't start its execution.
 
@@ -273,11 +310,143 @@ class Pipeline:
                            in parallel.
         :type batch_size: int
         """
-        self.steps = steps or []
+        self.steps = tuple(steps) if steps else ()
         try:
             self.batch_size = batch_size or len(os.sched_getaffinity(0))
         except AttributeError:
             self.batch_size = batch_size or os.cpu_count() or 1
+
+        self.journal_dir = None
+        self.keep_journal = keep_journal
+        self.db_file = None
+        self.connection = None
+        self.counter = 0
+
+        if journal:
+            self.initialize_journal(journal)
+
+        self.process_lock = multiprocessing.Lock()
+
+    @classmethod
+    def restore(cls, journal_dir, skip=0, **overrides):
+        # TODO(wvxvw): Serialize other pipeline parameters,
+        # s.a. batch_size
+        result = cls(**overrides)
+        result.journal_dir = journal_dir
+        result.db_file = os.path.join(journal_dir, 'journal.db')
+        result.connection = sqlite3.connect(result.db_file)
+        result.connection.isolation_level = None
+        result.cursor = result.connection.cursor()
+        select = 'select id, step from history where processed = 0'
+        lastrowid = 'select max(id) from history where processed = 1'
+        props = 'select property, contents from pipeline'
+        steps = []
+        for id, step in result.cursor.execute(select).fetchall():
+            steps.append(pickle.loads(step))
+        result.steps = tuple(steps[skip:])
+        processed = result.cursor.execute(lastrowid).fetchone()
+        result.lastrowid = processed[0] if processed else 0
+        result.lastrowid += 1
+        for k, v in result.cursor.execute(props).fetchall():
+            print(k, v)
+            setattr(result, k, pickle.loads(v))
+        result.counter += skip
+        return result
+
+    def initialize_journal(self, journal):
+        if journal is True:
+            journal = os.path.expanduser(
+                '~/cleanx/journal/{}'.format(uuid4()),
+            )
+        try:
+            os.makedirs(journal)
+        except FileExistsError:
+            logging.warning(
+                'Creating journal in existing directory: {}'.forma(journal),
+            )
+            pass
+        serialized = [(pickle.dumps(s),) for s in self.steps]
+        self.journal_dir = journal
+        self.db_file = os.path.join(self.journal_dir, 'journal.db')
+        self.connection = sqlite3.connect(self.db_file)
+        self.connection.isolation_level = None
+        self.cursor = self.connection.cursor()
+        self.cursor.execute(
+            '''
+            create table history(
+                id integer primary key,
+                step blob not null,
+                processed integer not null default 0
+            );
+            '''
+        )
+        self.cursor.executemany(
+            'insert into history(step) values(?)',
+            serialized,
+        )
+        self.cursor.execute(
+            '''
+            create table pipeline(
+                property text primary key,
+                contents blob
+            );
+            '''
+        )
+        self.cursor.executemany(
+            'insert into pipeline(property, contents) values(?, ?)',
+            self.serializable_properties(),
+        )
+        self.connection.commit()
+        self.lastrowid = 1
+
+    def serializable_properties(self):
+        return (
+            ('keep_journal', pickle.dumps(self.keep_journal)),
+            ('counter', pickle.dumps(self.counter)),
+            ('batch_size', pickle.dumps(self.batch_size)),
+        )
+
+    def workspace(self):
+        if not self.journal_dir:
+            return TemporaryDirectory()
+        return self.JournalDirectory(self.journal_dir, self.keep_journal)
+
+    def update_counter(self):
+        self.cursor.execute(
+            'update pipeline set contents = ? where property = "counter"',
+            (pickle.dumps(self.counter),),
+        )
+
+    def begin_transaction(self, step):
+        if not self.journal_dir:
+            return
+        self.cursor.execute('begin')
+        self.cursor.execute(
+            '''
+            update history
+            set
+              processed = 1,
+              step = ?
+            where id = ?
+            ''',
+            (pickle.dumps(step), self.lastrowid),
+        )
+        self.update_counter()
+
+    def commit_transaction(self, step):
+        if not self.journal_dir:
+            return
+        self.cursor.execute('commit')
+        self.lastrowid += 1
+
+    def find_previous_step(self):
+        if not self.journal_dir:
+            return None
+        last_exp = 'select step from history where processed = 1 order by id'
+        last = self.cursor.execute(last_exp).fetchone()
+        if not last:
+            return None
+        return pickle.loads(last[0])
 
     def process(self, source):
         """
@@ -287,54 +456,63 @@ class Pipeline:
                        for the images to be processed.
         :type source: Iterable
         """
-        with TemporaryDirectory() as td:
-            previous_step = None
-            processed_step = None
-            counter = 0
-            for step in self.steps:
-                step.cache_dir = os.path.join(td, str(counter))
-                os.mkdir(step.cache_dir)
-                counter += 1
+        with self.process_lock:
+            with self.workspace() as td:
+                previous_step = self.find_previous_step()
+                processed_step = None
+                for step in self.steps:
+                    step.cache_dir = os.path.join(td, str(self.counter))
+                    os.mkdir(step.cache_dir)
+                    self.counter += 1
+                    self.begin_transaction(step)
 
-                if previous_step is None:
-                    batch = []
-                    for i, s in enumerate(source):
-                        step.position = i
-                        # TODO(wvxvw): Move reading into multiple
-                        # processes
-                        sdata, err = step.read(s)
-                        if err is not None:
-                            raise err
-                        n = os.path.join(step.cache_dir, os.path.basename(s))
-                        batch.append((n, sdata))
-                        if (i + 1) % self.batch_size == 0:
+                    if previous_step is None:
+                        batch = []
+                        for i, s in enumerate(source):
+                            step.position = i
+                            # TODO(wvxvw): Move reading into multiple
+                            # processes
+                            sdata, err = step.read(s)
+                            if err is not None:
+                                raise err
+                            n = os.path.join(
+                                step.cache_dir,
+                                os.path.basename(s),
+                            )
+                            batch.append((n, sdata))
+                            if (i + 1) % self.batch_size == 0:
+                                self.process_batch(batch, step)
+                                batch = []
+                        if batch:
                             self.process_batch(batch, step)
-                            batch = []
-                    if batch:
-                        self.process_batch(batch, step)
-                else:
-                    batch = []
-                    for i, f in enumerate(os.listdir(previous_step.cache_dir)):
-                        step.position = i
-                        sdata, err = step.read(
-                            os.path.join(previous_step.cache_dir, f),
-                        )
-                        if err is not None:
-                            raise err
-                        s = os.path.join(step.cache_dir, f)
-                        batch.append((s, sdata))
-                        if (i + 1) % self.batch_size == 0:
+                    else:
+                        batch = []
+                        files = os.listdir(previous_step.cache_dir)
+                        for i, f in enumerate(files):
+                            step.position = i
+                            sdata, err = step.read(
+                                os.path.join(previous_step.cache_dir, f),
+                            )
+                            if err is not None:
+                                raise err
+                            s = os.path.join(step.cache_dir, f)
+                            batch.append((s, sdata))
+                            if (i + 1) % self.batch_size == 0:
+                                self.process_batch(batch, step)
+                                batch = []
+                        if batch:
                             self.process_batch(batch, step)
-                            batch = []
-                    if batch:
-                        self.process_batch(batch, step)
 
-                processed_step = previous_step
-                previous_step = step
+                    processed_step = previous_step
+                    previous_step = step
 
-                if processed_step is not None:
-                    if os.path.isdir(processed_step.cache_dir):
-                        shutil.rmtree(processed_step.cache_dir)
+                    if processed_step is not None:
+                        if os.path.isdir(processed_step.cache_dir):
+                            shutil.rmtree(processed_step.cache_dir)
+                    self.commit_transaction(step)
+
+            self.counter = 0
+            self.update_counter()
 
     def process_batch(self, batch, step):
         # Forking only works on Linux.  The garbage that Python
