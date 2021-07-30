@@ -96,6 +96,7 @@ class Save(Step):
             logging.exception(e)
             return e
 
+
 class Crop(Step):
 
     def apply(self, image_data):
@@ -108,15 +109,16 @@ class Crop(Step):
             return image_data[
                 np.min(y_nonzero):np.max(y_nonzero),
                 np.min(x_nonzero):np.max(x_nonzero)
-            ],None
+            ], None
         except Exception as e:
             logging.exception(e)
-            return None, e            
+            return None, e
+
 
 class Normalize(Step):
 
     def apply(self, image_data):
-        #img_py = res
+        # img_py = res
         try:
             new_max_value = 255
 
@@ -136,7 +138,7 @@ class Normalize(Step):
 #     def __init__(self, tail_cut_percent=5):
 #         super().__init__()
 #         self.tail_cut_percent = tail_cut_percent
-        
+
 #     def apply(self, image_data):
 #         #img_py = res
 #         try:
@@ -173,6 +175,7 @@ class Normalize(Step):
 #         except Exception as e:
 #                 logging.exception(e)
 #                 return None, e
+
 
 class Pipeline:
 

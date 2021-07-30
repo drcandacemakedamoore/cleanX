@@ -71,10 +71,10 @@ def test_crop():
     assert cropped_example.shape < example.shape
 
 
-def test_simpler_crop():
-    example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
-    cropped_example = iwork.simpler_crop(example)
-    assert cropped_example.shape < example.shape
+# def test_simpler_crop():
+#     example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
+#     cropped_example = iwork.simpler_crop(example)
+#     assert cropped_example.shape < example.shape
 
 
 def test_blur_out_edges():
@@ -297,9 +297,9 @@ def test_avg_image_maker_by_label():
     assert len(lotus) > 0       
 
 
-def test_find_tiny_image_differences():
-    defleper = iwork.find_tiny_image_differences(image_directory)
-    assert len(defleper) > 0
+# def test_find_tiny_image_differences():
+#     defleper = iwork.find_tiny_image_differences(image_directory)
+#     assert len(defleper) > 0
 
 
 def test_zero_to_twofivefive_simplest_norming():
