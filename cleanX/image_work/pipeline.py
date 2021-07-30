@@ -137,6 +137,7 @@ class Normalize(Step):
             logging.exception(e)
             return None, e
 
+
 class HistogramNormalize(Step):
     """This class allows normalization by throwing off exxtreme values on
     image histogram. """
@@ -146,7 +147,6 @@ class HistogramNormalize(Step):
         self.tail_cut_percent = tail_cut_percent
 
     def apply(self, image_data):
-        #img_py = res
         try:
             new_max_value = 255
             img_py = np.array((image_data), dtype='int64')
@@ -179,8 +179,8 @@ class HistogramNormalize(Step):
 
             return img_py, None
         except Exception as e:
-                logging.exception(e)
-                return None, e
+            logging.exception(e)
+            return None, e
 
 
 class Pipeline:
