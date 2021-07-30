@@ -949,6 +949,7 @@ into 0 to 255 values</p>
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Acquire">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Acquire</span></span><a class="headerlink" href="#cleanX.image_work.pipeline.Acquire" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
+<p>This class reads in images (to an array) from a path</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Acquire.read">
 <span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Acquire.read" title="Permalink to this definition">¶</a></dt>
@@ -960,6 +961,7 @@ into 0 to 255 values</p>
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Crop">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Crop</span></span><a class="headerlink" href="#cleanX.image_work.pipeline.Crop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
+<p>This class crops image arrays of black frames</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Crop.apply">
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Crop.apply" title="Permalink to this definition">¶</a></dt>
@@ -974,9 +976,23 @@ into 0 to 255 values</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.HistogramNormalize">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">HistogramNormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.HistogramNormalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
+<p>This class allows normalization by throwing off exxtreme values on
+image histogram.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.HistogramNormalize.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.HistogramNormalize.apply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Normalize">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Normalize</span></span><a class="headerlink" href="#cleanX.image_work.pipeline.Normalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
+<p>This class makes a simple normalizing to get values 0 to 255.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Normalize.apply">
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Normalize.apply" title="Permalink to this definition">¶</a></dt>
@@ -1010,6 +1026,7 @@ into 0 to 255 values</p>
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Save">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
+<p>This class writes the images somewhere</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Save.write">
 <span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Save.write" title="Permalink to this definition">¶</a></dt>
