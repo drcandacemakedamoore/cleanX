@@ -14,8 +14,21 @@ import cv2
 
 
 class DirectorySource:
+    """
+    A class that creates an iterator to look at files in the given
+    directory.
+    """
 
     def __init__(self, directory, extension='jpg'):
+        """
+        Initializes this iterator.
+
+        :param directory: The directory in which to look for images.
+        :type directory: Must be valid for :code:`os.path.join()`.
+        :param extension: A glob pattern for fle extension.  Whether
+                          it is case-sensitive depends on the
+                          filesystem being used.
+        """
         self.directory = directory
         self.extension = extension
 
@@ -26,19 +39,65 @@ class DirectorySource:
 
 
 class PipelineError(RuntimeError):
+    """
+    These errors are reported when pipeline encounters errors with
+    reading or writing images.
+    """
     pass
 
 
 class Step:
+    """
+    This class has default implementations for methods all steps are
+    expected to implement.
+
+    Use this as the base class if you intend to add custom steps.
+    """
 
     def __init__(self):
+        """
+        If you extend this class, you need to call its :code:`__init__`.
+        """
         self.cache_dir = None
         self.position = None
 
     def apply(self, image_data):
+        """
+        This is the method that will be called to do the actual image
+        transformation.  This function must not raise exceptions, as it
+        is used in the :code:`multiprocessing` context.
+
+        :param image_data: Will be the data obtained when calling
+                           :code:`read()` method of this class.
+        :type image_data: Unless this class overrides the defaults, this
+                          will be :code:`numpy.ndarray`.
+
+        :return: This method should return two values.  First is the
+                 processed image data.  This should be suitable for the
+                 :code:`write()` method of this class to write.  Second
+                 is the error, if procesing wasn't possible.  Only one
+                 element of the tuple should be :code:`not None`.
+        :rtype: Tuple[numpy.ndarray, Exception]
+        """
         return image_data, None
 
     def read(self, path):
+        """
+        Read the image saved in the previvous step.  This function must not
+        raise exceptions as it is used in :code:`multiprocessing` context.
+
+        :param path: The path to the image to read.  Unless the
+                     :code:`write()` method of the previous step
+                     was modified to do it differently, the format
+                     of the data in the file is the serialized NumPy array
+
+        :return: This method should return two values.  First is the
+                 image data read from :code:`path`.  It should be in the
+                 format suitable for :code:`apply()`.  Second is the
+                 :code:`Exception` if the read was not successful.  Only
+                 one element in the tuple may be :code:`not None`.
+        :rtype: Tuple[numpy.ndarray, Exception]
+        """
         try:
             res = np.load(path)
             return res, None
@@ -47,6 +106,16 @@ class Step:
             return None, e
 
     def write(self, image_data, path):
+        """
+        This method should write the image data to make it available for
+        the next step.  Default implementation use NumPy's persistence
+        format.  This method is used in :code:`multiprocessing` context,
+        therefore it must not raise exceptions.
+
+        :param image_data: This is the result from calling :code:`apply()`
+                           method of this class.
+        :type image_data: Default implementation uses :code:`numpy.ndarray`.
+        """
         try:
             assert image_data is not None, (
                 'Image data should exist in {} at {}'.format(
@@ -122,7 +191,6 @@ class Normalize(Step):
     """This class makes a simple normalizing to get values 0 to 255."""
 
     def apply(self, image_data):
-        # img_py = res
         try:
             new_max_value = 255
 
@@ -184,8 +252,27 @@ class HistogramNormalize(Step):
 
 
 class Pipeline:
+    """
+    This class is the builder for the image processing pipeline.
+
+    This class executes a sequence of :code:`Steps`.  It attemts to
+    execute as many steps as possible in parallel.  However, in order
+    to avoid running out of memory, it saves the intermediate results
+    to the disk.  You can control the number of images processed at
+    once by specifying :code:`batch_size` parameter.
+    """
 
     def __init__(self, steps=None, batch_size=None):
+        """
+        Initializes this pipeline, but doesn't start its execution.
+
+        :param steps: A sequence of :code:`Steps` this pipeline should
+                      execute.
+        :type steps: List[Step]
+        :param batch_size: The number of images that will be processed
+                           in parallel.
+        :type batch_size: int
+        """
         self.steps = steps or []
         try:
             self.batch_size = batch_size or len(os.sched_getaffinity(0))
@@ -193,6 +280,13 @@ class Pipeline:
             self.batch_size = batch_size or os.cpu_count() or 1
 
     def process(self, source):
+        """
+        Starts this pipeline.
+
+        :param source: This must be an iterable that yields file names
+                       for the images to be processed.
+        :type source: Iterable
+        """
         with TemporaryDirectory() as td:
             previous_step = None
             processed_step = None
@@ -244,7 +338,7 @@ class Pipeline:
 
     def process_batch(self, batch, step):
         # Forking only works on Linux.  The garbage that Python
-        # multiprocessing is requires a lot of workarounds...
+        # multiprocessing is it requires a lot of workarounds...
         ctx = multiprocessing.get_context('spawn')
         with ProcessPoolExecutor(mp_context=ctx) as ex:
             results, errors = [], []
