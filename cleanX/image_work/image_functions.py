@@ -775,12 +775,11 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
-    # suspects = glob.glob(os.path.join(directory, '*.jpg'))
-    avg_image = separate_image_averager(suspects, s)  # np.zeros((5, 5)) + 128
+    avg_image = separate_image_averager(suspects, s)  
     images, sums = [], []
     for pic in suspects:
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
-        example_clipped = simpler_crop(example)
+        example_clipped = crop_np(example)
         example_small = cv2.resize(example_clipped, (s, s))
         experiment_a = (example_small - avg_image) ** 2
         experiment_sum = experiment_a.sum()
@@ -789,11 +788,8 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     df = pd.DataFrame({'images': images, 'sums': sums})
     df.sort_values('sums', inplace=True, ignore_index=True)
     df.reset_index(inplace=True, drop=True)
-    # return df.tail(int((len(df) / 100) * percentile))
-    # df.loc((int((len(df) / 100) * percentile): ) = True
     df['results'] = 'within range'
     df.loc[int((len(df) / 100) * (100 - percentile)):, 'results'] = 'mismatch'
-    # df.loc[len(df) - percentile:, 'results'] = 'high'
     return df
 
 

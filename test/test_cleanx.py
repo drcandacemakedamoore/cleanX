@@ -297,9 +297,9 @@ def test_avg_image_maker_by_label():
     assert len(lotus) > 0       
 
 
-# def test_find_tiny_image_differences():
-#     defleper = iwork.find_tiny_image_differences(image_directory)
-#     assert len(defleper) > 0
+def test_find_tiny_image_differences():
+    defleper = iwork.find_tiny_image_differences(image_directory)
+    assert len(defleper) > 0
 
 
 def test_zero_to_twofivefive_simplest_norming():
