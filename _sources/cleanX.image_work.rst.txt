@@ -4,10 +4,10 @@ cleanX.image\_work package
 Submodules
 ----------
 
-cleanX.image\_work.image\_work module
--------------------------------------
+cleanX.image\_work.image\_functions module
+------------------------------------------
 
-.. automodule:: cleanX.image_work.image_work
+.. automodule:: cleanX.image_work.image_functions
    :members:
    :undoc-members:
    :show-inheritance:

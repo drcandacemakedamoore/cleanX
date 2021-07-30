@@ -37,26 +37,26 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </section>
-<section id="module-cleanX.image_work.image_work">
-<span id="cleanx-image-work-image-work-module"></span><h2>cleanX.image_work.image_work module<a class="headerlink" href="#module-cleanX.image_work.image_work" title="Permalink to this headline">¶</a></h2>
+<section id="module-cleanX.image_work.image_functions">
+<span id="cleanx-image-work-image-functions-module"></span><h2>cleanX.image_work.image_functions module<a class="headerlink" href="#module-cleanX.image_work.image_functions" title="Permalink to this headline">¶</a></h2>
 <p>Library for cleaning radiological data used in machine learning
 applications</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.Rotator">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">Rotator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.Rotator" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.Rotator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">Rotator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.Rotator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class for rotating OpenCV images.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.Rotator.RotationIterator">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">RotationIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.Rotator.RotationIterator" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.Rotator.RotationIterator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">RotationIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.Rotator.RotationIterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class RotationIterator iterator implementation of a range of
 rotated images</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.Rotator.iter">
-<span class="sig-name descname"><span class="pre">iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">360</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.Rotator.iter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.Rotator.iter">
+<span class="sig-name descname"><span class="pre">iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">360</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.Rotator.iter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class method <code class="code docutils literal notranslate"><span class="pre">iter</span></code> returns a generator group of images that
 are on angles from <code class="code docutils literal notranslate"><span class="pre">start</span></code> to <code class="code docutils literal notranslate"><span class="pre">stop</span></code> with increment of
 <code class="code docutils literal notranslate"><span class="pre">step</span></code>.
@@ -73,8 +73,8 @@ Usage example:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.augment_and_move">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">augment_and_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.augment_and_move" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.augment_and_move">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">augment_and_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.augment_and_move" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes images and applies the same list of augmentations, which can include
 the cleanX function crop, to all of them</p>
 <dl class="field-list simple">
@@ -95,8 +95,8 @@ the cleanX function crop, to all of them</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.avg_image_maker">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">avg_image_maker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.avg_image_maker" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.avg_image_maker">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">avg_image_maker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.avg_image_maker" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function shows you an average sized image that has been made with the
 average per pixel place (in a normalized matrix) of all images averaged
 from the set_of_images group.</p>
@@ -118,8 +118,8 @@ from the set_of_images group.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.avg_image_maker_by_label">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">avg_image_maker_by_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe_image_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe_label_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.avg_image_maker_by_label" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.avg_image_maker_by_label">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">avg_image_maker_by_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe_image_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe_label_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.avg_image_maker_by_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function sorts images by labels and makes an average image per label.
 If images are all the same size subtracting one from the other should
 reveal salient differences. N.B. blending different views e.g. PA and
@@ -145,8 +145,8 @@ string
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.blur_out_edges">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">blur_out_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.blur_out_edges" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.blur_out_edges">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">blur_out_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.blur_out_edges" title="Permalink to this definition">¶</a></dt>
 <dd><p>For an individual image, blurs out the edges as an augmentation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -162,8 +162,8 @@ string
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.create_matrix">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">create_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_element</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.create_matrix" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.create_matrix">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">create_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_element</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.create_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes width, height then creates a matrix populated by the default
 element. Super handy for advanced image manipulation. Note you can not
 create matrices bigger than your computer memory can handle making.
@@ -187,8 +187,8 @@ maybe 500*500 depending</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.crop">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">crop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.crop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.crop">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">crop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.crop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Crops an image of a black frame: does both PIL and opencv2 images</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -205,8 +205,8 @@ or </em><em>a PIL image.</em>) – Image</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.crop_np">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">crop_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.crop_np" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.crop_np">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">crop_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.crop_np" title="Permalink to this definition">¶</a></dt>
 <dd><p>Crops black edges of an image array</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -222,8 +222,8 @@ or </em><em>a PIL image.</em>) – Image</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.crop_pil">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">crop_pil</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.crop_pil" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.crop_pil">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">crop_pil</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.crop_pil" title="Permalink to this definition">¶</a></dt>
 <dd><p>Crops black edges of an Pil/Pillow image</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -239,8 +239,8 @@ or </em><em>a PIL image.</em>) – Image</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.crop_them_all">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">crop_them_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.crop_them_all" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.crop_them_all">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">crop_them_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.crop_them_all" title="Permalink to this definition">¶</a></dt>
 <dd><p>Crops all images and moves them to a target folder</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -259,8 +259,8 @@ or </em><em>a PIL image.</em>) – Image</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.dataframe_up_my_pics">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">dataframe_up_my_pics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagnosis_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.dataframe_up_my_pics" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.dataframe_up_my_pics">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">dataframe_up_my_pics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagnosis_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.dataframe_up_my_pics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes images in a directory (should all be with same label), and puts the
 name (with path) and label into a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
 <dl class="field-list simple">
@@ -280,8 +280,8 @@ name (with path) and label into a <code class="code docutils literal notranslate
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.dimensions_to_df">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">dimensions_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.dimensions_to_df" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.dimensions_to_df">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">dimensions_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.dimensions_to_df" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds dimensions on images in a folder, and makes a df for exploratory
 data analysis</p>
 <dl class="field-list simple">
@@ -299,8 +299,8 @@ data analysis</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.dimensions_to_histo">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">dimensions_to_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.dimensions_to_histo" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.dimensions_to_histo">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">dimensions_to_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.dimensions_to_histo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Looks in the directory given, and produces a histogram of various widths
 and heights. Important information as many neural nets take images all the
 same size. Classically most chest-X-rays are <span class="math">2500 \times 2000</span> or
@@ -323,8 +323,8 @@ varied</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_big_lines">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_big_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_big_lines" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_big_lines">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_big_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_big_lines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds number of lines in images at or over the length of
 <code class="code docutils literal notranslate"><span class="pre">line_length</span></code>, gives back a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with this information.
 Note lines can fold back on themselves, and every pixel is counted if they
@@ -347,8 +347,8 @@ are all contiguous</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_by_sample_upper">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_by_sample_upper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_for_line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_by_sample_upper" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_by_sample_upper">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_by_sample_upper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_for_line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_by_sample_upper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes average of upper pixels, and can show you outliers defined by a
 percentage, e.g. shows images with an average of top pixels in top x %
 where x is the percent height of the sample.</p>
@@ -371,8 +371,8 @@ values abnormal</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_duplicated_images">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_duplicated_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_duplicated_images" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_duplicated_images">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_duplicated_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_duplicated_images" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds duplicated images and returns a list of them.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -388,8 +388,8 @@ values abnormal</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_duplicated_images_todf">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_duplicated_images_todf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_duplicated_images_todf" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_duplicated_images_todf">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_duplicated_images_todf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_duplicated_images_todf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds duplicated images and returns a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> of them.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -405,8 +405,8 @@ values abnormal</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_outliers_by_mean_to_df">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_outliers_by_mean_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_outliers_by_mean_to_df" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_outliers_by_mean_to_df">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_outliers_by_mean_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_outliers_by_mean_to_df" title="Permalink to this definition">¶</a></dt>
 <dd><p>Important note: approximate, and it can by chance cut the group
 so images with
 the same mean are in and out of normal range if the knife so falls</p>
@@ -427,8 +427,8 @@ the same mean are in and out of normal range if the knife so falls</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_outliers_by_total_mean">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_outliers_by_total_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_outliers_by_total_mean" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_outliers_by_total_mean">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_outliers_by_total_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_outliers_by_total_mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes the average of all pixels in an image, returns a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>
 with those images that are outliers by mean. Should catch some inverted
 or problem images</p>
@@ -449,8 +449,8 @@ or problem images</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_sample_upper_greater_than_lower">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_sample_upper_greater_than_lower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_sample_upper_greater_than_lower" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_sample_upper_greater_than_lower">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_sample_upper_greater_than_lower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_sample_upper_greater_than_lower" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes average of upper pixels, average of lower (you define what
 percent of picture should be considered upper and lower) and compares.
 In a CXR if lower average is greater than upper it may be upside down
@@ -472,8 +472,8 @@ or otherwise bizarre, as the neck is smaller than the abdomen.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_suspect_text">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_suspect_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_word</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_suspect_text" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_suspect_text">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_suspect_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_word</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_suspect_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds images with a specific text you ask for on them.
 Multi-lingual including English. Accuracy is very high, but not perfect.</p>
 <dl class="field-list simple">
@@ -493,8 +493,8 @@ Multi-lingual including English. Accuracy is very high, but not perfect.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_suspect_text_by_length">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_suspect_text_by_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_suspect_text_by_length" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_suspect_text_by_length">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_suspect_text_by_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_suspect_text_by_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds images with text over a specific length you ask for.
 Useful if you know you do not care about R and L or SUP.
 Multi-lingual including English. Accuracy is very high, but not perfect.</p>
@@ -515,8 +515,8 @@ Multi-lingual including English. Accuracy is very high, but not perfect.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_tiny_image_differences">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_tiny_image_differences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_tiny_image_differences" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_tiny_image_differences">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_tiny_image_differences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_tiny_image_differences" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds differences between a manufactured tiny image, and all your images at
 that size. If you return the outliers they are inverted,
 or dramatically different in some way. Note: percentile returned
@@ -540,8 +540,8 @@ and within range images</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.find_very_hazy">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">find_very_hazy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.find_very_hazy" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_very_hazy">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_very_hazy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_very_hazy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds pictures that are really “hazy” i.e. there is no real straight line
 because they are blurred. Usually, at least the left or right tag
 should give straight lines, thus this function finds image of a certain
@@ -561,8 +561,8 @@ questionable technique level.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.harsh_sharpie_enhance">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">harsh_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.harsh_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.harsh_sharpie_enhance">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">harsh_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.harsh_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a new image that is very sharper to the human eye,
 and has new values in most of the pixels (besides the background).</p>
 <dl class="field-list simple">
@@ -579,8 +579,8 @@ and has new values in most of the pixels (besides the background).</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.histogram_difference_for_inverts">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">histogram_difference_for_inverts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.histogram_difference_for_inverts" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.histogram_difference_for_inverts">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">histogram_difference_for_inverts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.histogram_difference_for_inverts" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function looks for images by a spike on the end of their pixel
 value histogram to find inverted images. Note we assume classical
 X-rays, not inverted fluoroscopy images.</p>
@@ -598,8 +598,8 @@ X-rays, not inverted fluoroscopy images.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.histogram_difference_for_inverts_todf">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">histogram_difference_for_inverts_todf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.histogram_difference_for_inverts_todf" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.histogram_difference_for_inverts_todf">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">histogram_difference_for_inverts_todf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.histogram_difference_for_inverts_todf" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function looks for images by a spike on the end of their pixel
 value histogram to find inverted images, then puts what it found into
 a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>. Images are listed as regulars, inverts of unclear (the
@@ -618,8 +618,8 @@ unclear have equal spikes on both ends). #histo</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.make_contour_image">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">make_contour_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.make_contour_image" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.make_contour_image">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">make_contour_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.make_contour_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes an image into a contour image
 :param im: image name
 :type im: string</p>
@@ -634,8 +634,8 @@ unclear have equal spikes on both ends). #histo</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.make_histo_scaled_folder">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">make_histo_scaled_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.make_histo_scaled_folder" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.make_histo_scaled_folder">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">make_histo_scaled_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.make_histo_scaled_folder" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes each image inside a folder and normalizes them by the
 histogram. It then puts the new normalized images in to a folder
 which is called the target folder (to be made by user)</p>
@@ -655,8 +655,8 @@ which is called the target folder (to be made by user)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.proportions_ht_wt_to_histo">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">proportions_ht_wt_to_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.proportions_ht_wt_to_histo" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.proportions_ht_wt_to_histo">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">proportions_ht_wt_to_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.proportions_ht_wt_to_histo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Looks in the directory given, produces a histogram of various proportions
 of the images by dividing their height by widths.
 Important information as many neural nets take images all the
@@ -680,8 +680,8 @@ varied</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.reasonable_rotation_augmentation">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">reasonable_rotation_augmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.reasonable_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.reasonable_rotation_augmentation">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">reasonable_rotation_augmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.reasonable_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Works on a single image, and returns a list of augmented images which are
 based on twisting the angle from angle1 to angle2 with ‘number_slices’ as
 the number of augmented images to be made from the original. It is not
@@ -708,8 +708,8 @@ between angles -5 to 5.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.rescale_range_from_histogram_low_end">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">rescale_range_from_histogram_low_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.rescale_range_from_histogram_low_end" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.rescale_range_from_histogram_low_end">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">rescale_range_from_histogram_low_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.rescale_range_from_histogram_low_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes an image  and makes the highest pixel value 255,
 and the lowest zero. It also normalizes based on the histogram
 distribution of values, such that the lowest percent
@@ -734,8 +734,8 @@ in size for a neural net anyways)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.salting">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">salting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.salting" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.salting">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">salting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.salting" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function adds some noise to an image.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -751,8 +751,8 @@ in size for a neural net anyways)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.separate_image_averager">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">separate_image_averager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.separate_image_averager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.separate_image_averager">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">separate_image_averager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.separate_image_averager" title="Permalink to this definition">¶</a></dt>
 <dd><p>To run on a list to make a prototype tiny X-ray that is an averages image</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -771,8 +771,8 @@ in size for a neural net anyways)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.set_image_variability">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">set_image_variability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.set_image_variability" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.set_image_variability">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">set_image_variability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.set_image_variability" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function shows you an average sized image created to show variability
 per pixel if all images were averaged (in terms of size) and compared.
 Here you will see where the variability- and therefore in some cases
@@ -796,8 +796,8 @@ aspects of your image set.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.show_images_in_df">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">show_images_in_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iter_ob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.show_images_in_df" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.show_images_in_df">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">show_images_in_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iter_ob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.show_images_in_df" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shows images by taking them off a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> column, and puts
 them up but smaller, so they can be compared quickly</p>
 <dl class="field-list simple">
@@ -817,8 +817,8 @@ them up but smaller, so they can be compared quickly</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.show_major_lines_on_image">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">show_major_lines_on_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pic_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.show_major_lines_on_image" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.show_major_lines_on_image">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">show_major_lines_on_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pic_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.show_major_lines_on_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>A function that takes individual images and shows suspect lines i.e.
 lines more likely to be non-biological.</p>
 <dl class="field-list simple">
@@ -835,8 +835,8 @@ lines more likely to be non-biological.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.simple_rotation_augmentation">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">simple_rotation_augmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_list1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.simple_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.simple_rotation_augmentation">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">simple_rotation_augmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_list1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.simple_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes one picture and rotates is by a number
 of degrees is angle_list1.This function can be used with the
 augment_and_move function as follows (example):</p>
@@ -861,8 +861,8 @@ augment_and_move function as follows (example):</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.simple_spinning_template">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">simple_spinning_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">greys_template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.simple_spinning_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.simple_spinning_template">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">simple_spinning_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">greys_template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.simple_spinning_template" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -888,25 +888,8 @@ outlined in blue rectangles</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.simpler_crop">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">simpler_crop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.simpler_crop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Crops an image of a black frame</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>image cropped of black edges</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>numpy.ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.subtle_sharpie_enhance">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">subtle_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.subtle_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.subtle_sharpie_enhance">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">subtle_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.subtle_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a new image that is very subtly sharper to the human eye,
 but has new values in most of the pixels(besides the background)</p>
 <dl class="field-list simple">
@@ -923,8 +906,8 @@ but has new values in most of the pixels(besides the background)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.tesseract_specific">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">tesseract_specific</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.tesseract_specific" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.tesseract_specific">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">tesseract_specific</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.tesseract_specific" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds images with text on them. Multi-lingual including English.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -940,8 +923,8 @@ but has new values in most of the pixels(besides the background)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_work.zero_to_twofivefive_simplest_norming">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_work.</span></span><span class="sig-name descname"><span class="pre">zero_to_twofivefive_simplest_norming</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_pys</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_work.zero_to_twofivefive_simplest_norming" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.zero_to_twofivefive_simplest_norming">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">zero_to_twofivefive_simplest_norming</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_pys</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.zero_to_twofivefive_simplest_norming" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function takes an image  and makes the highest pixel value 255,
 and the lowest zero. Note that this will not give anything like
 a true normalization, but will put all images
@@ -974,9 +957,31 @@ into 0 to 255 values</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Crop">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Crop</span></span><a class="headerlink" href="#cleanX.image_work.pipeline.Crop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Crop.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Crop.apply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.DirectorySource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">DirectorySource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.DirectorySource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Normalize">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Normalize</span></span><a class="headerlink" href="#cleanX.image_work.pipeline.Normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Normalize.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Normalize.apply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
