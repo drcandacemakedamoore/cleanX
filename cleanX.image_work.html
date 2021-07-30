@@ -1084,7 +1084,7 @@ element of the tuple should be <code class="code docutils literal notranslate"><
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class is the builder for the image processing pipeline.</p>
 <p>This class executes a sequence of <code class="code docutils literal notranslate"><span class="pre">Steps</span></code>.  It attemts to
@@ -1092,6 +1092,21 @@ execute as many steps as possible in parallel.  However, in order
 to avoid running out of memory, it saves the intermediate results
 to the disk.  You can control the number of images processed at
 once by specifying <code class="code docutils literal notranslate"><span class="pre">batch_size</span></code> parameter.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.begin_transaction">
+<span class="sig-name descname"><span class="pre">begin_transaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.begin_transaction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.commit_transaction">
+<span class="sig-name descname"><span class="pre">commit_transaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.commit_transaction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.initialize_journal">
+<span class="sig-name descname"><span class="pre">initialize_journal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">journal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.initialize_journal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.process">
 <span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.process" title="Permalink to this definition">¶</a></dt>
@@ -1174,6 +1189,11 @@ element of the tuple should be <code class="code docutils literal notranslate"><
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Step.deserialize">
+<span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Step.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Step.read">
 <span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Step.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the image saved in the previvous step.  This function must not
@@ -1197,6 +1217,11 @@ one element in the tuple may be <code class="code docutils literal notranslate">
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Step.serialize">
+<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Step.serialize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Step.write">
