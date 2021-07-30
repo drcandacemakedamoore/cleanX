@@ -347,9 +347,9 @@ class Report:
                 elements.append('-' * len(str(k)))
                 elements.append(
                     tw.indent(
-                        self.subsection_text(v, level + 1)),
+                        self.subsection_text(v, level + 1),
                         prefix,
-                        )
+                        ))
                 elements.append('')
             elif isinstance(v, pd.DataFrame):
                 elements.append(str(k))
