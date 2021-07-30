@@ -96,6 +96,83 @@ class Save(Step):
             logging.exception(e)
             return e
 
+class Crop(Step):
+
+    def apply(self, image_data):
+
+        try:
+            nonzero = np.nonzero(image_data)
+            y_nonzero = nonzero[0]
+            x_nonzero = nonzero[1]
+    # , x_nonzero, _ = np.nonzero(image)
+            return image_data[
+                np.min(y_nonzero):np.max(y_nonzero),
+                np.min(x_nonzero):np.max(x_nonzero)
+            ],None
+        except Exception as e:
+            logging.exception(e)
+            return None, e            
+
+class Normalize(Step):
+
+    def apply(self, image_data):
+        #img_py = res
+        try:
+            new_max_value = 255
+
+            max_value = np.amax(image_data)
+            min_value = np.amin(image_data)
+
+            img_py = image_data - min_value
+            multiplier_ratio = new_max_value/max_value
+            img_py = img_py*multiplier_ratio
+            return img_py, None
+        except Exception as e:
+            logging.exception(e)
+            return None, e
+
+# class HistogramNormalize(Step):
+
+#     def __init__(self, tail_cut_percent=5):
+#         super().__init__()
+#         self.tail_cut_percent = tail_cut_percent
+        
+#     def apply(self, image_data):
+#         #img_py = res
+#         try:
+#             new_max_value = 255
+#             img_py = image_data#np.array((image_data), dtype='int64')
+#             # num_total = img_py.shape[0]*img_py.shape[1]
+#             # list_from_array = img_py.tolist()
+#             gray_hist = np.histogram(img_py, bins=256)[0]
+#             area = gray_hist.sum()
+#             cutoff = area * (self.tail_cut_percent/100)
+#             dark_cutoff = 0
+#             bright_cutoff = 255
+#             area_so_far = 0
+#             for i, b in enumerate(gray_hist):
+#                 area_so_far += b
+#                 if area_so_far >= cutoff:
+#                     dark_cutoff = max(0, i - 1)
+#                     break
+#             area_so_far = 0
+#             for i, b in enumerate(reversed(gray_hist)):
+#                 area_so_far += b
+#                 if area_so_far >= cutoff:
+#                     bright_cutoff = min(255, 255 - i)
+#                     break
+
+#             img_py = img_py - dark_cutoff
+#             img_py[img_py < 0] = 0
+#             max_value2 = np.amax(img_py)
+#             # min_value2 = np.amin(img_py)
+#             multiplier_ratio = new_max_value/max_value2
+#             img_py = img_py*multiplier_ratio
+
+#             return img_py, None
+#         except Exception as e:
+#                 logging.exception(e)
+#                 return None, e
 
 class Pipeline:
 

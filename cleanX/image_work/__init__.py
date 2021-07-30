@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from .image_work import (
-    simpler_crop,
+from .image_functions import (
+    # simpler_crop,
     crop_np,
     crop_pil,
     crop,
@@ -45,4 +45,13 @@ from .image_work import (
     make_histo_scaled_folder,
 
     Rotator,
+
 )
+
+# from .pipeline import (
+
+#     DirectorySource,
+#     PipelineError,
+#     Step,
+
+# )
