@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 clean X : Library for cleaning radiological data used in machine learning
-applications
-module dataframes: processing of datasetss related to images
+applications.
+Module dataframes: a module for processing of datasets related to images.
 This module can be implemented by functions,
-or can be implemented with classes
+or can be implemented with classes.
 """
 
 import os
@@ -208,8 +208,8 @@ class MLSetup:
 
     def bias(self):
         """This method sorts the data instances by sensitive categories for
-        each label e.g. if the ML is instended to diagnose pneumonia then cases
-        of pnuemonia and not pnuemonia would get counts of gender or other
+        each label e.g. if the ML is intended to diagnose pneumonia then cases
+        of pneumonia and not pneumonia would get counts of gender or other
         specified sensitive categories."""
         sensitive_patterns = self.get_sensitive_list()
         df = self.train_src.to_dataframe()
@@ -275,7 +275,7 @@ class Report:
 
     def report_understand(self):
         """This method extracts information on the datasets,
-        once make into dataframes.The information can be reported"""
+        once make into dataframes. The information can be reported"""
         # TODO(wvxvw): The calculation part needs to go into the
         # MLSetup, only the functionality relevant to reporting needs
         # to be here.
@@ -347,9 +347,9 @@ class Report:
                 elements.append('-' * len(str(k)))
                 elements.append(
                     tw.indent(
-                        self.subsection_text(v, level + 1),
+                        self.subsection_text(v, level + 1)),
                         prefix,
-                    ))
+                        )
                 elements.append('')
             elif isinstance(v, pd.DataFrame):
                 elements.append(str(k))
