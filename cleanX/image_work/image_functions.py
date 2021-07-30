@@ -24,24 +24,24 @@ from filecmp import cmp
 from pathlib import Path
 
 
-def simpler_crop(image):
-    """
-    Crops an image of a black frame
+# def simpler_crop(image):
+#     """
+#     Crops an image of a black frame
 
-    :param image: Image
-    :type image: Image (JPEG)
+#     :param image: Image
+#     :type image: Image (JPEG)
 
-    :return: image cropped of black edges
-    :rtype: numpy.ndarray
-    """
-    nonzero = np.nonzero(image)
-    y_nonzero = nonzero[0]
-    x_nonzero = nonzero[1]
-    # , x_nonzero, _ = np.nonzero(image)
-    return image[
-        np.min(y_nonzero):np.max(y_nonzero),
-        np.min(x_nonzero):np.max(x_nonzero)
-    ]
+#     :return: image cropped of black edges
+#     :rtype: numpy.ndarray
+#     """
+#     nonzero = np.nonzero(image)
+#     y_nonzero = nonzero[0]
+#     x_nonzero = nonzero[1]
+#     # , x_nonzero, _ = np.nonzero(image)
+#     return image[
+#         np.min(y_nonzero):np.max(y_nonzero),
+#         np.min(x_nonzero):np.max(x_nonzero)
+#     ]
 
 
 def crop_np(image_array):
