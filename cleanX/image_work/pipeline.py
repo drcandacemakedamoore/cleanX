@@ -62,6 +62,7 @@ class Step:
 
 
 class Acquire(Step):
+    """This class reads in images (to an array) from a path"""
 
     def read(self, path):
         try:
@@ -73,6 +74,7 @@ class Acquire(Step):
 
 
 class Save(Step):
+    """This class writes the images somewhere"""
 
     def __init__(self, target, extension='jpg'):
         super().__init__()
@@ -98,6 +100,7 @@ class Save(Step):
 
 
 class Crop(Step):
+    """This class crops image arrays of black frames"""
 
     def apply(self, image_data):
 
@@ -116,6 +119,7 @@ class Crop(Step):
 
 
 class Normalize(Step):
+    """This class makes a simple normalizing to get values 0 to 255."""
 
     def apply(self, image_data):
         # img_py = res
@@ -133,48 +137,50 @@ class Normalize(Step):
             logging.exception(e)
             return None, e
 
-# class HistogramNormalize(Step):
+class HistogramNormalize(Step):
+    """This class allows normalization by throwing off exxtreme values on
+    image histogram. """
 
-#     def __init__(self, tail_cut_percent=5):
-#         super().__init__()
-#         self.tail_cut_percent = tail_cut_percent
+    def __init__(self, tail_cut_percent=5):
+        super().__init__()
+        self.tail_cut_percent = tail_cut_percent
 
-#     def apply(self, image_data):
-#         #img_py = res
-#         try:
-#             new_max_value = 255
-#             img_py = image_data#np.array((image_data), dtype='int64')
-#             # num_total = img_py.shape[0]*img_py.shape[1]
-#             # list_from_array = img_py.tolist()
-#             gray_hist = np.histogram(img_py, bins=256)[0]
-#             area = gray_hist.sum()
-#             cutoff = area * (self.tail_cut_percent/100)
-#             dark_cutoff = 0
-#             bright_cutoff = 255
-#             area_so_far = 0
-#             for i, b in enumerate(gray_hist):
-#                 area_so_far += b
-#                 if area_so_far >= cutoff:
-#                     dark_cutoff = max(0, i - 1)
-#                     break
-#             area_so_far = 0
-#             for i, b in enumerate(reversed(gray_hist)):
-#                 area_so_far += b
-#                 if area_so_far >= cutoff:
-#                     bright_cutoff = min(255, 255 - i)
-#                     break
+    def apply(self, image_data):
+        #img_py = res
+        try:
+            new_max_value = 255
+            img_py = np.array((image_data), dtype='int64')
+            # num_total = img_py.shape[0]*img_py.shape[1]
+            # list_from_array = img_py.tolist()
+            gray_hist = np.histogram(img_py, bins=256)[0]
+            area = gray_hist.sum()
+            cutoff = area * (self.tail_cut_percent/100)
+            dark_cutoff = 0
+            bright_cutoff = 255
+            area_so_far = 0
+            for i, b in enumerate(gray_hist):
+                area_so_far += b
+                if area_so_far >= cutoff:
+                    dark_cutoff = max(0, i - 1)
+                    break
+            area_so_far = 0
+            for i, b in enumerate(reversed(gray_hist)):
+                area_so_far += b
+                if area_so_far >= cutoff:
+                    bright_cutoff = min(255, 255 - i)
+                    break
 
-#             img_py = img_py - dark_cutoff
-#             img_py[img_py < 0] = 0
-#             max_value2 = np.amax(img_py)
-#             # min_value2 = np.amin(img_py)
-#             multiplier_ratio = new_max_value/max_value2
-#             img_py = img_py*multiplier_ratio
+            img_py = img_py - dark_cutoff
+            img_py[img_py < 0] = 0
+            max_value2 = np.amax(img_py)
+            # min_value2 = np.amin(img_py)
+            multiplier_ratio = new_max_value/max_value2
+            img_py = img_py*multiplier_ratio
 
-#             return img_py, None
-#         except Exception as e:
-#                 logging.exception(e)
-#                 return None, e
+            return img_py, None
+        except Exception as e:
+                logging.exception(e)
+                return None, e
 
 
 class Pipeline:
