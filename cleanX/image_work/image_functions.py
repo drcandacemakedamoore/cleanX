@@ -775,7 +775,7 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
-    avg_image = separate_image_averager(suspects, s)  
+    avg_image = separate_image_averager(suspects, s)
     images, sums = [], []
     for pic in suspects:
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
