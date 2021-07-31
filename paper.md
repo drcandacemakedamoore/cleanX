@@ -36,7 +36,7 @@ bibliography: paper.bib
 # Summary
 
 
-Radiological images of various anatomy are part of the diagnostic work-up for millions of patients for indications as diverse as trauma, infection, and malignancies, to name a few.  A considerable amount of time and resources have gone into developing an automated diagnostic interpretation of these images. The purpose of this library is to help scientists, medical professionals, and programmers create better datasets to create algorithms related to X-rays, MRIs or CTs.
+Radiological images of various anatomy are part of the diagnostic work-up for millions of patients for diverse indications.  A considerable amount of time and resources have gone into the effort to develop automated diagnostic interpretation of these images. The purpose of this library is to help scientists, medical professionals, and programmers create better datasets upon which algorithms related to X-rays, MRIs or CTs can be based.
 CleanX is a Python package for data cleaning that was developed for radiology AI. 
 
 
