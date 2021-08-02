@@ -11,8 +11,18 @@ from .pipeline import Pipeline
 
 
 class JournalingPipeline(Pipeline):
+    """
+    This class extends :class:`Pipeline` with the ability to store
+    the progress and the state in a database.
+    """
 
     class JournalDirectory:
+        """
+        A context manager drop-in replacement for
+        :code:`tempfile.TemporaryDirectory` that works with existing
+        directory that may not be removed after the context manager
+        exits.
+        """
 
         def __init__(self, journal_dir, keep=False):
             self.journal_dir = journal_dir
@@ -32,6 +42,20 @@ class JournalingPipeline(Pipeline):
             journal=True,
             keep_journal=False,
     ):
+        """
+        Initializes pipeline with two additional arguments controlling
+        the behavior of presistent storage.  See :class:`Pipeline` for
+        remaining arguments.
+
+        :param journal: If :code:`True` is passed, the pipeline code will use a
+                        preconfigured directory to store the journal.
+                        Otherwise, this must be the path to the directory to
+                        store the journal database.
+        :type journal: :code:`Choice[bool, str]`.
+        :param keep_journal: Controls whether the journal is kept after
+                             successful completion of the pipeline.
+        :type keep_journal: :code:`bool`.
+        """
         super().__init__(steps, batch_size)
 
         self.journal_dir = None
@@ -43,6 +67,25 @@ class JournalingPipeline(Pipeline):
 
     @classmethod
     def restore(cls, journal_dir, skip=0, **overrides):
+        """
+        Restore the previously created journaling pipeline from the last
+        executed step.
+
+        :param journal_dir: The directory containing journal database to
+                            restore from.
+        :type journal_dir: Suitable for :code:`os.path.join()`.
+        :param skip: Skip this many steps before attempting to resume the
+                     pipeline.  This is useful if you know that the step that
+                     failed will fail again, but you want to execute the rest
+                     of the steps in the pipeline.
+        :param \\**overrides: Arguments to pass to the created pipeline
+                              instance that will override those restored from
+                              the journal.
+
+        :return: Fresh :class:`JournalingPipeline` object fast-forwarded to the
+                       last executed step + :code:`skip`.
+        :rtype: :code:`JournalingPipeline`.
+        """
         result = cls(**overrides)
         result.journal_dir = journal_dir
         result.db_file = os.path.join(journal_dir, 'journal.db')
