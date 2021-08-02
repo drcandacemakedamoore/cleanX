@@ -412,6 +412,8 @@ class Pipeline:
         return self.JournalDirectory(self.journal_dir, self.keep_journal)
 
     def update_counter(self):
+        if not self.journal_dir:
+            return
         self.cursor.execute(
             'update pipeline set contents = ? where property = "counter"',
             (pickle.dumps(self.counter),),
