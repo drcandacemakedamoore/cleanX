@@ -71,6 +71,8 @@ class Pipeline:
         except AttributeError:
             self.batch_size = batch_size or os.cpu_count() or 1
 
+        self.counter = 0
+
         self.process_lock = multiprocessing.Lock()
 
     def workspace(self):
