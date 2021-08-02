@@ -182,7 +182,6 @@ class Save(Step):
         )
 
 
-
 class Crop(Step):
     """This class crops image arrays of black frames"""
 
