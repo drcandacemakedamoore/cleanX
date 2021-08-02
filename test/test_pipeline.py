@@ -61,7 +61,7 @@ def test_journaling_pipeline():
 
         p = restore_pipeline(journal_dir, skip=1)
         p.process(src)
-        
+
         src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
         dst_files = set(os.listdir(td))
         assert src_files == dst_files

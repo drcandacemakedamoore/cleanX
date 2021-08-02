@@ -10,6 +10,28 @@ from tempfile import TemporaryDirectory
 from glob import glob
 
 
+class MultiSource:
+
+    def __init__(self, sources):
+        self.sources = tuple(sources)
+
+    def __iter__(self):
+        for src in self.sources:
+            for s in src:
+                yield s
+
+
+class GlobSource:
+
+    def __init__(self, expression, recursive=False):
+        self.expression = expression
+        self.recursive = recursive
+
+    def __iter__(self):
+        for s in glob(self.expression, recursive=self.recursive):
+            yield s
+
+
 class DirectorySource:
     """
     A class that creates an iterator to look at files in the given
@@ -153,8 +175,8 @@ class Pipeline:
                             shutil.rmtree(processed_step.cache_dir)
                     self.commit_transaction(step)
 
-            self.counter = 0
-            self.update_counter()
+                self.counter = 0
+                self.update_counter()
 
     def process_batch(self, batch, step):
         # Forking only works on Linux.  The garbage that Python
