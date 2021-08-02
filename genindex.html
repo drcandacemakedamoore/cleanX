@@ -59,16 +59,16 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Acquire">Acquire (class in cleanX.image_work.pipeline)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Acquire">Acquire (class in cleanX.image_work.steps)</a>
 </li>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Crop.apply">apply() (cleanX.image_work.pipeline.Crop method)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Crop.apply">apply() (cleanX.image_work.steps.Crop method)</a>
 
       <ul>
-        <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.HistogramNormalize.apply">(cleanX.image_work.pipeline.HistogramNormalize method)</a>
+        <li><a href="cleanX.image_work.html#cleanX.image_work.steps.HistogramNormalize.apply">(cleanX.image_work.steps.HistogramNormalize method)</a>
 </li>
-        <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Normalize.apply">(cleanX.image_work.pipeline.Normalize method)</a>
+        <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Normalize.apply">(cleanX.image_work.steps.Normalize method)</a>
 </li>
-        <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Step.apply">(cleanX.image_work.pipeline.Step method)</a>
+        <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Step.apply">(cleanX.image_work.steps.Step method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -85,8 +85,12 @@
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.begin_transaction">begin_transaction() (cleanX.image_work.pipeline.Pipeline method)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.begin_transaction">begin_transaction() (cleanX.image_work.journaling_pipeline.JournalingPipeline method)</a>
+
+      <ul>
+        <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.begin_transaction">(cleanX.image_work.pipeline.Pipeline method)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cleanX.dataset_processing.html#cleanX.dataset_processing.dataframes.MLSetup.bias">bias() (cleanX.dataset_processing.dataframes.MLSetup method)</a>
@@ -143,8 +147,6 @@
         <li><a href="cleanX.image_work.html#module-cleanX.image_work">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     cleanX.image_work.image_functions
 
@@ -153,21 +155,43 @@
 </li>
       </ul></li>
       <li>
+    cleanX.image_work.journaling_pipeline
+
+      <ul>
+        <li><a href="cleanX.image_work.html#module-cleanX.image_work.journaling_pipeline">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
     cleanX.image_work.pipeline
 
       <ul>
         <li><a href="cleanX.image_work.html#module-cleanX.image_work.pipeline">module</a>
 </li>
       </ul></li>
+      <li>
+    cleanX.image_work.steps
+
+      <ul>
+        <li><a href="cleanX.image_work.html#module-cleanX.image_work.steps">module</a>
+</li>
+      </ul></li>
       <li><a href="cleanX.dataset_processing.html#cleanX.dataset_processing.dataframes.ColumnsSource">ColumnsSource (class in cleanX.dataset_processing.dataframes)</a>
 </li>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.commit_transaction">commit_transaction() (cleanX.image_work.pipeline.Pipeline method)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.commit_transaction">commit_transaction() (cleanX.image_work.journaling_pipeline.JournalingPipeline method)</a>
+
+      <ul>
+        <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.commit_transaction">(cleanX.image_work.pipeline.Pipeline method)</a>
 </li>
+      </ul></li>
       <li><a href="cleanX.dataset_processing.html#cleanX.dataset_processing.dataframes.MLSetup.concat_dataframe">concat_dataframe() (cleanX.dataset_processing.dataframes.MLSetup method)</a>
 </li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.create_matrix">create_matrix() (in module cleanX.image_work.image_functions)</a>
 </li>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Crop">Crop (class in cleanX.image_work.pipeline)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.create_pipeline">create_pipeline() (in module cleanX.image_work)</a>
+</li>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Crop">Crop (class in cleanX.image_work.steps)</a>
 </li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.crop">crop() (in module cleanX.image_work.image_functions)</a>
 </li>
@@ -227,8 +251,12 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.find_previous_step">find_previous_step() (cleanX.image_work.pipeline.Pipeline method)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.find_previous_step">find_previous_step() (cleanX.image_work.journaling_pipeline.JournalingPipeline method)</a>
+
+      <ul>
+        <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.find_previous_step">(cleanX.image_work.pipeline.Pipeline method)</a>
 </li>
+      </ul></li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.find_sample_upper_greater_than_lower">find_sample_upper_greater_than_lower() (in module cleanX.image_work.image_functions)</a>
 </li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.find_suspect_text">find_suspect_text() (in module cleanX.image_work.image_functions)</a>
@@ -283,7 +311,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.histogram_difference_for_inverts_todf">histogram_difference_for_inverts_todf() (in module cleanX.image_work.image_functions)</a>
 </li>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.HistogramNormalize">HistogramNormalize (class in cleanX.image_work.pipeline)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.steps.HistogramNormalize">HistogramNormalize (class in cleanX.image_work.steps)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -291,7 +319,7 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.initialize_journal">initialize_journal() (cleanX.image_work.pipeline.Pipeline method)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.initialize_journal">initialize_journal() (cleanX.image_work.journaling_pipeline.JournalingPipeline method)</a>
 </li>
       <li><a href="cleanX.dicom_processing.html#cleanX.dicom_processing.source.DirectorySource.items">items() (cleanX.dicom_processing.source.DirectorySource method)</a>
 
@@ -313,6 +341,12 @@
 <h2 id="J">J</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.journaling_pipeline.JournalingPipeline">JournalingPipeline (class in cleanX.image_work.journaling_pipeline)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.JournalDirectory">JournalingPipeline.JournalDirectory (class in cleanX.image_work.journaling_pipeline)</a>
+</li>
       <li><a href="cleanX.dataset_processing.html#cleanX.dataset_processing.dataframes.JSONSource">JSONSource (class in cleanX.dataset_processing.dataframes)</a>
 </li>
   </ul></td>
@@ -363,7 +397,11 @@
 </li>
         <li><a href="cleanX.image_work.html#module-cleanX.image_work.image_functions">cleanX.image_work.image_functions</a>
 </li>
+        <li><a href="cleanX.image_work.html#module-cleanX.image_work.journaling_pipeline">cleanX.image_work.journaling_pipeline</a>
+</li>
         <li><a href="cleanX.image_work.html#module-cleanX.image_work.pipeline">cleanX.image_work.pipeline</a>
+</li>
+        <li><a href="cleanX.image_work.html#module-cleanX.image_work.steps">cleanX.image_work.steps</a>
 </li>
       </ul></li>
   </ul></td>
@@ -380,7 +418,7 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Normalize">Normalize (class in cleanX.image_work.pipeline)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Normalize">Normalize (class in cleanX.image_work.steps)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -392,12 +430,10 @@
 </li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline">Pipeline (class in cleanX.image_work.pipeline)</a>
 </li>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.JournalDirectory">Pipeline.JournalDirectory (class in cleanX.image_work.pipeline)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.PipelineError">PipelineError</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.PipelineError">PipelineError</a>
-</li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.process">process() (cleanX.image_work.pipeline.Pipeline method)</a>
 </li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.process_batch">process_batch() (cleanX.image_work.pipeline.Pipeline method)</a>
@@ -410,10 +446,10 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Acquire.read">read() (cleanX.image_work.pipeline.Acquire method)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Acquire.read">read() (cleanX.image_work.steps.Acquire method)</a>
 
       <ul>
-        <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Step.read">(cleanX.image_work.pipeline.Step method)</a>
+        <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Step.read">(cleanX.image_work.steps.Step method)</a>
 </li>
       </ul></li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.reasonable_rotation_augmentation">reasonable_rotation_augmentation() (in module cleanX.image_work.image_functions)</a>
@@ -432,7 +468,9 @@
 </li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.rescale_range_from_histogram_low_end">rescale_range_from_histogram_low_end() (in module cleanX.image_work.image_functions)</a>
 </li>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.restore">restore() (cleanX.image_work.pipeline.Pipeline class method)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.restore">restore() (cleanX.image_work.journaling_pipeline.JournalingPipeline class method)</a>
+</li>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.restore_pipeline">restore_pipeline() (in module cleanX.image_work)</a>
 </li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.Rotator">Rotator (class in cleanX.image_work.image_functions)</a>
 </li>
@@ -446,13 +484,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.salting">salting() (in module cleanX.image_work.image_functions)</a>
 </li>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Save">Save (class in cleanX.image_work.pipeline)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Save">Save (class in cleanX.image_work.steps)</a>
 </li>
       <li><a href="cleanX.dataset_processing.html#cleanX.dataset_processing.dataframes.see_part_potential_bias">see_part_potential_bias() (in module cleanX.dataset_processing.dataframes)</a>
 </li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.separate_image_averager">separate_image_averager() (in module cleanX.image_work.image_functions)</a>
 </li>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.serializable_properties">serializable_properties() (cleanX.image_work.pipeline.Pipeline method)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.serializable_properties">serializable_properties() (cleanX.image_work.journaling_pipeline.JournalingPipeline method)</a>
 </li>
       <li><a href="cleanX.image_work.html#cleanX.image_work.image_functions.set_image_variability">set_image_variability() (in module cleanX.image_work.image_functions)</a>
 </li>
@@ -470,7 +508,7 @@
 </li>
       <li><a href="cleanX.dicom_processing.html#cleanX.dicom_processing.source.Source">Source (class in cleanX.dicom_processing.source)</a>
 </li>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Step">Step (class in cleanX.image_work.pipeline)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Step">Step (class in cleanX.image_work.steps)</a>
 </li>
       <li><a href="cleanX.dataset_processing.html#cleanX.dataset_processing.dataframes.string_source">string_source() (in module cleanX.dataset_processing.dataframes)</a>
 </li>
@@ -516,22 +554,30 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.update_counter">update_counter() (cleanX.image_work.pipeline.Pipeline method)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.update_counter">update_counter() (cleanX.image_work.journaling_pipeline.JournalingPipeline method)</a>
+
+      <ul>
+        <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.update_counter">(cleanX.image_work.pipeline.Pipeline method)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.workspace">workspace() (cleanX.image_work.pipeline.Pipeline method)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Save.write">write() (cleanX.image_work.pipeline.Save method)</a>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.workspace">workspace() (cleanX.image_work.journaling_pipeline.JournalingPipeline method)</a>
 
       <ul>
-        <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Step.write">(cleanX.image_work.pipeline.Step method)</a>
+        <li><a href="cleanX.image_work.html#cleanX.image_work.pipeline.Pipeline.workspace">(cleanX.image_work.pipeline.Pipeline method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Save.write">write() (cleanX.image_work.steps.Save method)</a>
+
+      <ul>
+        <li><a href="cleanX.image_work.html#cleanX.image_work.steps.Step.write">(cleanX.image_work.steps.Step method)</a>
 </li>
       </ul></li>
   </ul></td>

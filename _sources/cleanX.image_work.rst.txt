@@ -12,10 +12,26 @@ cleanX.image\_work.image\_functions module
    :undoc-members:
    :show-inheritance:
 
+cleanX.image\_work.journaling\_pipeline module
+----------------------------------------------
+
+.. automodule:: cleanX.image_work.journaling_pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 cleanX.image\_work.pipeline module
 ----------------------------------
 
 .. automodule:: cleanX.image_work.pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+cleanX.image\_work.steps module
+-------------------------------
+
+.. automodule:: cleanX.image_work.steps
    :members:
    :undoc-members:
    :show-inheritance:

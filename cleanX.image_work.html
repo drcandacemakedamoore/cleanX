@@ -943,72 +943,63 @@ into 0 to 255 values</p>
 </dd></dl>
 
 </section>
+<section id="module-cleanX.image_work.journaling_pipeline">
+<span id="cleanx-image-work-journaling-pipeline-module"></span><h2>cleanX.image_work.journaling_pipeline module<a class="headerlink" href="#module-cleanX.image_work.journaling_pipeline" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.journaling_pipeline.</span></span><span class="sig-name descname"><span class="pre">JournalingPipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Pipeline" title="cleanX.image_work.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Pipeline</span></code></a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.JournalDirectory">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">JournalDirectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">journal_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.JournalDirectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.begin_transaction">
+<span class="sig-name descname"><span class="pre">begin_transaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.begin_transaction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.commit_transaction">
+<span class="sig-name descname"><span class="pre">commit_transaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.commit_transaction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.find_previous_step">
+<span class="sig-name descname"><span class="pre">find_previous_step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.find_previous_step" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.initialize_journal">
+<span class="sig-name descname"><span class="pre">initialize_journal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">journal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.initialize_journal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.restore">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">journal_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">overrides</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.restore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.serializable_properties">
+<span class="sig-name descname"><span class="pre">serializable_properties</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.serializable_properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.update_counter">
+<span class="sig-name descname"><span class="pre">update_counter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.update_counter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.workspace">
+<span class="sig-name descname"><span class="pre">workspace</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.workspace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="module-cleanX.image_work.pipeline">
 <span id="cleanx-image-work-pipeline-module"></span><h2>cleanX.image_work.pipeline module<a class="headerlink" href="#module-cleanX.image_work.pipeline" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Acquire">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Acquire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Acquire" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
-<p>This class reads in images (to an array) from a path</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Acquire.read">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Acquire.read" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read the image saved in the previvous step.  This function must not
-raise exceptions as it is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>path</strong> – The path to the image to read.  Unless the
-<code class="code docutils literal notranslate"><span class="pre">write()</span></code> method of the previous step
-was modified to do it differently, the format
-of the data in the file is the serialized NumPy array</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>This method should return two values.  First is the
-image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
-format suitable for <code class="code docutils literal notranslate"><span class="pre">apply()</span></code>.  Second is the
-<code class="code docutils literal notranslate"><span class="pre">Exception</span></code> if the read was not successful.  Only
-one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[numpy.ndarray, Exception]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Crop">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Crop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Crop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
-<p>This class crops image arrays of black frames</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Crop.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Crop.apply" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is the method that will be called to do the actual image
-transformation.  This function must not raise exceptions, as it
-is used in the <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
-will be <code class="code docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.) – Will be the data obtained when calling
-<code class="code docutils literal notranslate"><span class="pre">read()</span></code> method of this class.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>This method should return two values.  First is the
-processed image data.  This should be suitable for the
-<code class="code docutils literal notranslate"><span class="pre">write()</span></code> method of this class to write.  Second
-is the error, if procesing wasn’t possible.  Only one
-element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[numpy.ndarray, Exception]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.DirectorySource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">DirectorySource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.DirectorySource" title="Permalink to this definition">¶</a></dt>
@@ -1018,73 +1009,8 @@ directory.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.HistogramNormalize">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">HistogramNormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.HistogramNormalize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
-<p>This class allows normalization by throwing off exxtreme values on
-image histogram.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.HistogramNormalize.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.HistogramNormalize.apply" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is the method that will be called to do the actual image
-transformation.  This function must not raise exceptions, as it
-is used in the <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
-will be <code class="code docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.) – Will be the data obtained when calling
-<code class="code docutils literal notranslate"><span class="pre">read()</span></code> method of this class.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>This method should return two values.  First is the
-processed image data.  This should be suitable for the
-<code class="code docutils literal notranslate"><span class="pre">write()</span></code> method of this class to write.  Second
-is the error, if procesing wasn’t possible.  Only one
-element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[numpy.ndarray, Exception]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Normalize">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Normalize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
-<p>This class makes a simple normalizing to get values 0 to 255.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Normalize.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Normalize.apply" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is the method that will be called to do the actual image
-transformation.  This function must not raise exceptions, as it
-is used in the <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
-will be <code class="code docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.) – Will be the data obtained when calling
-<code class="code docutils literal notranslate"><span class="pre">read()</span></code> method of this class.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>This method should return two values.  First is the
-processed image data.  This should be suitable for the
-<code class="code docutils literal notranslate"><span class="pre">write()</span></code> method of this class to write.  Second
-is the error, if procesing wasn’t possible.  Only one
-element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[numpy.ndarray, Exception]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class is the builder for the image processing pipeline.</p>
 <p>This class executes a sequence of <code class="code docutils literal notranslate"><span class="pre">Steps</span></code>.  It attemts to
@@ -1092,12 +1018,6 @@ execute as many steps as possible in parallel.  However, in order
 to avoid running out of memory, it saves the intermediate results
 to the disk.  You can control the number of images processed at
 once by specifying <code class="code docutils literal notranslate"><span class="pre">batch_size</span></code> parameter.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.JournalDirectory">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">JournalDirectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">journal_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.JournalDirectory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.begin_transaction">
 <span class="sig-name descname"><span class="pre">begin_transaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.begin_transaction" title="Permalink to this definition">¶</a></dt>
@@ -1111,11 +1031,6 @@ once by specifying <code class="code docutils literal notranslate"><span class="
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.find_previous_step">
 <span class="sig-name descname"><span class="pre">find_previous_step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.find_previous_step" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.initialize_journal">
-<span class="sig-name descname"><span class="pre">initialize_journal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">journal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.initialize_journal" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1133,16 +1048,6 @@ for the images to be processed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.process_batch">
 <span class="sig-name descname"><span class="pre">process_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.process_batch" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.restore">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">journal_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">overrides</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.restore" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.serializable_properties">
-<span class="sig-name descname"><span class="pre">serializable_properties</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.serializable_properties" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1165,14 +1070,146 @@ for the images to be processed.</p>
 reading or writing images.</p>
 </dd></dl>
 
+</section>
+<section id="module-cleanX.image_work.steps">
+<span id="cleanx-image-work-steps-module"></span><h2>cleanX.image_work.steps module<a class="headerlink" href="#module-cleanX.image_work.steps" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Save">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.pipeline.Step" title="cleanX.image_work.pipeline.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Step</span></code></a></p>
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Acquire">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Acquire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
+<p>This class reads in images (to an array) from a path</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Acquire.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the image saved in the previvous step.  This function must not
+raise exceptions as it is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – The path to the image to read.  Unless the
+<code class="code docutils literal notranslate"><span class="pre">write()</span></code> method of the previous step
+was modified to do it differently, the format
+of the data in the file is the serialized NumPy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
+format suitable for <code class="code docutils literal notranslate"><span class="pre">apply()</span></code>.  Second is the
+<code class="code docutils literal notranslate"><span class="pre">Exception</span></code> if the read was not successful.  Only
+one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[numpy.ndarray, Exception]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Crop">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Crop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
+<p>This class crops image arrays of black frames</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Crop.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the method that will be called to do the actual image
+transformation.  This function must not raise exceptions, as it
+is used in the <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
+will be <code class="code docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.) – Will be the data obtained when calling
+<code class="code docutils literal notranslate"><span class="pre">read()</span></code> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+processed image data.  This should be suitable for the
+<code class="code docutils literal notranslate"><span class="pre">write()</span></code> method of this class to write.  Second
+is the error, if procesing wasn’t possible.  Only one
+element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[numpy.ndarray, Exception]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.HistogramNormalize">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">HistogramNormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
+<p>This class allows normalization by throwing off exxtreme values on
+image histogram.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.HistogramNormalize.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the method that will be called to do the actual image
+transformation.  This function must not raise exceptions, as it
+is used in the <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
+will be <code class="code docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.) – Will be the data obtained when calling
+<code class="code docutils literal notranslate"><span class="pre">read()</span></code> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+processed image data.  This should be suitable for the
+<code class="code docutils literal notranslate"><span class="pre">write()</span></code> method of this class to write.  Second
+is the error, if procesing wasn’t possible.  Only one
+element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[numpy.ndarray, Exception]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Normalize">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
+<p>This class makes a simple normalizing to get values 0 to 255.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Normalize.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the method that will be called to do the actual image
+transformation.  This function must not raise exceptions, as it
+is used in the <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
+will be <code class="code docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.) – Will be the data obtained when calling
+<code class="code docutils literal notranslate"><span class="pre">read()</span></code> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+processed image data.  This should be suitable for the
+<code class="code docutils literal notranslate"><span class="pre">write()</span></code> method of this class to write.  Second
+is the error, if procesing wasn’t possible.  Only one
+element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[numpy.ndarray, Exception]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Save">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
 <p>This class writes the images somewhere</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Save.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Save.write" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Save.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method should write the image data to make it available for
 the next step.  Default implementation use NumPy’s persistence
 format.  This method is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context,
@@ -1188,15 +1225,15 @@ method of this class.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Step">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Step" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class has default implementations for methods all steps are
 expected to implement.</p>
 <p>Use this as the base class if you intend to add custom steps.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Step.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Step.apply" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the method that will be called to do the actual image
 transformation.  This function must not raise exceptions, as it
 is used in the <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
@@ -1220,8 +1257,8 @@ element of the tuple should be <code class="code docutils literal notranslate"><
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Step.read">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Step.read" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the image saved in the previvous step.  This function must not
 raise exceptions as it is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
 <dl class="field-list simple">
@@ -1245,8 +1282,8 @@ one element in the tuple may be <code class="code docutils literal notranslate">
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Step.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Step.write" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method should write the image data to make it available for
 the next step.  Default implementation use NumPy’s persistence
 format.  This method is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context,
@@ -1264,6 +1301,16 @@ method of this class.</p>
 </section>
 <section id="module-cleanX.image_work">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cleanX.image_work" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.create_pipeline">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.</span></span><span class="sig-name descname"><span class="pre">create_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.create_pipeline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.restore_pipeline">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.</span></span><span class="sig-name descname"><span class="pre">restore_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">journal_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.restore_pipeline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </section>
 </section>
 
