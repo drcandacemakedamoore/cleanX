@@ -63,6 +63,27 @@ from .steps import (
 
 
 def create_pipeline(steps, batch_size=None, journal=None, keep_journal=False):
+    """
+    Create a pipeline that will execute the :code:`steps`.  If
+    :code:`journal` is not falsy, create a journaling pipeline, that can
+    be pick up from the failed step.
+
+    :param steps: A sequence of :class:`Step` to be executed in this pipeline.
+    :type steps: :code:`Sequence[Step]`.
+    :param batch_size: Controls how many steps are processed concurrently.
+    :type batch_size: :code:`int`.
+    :param journal: If :code:`True` is passed, the pipeline code will use a
+                    preconfigured directory to store the journal.  Otherwise,
+                    this must be the path to the directory to store the journal
+                    database.
+    :type journal: :code:`Choice[bool, str]`.
+    :param keep_journal: Controls whether the journal is kept after successful
+                         completion of the pipeline.
+    :type keep_journal: :code:`bool`.
+
+    :return: a :class:`Pipeline` object or one of its descendants.
+    :rtype: :code:`Pipeline`.
+    """
     if journal:
         return JournalingPipeline(
             steps,
@@ -73,5 +94,31 @@ def create_pipeline(steps, batch_size=None, journal=None, keep_journal=False):
     return Pipeline(steps, batch_size)
 
 
-def restore_pipeline(journal_dir, skip=0):
-    return JournalingPipeline.restore(journal_dir, skip=skip)
+def restore_pipeline(journal_dir, skip=0, **overrides):
+    """
+    Restores previously interrupted pipeline.  The pipeline should have been
+    created with :code:`journal` set.  If the creating code didn't specify
+    the directory to keep the journal, it may be obtained in this way:
+
+    .. code-block:: python
+
+        p = create_pipeline(steps=(...), journal=True)
+        journal_dir = p.journal_dir
+        # After pipeline failed
+        p = restore_pipeline(journal_dir)
+
+    :param journal_dir: The directory containing journal database to restore
+                        from.
+    :type journal_dir: Suitable for :code:`os.path.join()`.
+    :param skip: Skip this many steps before attempting to resume the pipeline.
+                 This is useful if you know that the step that failed will
+                 fail again, but you want to execute the rest of the steps
+                 in the pipeline.
+    :param \\**overrides: Arguments to pass to the created pipeline instance
+                          that will override those restored from the journal.
+
+    :return: Fresh :class:`JournalingPipeline` object fast-forwarded to the
+                   last executed step + :code:`skip`.
+    :rtype: :code:`JournalingPipeline`.
+    """
+    return JournalingPipeline.restore(journal_dir, skip=skip, **overrides)
