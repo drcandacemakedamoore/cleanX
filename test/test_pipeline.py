@@ -6,8 +6,9 @@ from tempfile import TemporaryDirectory
 
 import pytest
 
-from cleanX.image_work.pipeline import (
-    Pipeline,
+from cleanX.image_work import (
+    create_pipeline,
+    restore_pipeline,
     Acquire,
     Save,
     DirectorySource,
@@ -29,7 +30,7 @@ def test_copy_images():
     src_dir = image_directory
     with TemporaryDirectory() as td:
         src = DirectorySource(src_dir)
-        p = Pipeline(steps=(
+        p = create_pipeline(steps=(
             Acquire(),
             Save(td),
         ))
@@ -43,7 +44,7 @@ def test_journaling_pipeline():
     src_dir = image_directory
     with TemporaryDirectory() as td:
         src = DirectorySource(src_dir)
-        p = Pipeline(
+        p = create_pipeline(
             steps=(
                 Acquire(),
                 Fail(),
@@ -58,7 +59,7 @@ def test_journaling_pipeline():
         with pytest.raises(PipelineError):
             p.process(src)
 
-        p = Pipeline.restore(journal_dir, skip=1)
+        p = restore_pipeline(journal_dir, skip=1)
         p.process(src)
         
         src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))

@@ -45,13 +45,33 @@ from .image_functions import (
     make_histo_scaled_folder,
 
     Rotator,
-
+)
+from .pipeline import (
+    DirectorySource,
+    PipelineError,
+    Pipeline,
+)
+from .journaling_pipeline import JournalingPipeline
+from .steps import (
+    Step,
+    Acquire,
+    Save,
+    Crop,
+    Normalize,
+    HistogramNormalize,
 )
 
-# from .pipeline import (
 
-#     DirectorySource,
-#     PipelineError,
-#     Step,
+def create_pipeline(steps, batch_size=None, journal=None, keep_journal=False):
+    if journal:
+        return JournalingPipeline(
+            steps,
+            batch_size=batch_size,
+            journal=journal,
+            keep_journal=keep_journal,
+        )
+    return Pipeline(steps, batch_size)
 
-# )
+
+def restore_pipeline(journal_dir, skip=0):
+    return JournalingPipeline.restore(journal_dir, skip=skip)
