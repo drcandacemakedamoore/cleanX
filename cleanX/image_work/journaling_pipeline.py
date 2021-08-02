@@ -38,7 +38,6 @@ class JournalingPipeline(Pipeline):
         self.keep_journal = keep_journal
         self.db_file = None
         self.connection = None
-        self.counter = 0
 
         self.initialize_journal(journal)
 
@@ -151,5 +150,3 @@ class JournalingPipeline(Pipeline):
         if not last:
             return None
         return pickle.loads(last[0])
-
-
