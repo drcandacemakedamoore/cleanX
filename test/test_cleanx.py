@@ -4,12 +4,10 @@ import os
 import sys
 import csv
 import json
-import subprocess
 
 from functools import partial
 from tempfile import TemporaryDirectory
 from random import Random
-from importlib import import_module
 
 import cv2
 import pytest
@@ -24,19 +22,11 @@ from cleanX import (
     dicom_processing as dicomp,
     image_work as iwork,
 )
+from harness import skip_if_missing
 
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
 target_directory = os.path.join(os.path.dirname(__file__), 'target')
-
-
-def missing(*modules):
-    try:
-        for m in modules:
-            import_module(m)
-        return False
-    except ModuleNotFoundError:
-        return True
 
 
 def gen_row(columns, rnd):
@@ -322,7 +312,7 @@ def test_make_histo_scaled_folder():
     assert len(d) > 0
 
 
-@pytest.mark.skipif(missing('SimpleITK'), reason='no simpleITK available')
+@skip_if_missing('no simpleITK available', 'SimpleITK')
 def test_rip_out_jpgs_sitk():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -337,7 +327,7 @@ def test_rip_out_jpgs_sitk():
     assert len(jpegs_made) > 0    
 
 
-@pytest.mark.skipif(missing('SimpleITK'), reason='no simpleITK available')
+@skip_if_missing('no simpleITK available', 'SimpleITK')
 def test_read_dicoms_with_sitk():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -356,7 +346,7 @@ def test_read_dicoms_with_sitk():
     assert 'Protocol Name' in df.columns
 
 
-@pytest.mark.skipif(missing('pydicom') , reason='no pydicom available')
+@skip_if_missing('no pydicom available', 'pydicom')
 def test_get_jpg_with_pydicom():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -370,7 +360,7 @@ def test_get_jpg_with_pydicom():
     assert jpegs_made
 
 
-@pytest.mark.skipif(missing('pydicom'), reason='no pydicom available')
+@skip_if_missing('no pydicom available', 'pydicom')
 def test_read_dicoms_with_pydicom():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -384,7 +374,7 @@ def test_read_dicoms_with_pydicom():
     assert set(os.listdir(dicomfile_directory1)) == set(df[tag].to_list())
 
 
-@pytest.mark.skipif(missing('pydicom'), reason='no pydicom available')
+@skip_if_missing('no pydicom available', 'pydicom')
 def test_read_dicoms_options_with_pydicom():
     dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
@@ -424,45 +414,3 @@ def test_dataset_creation():
         assert len(m2) == common
         all_df = setup.concat_dataframe()
         assert len(m1) == len(all_df.columns)
-
-
-@pytest.mark.skipif(missing('pydicom', 'click'), reason='no pydicom available')
-def test_cli_pydicom():
-    dicomfile_directory1 = os.path.join(
-        os.path.dirname(__file__),
-        'dicom_example_folder',
-    )
-    with TemporaryDirectory() as td:
-        result = subprocess.call(
-            [
-                sys.executable, '-m', 'cleanX',
-                'dicom', 'extract-images',
-                '-i', 'dir', dicomfile_directory1,
-                '-o', td,
-            ]
-        )
-        assert not result
-        df = pd.read_csv(os.path.join(td, 'report.csv'))
-        assert 'source' in df.columns
-        assert len(os.listdir(dicomfile_directory1)) == len(df)
-
-
-@pytest.mark.skipif(missing('pydicom', 'click'), reason='no pydicom available')
-def test_cli_datasets():
-    resources = os.path.dirname(__file__)
-    with TemporaryDirectory() as td:
-        result = subprocess.check_output(
-            [
-                sys.executable, '-m', 'cleanX',
-                'dataset', 'generate-report',
-                '-r', os.path.join(resources, 'test_sample_df.csv'),
-                '-t', os.path.join(resources, 'train_sample_df.csv'),
-                # These two sets don't appear to have common columns
-                '--no-report-leakage',
-                '--no-report-bias',
-            ]
-        )
-        result = result.decode()
-        assert 'Duplicates' in result
-        assert 'Knowledge' in result
-        assert 'Value Counts on Sensitive Categories' not in result

@@ -4,6 +4,7 @@ import os
 import shutil
 import sqlite3
 import pickle
+import logging
 
 from uuid import uuid4
 
@@ -33,6 +34,9 @@ class JournalingPipeline(Pipeline):
 
         def __exit__(self, x, y, z):
             if not self.keep:
+                logging.info(
+                    'Removing jouranl from {}'.format(self.journal_dir),
+                )
                 shutil.rmtree(self.journal_dir)
 
     def __init__(
@@ -122,6 +126,9 @@ class JournalingPipeline(Pipeline):
         serialized = [(pickle.dumps(s),) for s in self.steps]
         self.journal_dir = journal
         self.db_file = os.path.join(self.journal_dir, 'journal.db')
+
+        logging.info('Creating journal database in {}'.format(self.db_file))
+
         self.connection = sqlite3.connect(self.db_file)
         self.connection.isolation_level = None
         self.cursor = self.connection.cursor()
@@ -151,6 +158,9 @@ class JournalingPipeline(Pipeline):
             self.serializable_properties(),
         )
         self.connection.commit()
+
+        logging.info('Created journal database in {}'.format(self.db_file))
+
         self.lastrowid = 1
 
     def serializable_properties(self):

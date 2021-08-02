@@ -48,6 +48,8 @@ from .image_functions import (
 )
 from .pipeline import (
     DirectorySource,
+    GlobSource,
+    MultiSource,
     PipelineError,
     Pipeline,
 )

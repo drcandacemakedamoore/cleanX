@@ -2,12 +2,28 @@
 
 import logging
 import os
+import json
+import inspect
 
 import numpy as np
 import cv2
 
 
-class Step:
+_known_steps = {}
+
+
+def get_known_steps():
+    return dict(_known_steps)
+
+
+class RegisteredStep(type):
+    def __init__(cls, name, bases, clsdict):
+        if len(cls.mro()) > 2:
+            _known_steps[cls.__name__] = cls
+        super().__init__(name, bases, clsdict)
+
+
+class Step(metaclass=RegisteredStep):
     """
     This class has default implementations for methods all steps are
     expected to implement.
@@ -92,6 +108,22 @@ class Step:
 
     def __reduce__(self):
         return self.__class__, (self.cache_dir,)
+
+    def to_json(self):
+        result = {
+            '__name__': type(self).__name__,
+            '__module__': type(self).__module__,
+        }
+        names = inspect.getfullargspec(self.__init__)[0]
+        values = self.__reduce__()[1]
+        for k, v in zip(names, values):
+            result[k] = v
+        return json.dumps(result)
+
+    @classmethod
+    def from_cmd_args(cls, cmd_args):
+        evaled_args = eval('dict({})'.format(cmd_args))
+        return cls(**evaled_args)
 
 
 class Acquire(Step):
