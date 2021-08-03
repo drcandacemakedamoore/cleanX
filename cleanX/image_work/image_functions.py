@@ -138,7 +138,8 @@ def harsh_sharpie_enhance(image):
 
 def salting(img):
     """
-    This function adds some noise to an image.
+    This function adds some noise to an image. The noise is synthetic. It has
+    not been tested for similarity to older machines, which also add add noise.
 
     :param img_name: String for image name
     :type img_name: string
