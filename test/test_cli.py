@@ -6,6 +6,7 @@ import subprocess
 
 from tempfile import TemporaryDirectory
 
+import pandas as pd
 import pytest
 
 from cleanX.image_work import (
