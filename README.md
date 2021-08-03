@@ -97,4 +97,6 @@ We are adding new functions and classes all the time. Many unit tests are availa
 
         Normalize images in terms of pixel values (multiple methods)
 
-All important functions are documented in the online documentation.
+All important functions are documented in the online documentation. You can also check out our videos:
+
+[![Video](https://raw.githubusercontent.com/drcandacemakedamoore/cleanX/main/test/cleanXpic.png)](https://youtu.be/jaX5tXmiWrQ)
