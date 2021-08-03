@@ -13,19 +13,19 @@ from .pipeline import Pipeline
 
 class JournalingPipeline(Pipeline):
     """
-    This class extends :class:`Pipeline` with the ability to store
-    the progress and the state in a database.
+    This class extends :class:`~cleanX.image_work.pipeline.Pipeline` with
+    the ability to store the progress and the state in a database.
     """
 
     class JournalDirectory:
         """
-        A context manager drop-in replacement for
-        :code:`tempfile.TemporaryDirectory` that works with existing
-        directory that may not be removed after the context manager
-        exits.
+        :meta private:
         """
 
         def __init__(self, journal_dir, keep=False):
+            """
+            :meta private:
+            """
             self.journal_dir = journal_dir
             self.keep = keep
 
@@ -48,17 +48,17 @@ class JournalingPipeline(Pipeline):
     ):
         """
         Initializes pipeline with two additional arguments controlling
-        the behavior of presistent storage.  See :class:`Pipeline` for
-        remaining arguments.
+        the behavior of presistent storage.  See
+        :class:`~cleanX.image_work.pipeline.Pipeline` for remaining arguments.
 
         :param journal: If :code:`True` is passed, the pipeline code will use a
                         preconfigured directory to store the journal.
                         Otherwise, this must be the path to the directory to
                         store the journal database.
-        :type journal: :code:`Choice[bool, str]`.
+        :type journal: :code:`Union[bool, str]`
         :param keep_journal: Controls whether the journal is kept after
                              successful completion of the pipeline.
-        :type keep_journal: :code:`bool`.
+        :type keep_journal: :code:`bool`
         """
         super().__init__(steps, batch_size)
 
@@ -77,7 +77,7 @@ class JournalingPipeline(Pipeline):
 
         :param journal_dir: The directory containing journal database to
                             restore from.
-        :type journal_dir: Suitable for :code:`os.path.join()`.
+        :type journal_dir: Suitable for :code:`os.path.join()`
         :param skip: Skip this many steps before attempting to resume the
                      pipeline.  This is useful if you know that the step that
                      failed will fail again, but you want to execute the rest
@@ -88,7 +88,7 @@ class JournalingPipeline(Pipeline):
 
         :return: Fresh :class:`JournalingPipeline` object fast-forwarded to the
                        last executed step + :code:`skip`.
-        :rtype: :code:`JournalingPipeline`.
+        :rtype: :code:`JournalingPipeline`
         """
         result = cls(**overrides)
         result.journal_dir = journal_dir
@@ -112,6 +112,9 @@ class JournalingPipeline(Pipeline):
         return result
 
     def initialize_journal(self, journal):
+        """
+        :meta private:
+        """
         if journal is True:
             journal = os.path.expanduser(
                 '~/cleanx/journal/{}'.format(uuid4()),
@@ -164,6 +167,9 @@ class JournalingPipeline(Pipeline):
         self.lastrowid = 1
 
     def serializable_properties(self):
+        """
+        :meta private:
+        """
         return (
             ('keep_journal', pickle.dumps(self.keep_journal)),
             ('counter', pickle.dumps(self.counter)),
@@ -171,15 +177,24 @@ class JournalingPipeline(Pipeline):
         )
 
     def workspace(self):
+        """
+        :meta private:
+        """
         return self.JournalDirectory(self.journal_dir, self.keep_journal)
 
     def update_counter(self):
+        """
+        :meta private:
+        """
         self.cursor.execute(
             'update pipeline set contents = ? where property = "counter"',
             (pickle.dumps(self.counter),),
         )
 
     def begin_transaction(self, step):
+        """
+        :meta private:
+        """
         self.cursor.execute('begin')
         self.cursor.execute(
             '''
@@ -194,10 +209,16 @@ class JournalingPipeline(Pipeline):
         self.update_counter()
 
     def commit_transaction(self, step):
+        """
+        :meta private:
+        """
         self.cursor.execute('commit')
         self.lastrowid += 1
 
     def find_previous_step(self):
+        """
+        :meta private:
+        """
         last_exp = 'select step from history where processed = 1 order by id'
         last = self.cursor.execute(last_exp).fetchone()
         if not last:

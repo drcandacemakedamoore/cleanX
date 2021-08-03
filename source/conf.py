@@ -60,5 +60,18 @@ extlinks = {
     'pd': (
         'https://pandas.pydata.org/docs/reference/api/pandas.%s.html',
         'pandas.',
+    ),
+    'pdcm': (
+        'https://pydicom.github.io/pydicom/stable/reference/generated/pydicom.%s.html',
+        'pydicom.',
     )
+}
+
+autodoc_default_options = {
+    'members': True,
+    'member-order': 'bysource',
+    'special-members': '__init__,__iter__,__reduce__',
+    'undoc-members': True,
+    'exclude-members': '__weakref__',
+    'inherited-members': True,
 }

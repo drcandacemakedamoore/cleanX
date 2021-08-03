@@ -1283,16 +1283,16 @@ def make_contour_image(im):
     # find contours
     if major_cv2 > 3:
         contours, hierarchy = cv2.findContours(
-                                edges,
-                                cv2.RETR_EXTERNAL,
-                                cv2.CHAIN_APPROX_SIMPLE,
-                                )
+            edges,
+            cv2.RETR_EXTERNAL,
+            cv2.CHAIN_APPROX_SIMPLE,
+        )
     else:
         ret2, contours, hierarchy = cv2.findContours(
-                                        edges,
-                                        cv2.RETR_EXTERNAL,
-                                        cv2.CHAIN_APPROX_SIMPLE,
-                                        )
+            edges,
+            cv2.RETR_EXTERNAL,
+            cv2.CHAIN_APPROX_SIMPLE,
+        )
     # create an empty image for contours
     img_contours = np.zeros(imgL.shape)
     drawing = cv2.drawContours(img_contours, contours, -1, (0, 255, 0), 3)
@@ -1305,8 +1305,8 @@ def avg_image_maker(set_of_images):
     average per pixel place (in a normalized matrix) of all images averaged
     from the set_of_images group.
 
-    :param set_of_images: A set of images,
-    can be read in with glob.glob on a folder of jpgs.
+    :param set_of_images: A set of images, can be read in with glob.glob on
+                          a folder of jpgs.
     :type set_of_images: list
 
     :return: final_avg, an image that is the average image of images in the set
@@ -1342,12 +1342,12 @@ def set_image_variability(set_of_images):
     air interface (not all subjects same size) and other obviously variable
     aspects of your image set.
 
-    :param set_of_images: A set of images,
-    can be read in with glob.glob on a folder of jpgs.
+    :param set_of_images: A set of images, can be read in with glob.glob on
+                          a folder of jpgs.
     :type set_of_images: list
 
     :return: final_diff, an image that is the average virability per pixel
-    of the image in images in the set
+             of the image in images in the set
     :rtype: nd.array
     """
     final_avg = avg_image_maker(set_of_images)
@@ -1531,7 +1531,7 @@ def make_histo_scaled_folder(imgs_folder, tail_cut_percent, target_folder):
 
 
     :return: target_name, but your images go into target folder with
-    target_name
+             target_name
     :rtype: string
     """
 

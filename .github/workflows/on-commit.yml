@@ -50,7 +50,10 @@ jobs:
 
   Sphinx:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: >-
+      github.ref == 'refs/heads/main'
+      or
+      github.ref == 'refs/heads/wvxvw/documentation-fixes
     steps:
       - uses: actions/checkout@v2
       - run: >-
