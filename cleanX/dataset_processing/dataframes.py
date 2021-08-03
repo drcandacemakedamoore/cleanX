@@ -406,13 +406,13 @@ def check_paths_for_group_leakage(train_df, test_df, unique_id):
 
     :param train_df: Pandas :code:`DataFrame` containing information about
                      train assets.
-    :type train_df: :pd:`DataFrame`
+    :type train_df: :class:`~pandas.DataFrame`
     :param test_df: Pandas :code:`DataFrame` containing information about
                     train assets.
-    :type test_df: :pd:`DataFrame`
+    :type test_df: :class:`~pandas.DataFrame`
     :return: duplications of any image into both sets as a new
              :code:`DataFrame`
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     pics_in_both_groups = train_df.merge(test_df, on=unique_id, how='inner')
     return pics_in_both_groups
@@ -431,14 +431,14 @@ def see_part_potential_bias(df, label, sensitive_column_list):
 
     :param df: :code:`DataFrame` including sample IDs, labels, and sensitive
                columns
-    :type df: :pd:`DataFrame`
+    :type df: :class:`~pandas.DataFrame`
     :param label: The name of the column with the labels
-    :type label: string
+    :type label: str
     :param sensitive_column_list: List names sensitive columns on
                                   :code:`DataFrame`
     :type sensitive_column_list: list
     :return: tab_fight_bias2, a neatly sorted :code:`DataFrame`
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
 
     label_and_sensitive = [label]+sensitive_column_list
@@ -456,9 +456,8 @@ def understand_df(df):
     and prints information including length, data types, nulls and number
     of duplicated rows
     :param df: :code:`DataFrame` you are interested in getting features of.
-    :type df: :pd:`DataFrame`
+    :type df: :class:`~pandas.DataFrame`
     :return: Prints out information on :code:`DataFrame`.
-    :rtype: NoneType
     """
     print("The DataFrame has", len(df.columns), "columns, named", df.columns)
     print("")

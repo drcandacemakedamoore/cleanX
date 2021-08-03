@@ -37,16 +37,16 @@ class PydicomDicomReader:
                                     * :pdcm:`multival.MultiValue`
                                     * :class:`bytes` (this is usually the
                                       image data)
-        :type exclude_field_types: :code:`Sequence[type]`
+        :type exclude_field_types: Sequence[type]
         :param date_fields: Fields that should be interpreted as having
                             date information in them.
-        :type date_fields: :code:`Sequence[str]`
+        :type date_fields: Sequence[str]
         :param time_fields: Fields that should be interpreted as having
                             time information in them.
-        :type time_fields: :code:`Sequence[str]`
+        :type time_fields: Sequence[str]
         :param exclude_fields: Fields to exclude (in addition to those selected
                                by :code:`exclude_field_types`
-        :type exclude_fields: :code:`Sequence[str]`
+        :type exclude_fields: Sequence[str]
         """
         if exclude_field_types:
             self.exclude_field_types = exclude_field_types
@@ -77,7 +77,7 @@ class PydicomDicomReader:
         :type source: :class:`~cleanX.dicom_processing.Source`
 
         :return: dataframe with metadata from dicoms
-        :rtype: dataframe
+        :rtype: :class:`~pandas.DataFrame`
         """
 
         tag = source.get_tag()
@@ -122,9 +122,9 @@ def get_jpg_with_pydicom(dicom_folder_path, jpg_folder_path):
     an out put directory.
 
     :param dicom_folder_path: dicomfile_directory, directory with dicom/.dcm
-    :type dicom_folder_path: string
+    :type dicom_folder_path: str
     :param jpg_folder_path: output_directory, where they should be placed
-    :type jpg_folder_path: string
+    :type jpg_folder_path: str
 
     :return: love (will put your images in the new folder but not return them)
     :rtype: bool

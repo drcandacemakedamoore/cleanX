@@ -42,18 +42,18 @@ class Step(metaclass=RegisteredStep):
         """
         This is the method that will be called to do the actual image
         transformation.  This function must not raise exceptions, as it
-        is used in the :code:`multiprocessing` context.
+        is used in the :mod:`multiprocessing` context.
 
         :param image_data: Will be the data obtained when calling
-                           :code:`read()` method of this class.
+                           :meth:`~.Step.read()` method of this class.
         :type image_data: Unless this class overrides the defaults, this
-                          will be :code:`numpy.ndarray`.
+                          will be :class:`~numpy.ndarray`.
 
         :return: This method should return two values.  First is the
                  processed image data.  This should be suitable for the
-                 :code:`write()` method of this class to write.  Second
-                 is the error, if procesing wasn't possible.  Only one
-                 element of the tuple should be :code:`not None`.
+                 :meth:`~.Step.write()` method of this class to write.
+                 Second is the error, if procesing wasn't possible.  Only
+                 one element of the tuple should be :code:`not None`.
         :rtype: Tuple[numpy.ndarray, Exception]
         """
         return image_data, None
@@ -64,14 +64,14 @@ class Step(metaclass=RegisteredStep):
         raise exceptions as it is used in :code:`multiprocessing` context.
 
         :param path: The path to the image to read.  Unless the
-                     :code:`write()` method of the previous step
+                     :meth:`~.Step.write()` method of the previous step
                      was modified to do it differently, the format
                      of the data in the file is the serialized NumPy array
 
         :return: This method should return two values.  First is the
                  image data read from :code:`path`.  It should be in the
-                 format suitable for :code:`apply()`.  Second is the
-                 :code:`Exception` if the read was not successful.  Only
+                 format suitable for :meth:`~.Step.apply()`.  Second is the
+                 :class:`Exception` if the read was not successful.  Only
                  one element in the tuple may be :code:`not None`.
         :rtype: Tuple[numpy.ndarray, Exception]
         """
@@ -86,12 +86,15 @@ class Step(metaclass=RegisteredStep):
         """
         This method should write the image data to make it available for
         the next step.  Default implementation use NumPy's persistence
-        format.  This method is used in :code:`multiprocessing` context,
+        format.  This method is used in :mod:`multiprocessing` context,
         therefore it must not raise exceptions.
 
-        :param image_data: This is the result from calling :code:`apply()`
-                           method of this class.
-        :type image_data: Default implementation uses :code:`numpy.ndarray`.
+        :param image_data: This is the result from calling
+                           :meth:`~.Step.apply()` method of this class.
+        :type image_data: Default implementation uses :class:`~numpy.ndarray`.
+        :return: Exception if it was raised during the execution, or
+                 :code:`None`.
+        :rtype: Exception
         """
         try:
             assert image_data is not None, (

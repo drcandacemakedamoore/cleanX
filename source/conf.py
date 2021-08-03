@@ -11,7 +11,7 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 # import os
-# import sys
+import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
 
@@ -34,6 +34,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks',
     'sphinx.ext.imgmath',
+    'sphinx.ext.intersphinx',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -74,4 +75,16 @@ autodoc_default_options = {
     'undoc-members': True,
     'exclude-members': '__weakref__',
     'inherited-members': True,
+}
+
+intersphinx_mapping = {
+    'python': (
+        'https://docs.python.org/{.major}'.format(
+            sys.version_info,
+        ),
+        None,
+    ),
+    'numpy': ('https://docs.scipy.org/doc/numpy/', None),
+    'matplotlib': ('http://matplotlib.org', None),
+    'pandas': ('https://pandas.pydata.org/docs/', None),
 }
