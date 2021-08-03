@@ -55,10 +55,10 @@ class JournalingPipeline(Pipeline):
                         preconfigured directory to store the journal.
                         Otherwise, this must be the path to the directory to
                         store the journal database.
-        :type journal: :code:`Union[bool, str]`
+        :type journal: Union[bool, str]
         :param keep_journal: Controls whether the journal is kept after
                              successful completion of the pipeline.
-        :type keep_journal: :code:`bool`
+        :type keep_journal: bool
         """
         super().__init__(steps, batch_size)
 

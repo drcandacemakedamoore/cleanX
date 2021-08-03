@@ -222,9 +222,9 @@ def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
     , which you can look at the [0] layer with matplotlib
 
     :param dicomfile_directory: dicomfile_directory, directory with dicom/.dcm
-    :type dicomfile_directory: string
+    :type dicomfile_directory: str
     :param output_directory: output_directory, where they should be placed
-    :type output_directory: string
+    :type output_directory: str
 
     :return: saved_images
     :rtype: list
