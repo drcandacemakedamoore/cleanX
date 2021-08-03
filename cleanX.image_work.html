@@ -736,7 +736,8 @@ in size for a neural net anyways)</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.salting">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">salting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.salting" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function adds some noise to an image.</p>
+<dd><p>This function adds some noise to an image. The noise is synthetic. It has
+not been tested for similarity to older machines, which also add add noise.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>img_name</strong> (<em>string</em>) – String for image name</p>
@@ -1039,18 +1040,6 @@ directory.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.GlobSource">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">GlobSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.GlobSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.pipeline.MultiSource">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">MultiSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.MultiSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -1245,12 +1234,6 @@ element of the tuple should be <code class="code docutils literal notranslate"><
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="cleanX.image_work.steps.RegisteredStep">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">RegisteredStep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clsdict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.RegisteredStep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></p>
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.steps.Save">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
@@ -1305,11 +1288,6 @@ element of the tuple should be <code class="code docutils literal notranslate"><
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.from_cmd_args">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_cmd_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.from_cmd_args" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.steps.Step.read">
 <span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the image saved in the previvous step.  This function must not
@@ -1335,11 +1313,6 @@ one element in the tuple may be <code class="code docutils literal notranslate">
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.to_json">
-<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.to_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.steps.Step.write">
 <span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method should write the image data to make it available for
@@ -1355,11 +1328,6 @@ method of this class.</p>
 </dd></dl>
 
 </dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.steps.get_known_steps">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">get_known_steps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.get_known_steps" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </section>
 <section id="module-cleanX.image_work">
