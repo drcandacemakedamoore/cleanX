@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>cleanX.image_work.journaling_pipeline module &#8212; cleanX 0.0.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="cleanX.image_work.pipeline module" href="cleanX.image_work.pipeline.html" />
+    <link rel="prev" title="cleanX.image_work.image_functions module" href="cleanX.image_work.image_functions.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cleanX.image_work.pipeline.html" title="cleanX.image_work.pipeline module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cleanX.image_work.image_functions.html" title="cleanX.image_work.image_functions module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.0.4 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cleanX</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cleanX.html" >cleanX package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="cleanX.image_work.html" accesskey="U">cleanX.image_work package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cleanX.image_work.journaling_pipeline module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-cleanX.image_work.journaling_pipeline">
+<span id="cleanx-image-work-journaling-pipeline-module"></span><h1>cleanX.image_work.journaling_pipeline module<a class="headerlink" href="#module-cleanX.image_work.journaling_pipeline" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.journaling_pipeline.</span></span><span class="sig-name descname"><span class="pre">JournalingPipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline" title="cleanX.image_work.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Pipeline</span></code></a></p>
+<p>This class extends <a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline" title="cleanX.image_work.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a> with
+the ability to store the progress and the state in a database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes pipeline with two additional arguments controlling
+the behavior of presistent storage.  See
+<a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline" title="cleanX.image_work.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a> for remaining arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>journal</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code> is passed, the pipeline code will use a
+preconfigured directory to store the journal.
+Otherwise, this must be the path to the directory to
+store the journal database.</p></li>
+<li><p><strong>keep_journal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Controls whether the journal is kept after
+successful completion of the pipeline.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.restore">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">journal_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">overrides</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.restore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore the previously created journaling pipeline from the last
+executed step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>journal_dir</strong> (Suitable for <code class="code docutils literal notranslate"><span class="pre">os.path.join()</span></code>) – The directory containing journal database to
+restore from.</p></li>
+<li><p><strong>skip</strong> – Skip this many steps before attempting to resume the
+pipeline.  This is useful if you know that the step that
+failed will fail again, but you want to execute the rest
+of the steps in the pipeline.</p></li>
+<li><p><strong>**overrides</strong> – Arguments to pass to the created pipeline
+instance that will override those restored from
+the journal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Fresh <a class="reference internal" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline" title="cleanX.image_work.journaling_pipeline.JournalingPipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">JournalingPipeline</span></code></a> object fast-forwarded to the
+last executed step + <code class="code docutils literal notranslate"><span class="pre">skip</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="code docutils literal notranslate"><span class="pre">JournalingPipeline</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts this pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>source</strong> (<em>Iterable</em>) – This must be an iterable that yields file names
+for the images to be processed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cleanX.image_work.image_functions.html"
+                        title="previous chapter">cleanX.image_work.image_functions module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cleanX.image_work.pipeline.html"
+                        title="next chapter">cleanX.image_work.pipeline module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cleanX.image_work.journaling_pipeline.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cleanX.image_work.pipeline.html" title="cleanX.image_work.pipeline module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cleanX.image_work.image_functions.html" title="cleanX.image_work.image_functions module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.0.4 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cleanX</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cleanX.html" >cleanX package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="cleanX.image_work.html" >cleanX.image_work package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cleanX.image_work.journaling_pipeline module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, doctormakeda@gmail.com.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    </div>
+  </body>
+</html>

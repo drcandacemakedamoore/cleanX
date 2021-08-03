@@ -4,13 +4,10 @@ cleanX.dataset\_processing package
 Submodules
 ----------
 
-cleanX.dataset\_processing.dataframes module
---------------------------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: cleanX.dataset_processing.dataframes
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   cleanX.dataset_processing.dataframes
 
 Module contents
 ---------------

@@ -1,0 +1,7 @@
+cleanX.dicom\_processing.simpleitk\_adapter module
+==================================================
+
+.. automodule:: cleanX.dicom_processing.simpleitk_adapter
+   :members:
+   :undoc-members:
+   :show-inheritance:

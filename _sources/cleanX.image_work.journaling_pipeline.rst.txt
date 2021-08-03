@@ -1,0 +1,7 @@
+cleanX.image\_work.journaling\_pipeline module
+==============================================
+
+.. automodule:: cleanX.image_work.journaling_pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:
