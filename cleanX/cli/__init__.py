@@ -19,7 +19,7 @@ from cleanX.dicom_processing import (
 )
 from cleanX.dataset_processing import MLSetup
 from cleanX.image_work import (
-    MultiSource,
+    MultiSource as ImageMultiSource,
     GlobSource,
     create_pipeline,
     restore_pipeline,
@@ -187,7 +187,7 @@ def run_pipeline(cfg, step, source, batch_size, journal, keep_journal):
         journal=journal,
         keep_journal=keep_journal,
     )
-    p.process(MultiSource(GlobSource(src) for src in source))
+    p.process(ImageMultiSource(GlobSource(src) for src in source))
 
 
 @images.command()
@@ -220,7 +220,7 @@ def run_pipeline(cfg, step, source, batch_size, journal, keep_journal):
 def restore_pipeline(cfg, journal_dir, skip, overrides, source):
     overrides = dict(overrides)
     p = restore_pipeline(journal_dir=journal_dir, skip=skip, **overrides)
-    p.process(MultiSource(GlobSource(src) for src in source))
+    p.process(ImageMultiSource(GlobSource(src) for src in source))
 
 
 @dataset.command()
