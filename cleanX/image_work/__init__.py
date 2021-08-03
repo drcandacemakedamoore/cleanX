@@ -71,19 +71,19 @@ def create_pipeline(steps, batch_size=None, journal=None, keep_journal=False):
     be pick up from the failed step.
 
     :param steps: A sequence of :class:`Step` to be executed in this pipeline.
-    :type steps: :code:`Sequence[Step]`.
+    :type steps: :code:`Sequence[Step]`
     :param batch_size: Controls how many steps are processed concurrently.
-    :type batch_size: :code:`int`.
+    :type batch_size: :code:`int`
     :param journal: If :code:`True` is passed, the pipeline code will use a
                     preconfigured directory to store the journal.  Otherwise,
                     this must be the path to the directory to store the journal
                     database.
-    :type journal: :code:`Choice[bool, str]`.
+    :type journal: :code:`Union[bool, str]`
     :param keep_journal: Controls whether the journal is kept after successful
                          completion of the pipeline.
-    :type keep_journal: :code:`bool`.
+    :type keep_journal: :code:`bool`
 
-    :return: a :class:`Pipeline` object or one of its descendants.
+    :return: a :class:`~.pipeline.Pipeline` object or one of its descendants.
     :rtype: :code:`Pipeline`.
     """
     if journal:
@@ -111,7 +111,7 @@ def restore_pipeline(journal_dir, skip=0, **overrides):
 
     :param journal_dir: The directory containing journal database to restore
                         from.
-    :type journal_dir: Suitable for :code:`os.path.join()`.
+    :type journal_dir: Suitable for :code:`os.path.join()`
     :param skip: Skip this many steps before attempting to resume the pipeline.
                  This is useful if you know that the step that failed will
                  fail again, but you want to execute the rest of the steps
@@ -119,8 +119,8 @@ def restore_pipeline(journal_dir, skip=0, **overrides):
     :param \\**overrides: Arguments to pass to the created pipeline instance
                           that will override those restored from the journal.
 
-    :return: Fresh :class:`JournalingPipeline` object fast-forwarded to the
-                   last executed step + :code:`skip`.
+    :return: Fresh :class:`~.journaling_pipeline.JournalingPipeline` object
+                   fast-forwarded to the last executed step + :code:`skip`.
     :rtype: :code:`JournalingPipeline`.
     """
     return JournalingPipeline.restore(journal_dir, skip=skip, **overrides)

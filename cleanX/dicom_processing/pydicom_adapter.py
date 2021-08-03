@@ -26,6 +26,28 @@ class PydicomDicomReader:
             time_fields=None,
             exclude_fields=None,
     ):
+        """
+        Initializes the reader with some filtering options.
+
+        :param exclude_field_types: Some DICOM types have internal structure
+                                    difficult to represent in a dataframe.
+                                    These are filtered by default:
+
+                                    * :pdcm:`sequence.Sequence`
+                                    * :pdcm:`multival.MultiValue`
+                                    * :class:`bytes` (this is usually the
+                                      image data)
+        :type exclude_field_types: :code:`Sequence[type]`
+        :param date_fields: Fields that should be interpreted as having
+                            date information in them.
+        :type date_fields: :code:`Sequence[str]`
+        :param time_fields: Fields that should be interpreted as having
+                            time information in them.
+        :type time_fields: :code:`Sequence[str]`
+        :param exclude_fields: Fields to exclude (in addition to those selected
+                               by :code:`exclude_field_types`
+        :type exclude_fields: :code:`Sequence[str]`
+        """
         if exclude_field_types:
             self.exclude_field_types = exclude_field_types
         if date_fields:
@@ -51,8 +73,8 @@ class PydicomDicomReader:
         This function allows reading of metadata in what source gives.
 
         :param source: A source generator.  For extended explanation see
-                       :ref:`cleanX.dicom_processing.Source`.
-        :type cleanX.dicom_processing.Source:
+                       :class:`~cleanX.dicom_processing.Source`.
+        :type source: :class:`~cleanX.dicom_processing.Source`
 
         :return: dataframe with metadata from dicoms
         :rtype: dataframe

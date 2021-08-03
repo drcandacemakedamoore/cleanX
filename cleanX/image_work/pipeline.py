@@ -11,23 +11,56 @@ from glob import glob
 
 
 class MultiSource:
+    """
+    A class to append multiple sources such as :class:`~.GlobSource` or
+    :class:`~.DirectorySource`.  All source classes implement iterator
+    interface.
+    """
 
     def __init__(self, sources):
+        """
+        Initializes this iterator with multiple sources in a way similar
+        to :code:`itertools.chain()`
+
+        :param sources: A sequence of sources, such as :class:`~.GlobSource`
+                        or :class:`~.DirectorySource`.
+        :type sources: :code:`Sequence`
+        """
         self.sources = tuple(sources)
 
     def __iter__(self):
+        """
+        Iterator implementation.
+        """
         for src in self.sources:
             for s in src:
                 yield s
 
 
 class GlobSource:
+    """
+    A class that creates an iterator to list all files matching
+    glob pattern.
+    """
 
     def __init__(self, expression, recursive=False):
+        """
+        Initializes this iterator with the arguments to be passed to
+        :code:`glob.glob()`.
+
+        :param expression: Expression to be passed to :code:`glob.glob()`
+        :type expression: :code:`Union[str, bytes]`
+        :param recursive: Controls the interpretation of :code:`**`
+                          pattern.  If :code:`True`, will interpret it
+                          to mean any number of path fragments.
+        """
         self.expression = expression
         self.recursive = recursive
 
     def __iter__(self):
+        """
+        Iterator implementation.
+        """
         for s in glob(self.expression, recursive=self.recursive):
             yield s
 
@@ -43,7 +76,7 @@ class DirectorySource:
         Initializes this iterator.
 
         :param directory: The directory in which to look for images.
-        :type directory: Must be valid for :code:`os.path.join()`.
+        :type directory: Must be valid for :code:`os.path.join()`
         :param extension: A glob pattern for fle extension.  Whether
                           it is case-sensitive depends on the
                           filesystem being used.
@@ -52,6 +85,9 @@ class DirectorySource:
         self.extension = extension
 
     def __iter__(self):
+        """
+        Iterator implementation.
+        """
         exp = os.path.join(self.directory, '*.' + self.extension)
         for f in glob(exp):
             yield f
@@ -69,7 +105,7 @@ class Pipeline:
     """
     This class is the builder for the image processing pipeline.
 
-    This class executes a sequence of :code:`Steps`.  It attemts to
+    This class executes a sequence of :class:`~.steps.Step`.  It attemts to
     execute as many steps as possible in parallel.  However, in order
     to avoid running out of memory, it saves the intermediate results
     to the disk.  You can control the number of images processed at
@@ -80,9 +116,9 @@ class Pipeline:
         """
         Initializes this pipeline, but doesn't start its execution.
 
-        :param steps: A sequence of :code:`Steps` this pipeline should
+        :param steps: A sequence of :class:`~.steps.Step` this pipeline should
                       execute.
-        :type steps: List[Step]
+        :type steps: Sequence[Step]
         :param batch_size: The number of images that will be processed
                            in parallel.
         :type batch_size: int
@@ -98,18 +134,33 @@ class Pipeline:
         self.process_lock = multiprocessing.Lock()
 
     def workspace(self):
+        """
+        :meta private:
+        """
         return TemporaryDirectory()
 
     def update_counter(self):
+        """
+        :meta private:
+        """
         pass
 
     def begin_transaction(self, step):
+        """
+        :meta private:
+        """
         pass
 
     def commit_transaction(self, step):
+        """
+        :meta private:
+        """
         pass
 
     def find_previous_step(self):
+        """
+        :meta private:
+        """
         return None
 
     def process(self, source):
@@ -179,6 +230,9 @@ class Pipeline:
                 self.update_counter()
 
     def process_batch(self, batch, step):
+        """
+        :meta private:
+        """
         # Forking only works on Linux.  The garbage that Python
         # multiprocessing is it requires a lot of workarounds...
         ctx = multiprocessing.get_context('spawn')

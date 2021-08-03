@@ -126,10 +126,21 @@ class SphinxApiDoc(Command):
 
     def run(self):
         from sphinx.ext.apidoc import main
+
+        src = os.path.join(project_dir, 'source')
+
+        for f in glob(os.path.join(src, '*.rst')):
+            if f.endswith('modules.rst'):
+                continue
+            if f.endswith('index.rst'):
+                continue
+            os.unlink(f)
+
         sys.exit(main([
-            '-o', os.path.join(project_dir, 'source'),
+            '-o', src,
             '-f',
             os.path.join(project_dir, 'cleanX'),
+            '--separate',
         ]))
 
 

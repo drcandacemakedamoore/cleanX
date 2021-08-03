@@ -403,6 +403,7 @@ def check_paths_for_group_leakage(train_df, test_df, unique_id):
     """
     Finds train samples that have been accidentally leaked into test
     samples
+
     :param train_df: Pandas :code:`DataFrame` containing information about
                      train assets.
     :type train_df: :pd:`DataFrame`
@@ -427,6 +428,7 @@ def see_part_potential_bias(df, label, sensitive_column_list):
     early neural nets for chest X-rays were less accurate in women and the
     fact that there were fewer X-rays of women in the datasets they built on
     did not help
+
     :param df: :code:`DataFrame` including sample IDs, labels, and sensitive
                columns
     :type df: :pd:`DataFrame`
