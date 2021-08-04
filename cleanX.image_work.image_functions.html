@@ -106,7 +106,10 @@ or </em><em>a PIL image.</em>) – Image</p>
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.subtle_sharpie_enhance">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">subtle_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.subtle_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a new image that is very subtly sharper to the human eye,
-but has new values in most of the pixels(besides the background)</p>
+but has new values in most of the pixels(besides the background). This
+is an augmentation, that has not been tested for how well the outputs match
+X-rays from new machines used well, but is within a reasonable range 
+by human eye.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image</strong> (<em>string</em>) – String for image name</p>
@@ -124,7 +127,9 @@ but has new values in most of the pixels(besides the background)</p>
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.harsh_sharpie_enhance">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">harsh_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.harsh_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a new image that is very sharper to the human eye,
-and has new values in most of the pixels (besides the background).</p>
+and has new values in most of the pixels (besides the background). This 
+augmentation may allow humans to understnd certain elements of an image,
+but should be used with care to make augmented data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image</strong> (<em>string</em>) – String for image name</p>
@@ -142,7 +147,7 @@ and has new values in most of the pixels (besides the background).</p>
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.salting">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">salting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.salting" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function adds some noise to an image. The noise is synthetic. It has
-not been tested for similarity to older machines, which also add add noise.</p>
+not been tested for similarity to older machines, which also add noise.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>img_name</strong> (<em>string</em>) – String for image name</p>
@@ -185,7 +190,10 @@ augment_and_move function as follows (example):</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.blur_out_edges">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">blur_out_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.blur_out_edges" title="Permalink to this definition">¶</a></dt>
-<dd><p>For an individual image, blurs out the edges as an augmentation.</p>
+<dd><p>For an individual image, blurs out the edges as an augmentation. This
+augmentation is not like any real-world X-ray, but can make images
+which helps force attention in a neural net away from the edges of the
+images.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image</p>
@@ -858,14 +866,17 @@ average per pixel place (in a normalized matrix) of all images averaged
 from the set_of_images group.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>set_of_images</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – A set of images, can be read in with glob.glob on
-a folder of jpgs.</p>
+<dd class="field-odd"><p><strong>set_of_images</strong> – A set of images,</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>final_avg, an image that is the average image of images in the set</p>
+</dl>
+<p>can be read in with glob.glob on a folder of jpgs.
+:type set_of_images: list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>final_avg, an image that is the average image of images in the set</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>nd.array</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>nd.array</p>
 </dd>
 </dl>
 </dd></dl>
@@ -881,17 +892,18 @@ air interface (not all subjects same size) and other obviously variable
 aspects of your image set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>set_of_images</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – A set of images, can be read in with glob.glob on
-a folder of jpgs.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>final_diff, an image that is the average virability per pixel
-of the image in images in the set</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>nd.array</p>
+<dd class="field-odd"><p><strong>set_of_images</strong> – A set of images,</p>
 </dd>
 </dl>
+<p>can be read in with glob.glob on a folder of jpgs.
+:type set_of_images: list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>final_diff, an image that is the average virability per pixel</p>
+</dd>
+</dl>
+<p>of the image in images in the set
+:rtype: nd.array</p>
 </dd></dl>
 
 <dl class="py function">
@@ -981,13 +993,11 @@ which is called the target folder (to be made by user)</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>target_name, but your images go into target folder with
-target_name</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-even"><p>target_name, but your images go into target folder with</p>
 </dd>
 </dl>
+<p>target_name
+:rtype: string</p>
 </dd></dl>
 
 </section>
