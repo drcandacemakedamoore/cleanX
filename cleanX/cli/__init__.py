@@ -44,7 +44,7 @@ class Config:
           Only makes sense if both modules are available.  The default
           is :code:`"pydicom"`.
         * :code:`GLOB_IS_RECURSIVE` can be :code:`True` or :code:`False`.
-          controls how :fun:`glob()` patterns are interpreted when
+          controls how :func:`glob()` patterns are interpreted when
           they use :code:`**` command.  The default is :code:`False`.
         * :code:`JOURNAL_HOME` is a path to the directory where journals
           for journaling pipeline are stored.  This defaults to
@@ -64,7 +64,7 @@ class Config:
         as configuration variables and values as those variables values.
 
         :param source: Path to the configuration file.
-        :type source: Suitable for :fun:`open()`
+        :type source: Suitable for :func:`open()`
         """
         self.source = source
         self.properties = {}
