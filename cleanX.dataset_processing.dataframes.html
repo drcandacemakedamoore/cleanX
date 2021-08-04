@@ -48,15 +48,17 @@
             
   <section id="module-cleanX.dataset_processing.dataframes">
 <span id="cleanx-dataset-processing-dataframes-module"></span><h1>cleanX.dataset_processing.dataframes module<a class="headerlink" href="#module-cleanX.dataset_processing.dataframes" title="Permalink to this headline">¶</a></h1>
-<p>clean X : Library for cleaning radiological data used in machine learning
-applications.
-Module dataframes: a module for processing of datasets related to images.
+<p>Library for cleaning radiological data used in machine learning
+applications.</p>
+<p>Module dataframes: a module for processing of datasets related to images.
 This module can be implemented by functions,
 or can be implemented with classes.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.GuesserError">
 <em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">GuesserError</span></span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.GuesserError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError</span></code></a></p>
+<p>This error is raised when the loading code cannot figure
+out what kind of source it is dealing with.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.GuesserError.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.GuesserError.__init__" title="Permalink to this definition">¶</a></dt>
@@ -86,10 +88,21 @@ set self.__traceback__ to tb and return self.</p>
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.ColumnsSource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">ColumnsSource</span></span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Formal superclass for all sources that should be used to
+produce <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.ColumnsSource.to_dataframe">
-<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.ColumnsSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.ColumnsSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Descendants of this class must implement this method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dataframe produced from the source represented by this class.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -101,12 +114,34 @@ set self.__traceback__ to tb and return self.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.CSVSource.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.CSVSource.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initializes this class with the path to the csv file from which
+to create the dataframe and the pass-through arguments to
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v1.3.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csv</strong> – The path to CSV file or an open file handle.  Must be
+suitable for <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v1.3.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>.</p></li>
+<li><p><strong>**pd_args</strong> – The pass-through arguments to
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v1.3.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.CSVSource.to_dataframe">
 <span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.CSVSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Necessary implementation of the abstractmethod.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dataframe produced from the source represented by this class.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -118,12 +153,34 @@ set self.__traceback__ to tb and return self.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.JSONSource.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.JSONSource.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initializes this class with the path to the json file from which
+to create the dataframe and the pass-through arguments to
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_json()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json</strong> – The path to JSON file or an open file handle.  Must be
+suitable for <code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_json()</span></code>.</p></li>
+<li><p><strong>**pd_args</strong> – The pass-through arguments to
+<code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_json()</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.JSONSource.to_dataframe">
 <span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.JSONSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Necessary implementation of the abstractmethod.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dataframe produced from the source represented by this class.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -131,16 +188,32 @@ set self.__traceback__ to tb and return self.</p>
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.DFSource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">DFSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.DFSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="cleanX.dataset_processing.dataframes.ColumnsSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.dataset_processing.dataframes.ColumnsSource</span></code></a></p>
-<p>Class initializes dataframes for later exploration and reporting</p>
+<p>This class is a no-op source.  Use this when you already have a dataframe
+ready.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.DFSource.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.DFSource.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initializes this class with the existing dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.) – Existing dataframe that should be used as the source.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.DFSource.to_dataframe">
 <span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.DFSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Necessary implementation of the abstractmethod.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dataframe produced from the source represented by this class.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -148,22 +221,52 @@ set self.__traceback__ to tb and return self.</p>
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MultiSource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">MultiSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MultiSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="cleanX.dataset_processing.dataframes.ColumnsSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.dataset_processing.dataframes.ColumnsSource</span></code></a></p>
+<p>This class allows aggregation of multiple sources.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MultiSource.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MultiSource.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initializes this class with the number of sources that will
+be used in a way similar to <a class="reference external" href="https://docs.python.org/3/library/itertools.html#itertools.chain" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.chain()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*sources</strong> – Sources to be concatendated together to
+create a single dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MultiSource.to_dataframe">
 <span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MultiSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Necessary implementation of the abstractmethod.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dataframe produced from the source represented by this class.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.string_source">
 <span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">string_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.string_source" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class that helps process strings for later exploration</p>
+<dd><p>Helper function to select source based on file extension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_src</strong> (Suitable for <a class="reference external" href="https://docs.python.org/3/library/os.path.html#os.path.splitext" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.splitext()</span></code></a>) – The path to the file to be interpreted as a source.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Either <a class="reference internal" href="#cleanX.dataset_processing.dataframes.CSVSource" title="cleanX.dataset_processing.dataframes.CSVSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSVSource</span></code></a> or <a class="reference internal" href="#cleanX.dataset_processing.dataframes.JSONSource" title="cleanX.dataset_processing.dataframes.JSONSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">JSONSource</span></code></a>, depending
+on file extension.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="#cleanX.dataset_processing.dataframes.CSVSource" title="cleanX.dataset_processing.dataframes.CSVSource">CSVSource</a>, <a class="reference internal" href="#cleanX.dataset_processing.dataframes.JSONSource" title="cleanX.dataset_processing.dataframes.JSONSource">JSONSource</a>]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
@@ -171,68 +274,202 @@ set self.__traceback__ to tb and return self.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">MLSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Label'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class allows configuration of the train and test datasets
-organized into a pandas dataframe
-to be checked for problems, and creates reports, which can be
-put in multiple output options.</p>
+organized into a pandas dataframe to be checked for problems, and
+creates reports, which can be put in multiple output options.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.known_sources">
 <span class="sig-name descname"><span class="pre">known_sources</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{&lt;class</span> <span class="pre">'str'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">string_source&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">string_source&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'pathlib.Path'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">string_source&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'pandas.core.frame.DataFrame'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">MLSetup.&lt;lambda&gt;&gt;}</span></em><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.known_sources" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Mapping of types of sources to the factory functions for creating
+source objects.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Label'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitive_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initializes this class with various aspects of a typical
+machine-learning study.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_src</strong> (If this is a path-like object, it is interpreted
+to be a path to a file that needs to be read into
+a <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.  If this is already
+a dataframe, it’s used as is.  If this is an iterable
+it is interpreted as a sequence of different sources
+and will be processed using <a class="reference internal" href="#cleanX.dataset_processing.dataframes.MultiSource" title="cleanX.dataset_processing.dataframes.MultiSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiSource</span></code></a>.) – The source for training dataset.</p></li>
+<li><p><strong>test_src</strong> (Same as <code class="code docutils literal notranslate"><span class="pre">train_src</span></code>) – Similar to <code class="code docutils literal notranslate"><span class="pre">train_src</span></code>, but for testing dataset.</p></li>
+<li><p><strong>unique_id</strong> (Suitable for accessing columns in <a class="reference external" href="https://pandas.pydata.org/docs/index.html#module-pandas" title="(in pandas v1.3.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pandas</span></code></a>
+dataframe.) – The name of the column that uniquely identifies the
+cases (typically, this is patient’s id).</p></li>
+<li><p><strong>label_tag</strong> (Suitable for accessing columns in <a class="reference external" href="https://pandas.pydata.org/docs/index.html#module-pandas" title="(in pandas v1.3.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pandas</span></code></a>
+dataframe.) – Usually, the training dataset has an assesment column
+that assings the case to the category of interest.
+Typically, this is diagnosis, or finding, etc.</p></li>
+<li><p><strong>sensitive_list</strong> (<em>A sequence of regular expression that will be
+applied to the colum names</em><em> (</em><em>converted to strings
+if necessary</em><em>)</em><em></em>) – The list of columns that you suspect might be
+affecting the fairness of the study.  These
+are typically gender, age, ethnicity etc.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.get_unique_id">
 <span class="sig-name descname"><span class="pre">get_unique_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.get_unique_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Tries to find the column in training and testing datasests that
+uniquely identifies the entires in both.  Typically, this is
+patient id of some sort.  If the setup was initialized with
+<code class="code docutils literal notranslate"><span class="pre">unique_id</span></code>, than that is used.  Otherwise, a rather simple
+heuristic is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The name of the column that should uniquely identify
+the cases being studied.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>The value from <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html#pandas.DataFrame.columns" title="(in pandas v1.3.1)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">columns</span></code></a>.  Typically,
+this is a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.get_sensitive_list">
 <span class="sig-name descname"><span class="pre">get_sensitive_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.get_sensitive_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a list of regular expressions that will be applied to the
+list of columns to identify the senistive categories (those that
+might bias the training towards overrepresented categories).</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.guess_source">
 <span class="sig-name descname"><span class="pre">guess_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.guess_source" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Helper method to conver sources given by external factors to internal
+representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_src</strong> – The externally supplied source.  This is typcially
+either a path to a file, or an existing dataframe
+or a collection of such sources.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An internal representation of source.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ColumnSource</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.metadata">
 <span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.metadata" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a tuple of column names of train and test datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Column names of train and test datasets.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.concat_dataframe">
 <span class="sig-name descname"><span class="pre">concat_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.concat_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Helper method to generate the dataset containing both training and
+test data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A combined dataframe.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.duplicated">
 <span class="sig-name descname"><span class="pre">duplicated</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.duplicated" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Provides information on duplicates found in training and test data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dataframe with information about duplicates.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.duplicated_frame">
 <span class="sig-name descname"><span class="pre">duplicated_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.duplicated_frame" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Provides more detailed information about the ducplicates found in
+training and test data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A tuple of two dataframes first listing duplicates in
+training data, second listing duplicates in test data.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.duplicates">
 <span class="sig-name descname"><span class="pre">duplicates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.duplicates" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculates the number of duplicates in training and test datasets
+separately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A tuple with number of duplicates in training and test
+datasets.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.pics_in_both_groups">
 <span class="sig-name descname"><span class="pre">pics_in_both_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unique_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.pics_in_both_groups" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Generates dataframe listing cases that appear in both training and
+testing datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dataframe with images found in both training and testing
+datasets.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.generate_report">
 <span class="sig-name descname"><span class="pre">generate_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">duplicates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leakage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">understand</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.MLSetup.generate_report" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Generates report object summarizing the properties of this setup.
+This report can later be used to produce formatted output for
+inspection by human.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>duplicates</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Whether the information on duplicates needs to
+be included in the report.</p></li>
+<li><p><strong>leakage</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Whether the information on data leakage (cases from
+training set appearing in test set) should be
+included in report.</p></li>
+<li><p><strong>bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Whether the information about distribution in sensitive
+categories should be included in the report.</p></li>
+<li><p><strong>understand</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Whether information about general properties of
+the dataset should be included in the report.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.MLSetup.leakage">
