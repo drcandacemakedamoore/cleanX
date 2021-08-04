@@ -261,8 +261,6 @@ def str_or_bool(s):
     ''',
 )
 def run_pipeline(cfg, step, source, batch_size, journal, keep_journal):
-    import pdb
-    pdb.set_trace()
     if journal == unique_flag_value:
         journal = os.path.join(cfg.get_setting('JOURNAL_HOME'), str(uuid4()))
 
