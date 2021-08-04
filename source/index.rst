@@ -26,6 +26,12 @@ this part of the documentation is for you.
    modules
 
 
+Command-Line Interface Documentation
+------------------------------------
+
+:doc:`CLI <../cli>`
+
+
 Indices and tables
 ==================
 
