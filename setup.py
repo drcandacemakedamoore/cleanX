@@ -134,6 +134,8 @@ class SphinxApiDoc(Command):
                 continue
             if f.endswith('index.rst'):
                 continue
+            if f.endswith('cli.rst'):
+                continue
             os.unlink(f)
 
         sys.exit(main([
