@@ -125,6 +125,11 @@ def deserialize_step(record):
     return step_class.from_cmd_args(cmd_args)
 
 
+def str_or_bool(s):
+    print(type(s))
+    return s
+
+
 @images.command()
 @click.pass_obj
 @click.option(
@@ -148,10 +153,10 @@ def deserialize_step(record):
 @click.option(
     '-j',
     '--journal',
-    prompt=False,
-    prompt_required=False,
     flag_value=unique_flag_value,
     is_flag=False,
+    default=False,
+    type=str_or_bool,
     help='''
     Where to store the journal.  If not specified, the default
     journal location is used.  You can control the default location
@@ -177,6 +182,8 @@ def deserialize_step(record):
     ''',
 )
 def run_pipeline(cfg, step, source, batch_size, journal, keep_journal):
+    import pdb
+    pdb.set_trace()
     if journal == unique_flag_value:
         journal = os.path.join(cfg.get_setting('JOURNAL_HOME'), str(uuid4()))
 
