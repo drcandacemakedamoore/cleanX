@@ -1,0 +1,7 @@
+cleanX.dataset\_processing.dataframes module
+============================================
+
+.. automodule:: cleanX.dataset_processing.dataframes
+   :members:
+   :undoc-members:
+   :show-inheritance:
