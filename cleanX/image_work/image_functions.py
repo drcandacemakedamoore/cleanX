@@ -105,8 +105,8 @@ def subtle_sharpie_enhance(image):
     Makes a new image that is very subtly sharper to the human eye,
     but has new values in most of the pixels(besides the background). This
     is an augmentation, that has not been tested for how well the outputs match
-    X-rays from new machines used well, but is within a reasonable range 
-    by human eye. 
+    X-rays from new machines used well, but is within a reasonable range
+    by human eye.
 
     :param image: String for image name
     :type image: string
@@ -124,7 +124,7 @@ def subtle_sharpie_enhance(image):
 def harsh_sharpie_enhance(image):
     """
     Makes a new image that is very sharper to the human eye,
-    and has new values in most of the pixels (besides the background). This 
+    and has new values in most of the pixels (besides the background). This
     augmentation may allow humans to understnd certain elements of an image,
     but should be used with care to make augmented data.
 
