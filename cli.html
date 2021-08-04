@@ -46,17 +46,24 @@
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-python3-m-cleanX-c">
 <span id="cmdoption-python3-m-cleanx-c"></span><span id="cmdoption-python3-m-cleanX-config"></span><span id="cmdoption-python3-m-cleanx-config"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--config</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;config&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-cleanX-c" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Configuration value pairs. The values will be processed using JSON parser.
+For the list of possible values see <a class="reference internal" href="cleanX.cli.html#cleanX.cli.Config" title="cleanX.cli.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></a>.</p>
+</dd></dl>
 
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-python3-m-cleanX-f">
 <span id="cmdoption-python3-m-cleanx-f"></span><span id="cmdoption-python3-m-cleanX-config-file"></span><span id="cmdoption-python3-m-cleanx-config-file"></span><span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--config-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;config_file&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-cleanX-f" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Similar to <code class="code docutils literal notranslate"><span class="pre">--config</span></code> it is possible to provide all the necessary
+configuraiton settings as a file.  The file needs to be in JSON format
+suitable for <a class="reference internal" href="cleanX.cli.html#cleanX.cli.Config.parse" title="cleanX.cli.Config.parse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Config.parse()</span></code></a>.</p>
+</dd></dl>
 
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-python3-m-cleanX-v">
 <span id="cmdoption-python3-m-cleanx-v"></span><span id="cmdoption-python3-m-cleanX-verbosity"></span><span id="cmdoption-python3-m-cleanx-verbosity"></span><span class="sig-name descname"><span class="pre">-v</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--verbosity</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;verbosity&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-cleanX-v" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Controls verbosity level set for <a class="reference external" href="https://docs.python.org/3/library/logging.html#module-logging" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a>.  The default is
+<code class="code docutils literal notranslate"><span class="pre">logging.WARNING</span></code>.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Options</dt>
 <dd class="field-odd"><p>critical | debug | error | fatal | info | warning | warn | notset</p>
 </dd>
