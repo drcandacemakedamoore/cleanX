@@ -93,7 +93,7 @@ class Config:
     def add_setting(self, k, v):
         """
         Override existing setting with the given setting.
-        
+
         :param k: The name of the setting to replace.
         :type k: str
         :param v: The new value of the setting.
