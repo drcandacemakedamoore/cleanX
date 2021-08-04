@@ -3,5 +3,5 @@ cleanX==0.1.9
 numpy==1.18.5
 matplotlib==3.4.2
 pandas==1.3.0
-opencv-python-headless
+opencv-contrib-python==4.2.0.34
 PIL==8.3.0
