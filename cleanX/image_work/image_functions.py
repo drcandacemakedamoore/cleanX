@@ -103,7 +103,10 @@ def crop(image):
 def subtle_sharpie_enhance(image):
     """
     Makes a new image that is very subtly sharper to the human eye,
-    but has new values in most of the pixels(besides the background)
+    but has new values in most of the pixels(besides the background). This
+    is an augmentation, that has not been tested for how well the outputs match
+    X-rays from new machines used well, but is within a reasonable range 
+    by human eye. 
 
     :param image: String for image name
     :type image: string
@@ -121,7 +124,9 @@ def subtle_sharpie_enhance(image):
 def harsh_sharpie_enhance(image):
     """
     Makes a new image that is very sharper to the human eye,
-    and has new values in most of the pixels (besides the background).
+    and has new values in most of the pixels (besides the background). This 
+    augmentation may allow humans to understnd certain elements of an image,
+    but should be used with care to make augmented data.
 
     :param image: String for image name
     :type image: string
@@ -139,7 +144,7 @@ def harsh_sharpie_enhance(image):
 def salting(img):
     """
     This function adds some noise to an image. The noise is synthetic. It has
-    not been tested for similarity to older machines, which also add add noise.
+    not been tested for similarity to older machines, which also add noise.
 
     :param img_name: String for image name
     :type img_name: string
@@ -185,7 +190,10 @@ def simple_rotation_augmentation(angle_list1, image):
 
 def blur_out_edges(image):
     """
-    For an individual image, blurs out the edges as an augmentation.
+    For an individual image, blurs out the edges as an augmentation. This
+    augmentation is not like any real-world X-ray, but can make images
+    which helps force attention in a neural net away from the edges of the
+    images.
 
     :param image: Image
     :type image: Image (JPEG)
@@ -1283,16 +1291,16 @@ def make_contour_image(im):
     # find contours
     if major_cv2 > 3:
         contours, hierarchy = cv2.findContours(
-            edges,
-            cv2.RETR_EXTERNAL,
-            cv2.CHAIN_APPROX_SIMPLE,
-        )
+                                edges,
+                                cv2.RETR_EXTERNAL,
+                                cv2.CHAIN_APPROX_SIMPLE,
+                                )
     else:
         ret2, contours, hierarchy = cv2.findContours(
-            edges,
-            cv2.RETR_EXTERNAL,
-            cv2.CHAIN_APPROX_SIMPLE,
-        )
+                                        edges,
+                                        cv2.RETR_EXTERNAL,
+                                        cv2.CHAIN_APPROX_SIMPLE,
+                                        )
     # create an empty image for contours
     img_contours = np.zeros(imgL.shape)
     drawing = cv2.drawContours(img_contours, contours, -1, (0, 255, 0), 3)
@@ -1305,8 +1313,8 @@ def avg_image_maker(set_of_images):
     average per pixel place (in a normalized matrix) of all images averaged
     from the set_of_images group.
 
-    :param set_of_images: A set of images, can be read in with glob.glob on
-                          a folder of jpgs.
+    :param set_of_images: A set of images,
+    can be read in with glob.glob on a folder of jpgs.
     :type set_of_images: list
 
     :return: final_avg, an image that is the average image of images in the set
@@ -1342,12 +1350,12 @@ def set_image_variability(set_of_images):
     air interface (not all subjects same size) and other obviously variable
     aspects of your image set.
 
-    :param set_of_images: A set of images, can be read in with glob.glob on
-                          a folder of jpgs.
+    :param set_of_images: A set of images,
+    can be read in with glob.glob on a folder of jpgs.
     :type set_of_images: list
 
     :return: final_diff, an image that is the average virability per pixel
-             of the image in images in the set
+    of the image in images in the set
     :rtype: nd.array
     """
     final_avg = avg_image_maker(set_of_images)
@@ -1531,7 +1539,7 @@ def make_histo_scaled_folder(imgs_folder, tail_cut_percent, target_folder):
 
 
     :return: target_name, but your images go into target folder with
-             target_name
+    target_name
     :rtype: string
     """
 
