@@ -26,11 +26,6 @@ from cleanX.image_work import (
 )
 from cleanX.image_work.steps import get_known_steps
 
-"""
-The documentation for command line builds differently with our automated
-documentation build. If you need documentation for this module immediately
-please open and issue and we will provide it on the wiki.  
-"""
 
 class Config:
 
