@@ -1,7 +1,0 @@
-cleanX.image\_work.pipeline module
-==================================
-
-.. automodule:: cleanX.image_work.pipeline
-   :members:
-   :undoc-members:
-   :show-inheritance:

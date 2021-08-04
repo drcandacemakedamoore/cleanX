@@ -4,12 +4,29 @@ cleanX.dicom\_processing package
 Submodules
 ----------
 
-.. toctree::
-   :maxdepth: 4
+cleanX.dicom\_processing.pydicom\_adapter module
+------------------------------------------------
 
-   cleanX.dicom_processing.pydicom_adapter
-   cleanX.dicom_processing.simpleitk_adapter
-   cleanX.dicom_processing.source
+.. automodule:: cleanX.dicom_processing.pydicom_adapter
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+cleanX.dicom\_processing.simpleitk\_adapter module
+--------------------------------------------------
+
+.. automodule:: cleanX.dicom_processing.simpleitk_adapter
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+cleanX.dicom\_processing.source module
+--------------------------------------
+
+.. automodule:: cleanX.dicom_processing.source
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Module contents
 ---------------

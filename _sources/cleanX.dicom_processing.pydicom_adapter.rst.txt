@@ -1,7 +1,0 @@
-cleanX.dicom\_processing.pydicom\_adapter module
-================================================
-
-.. automodule:: cleanX.dicom_processing.pydicom_adapter
-   :members:
-   :undoc-members:
-   :show-inheritance:

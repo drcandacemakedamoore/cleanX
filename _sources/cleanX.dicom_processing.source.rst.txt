@@ -1,7 +1,0 @@
-cleanX.dicom\_processing.source module
-======================================
-
-.. automodule:: cleanX.dicom_processing.source
-   :members:
-   :undoc-members:
-   :show-inheritance:
