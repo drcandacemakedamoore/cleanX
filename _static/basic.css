@@ -884,6 +884,12 @@ div.math:hover a.headerlink {
     visibility: visible;
 }
 
+section > dl.py {
+    padding-bottom: 16px;
+    border-bottom: 6px solid #BED4EB;
+    margin-bottom: 32px;
+}
+
 /* -- printout stylesheet --------------------------------------------------- */
 
 @media print {
