@@ -48,7 +48,10 @@ python setup.py build_sphinx
 ```
 
 The documentation will be generated in `./build/sphinx/html` directory. Documentation is generated
-automatically as new functions are added.  
+automatically as new functions are added.
+
+Special additional documentation for medical professionals with limited programming
+ability is available on the wiki (https://github.com/drcandacemakedamoore/cleanX/wiki/Medical-professional-documentation)
 
 # Installation
 - setting up a virtual environment is desirable, but not absolutely necessary
@@ -97,6 +100,6 @@ We are adding new functions and classes all the time. Many unit tests are availa
 
         Normalize images in terms of pixel values (multiple methods)
 
-All important functions are documented in the online documentation. You can also check out our video by clicking the linked picture below:
+All important functions are documented in the online documentation for programmers. You can also check out our video by clicking the linked picture below:
 
 [![Video](https://raw.githubusercontent.com/drcandacemakedamoore/cleanX/main/test/cleanXpic.png)](https://youtu.be/jaX5tXmiWrQ)
