@@ -33,8 +33,8 @@ class PydicomDicomReader:
                                     difficult to represent in a dataframe.
                                     These are filtered by default:
 
-                                    * :pdcm:`sequence.Sequence`
-                                    * :pdcm:`multival.MultiValue`
+                                    * :class:`~pydicom.sequence.Sequence`
+                                    * :class:`~pydicom.multival.MultiValue`
                                     * :class:`bytes` (this is usually the
                                       image data)
         :type exclude_field_types: Sequence[type]

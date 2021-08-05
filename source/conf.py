@@ -60,16 +60,7 @@ html_theme = 'nature'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-extlinks = {
-    'pd': (
-        'https://pandas.pydata.org/docs/reference/api/pandas.%s.html',
-        'pandas.',
-    ),
-    'pdcm': (
-        'https://pydicom.github.io/pydicom/stable/reference/generated/pydicom.%s.html',
-        'pydicom.',
-    )
-}
+extlinks = {}
 
 autodoc_default_options = {
     'members': True,
@@ -90,4 +81,8 @@ intersphinx_mapping = {
     'numpy': ('https://docs.scipy.org/doc/numpy/', None),
     'matplotlib': ('http://matplotlib.org', None),
     'pandas': ('https://pandas.pydata.org/docs/', None),
+    'pydicom': (
+        'https://pydicom.github.io/pydicom/stable/',
+        None,
+    ),
 }

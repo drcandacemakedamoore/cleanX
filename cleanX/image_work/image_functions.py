@@ -49,11 +49,11 @@ def crop_np(image_array):
     Crops black edges of an image array
 
     :param image_array: Image array.
-    :type image_array: array
+    :type image_array: :class:`~numpy.ndarray`
 
 
     :return: NumPy array with the image data with the black margins cropped.
-    :rtype: numpy.ndarray
+    :rtype: :class:`~numpy.ndarray`
     """
     nonzero = np.nonzero(image_array)
     y_nonzero = nonzero[0]
@@ -109,10 +109,10 @@ def subtle_sharpie_enhance(image):
     by human eye.
 
     :param image: String for image name
-    :type image: string
+    :type image: str
 
     :return: new_image_array, a nearly imperceptibly sharpened image for humans
-    :rtype: numpy.ndarray
+    :rtype: :class:`~numpy.ndarray`
     """
     ksize = (2, 2)
     image_body = cv2.imread(image)
@@ -129,10 +129,10 @@ def harsh_sharpie_enhance(image):
     but should be used with care to make augmented data.
 
     :param image: String for image name
-    :type image: string
+    :type image: str
 
     :return: new_image_array, a sharpened image for humans
-    :rtype: numpy.ndarray
+    :rtype: :class:`~numpy.ndarray`
     """
     ksize = (20, 20)
     image_body = cv2.imread(image)
@@ -147,10 +147,10 @@ def salting(img):
     not been tested for similarity to older machines, which also add noise.
 
     :param img_name: String for image name
-    :type img_name: string
+    :type img_name: str
 
     :return: new_image_array, with noise
-    :rtype: nd.array
+    :rtype: :class:`~numpy.ndarray`
     """
     kernel = (5, 5)
     img = cv2.imread(img)
@@ -199,7 +199,7 @@ def blur_out_edges(image):
     :type image: Image (JPEG)
 
     :return: blurred_edge_image an array of an image blurred around the edges
-    :rtype: numpy.ndarray
+    :rtype: :class:`~numpy.ndarray`
     """
     example = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
     msk = np.zeros(example.shape)
@@ -257,7 +257,7 @@ def show_major_lines_on_image(pic_name):
     lines more likely to be non-biological.
 
     :param pic_name: String of image full name e.g. "C:/folder/image.jpg"
-    :type pic_name: string
+    :type pic_name: str
 
     :return: shows image but technically returns a matplotlib plotted image
     :rtype: matplotlib.image.AxesImage
@@ -292,13 +292,13 @@ def find_big_lines(directory, line_length):
     are all contiguous
 
     :param directory: Directory with set_of_images (should include final '/').
-    :type directory: directory
+    :type directory: Suitable for :func:`os.path.join()`
     :param line_length: Minimal length of lines for the function to count.
-    :type line_length: integer
+    :type line_length: int
 
     :return: :code:`DataFrame` with column for line count at or above
              :code:`line_length`
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
@@ -336,9 +336,10 @@ def separate_image_averager(set_of_images, s=5):
     To run on a list to make a prototype tiny X-ray that is an averages image
 
     :param set_of_images: Set_of_images
-    :type set_of_images:
+    :type set_of_images: Collection of elements suitable for
+                         :func:`os.path.join()`
     :param s: length of sides in the image made
-    :type s: integer
+    :type s: int
 
     :return: image
     :rtype: image
@@ -359,9 +360,9 @@ def augment_and_move(origin_folder, target_folder, transformations):
     the cleanX function crop, to all of them
 
     :param origin_folder: folder the images are in (should include final '/')
-    :type origin_folder: directory
+    :type origin_folder: Suitable for :func:`os.path.join()`
     :param target_folder: The folder where augmented images will be sent
-    :type target_folder: directory
+    :type target_folder: :func:`os.path.join()`
     :param transformations: A list of augmentation functions to apply
     :type transformations: list
 
@@ -389,11 +390,11 @@ def dimensions_to_df(image_directory):
     data analysis
 
     :param folder_name: Adress of folder with images (should include final '/')
-    :type folder_name: Folder/directory
+    :type folder_name: :func:`os.path.join()`
 
     :return: image height, width and proportion height/width as a new
              :code:`DataFrame`
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     non_suspects1 = glob.glob(os.path.join(image_directory, '*.[Jj][Pp][Gg]'))
     non_suspects2 = glob.glob(
@@ -426,7 +427,7 @@ def dimensions_to_histo(image_directory, bins_count=10):
     varied
 
     :param folder_name: Folder_name, directory name.(should include final '/')
-    :type folder_name: string
+    :type folder_name: str
 
     :param bins_count: bins_count, number of bins desired (defaults to 10)
     :type bins_count: int
@@ -481,7 +482,7 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     varied
 
     :param folder_name: Folder_name, directory name. (should include final '/')
-    :type folder_name: string
+    :type folder_name: str
     :param bins_count: bins_count, number of bins desired (defaults to 10)
     :type bins_count: int
     :return: histo_ht_wt_p, a labeled histogram
@@ -525,10 +526,9 @@ def crop_them_all(origin_folder, target_folder):
     Crops all images and moves them to a target folder
 
     :param origin_folder: The folder in which the images are
-    :type origin_folder: directory
+    :type origin_folder: :func:`os.path.join()`
     :param target_folder: The folder where augmented images will be sent
-    :type target_folder: directory
-
+    :type target_folder: :func:`os.path.join()`
 
     :return: technically nothing returned, but new images will be made
     :rtype: none
@@ -549,11 +549,11 @@ def find_very_hazy(directory):
     questionable technique level.
 
     :param directory: The folder the images are in (should include final '/')
-    :type directory: directory
+    :type directory: :func:`os.path.join()`
 
     :return: :code:`DataFrame` with images sorted as hazy or regular under
              :code:`label_for_haze`
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
@@ -592,15 +592,15 @@ def find_by_sample_upper(
     where x is the percent height of the sample.
 
     :param source_directory: folder the images are in(should include final '/')
-    :type source_directory: directory
+    :type source_directory: :func:`os.path.join()`
     :param percent_height_of_sample: From where on image to call upper
-    :type percent_height_of_sample: integer
+    :type percent_height_of_sample: int
     :param value_for_line: From where in pixel values to call averaged
         values abnormal
-    :type value_for_line: integer
+    :type value_for_line: int
 
     :return: :code:`DataFrame` with images labeled
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     suspects1 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Ee][Gg]'))
@@ -636,13 +636,12 @@ def find_sample_upper_greater_than_lower(
     or otherwise bizarre, as the neck is smaller than the abdomen.
 
     :param source_directory: folder the images are in(should include final '/')
-    :type source_directory: directory
+    :type source_directory: :func:`os.path.join()`
     :param percent_height_of_sample: From where on image to call upper or lower
-    :type percent_height_of_sample: integer
-
+    :type percent_height_of_sample: int
 
     :return: :code:`DataFrame` with images labeled
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     estup, estdown, piclist = [], [], []
     suspects1 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Gg]'))
@@ -673,12 +672,12 @@ def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
     or problem images
 
     :param source_directory: folder images in (include final /)
-    :type source_directory: directory
+    :type source_directory: :func:`os.path.join()`
     :param percentage_to_say_outliers: Percentage to capture
-    :type percentage_to_say_outliers: integer
+    :type percentage_to_say_outliers: int
 
     :return: :code:`DataFrame` made up of outliers only
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     suspects1 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Ee][Gg]'))
@@ -705,12 +704,12 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     the same mean are in and out of normal range if the knife so falls
 
     :param source_directory: The folder in which the images are
-    :type source_directory: directory
+    :type source_directory: :func:`os.path.join()`
     :param percentage_to_say_outliers: Percentage to capture
-    :type percentage_to_say_outliers: integer
+    :type percentage_to_say_outliers: int
 
     :return: :code:`DataFrame` all images, marked as high, low or within range
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     suspects1 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Ee][Gg]'))
@@ -746,14 +745,14 @@ def create_matrix(width, height, default_element):
     maybe 500*500 depending
 
     :param width: Width of the matrix to be created
-    :type width: integer
+    :type width: int
     :param height: The height of matrix to be created
-    :type height: integer
+    :type height: int
     :param default_element: Element to populate the matrix with
-    :type default_element: float or integer or string
+    :type default_element: Union[float, int, str]
 
     :return: 2D matrix populated
-    :rtype: matrix
+    :rtype: list
     """
     result = [0] * width
 
@@ -770,16 +769,16 @@ def find_tiny_image_differences(directory, s=5, percentile=8):
     or dramatically different in some way. Note: percentile returned
     is approximate, may be a tad more
 
-    :param directory: Directory (folder).
-    :type directory: Directory
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
     :param s: length to make the sides of the tiny image for comparison
-    :type s: integer
+    :type s: int
     :param percentile: percentile to mark as abnormal
-    :type percentile: integer
+    :type percentile: int
 
     :return: :code:`DataFrame` with a column that notes mismatches
              and within range images
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
@@ -808,11 +807,11 @@ def tesseract_specific(directory):
     """
     Finds images with text on them. Multi-lingual including English.
 
-    :param directory: Directory (folder).
-    :type directory: Directory
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
 
     :return: :code:`DataFrame` with a column of text found
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
@@ -844,13 +843,13 @@ def find_suspect_text(directory, label_word):
     Finds images with a specific text you ask for on them.
     Multi-lingual including English. Accuracy is very high, but not perfect.
 
-    :param directory: Directory (folder).
-    :type directory: Directory
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
     :param label_word: Label word
-    :type label_word: string
+    :type label_word: str
 
     :return: :code:`DataFrame` with a column of text found over the length
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
 
     suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
@@ -882,13 +881,13 @@ def find_suspect_text_by_length(directory, length):
     Useful if you know you do not care about R and L or SUP.
     Multi-lingual including English. Accuracy is very high, but not perfect.
 
-    :param directory: Directory (folder).
-    :type directory: Directory
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
     :param length: Length to find above, inclusive
-    :type length: integer
+    :type length: int
 
     :return: :code:`DataFrame` with a column of text found
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
@@ -922,8 +921,8 @@ def histogram_difference_for_inverts(directory):
     value histogram to find inverted images. Note we assume classical
     X-rays, not inverted fluoroscopy images.
 
-    :param directory: Directory (folder).
-    :type directory: Directory
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
 
     :return: a list of images suspected to be inverted
     :rtype: list
@@ -956,11 +955,11 @@ def histogram_difference_for_inverts_todf(directory):
     a :code:`DataFrame`. Images are listed as regulars, inverts of unclear (the
     unclear have equal spikes on both ends). #histo
 
-    :param directory: Directory (folder).
-    :type directory: Directory
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
 
     :return: a :code:`DataFrame` with images categorized
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
@@ -994,8 +993,8 @@ def find_duplicated_images(directory):
     """
     Finds duplicated images and returns a list of them.
 
-    :param directory: Directory (folder).
-    :type directory: Directory
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
 
     :return: a list of duplicated images
     :rtype: list
@@ -1030,11 +1029,11 @@ def find_duplicated_images_todf(directory):
     """
     Finds duplicated images and returns a :code:`DataFrame` of them.
 
-    :param directory: Directory (folder).
-    :type directory: Directory
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
 
     :return: a :code:`DataFrame` of duplicated images
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
@@ -1079,7 +1078,7 @@ def show_images_in_df(iter_ob, length_name):
     :param iter_ob: List, chould be a :code:`DataFrame` column, use .to_list()
     :type iter_ob: list
     :param length_name: Size of image name going from end
-    :type length_name: integer
+    :type length_name: int
 
     :return: technically no return but makes a plot of images with names
     :rtype: none
@@ -1115,13 +1114,13 @@ def dataframe_up_my_pics(directory, diagnosis_string):
     Takes images in a directory (should all be with same label), and puts the
     name (with path) and label into a :code:`DataFrame`
 
-    :param directory: Directory (folder).
-    :type directory: Directory
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
     :param diagnosis_string: Usually a label, may be any string
-    :type diagnosis_string: string
+    :type diagnosis_string: str
 
     :return: :code:`DataFrame` of pictures and label
-    :rtype: :pd:`DataFrame`
+    :rtype: :class:`~pandas.DataFrame`
     """
     picture_directory = Path(directory)
     files = sorted(os.listdir(picture_directory))
@@ -1177,7 +1176,7 @@ class Rotator:
         rotation of the given image.
 
         :param image: OpenCV image
-        :type image: cv2.Image
+        :type image: :code:`cv2.Image`
         :param center: Coordinate of the center of rotation
                        (defaults to the middle of the image).
         :param scale: Scale ratio of the resulting image
@@ -1228,9 +1227,9 @@ def simple_spinning_template(
 ):
     """
     :param picy: String for image name of base image
-    :type picy: string
+    :type picy: str
     :param greys_template: The image array of the template,
-    :type greys_template: numpy.ndarray
+    :type greys_template: :class:`~numpy.ndarray`
     :param angle_start: angle to spin template to, it would normally start at
                         zero if picking up exact template itself is desired
     :type angle_start: float
@@ -1245,7 +1244,7 @@ def simple_spinning_template(
 
     :return: copy_image, a copy of base image with the template areas caught
         outlined in blue rectangles
-    :rtype: numpy.ndarray
+    :rtype: :class:`~numpy.ndarray`
     """
 
     pic = picy
@@ -1276,10 +1275,10 @@ def make_contour_image(im):
     """
     Makes an image into a contour image
     :param im: image name
-    :type im: string
+    :type im: str
 
     :return: drawing, the contour image
-    :rtype: nd.array
+    :rtype: :class:`~numpy.ndarray`
     """
     imgL = cv2.imread(im)
     cv2_vers = cv2.__version__
@@ -1311,14 +1310,14 @@ def avg_image_maker(set_of_images):
     """
     This function shows you an average sized image that has been made with the
     average per pixel place (in a normalized matrix) of all images averaged
-    from the set_of_images group.
+    from the :code:`set_of_images` group.
 
-    :param set_of_images: A set of images,
-    can be read in with glob.glob on a folder of jpgs.
+    :param set_of_images: A set of images, can be read in with
+                          :func:`glob.glob()` on a folder of jpgs.
     :type set_of_images: list
 
     :return: final_avg, an image that is the average image of images in the set
-    :rtype: nd.array
+    :rtype: :class:`~numpy.ndarray`
     """
     list_h = []
     list_w = []
@@ -1350,13 +1349,13 @@ def set_image_variability(set_of_images):
     air interface (not all subjects same size) and other obviously variable
     aspects of your image set.
 
-    :param set_of_images: A set of images,
-    can be read in with glob.glob on a folder of jpgs.
+    :param set_of_images: A set of images, can be read in with
+                          :func:`glob.glob()` on a folder of jpgs.
     :type set_of_images: list
 
-    :return: final_diff, an image that is the average virability per pixel
-    of the image in images in the set
-    :rtype: nd.array
+    :return: Final_diff, an image that is the average virability per pixel
+             of the image in images in the set.
+    :rtype: :class:`~numpy.ndarray`
     """
     final_avg = avg_image_maker(set_of_images)
 
@@ -1387,14 +1386,14 @@ def avg_image_maker_by_label(
     lateral is not suggested.
     :param master_df: Dataframe with image location and labels
     (must be in image folder)
-    :type master_df: Dataframe
+    :type master_df: :class:`~pandas.DataFrame`
     :param dataframe_image_column: name of dataframe column with image location
     string
-    :type dataframe_image_column:string
+    :type dataframe_image_column: str
     :param dataframe_label_column: name of dataframe column with label string
-    :type dataframe_label_column:string
+    :type dataframe_label_column: str
     :param image_folder: name of folder where images are
-    :type image_folder:string
+    :type image_folder: str
 
     :return: list of titled average images per label
     :rtype: list
@@ -1450,11 +1449,11 @@ def zero_to_twofivefive_simplest_norming(img_pys):
     a true normalization, but will put all images
     into 0 to 255 values
 
-    :param img_pys: image name
-    :type img_pys: string
+    :param img_pys: Image name.
+    :type img_pys: str
 
-    :return: img_py
-    :rtype: numpy.ndarray
+    :return: OpenCV image.
+    :rtype: :code:`cv2.Image`
     """
     img_py = cv2.imread(img_pys, cv2.IMREAD_GRAYSCALE)
 
@@ -1480,14 +1479,14 @@ def rescale_range_from_histogram_low_end(img, tail_cut_percent):
     should fix the problem (presumably you will have to sample down
     in size for a neural net anyways)
 
-    :param img_pys: image
-    :type img: numpy.ndarray
-    :param tail_cut_percent: percent of histogram to be discarded from low end
-    :type tail_cut_percent: integer
+    :param img_pys: NumPy array with image data.
+    :type img: :class:`~numpy.ndarray`
+    :param tail_cut_percent: Percent of histogram to be discarded from low end
+    :type tail_cut_percent: int
 
 
-    :return: img_py
-    :rtype: numpy.ndarray
+    :return: New NumPy array with image data.
+    :rtype: :class:`~numpy.ndarray`
     """
     # set arbitrary variables
     new_max_value = 255
@@ -1532,15 +1531,14 @@ def make_histo_scaled_folder(imgs_folder, tail_cut_percent, target_folder):
     histogram. It then puts the new normalized images in to a folder
     which is called the target folder (to be made by user)
 
-    :param imgs_folder: imgs_folder
-    :type imgs_folder: string
-    :param tail_cut_percent: percent of histogram to be discarded from low end
-    :type tail_cut_percent: integer
+    :param imgs_folder: Foulder with source images.
+    :type imgs_folder: str
+    :param tail_cut_percent: Percent of histogram to be discarded from low end
+    :type tail_cut_percent: int
 
-
-    :return: target_name, but your images go into target folder with
-    target_name
-    :rtype: string
+    :return: Target_name, but your images go into target folder with
+             target_name.
+    :rtype: str
     """
 
     suspects1 = glob.glob(os.path.join(imgs_folder, '*.[Jj][Pp][Gg]'))
