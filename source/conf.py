@@ -11,7 +11,7 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 # import os
-import sys
+import sys, subprocess
 # sys.path.insert(0, os.path.abspath('.'))
 
 
@@ -22,7 +22,19 @@ copyright = '2021, doctormakeda@gmail.com'
 author = 'doctormakeda@gmail.com'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.4'
+try:
+    tag = subprocess.check_output([
+        'git',
+        '--no-pager',
+        'describe',
+        '--abbrev=0',
+        '--tags',
+    ]).strip().decode()
+except subprocess.CalledProcessError as e:
+    print(e.output)
+    tag = 'v0.0.0'
+
+release = tag[1:]
 
 
 # -- General configuration ---------------------------------------------------
