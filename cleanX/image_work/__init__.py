@@ -43,6 +43,8 @@ from .image_functions import (
     zero_to_twofivefive_simplest_norming,
     rescale_range_from_histogram_low_end,
     make_histo_scaled_folder,
+    give_size_count_df,
+    give_size_counted_dfs,
 
     Rotator,
 )
