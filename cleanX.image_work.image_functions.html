@@ -1033,6 +1033,44 @@ have such a size.
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.image_quality_by_size">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">image_quality_by_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specific_image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.image_quality_by_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function returns the size of an image which indicates one aspect of
+quality
+:param specific_image: the jpg image
+:type specific_imager: string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>q</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.show_close_images">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">show_close_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression_level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_mse</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.show_close_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function shows potentially duplicated images by
+comparing compressed versions of the images.
+:param folder: folder with jpgs
+:type folder: string
+:param compression_level: size to compress down to
+:type compression_level: float
+:param ref_mse: mse is a mean squared error
+:type ref_mse: float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>near_dupers</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.core.frame.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
