@@ -1578,7 +1578,7 @@ def give_size_count_df(folder):
         example = cv2.imread(picy, cv2.IMREAD_GRAYSCALE)
         height = example.shape[0]
         width = example.shape[1]
-        height_width = 'h'+ str(height) + '_w' + str(width)
+        height_width = 'h' + str(height) + '_w' + str(width)
         heights.append(height)
         widths.append(width)
         pic_list.append(picy)
