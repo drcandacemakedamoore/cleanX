@@ -1697,9 +1697,8 @@ def show_close_images(folder, compression_level, ref_mse):
             img = img[..., 0:3]
             # resize the image based to compression level value
             img = cv2.resize(img,
-                            dsize=(compression, compression),
-                            interpolation=cv2.INTER_CUBIC,
-                )
+                                dsize=(compression, compression),
+                                interpolation=cv2.INTER_CUBIC)
             if counter == 0:
                 imgs_array = img
                 image_files.append(filename)
@@ -1718,10 +1717,8 @@ def show_close_images(folder, compression_level, ref_mse):
     while erow_B <= imgs_array.shape[0]:
         while compared_img < (len(image_files)):
             # select two images from imgs_matrix
-            imgA = imgs_array[srow_A: erow_A,  # rows
-                                0: ncols]   # columns
-            imgB = imgs_array[srow_B: erow_B,  # rows
-                                0: ncols]   # columns
+            imgA = imgs_array[srow_A: erow_A, 0: ncols]   # rows, columns
+            imgB = imgs_array[srow_B: erow_B, 0: ncols]   # rows,  columns
             # compare the images
             err = np.sum((imgA.astype("float") - imgB.astype("float")) ** 2)
             err /= float(imgA.shape[0] * imgA.shape[1])
@@ -1744,7 +1741,7 @@ def show_close_images(folder, compression_level, ref_mse):
                 plt.show()
                 print("Similar files: ",
                     image_files[main_img],
-                    " and ", image_files[compared_img])
+                    " and ", image_files[compared_img],)
                 duplicates_A.append(image_files[main_img])
                 duplicates_B.append(image_files[compared_img])
                 err_list.append(spec_err)
@@ -1752,9 +1749,9 @@ def show_close_images(folder, compression_level, ref_mse):
                         'twinB?': duplicates_B,
                         'mse': err_list}
                 near_dupers = pd.DataFrame(dupers)
-            srow_B += nrows
-            erow_B += nrows
-            compared_img += 1
+                srow_B += nrows
+                erow_B += nrows
+                compared_img += 1
 
         srow_A += nrows
         erow_A += nrows
