@@ -1578,13 +1578,13 @@ def give_size_count_df(folder):
         example = cv2.imread(picy, cv2.IMREAD_GRAYSCALE)
         height = example.shape[0]
         width = example.shape[1]
-        height_width= 'h'+str(height) + '_w' + str(width)
+        height_width = 'h'+ str(height) + '_w' + str(width)
         heights.append(height)
         widths.append(width)
         pic_list.append(picy)
-        dimension_groups.append(height_width) 
+        dimension_groups.append(height_width)
         d = {
-            'pics' : pic_list,
+            'pics': pic_list,
             'height': heights,
             'width': widths,
             'height_width': dimension_groups,
@@ -1601,7 +1601,7 @@ def give_size_count_df(folder):
         lener = len(sizesdict[sized])
         len_list.append(lener)
         size_name_list.append(sized)
-    sized_data = {'size':size_name_list, 'count': len_list}
+    sized_data = {'size': size_name_list, 'count': len_list}
     df = pd.DataFrame(sized_data)
     return df
 
@@ -1624,12 +1624,17 @@ def give_size_counted_dfs(folder):
         example = cv2.imread(picy, cv2.IMREAD_GRAYSCALE)
         height = example.shape[0]
         width = example.shape[1]
-        height_width= 'h'+ str(height) + '_w' + str(width)
+        height_width = 'h' + str(height) + '_w' + str(width)
         heights.append(height)
         widths.append(width)
         pic_list.append(picy)
         dimension_groups.append(height_width)
-        d = {'pics' : pic_list, 'height': heights, 'width': widths, 'height_width': dimension_groups}
+        d = {
+            'pics': pic_list,
+            'height': heights,
+            'width': widths,
+            'height_width': dimension_groups
+        }
         data = pd.DataFrame(d)
         data = data.sort_values('height_width')
         compuniquesizes = data.height_width.unique()
