@@ -1649,6 +1649,7 @@ def give_size_counted_dfs(folder):
         big_sizer.append(frames)
     return big_sizer
 
+
 def image_quality_by_size(specific_image):
     """
     This function returns the size of an image which indicates one aspect of
@@ -1661,6 +1662,7 @@ def image_quality_by_size(specific_image):
     """
     q = os.stat(specific_image).st_size
     return q
+
 
 def show_close_images(folder, compression_level,ref_mse):
     """
@@ -1682,18 +1684,18 @@ def show_close_images(folder, compression_level,ref_mse):
     duplicates_B = []
     image_files = []
     err_list = []
-    # list of all files in directory  
+    # list of all files in directory
     suspects1 = glob.glob(os.path.join(folder, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(folder, '*.[Jj][Pp][Ee][Gg]'))
     folder_files = suspects1 + suspects2
 
     # create images array  
     counter = 0
-    for filename in folder_files: 
+    for filename in folder_files:
         img = cv2.imread(filename)
         if type(img) == np.ndarray:
             img = img[...,0:3]
-            # resize the image based to compression level value 
+            # resize the image based to compression level value
             img = cv2.resize(img,
                 dsize=(compression, compression),
                 interpolation=cv2.INTER_CUBIC
@@ -1705,14 +1707,14 @@ def show_close_images(folder, compression_level,ref_mse):
             else:
                 imgs_array = np.concatenate((imgs_array, img))
                 image_files.append(filename)
-    # cook it            
+    # cook it
     main_img = 0
     compared_img = 1
     nrows, ncols = compression, compression
     srow_A = 0
     erow_A = nrows
     srow_B = erow_A
-    erow_B = srow_B + nrows       
+    erow_B = srow_B + nrows
     while erow_B <= imgs_array.shape[0]:
         while compared_img < (len(image_files)):
             # select two images from imgs_matrix
@@ -1723,7 +1725,7 @@ def show_close_images(folder, compression_level,ref_mse):
             # compare the images
             err = np.sum((imgA.astype("float") - imgB.astype("float")) ** 2)
             err /= float(imgA.shape[0] * imgA.shape[1])
-            # err_list = []
+            #
             if err < ref_mse:
                 spec_err_diff = imgA.astype("float") - imgB.astype("float")
                 spec_err = np.sum(spec_err_diff ** 2)
@@ -1741,19 +1743,19 @@ def show_close_images(folder, compression_level,ref_mse):
                 # show the images
                 plt.show()
                 print("Similar files: ",
-                image_files[main_img],
-                " and ", image_files[compared_img])
-                duplicates_A.append(image_files[main_img]
-                )
+                    image_files[main_img],
+                    " and ", image_files[compared_img])
+                duplicates_A.append(image_files[main_img])
                 duplicates_B.append(image_files[compared_img])
                 err_list.append(spec_err)
-                dupers = {'twinA?':duplicates_A,'twinB?' :duplicates_B, 'mse': err_list}
+                dupers = {'twinA?': duplicates_A,
+                'twinB?': duplicates_B,
+                'mse': err_list}
                 near_dupers = pd.DataFrame(dupers)
-                #near_dupers['mse'] = err
             srow_B += nrows
             erow_B += nrows
             compared_img += 1
-        
+
         srow_A += nrows
         erow_A += nrows
         srow_B = erow_A
@@ -1762,13 +1764,13 @@ def show_close_images(folder, compression_level,ref_mse):
         compared_img = main_img + 1
 
     print("\n***\n Output: ",
-           str(len(duplicates_A)),
-           " potential duplicate image pairs in ",
-           str(len(image_files)),
-           " total images.\n",
-           "At compression level",
-            compression,
-            "and mse",
-             ref_mse,
-    )
+        str(len(duplicates_A)),
+        " potential duplicate image pairs in ",
+        str(len(image_files)),
+        " total images.\n",
+        "At compression level",
+        compression,
+        "and mse",
+        ref_mse,
+        )
     return near_dupers
