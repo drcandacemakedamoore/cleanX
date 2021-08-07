@@ -1740,7 +1740,7 @@ def show_close_images(folder, compression_level, ref_mse):
                 # show the images
                 plt.show()
                 print("Similar files: ", image_files[main_img], " and ",
-                    image_files[compared_img],)
+                      image_files[compared_img],)
                 duplicates_A.append(image_files[main_img])
                 duplicates_B.append(image_files[compared_img])
                 err_list.append(spec_err)
