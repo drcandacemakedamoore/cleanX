@@ -1696,9 +1696,9 @@ def show_close_images(folder, compression_level, ref_mse):
         if type(img) == np.ndarray:
             img = img[..., 0:3]
             # resize the image based to compression level value
-            img = cv2.resize(img,
-                                dsize=(compression, compression),
-                                interpolation=cv2.INTER_CUBIC)
+            img = cv2.resize(
+                    img, dsize=(compression, compression),
+                    interpolation=cv2.INTER_CUBIC)
             if counter == 0:
                 imgs_array = img
                 image_files.append(filename)
@@ -1739,15 +1739,14 @@ def show_close_images(folder, compression_level, ref_mse):
                 plt.axis("off")
                 # show the images
                 plt.show()
-                print("Similar files: ",
-                    image_files[main_img],
-                    " and ", image_files[compared_img],)
+                print("Similar files: ", image_files[main_img],
+                        " and ", image_files[compared_img],)
                 duplicates_A.append(image_files[main_img])
                 duplicates_B.append(image_files[compared_img])
                 err_list.append(spec_err)
                 dupers = {'twinA?': duplicates_A,
-                        'twinB?': duplicates_B,
-                        'mse': err_list}
+                            'twinB?': duplicates_B,
+                            'mse': err_list}
                 near_dupers = pd.DataFrame(dupers)
                 srow_B += nrows
                 erow_B += nrows
@@ -1761,11 +1760,10 @@ def show_close_images(folder, compression_level, ref_mse):
         compared_img = main_img + 1
 
     print("\n***\n Output: ", str(len(duplicates_A)),
-        " potential duplicate image pairs in ", str(len(image_files)),
-        " total images.\n",
-        "At compression level",
-        compression,
-        "and mse",
-        ref_mse,
-    )
+            " potential duplicate image pairs in ", str(len(image_files)),
+            " total images.\n",
+            "At compression level",
+            compression,
+            "and mse",
+            ref_mse,)
     return near_dupers
