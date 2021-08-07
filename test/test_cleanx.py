@@ -414,3 +414,11 @@ def test_dataset_creation():
         assert len(m2) == common
         all_df = setup.concat_dataframe()
         assert len(m1) == len(all_df.columns)
+
+def test_give_me_size_counted_dfs():      
+    df_by_size = iwork.give_me_size_counted_dfs(image_directory)
+    assert len(df_by_size) > 0
+
+def test_give_me_size_count_df():      
+    df_by_size = iwork.give_me_size_count_df(image_directory)
+    assert len(df_by_size) > 0

@@ -1558,9 +1558,10 @@ def make_histo_scaled_folder(imgs_folder, tail_cut_percent, target_folder):
 
     return target_name
 
-def give_me_size_count_df(folder):
+
+def give_size_count_df(folder):
     """
-    This function returns a dataframe of unique sized, and how many pictures 
+    This function returns a dataframe of unique sized, and how many pictures
     have such a size.
     :param folder: folder with jpgs
     :type folder: string
@@ -1578,28 +1579,34 @@ def give_me_size_count_df(folder):
         height = example.shape[0]
         width = example.shape[1]
         height_width= 'h'+str(height) + '_w' + str(width)
-        heights.append(height)    
+        heights.append(height)
         widths.append(width)
         pic_list.append(picy)
         dimension_groups.append(height_width) 
-        d = {'pics' : pic_list, 'height': heights, 'width': widths, 'height_width':dimension_groups}
+        d = {
+            'pics' : pic_list,
+            'height': heights,
+            'width': widths,
+            'height_width': dimension_groups,
+        }
         data = pd.DataFrame(d)
         data = data.sort_values('height_width')
         compuniquesizes = data.height_width.unique()
         len_list = []
     size_name_list = []
-    sizesdict = {elem : pd.DataFrame() for elem in compuniquesizes}
+    sizesdict = {elem: pd.DataFrame() for elem in compuniquesizes}
     for key in sizesdict.keys():
         sizesdict[key] = data[:][data.height_width == key]
     for sized in compuniquesizes:
-        lener= len(sizesdict[sized])
+        lener = len(sizesdict[sized])
         len_list.append(lener)
         size_name_list.append(sized)
-    sized_data = {'size':size_name_list, 'count':len_list}
+    sized_data = {'size':size_name_list, 'count': len_list}
     df = pd.DataFrame(sized_data)
     return df
 
-def give_me_size_counted_dfs(folder):
+
+def give_size_counted_dfs(folder):
     """
     This function returns dataframes of unique sized images in a list
     :param folder: folder with jpgs
@@ -1617,22 +1624,22 @@ def give_me_size_counted_dfs(folder):
         example = cv2.imread(picy, cv2.IMREAD_GRAYSCALE)
         height = example.shape[0]
         width = example.shape[1]
-        height_width= 'h'+str(height) + '_w' + str(width)
-        heights.append(height)    
+        height_width= 'h'+ str(height) + '_w' + str(width)
+        heights.append(height)
         widths.append(width)
         pic_list.append(picy)
-        dimension_groups.append(height_width) 
-        d = {'pics' : pic_list, 'height': heights, 'width': widths, 'height_width':dimension_groups}
+        dimension_groups.append(height_width)
+        d = {'pics' : pic_list, 'height': heights, 'width': widths, 'height_width': dimension_groups}
         data = pd.DataFrame(d)
         data = data.sort_values('height_width')
         compuniquesizes = data.height_width.unique()
         len_list = []
     size_name_list = []
-    sizesdict = {elem : pd.DataFrame() for elem in compuniquesizes}
+    sizesdict = {elem: pd.DataFrame() for elem in compuniquesizes}
     for key in sizesdict.keys():
         sizesdict[key] = data[:][data.height_width == key]
     big_sizer = []
     for nami in compuniquesizes:
         frames = sizesdict[nami]
         big_sizer.append(frames)
-    return big_sizer  
+    return big_sizer
