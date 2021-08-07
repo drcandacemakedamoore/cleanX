@@ -45,6 +45,8 @@ from .image_functions import (
     make_histo_scaled_folder,
     give_size_count_df,
     give_size_counted_dfs,
+    image_quality_by_size,
+    show_close_images,
 
     Rotator,
 )

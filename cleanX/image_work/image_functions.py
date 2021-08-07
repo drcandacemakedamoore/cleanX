@@ -1648,3 +1648,127 @@ def give_size_counted_dfs(folder):
         frames = sizesdict[nami]
         big_sizer.append(frames)
     return big_sizer
+
+def image_quality_by_size(specific_image):
+    """
+    This function returns the size of an image which indicates one aspect of
+    quality
+    :param specific_image: the jpg image
+    :type specific_imager: string
+
+    :return: q
+    :rtype: int
+    """
+    q = os.stat(specific_image).st_size
+    return q
+
+def show_close_images(folder, compression_level,ref_mse):
+    """
+    This function shows potentially duplicated images by
+    comparing compressed versions of the images.
+    :param folder: folder with jpgs
+    :type folder: string
+    :param compression_level: size to compress down to
+    :type compression_level: float
+    :param ref_mse: mse is a mean squared error
+    :type ref_mse: float
+
+    :return: near_dupers
+    :rtype: pandas.core.frame.DataFrame
+    """
+    compression = compression_level
+    # lists of the found duplicate/similar images, images, and err 
+    duplicates_A = []
+    duplicates_B = []
+    image_files = []
+    err_list = []
+    # list of all files in directory  
+    suspects1 = glob.glob(os.path.join(folder, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(folder, '*.[Jj][Pp][Ee][Gg]'))
+    folder_files = suspects1 + suspects2
+
+    # create images array  
+    counter = 0
+    for filename in folder_files: 
+        img = cv2.imread(filename)
+        if type(img) == np.ndarray:
+            img = img[...,0:3]
+            # resize the image based to compression level value 
+            img = cv2.resize(img,
+                dsize=(compression, compression),
+                interpolation=cv2.INTER_CUBIC
+            )
+            if counter == 0:
+                imgs_array = img
+                image_files.append(filename)
+                counter += 1
+            else:
+                imgs_array = np.concatenate((imgs_array, img))
+                image_files.append(filename)
+    # cook it            
+    main_img = 0
+    compared_img = 1
+    nrows, ncols = compression, compression
+    srow_A = 0
+    erow_A = nrows
+    srow_B = erow_A
+    erow_B = srow_B + nrows       
+    while erow_B <= imgs_array.shape[0]:
+        while compared_img < (len(image_files)):
+            # select two images from imgs_matrix
+            imgA = imgs_array[srow_A : erow_A, # rows
+                               0      : ncols]  # columns
+            imgB = imgs_array[srow_B : erow_B, # rows
+                               0      : ncols]  # columns
+            # compare the images
+            err = np.sum((imgA.astype("float") - imgB.astype("float")) ** 2)
+            err /= float(imgA.shape[0] * imgA.shape[1])
+            # err_list = []
+            if err < ref_mse:
+                spec_err_diff = imgA.astype("float") - imgB.astype("float")
+                spec_err = np.sum(spec_err_diff ** 2)
+                spec_err /= float(imgA.shape[0] * imgA.shape[1])
+                fig = plt.figure()
+                plt.suptitle("MSE: %.3f" % (err))
+                # plot first image
+                ax = fig.add_subplot(1, 2, 1)
+                plt.imshow(imgA, cmap = plt.cm.gray)
+                plt.axis("off")
+                # plot second image
+                ax = fig.add_subplot(1, 2, 2)
+                plt.imshow(imgB, cmap = plt.cm.gray)
+                plt.axis("off")
+                # show the images
+                plt.show()
+                print("Similar files: ",
+                image_files[main_img],
+                " and ", image_files[compared_img])
+                duplicates_A.append(image_files[main_img]
+                )
+                duplicates_B.append(image_files[compared_img])
+                err_list.append(spec_err)
+                dupers = {'twinA?':duplicates_A,'twinB?' :duplicates_B, 'mse': err_list}
+                near_dupers = pd.DataFrame(dupers)
+                #near_dupers['mse'] = err
+            srow_B += nrows
+            erow_B += nrows
+            compared_img += 1
+        
+        srow_A += nrows
+        erow_A += nrows
+        srow_B = erow_A
+        erow_B = srow_B + nrows
+        main_img += 1
+        compared_img = main_img + 1
+
+    print("\n***\n Output: ",
+           str(len(duplicates_A)),
+           " potential duplicate image pairs in ",
+           str(len(image_files)),
+           " total images.\n",
+           "At compression level",
+            compression,
+            "and mse",
+             ref_mse,
+    )
+    return near_dupers

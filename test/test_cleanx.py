@@ -271,7 +271,6 @@ def test_avg_image_maker():
 
 
 def test_set_image_variability():
-    #set_of_images = glob.glob(*.jpg)
     test_dfE = (os.path.join(image_directory,'test_sample_df.csv'))
     test_df = pd.read_csv(test_dfE)
     set_of_images = image_directory + '/' + test_df.image_path.dropna()
@@ -282,7 +281,6 @@ def test_set_image_variability():
 def test_avg_image_maker_by_label():
     test_dfE = (os.path.join(image_directory,'alt_test_labeled.csv'))
     test_df = pd.read_csv(test_dfE)
-    #set_of_images = image_directory + '/' + test_df.image_path.dropna()
     lotus = iwork.avg_image_maker_by_label(test_df,'imageID','path_label',image_directory)
     assert len(lotus) > 0       
 
@@ -422,3 +420,12 @@ def test_give_size_counted_dfs():
 def test_give_size_count_df():      
     df_by_size = iwork.give_size_count_df(image_directory)
     assert len(df_by_size) > 0
+
+def test_image_quality_by_size():
+    vovo = os.path.join(image_directory, 'testtocrop.jpg')
+    quality = iwork.image_quality_by_size(vovo)
+    assert quality > 0
+
+def test_show_close_images():
+    output1 = iwork.show_close_images(image_directory,2,190)
+    assert len(output1) > 0
