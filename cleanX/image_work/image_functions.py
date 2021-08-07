@@ -1722,7 +1722,6 @@ def show_close_images(folder, compression_level, ref_mse):
             # compare the images
             err = np.sum((imgA.astype("float") - imgB.astype("float")) ** 2)
             err /= float(imgA.shape[0] * imgA.shape[1])
-            #
             if err < ref_mse:
                 spec_err_diff = imgA.astype("float") - imgB.astype("float")
                 spec_err = np.sum(spec_err_diff ** 2)
