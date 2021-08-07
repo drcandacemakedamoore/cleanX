@@ -1664,7 +1664,7 @@ def image_quality_by_size(specific_image):
     return q
 
 
-def show_close_images(folder, compression_level,ref_mse):
+def show_close_images(folder, compression_level, ref_mse):
     """
     This function shows potentially duplicated images by
     comparing compressed versions of the images.
@@ -1679,7 +1679,7 @@ def show_close_images(folder, compression_level,ref_mse):
     :rtype: pandas.core.frame.DataFrame
     """
     compression = compression_level
-    # lists of the found duplicate/similar images, images, and err 
+    # lists of the found duplicate/similar images, images, and err
     duplicates_A = []
     duplicates_B = []
     image_files = []
@@ -1689,16 +1689,16 @@ def show_close_images(folder, compression_level,ref_mse):
     suspects2 = glob.glob(os.path.join(folder, '*.[Jj][Pp][Ee][Gg]'))
     folder_files = suspects1 + suspects2
 
-    # create images array  
+    # create images array
     counter = 0
     for filename in folder_files:
         img = cv2.imread(filename)
         if type(img) == np.ndarray:
-            img = img[...,0:3]
+            img = img[..., 0:3]
             # resize the image based to compression level value
             img = cv2.resize(img,
-                dsize=(compression, compression),
-                interpolation=cv2.INTER_CUBIC
+                    dsize=(compression, compression),
+                    interpolation=cv2.INTER_CUBIC
             )
             if counter == 0:
                 imgs_array = img
@@ -1718,10 +1718,10 @@ def show_close_images(folder, compression_level,ref_mse):
     while erow_B <= imgs_array.shape[0]:
         while compared_img < (len(image_files)):
             # select two images from imgs_matrix
-            imgA = imgs_array[srow_A : erow_A, # rows
-                               0      : ncols]  # columns
-            imgB = imgs_array[srow_B : erow_B, # rows
-                               0      : ncols]  # columns
+            imgA = imgs_array[srow_A: erow_A,  # rows
+                               0: ncols]   # columns
+            imgB = imgs_array[srow_B: erow_B,  # rows
+                               0: ncols]   # columns
             # compare the images
             err = np.sum((imgA.astype("float") - imgB.astype("float")) ** 2)
             err /= float(imgA.shape[0] * imgA.shape[1])
@@ -1734,11 +1734,11 @@ def show_close_images(folder, compression_level,ref_mse):
                 plt.suptitle("MSE: %.3f" % (err))
                 # plot first image
                 ax = fig.add_subplot(1, 2, 1)
-                plt.imshow(imgA, cmap = plt.cm.gray)
+                plt.imshow(imgA, cmap=plt.cm.gray)
                 plt.axis("off")
                 # plot second image
                 ax = fig.add_subplot(1, 2, 2)
-                plt.imshow(imgB, cmap = plt.cm.gray)
+                plt.imshow(imgB, cmap=plt.cm.gray)
                 plt.axis("off")
                 # show the images
                 plt.show()
@@ -1764,13 +1764,13 @@ def show_close_images(folder, compression_level,ref_mse):
         compared_img = main_img + 1
 
     print("\n***\n Output: ",
-        str(len(duplicates_A)),
-        " potential duplicate image pairs in ",
-        str(len(image_files)),
-        " total images.\n",
-        "At compression level",
-        compression,
-        "and mse",
-        ref_mse,
-        )
+            str(len(duplicates_A)),
+            " potential duplicate image pairs in ",
+            str(len(image_files)),
+            " total images.\n",
+            "At compression level",
+            compression,
+            "and mse",
+            ref_mse,
+    )
     return near_dupers
