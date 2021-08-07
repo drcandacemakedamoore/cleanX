@@ -55,6 +55,8 @@ jobs:
       github.ref == 'refs/heads/wvxvw/documentation-fixes'
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - run: >-
           sudo apt-get install -y
           libleptonica-dev
