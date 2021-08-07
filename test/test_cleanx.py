@@ -413,11 +413,11 @@ def test_dataset_creation():
         all_df = setup.concat_dataframe()
         assert len(m1) == len(all_df.columns)
 
-def test_give_size_counted_dfs():      
+def test_give_size_counted_dfs():
     df_by_size = iwork.give_size_counted_dfs(image_directory)
     assert len(df_by_size) > 0
 
-def test_give_size_count_df():      
+def test_give_size_count_df():
     df_by_size = iwork.give_size_count_df(image_directory)
     assert len(df_by_size) > 0
 
@@ -427,5 +427,5 @@ def test_image_quality_by_size():
     assert quality > 0
 
 def test_show_close_images():
-    output1 = iwork.show_close_images(image_directory,2,190)
+    output1 = iwork.show_close_images(image_directory, 2, 190)
     assert len(output1) > 0
