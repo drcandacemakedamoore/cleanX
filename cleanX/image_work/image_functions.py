@@ -1729,18 +1729,22 @@ def show_close_images(folder, compression_level, ref_mse):
                 (imgA.astype("float") - imgB.astype("float")) ** 2
             ) / img_area
             if err < ref_mse:
-                fig = plt.figure()
-                plt.suptitle("MSE: %.3f" % (err))
-                # plot first image
-                ax = fig.add_subplot(1, 2, 1)
-                plt.imshow(imgA, cmap=plt.cm.gray)
-                plt.axis("off")
-                # plot second image
-                ax = fig.add_subplot(1, 2, 2)
-                plt.imshow(imgB, cmap=plt.cm.gray)
-                plt.axis("off")
-                # show the images
-                plt.show()
+                # TODO(wvxvw): matplotlib requires instrumentation for testing
+                # so that it doesn't start interactive ui during automatic
+                # test
+
+                # fig = plt.figure()
+                # plt.suptitle("MSE: %.3f" % (err))
+                # # plot first image
+                # ax = fig.add_subplot(1, 2, 1)
+                # plt.imshow(imgA, cmap=plt.cm.gray)
+                # plt.axis("off")
+                # # plot second image
+                # ax = fig.add_subplot(1, 2, 2)
+                # plt.imshow(imgB, cmap=plt.cm.gray)
+                # plt.axis("off")
+                # # show the images
+                # plt.show()
                 print(
                     'Similar files: {} and {}'.format(
                         img_name_A,
