@@ -1728,7 +1728,6 @@ def show_close_images(folder, compression_level, ref_mse):
             err = np.sum(
                 (imgA.astype("float") - imgB.astype("float")) ** 2
             ) / img_area
-            print('Comparing: {} =?= {}'.format(img_name_A, img_name_B))
             if err < ref_mse:
                 # fig = plt.figure()
                 # plt.suptitle("MSE: %.3f" % (err))
