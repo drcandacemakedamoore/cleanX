@@ -98,3 +98,30 @@ intersphinx_mapping = {
         None,
     ),
 }
+
+
+def is_error(obj):
+    return isinstance(obj, Exception)
+
+
+conditionally_ignored = {
+    '__reduce__': is_error,
+    '__init__': is_error,
+    'with_traceback': is_error,
+    'args': is_error,
+}
+
+def skip_member_handler(app, objtype, membername, member, skip, options):
+    ignore_checker = conditionally_ignored.get(membername)
+    if ignore_checker:
+        frame = sys._getframe()
+        while frame.f_code.co_name != 'filter_members':
+            frame = frame.f_back
+
+        suspect = frame.f_locals['self'].object
+        return not ignore_checker(suspect)
+    return skip
+
+
+def setup(app):
+    app.connect('autodoc-skip-member', skip_member_handler)
