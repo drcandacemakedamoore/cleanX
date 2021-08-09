@@ -97,6 +97,7 @@ intersphinx_mapping = {
         'https://pydicom.github.io/pydicom/stable/',
         None,
     ),
+    'IPython': ('https://ipython.readthedocs.io/en/stable/api/', None),
 }
 
 

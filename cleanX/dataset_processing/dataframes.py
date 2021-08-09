@@ -576,6 +576,13 @@ class Report:
         return '\n'.join(elements)
 
     def to_ipwidget(self):
+        """
+        Generates an :class:`~IPython.display.HTML` widget.  This is
+        mostly usable when running in Jupyter notebook context.
+
+        :return: An HTML widget with the formatted report.
+        :rtype: :class:`~IPython.display.HTML`
+        """
         from IPython.display import HTML
 
         elements = ['<ul>']
@@ -596,6 +603,13 @@ class Report:
         return HTML(''.join(elements))
 
     def to_text(self):
+        """
+        Generates plain text representation of this report.
+
+        :return: A string suitable for either printing to the
+                 screen or saving in a text file.
+        :rtype: str
+        """
         elements = []
         for k, v in self.sections.items():
             if type(v) is dict:
@@ -664,6 +678,7 @@ def understand_df(df):
     Takes a :code:`DataFrame` (if you have a :code:`DataFrame` for images)
     and prints information including length, data types, nulls and number
     of duplicated rows
+
     :param df: :code:`DataFrame` you are interested in getting features of.
     :type df: :class:`~pandas.DataFrame`
     :return: Prints out information on :code:`DataFrame`.
@@ -689,6 +704,9 @@ def show_duplicates(df):
     """
     Takes a :code:`DataFrame` (if you have a :code:`DataFrame` for images)
     and prints duplicated rows
+
+    :param df: Dataframe that needs to be searched for ducplicates.
+    :type df: :class:`~pandas.DataFrame`
     """
     if df.duplicated().any():
         print(
