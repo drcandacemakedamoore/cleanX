@@ -2,22 +2,42 @@
 
 import os
 
+from datetime import datetime, date
+
 import pydicom as dicom
 import pandas as pd
 import cv2
 
 from pydicom.multival import MultiValue
 from pydicom.sequence import Sequence
-from datetime import datetime, date
 
 
 class PydicomDicomReader:
     """Class for reading DICOM metadata with pydicom."""
 
     exclude_field_types = (Sequence, MultiValue, bytes)
+    """
+    Default types of fields not to be included in the dataframe
+    produced from parsed DICOM files.
+    """
+
     date_fields = ('ContentDate', 'SeriesDate', 'ContentDate', 'StudyDate')
+    """
+    Default DICOM tags that should be interpreted as containing date
+    information.
+    """
+
     time_fields = ('ContentTime', 'StudyTime')
+    """
+    Default DICOM tags that should be interpreted as containing
+    datetime information.
+    """
+
     exclude_fields = ()
+    """
+    Default tags to be excluded from genrated :code:`DataFrame` for any
+    other reason.
+    """
 
     def __init__(
             self,
@@ -58,12 +78,34 @@ class PydicomDicomReader:
             self.exclude_fields = exclude_fields
 
     def dicom_date_to_date(self, source):
+        """
+        Utility method to help translate DICOM dates to :class:`~datetime.date`
+
+        :param source: Date stored as a string in DICOM file.
+        :type source: str
+        :return: Python date object.
+        :rtype: :class:`~datetime.date`
+        """
         year = int(source[:4])
         month = int(source[4:6])
         day = int(source[6:])
         return date(year=year, month=month, day=day)
 
     def dicom_time_to_time(self, source):
+        """
+        Utility method to help translate DICOM date and time objects to python
+        :class:`~datetime.datetime`.
+
+        .. warning::
+
+            This isn't implemented yet.  Needs research on DICOM time
+            representation.
+
+        :param source: Date and time stored in DICOM as a string.
+        :type source: str
+        :return: Python's datetime object.
+        :rtype: :class:`~datetime.datetime`
+        """
         #     seconds, milis = source.split('.')
         # TODO: We don't know how to conver this yet
         return source

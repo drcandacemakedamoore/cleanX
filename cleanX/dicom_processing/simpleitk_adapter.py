@@ -3,8 +3,9 @@
 import os
 
 from glob import glob
-import pandas as pd
 from datetime import datetime, date
+
+import pandas as pd
 import SimpleITK as sitk
 import cv2
 
@@ -136,11 +137,28 @@ tag_dictionary = {   # 'key' , 'datapoint_name'
 
 class MetadataHelper:
     """Class for getting DICOM metadata with SimpleITK."""
+
     def __init__(self, reader):
+        """
+        Initializes this helper with the instance of
+        :sitk:`ImageFileReader`
+
+        :param reader: The SimpleITK redader used to read DICOM to
+                       extract metadata.
+        :type reader: :sitk:`ImageFileReader`
+        """
         self.reader = reader
 
     def fetch_metadata(self, dicom_file):
+        """
+        Reads enough of the DICOM file to fetch its metadata.
 
+        :param dicom_file: The file for which to read the metadata.
+        :type dicom_file: str
+
+        :return: Parsed metadata.
+        :rtype: dict
+        """
         self.reader.SetFileName(dicom_file)
 
         self.reader.LoadPrivateTagsOn()
@@ -162,8 +180,19 @@ class SimpleITKDicomReader:
         'Content Date',
         'Study Date',
     ))
+    """
+    Default fields in the parsed DICOM file to be interpreted as date.
+    """
+
     time_fields = set(('Content Time', 'Study Time'))
+    """
+    Default fields in the parsed DICOM file to be interpreted as datetime.
+    """
+
     exclude_fields = set([])
+    """
+    Default fields to exclude from dataframe generated form DICOM files.
+    """
 
     def __init__(
             self,
@@ -171,6 +200,19 @@ class SimpleITKDicomReader:
             time_fields=None,
             exclude_fields=None,
     ):
+        """
+        Initializes this reader with flags.
+
+        :param date_fields: Overrides the default values from
+                            :attr:`~.SimpleITKDicomReader.date_fields`.
+        :type date_fields: Iterable
+        :param time_fields: Overrides the default values from
+                           :attr:`~.SimpleITKDicomReader.time_fields`.
+        :type date_fields: Iterable
+        :param exclude_fields: Overrides the default values from
+                               :attr:`~.SimpleITKDicomReader.exclude_fields`.
+        :type exclude_fields: Iterable
+        """
         if date_fields:
             self.date_fields = set(date_fields)
         if time_fields:
@@ -179,17 +221,51 @@ class SimpleITKDicomReader:
             self.exclude_fields = set(exclude_fields)
 
     def dicom_date_to_date(self, source):
+        """
+        Utility method to parse DICOM dates to Python's
+        :class:`~datetime.date`.
+
+        :param source: DICOM date given as string.
+        :type source: str
+        :return: Pyton date object.
+        :rtype: :class:`~datetime.date`.
+        """
         year = int(source[:4])
         month = int(source[4:6])
         day = int(source[6:])
         return date(year=year, month=month, day=day)
 
     def dicom_time_to_time(self, source):
+        """
+        Utility method to help translate DICOM date and time objects to python
+        :class:`~datetime.datetime`.
+
+        .. warning::
+
+            This isn't implemented yet.  Needs research on DICOM time
+            representation.
+
+        :param source: Date and time stored in DICOM as a string.
+        :type source: str
+        :return: Python's datetime object.
+        :rtype: :class:`~datetime.datetime`
+        """
         #     seconds, milis = source.split('.')
         # TODO: We don't know how to convert this yet
         return source
 
     def read(self, source):
+        """
+        Read DICOM files, parse their metadata, and genrate a :code:`DataFrame`
+        based on that metadata.
+
+        :param source: A source generator.  For extended explanation see
+                       :class:`~cleanX.dicom_processing.Source`.
+        :type source: :class:`~cleanX.dicom_processing.Source`
+
+        :return: dataframe with metadata from dicoms
+        :rtype: :class:`~pandas.DataFrame`
+        """
         reader = sitk.ImageFileReader()
         m_reader = MetadataHelper(reader)
         tag = source.get_tag()
@@ -214,20 +290,21 @@ class SimpleITKDicomReader:
 
 def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
     """
-    This function is for users with simpleITK library only.
-    If you do not have the library it will throw an error.
-    The funuction function jpeg files out of a dicom file directory,
-    one by one, each of them (not just the first series as), and puts them in
-    an out put directory. It also returns the images for inspection (as arrays)
-    , which you can look at the [0] layer with matplotlib
+    This function is for users with simpleITK library only.  If you do
+    not have the library it will throw an error.  The funuction
+    function jpeg files out of a dicom file directory, one by one,
+    each of them (not just the first series as), and puts them in an
+    out put directory. It also returns the images for inspection (as
+    arrays), which you can look at the [0] layer with :mod:`matplotlib`
 
     :param dicomfile_directory: dicomfile_directory, directory with dicom/.dcm
     :type dicomfile_directory: str
     :param output_directory: output_directory, where they should be placed
     :type output_directory: str
 
-    :return: saved_images
-    :rtype: list
+    :return: List of images represented as NumPy arrays.
+    :rtype: List[numpy.ndarray]
+
     """
     # include final slash in output directory
     dicom_files = glob(dicomfile_directory + '/*')
