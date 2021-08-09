@@ -72,7 +72,12 @@ html_theme = 'nature'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-extlinks = {}
+extlinks = {
+    'sitk': (
+        'https://simpleitk.org/doxygen/latest/html/classitk_1_1simple_1_1%s.html',
+        'SimpleITK.',
+    ),
+}
 
 autodoc_default_options = {
     'members': True,
@@ -97,17 +102,46 @@ intersphinx_mapping = {
         'https://pydicom.github.io/pydicom/stable/',
         None,
     ),
-    'IPython': ('https://ipython.readthedocs.io/en/stable/api/', None),
+    'IPython': ('https://ipython.readthedocs.io/en/stable/', None),
+    'SimpleITK': ('https://simpleitk.readthedocs.io/en/latest/', None),
 }
 
 
-def is_error(obj):
-    return isinstance(obj, Exception)
+def is_error(obj, membername):
+    return issubclass(obj, Exception)
+
+
+def is_inherited(obj, membername):
+    if issubclass(obj, type):
+        # This is a metaclass. We don't care about those
+        return False
+    original = getattr(obj, membername)
+    for superclass in obj.mro():
+        if obj is superclass:
+            continue
+        if getattr(superclass, membername) is original:
+            return True
+    return False
+
+
+def is_inherited_from_object(obj, membername):
+    original = getattr(obj, membername)
+    parents = getattr(object, membername)
+    return original is parents
+
+
+def or_combinator(*funcs):
+    def f(obj, membername):
+        for f in funcs:
+            if f(obj, membername):
+                return True
+        return False
+    return f
 
 
 conditionally_ignored = {
-    '__reduce__': is_error,
-    '__init__': is_error,
+    '__reduce__': or_combinator(is_inherited_from_object, is_error),
+    '__init__': or_combinator(is_inherited_from_object, is_error),
     'with_traceback': is_error,
     'args': is_error,
 }
@@ -120,7 +154,10 @@ def skip_member_handler(app, objtype, membername, member, skip, options):
             frame = frame.f_back
 
         suspect = frame.f_locals['self'].object
-        return not ignore_checker(suspect)
+        skip = ignore_checker(suspect, membername)
+        if skip:
+            print('Ignoring: {}.{}'.format(suspect, membername))
+        return skip
     return skip
 
 

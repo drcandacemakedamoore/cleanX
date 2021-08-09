@@ -438,7 +438,9 @@ class MLSetup:
 
 
 class Report:
-    """This class is for a report which can be produced about the data"""
+    """
+    This class is for a report which can be produced about the data.
+    """
 
     def __init__(
         self,
@@ -448,6 +450,24 @@ class Report:
         bias=True,
         understand=True,
     ):
+        """
+        Initializes report instance with flags indicating what parts to
+        include in the report.
+
+        :param mlsetup: The setup this report is about.
+        :type mlsetup: :class:`~.MLSetup`
+        :param duplicates: Whether information about duplicates is to be
+                           reported.
+        :type duplicates: bool
+        :param leakage: Whether information about leakage is to be
+                        reported.
+        :type leakage: bool
+        :param bias: Whether information about bias is to be reported.
+        :type bias: bool
+        :param understand: Whether general information about the given
+                           setup is to be reported.
+        :type understand: bool
+        """
         self.mlsetup = mlsetup
         self.sections = {}
         if duplicates:
@@ -460,8 +480,10 @@ class Report:
             self.report_understand()
 
     def report_duplicates(self):
-        """This method extracts information on duplicates in the datasets,
-        once make into dataframes. The information can be reported"""
+        """
+        This method extracts information on duplicates in the datasets,
+        once make into dataframes.  The information can be reported.
+        """
         train_dupes, test_dupes = self.mlsetup.duplicates()
         dupe_names = self.mlsetup.duplicated_frame()
         train_dupe_names, test_dupe_names = self.mlsetup.duplicated_frame()
@@ -473,18 +495,27 @@ class Report:
         }
 
     def report_leakage(self):
+        """
+        Adds a report section on data leakage (training results found in
+        testing samples).
+        """
         self.sections['Leakage'] = {
            'Leaked entries': self.mlsetup.leakage(),
         }
 
     def report_bias(self):
+        """
+        Adds a report section on distribution in sensitive categories.
+        """
         self.sections['Value Counts on Sensitive Categories'] = {
            'Value counts of categorty 1': self.mlsetup.bias(),
         }
 
     def report_understand(self):
-        """This method extracts information on the datasets,
-        once make into dataframes. The information can be reported"""
+        """
+        This method extracts information on the datasets,
+        once make into dataframes.  The information can be reported.
+        """
         # TODO(wvxvw): The calculation part needs to go into the
         # MLSetup, only the functionality relevant to reporting needs
         # to be here.
@@ -524,7 +555,17 @@ class Report:
         }
 
     def subsection_html(self, data, level=2):
-        """This method helps write an html version of the report."""
+        """
+        Utility method to recursively generate subsections
+        for HTML report.
+
+        :param data: The data to be reported.
+        :type data: Various datastructures constituting the report
+        :param level: How deeply this section is indented.
+        :type level: int
+        :return: A list containing HTML markup elements.
+        :rtype: List[str]
+        """
         elements = ['<ul>']
         for k, v in data.items():
             if type(v) is dict:
@@ -547,7 +588,20 @@ class Report:
         return elements
 
     def subsection_text(self, data, level=2):
-        """This method helps write a text version of the report."""
+        """
+        Utility method to recursively generate subsections
+        for text report.
+
+        :param data: The data to be reported.
+        :type data: Various datastructures constituting the report
+        :param level: How deeply this section is indented.
+        :type level: int
+        :return: A strings containing the text of subsection.  Only the
+                 subsections of the returned subsection are indented.
+                 I.e. you need to indent the result according to
+                 nesting level.
+        :rtype: str
+        """
         elements = []
         prefix = '    '
         for k, v in data.items():
@@ -579,6 +633,12 @@ class Report:
         """
         Generates an :class:`~IPython.display.HTML` widget.  This is
         mostly usable when running in Jupyter notebook context.
+
+        .. warning::
+
+            This will try to import the widget class which is *not*
+            installed as the dependency of :code:`cleanX`.  It relies
+            on it being available as part of Jupyter installation.
 
         :return: An HTML widget with the formatted report.
         :rtype: :class:`~IPython.display.HTML`
