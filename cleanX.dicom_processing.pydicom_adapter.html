@@ -84,32 +84,70 @@ by <code class="code docutils literal notranslate"><span class="pre">exclude_fie
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.exclude_field_types">
 <span class="sig-name descname"><span class="pre">exclude_field_types</span></span><em class="property"> <span class="pre">=</span> <span class="pre">(&lt;class</span> <span class="pre">'pydicom.sequence.Sequence'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'pydicom.multival.MultiValue'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;)</span></em><a class="headerlink" href="#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.exclude_field_types" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Default types of fields not to be included in the dataframe
+produced from parsed DICOM files.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.date_fields">
 <span class="sig-name descname"><span class="pre">date_fields</span></span><em class="property"> <span class="pre">=</span> <span class="pre">('ContentDate',</span> <span class="pre">'SeriesDate',</span> <span class="pre">'ContentDate',</span> <span class="pre">'StudyDate')</span></em><a class="headerlink" href="#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.date_fields" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Default DICOM tags that should be interpreted as containing date
+information.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.time_fields">
 <span class="sig-name descname"><span class="pre">time_fields</span></span><em class="property"> <span class="pre">=</span> <span class="pre">('ContentTime',</span> <span class="pre">'StudyTime')</span></em><a class="headerlink" href="#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.time_fields" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Default DICOM tags that should be interpreted as containing
+datetime information.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.exclude_fields">
 <span class="sig-name descname"><span class="pre">exclude_fields</span></span><em class="property"> <span class="pre">=</span> <span class="pre">()</span></em><a class="headerlink" href="#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.exclude_fields" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Default tags to be excluded from genrated <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> for any
+other reason.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.dicom_date_to_date">
 <span class="sig-name descname"><span class="pre">dicom_date_to_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.dicom_date_to_date" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Utility method to help translate DICOM dates to <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Date stored as a string in DICOM file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Python date object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.dicom_time_to_time">
 <span class="sig-name descname"><span class="pre">dicom_time_to_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.dicom_time_to_time" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Utility method to help translate DICOM date and time objects to python
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This isn’t implemented yet.  Needs research on DICOM time
+representation.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Date and time stored in DICOM as a string.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Python’s datetime object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.read">
