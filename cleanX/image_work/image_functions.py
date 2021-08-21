@@ -5,6 +5,7 @@ applications
 """
 
 import subprocess
+import logging
 
 # imported libraries
 import cv2
@@ -34,7 +35,7 @@ try:
                     )
     __fix_tesserocr_locale()
     del __fix_tesserocr_locale
-except FileNotFoundError:
+except (FileNotFoundError, subprocess.CalledProcessError):
     logging.warning('Don\'t know how to find Tesseract library version')
 
 from tesserocr import PyTessBaseAPI
