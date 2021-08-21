@@ -14,7 +14,7 @@ JPEG files can be extracted from [DICOM](https://www.dicomstandard.org/) files o
 ### The latest official release:
 
 <a href="https://pypi.org/project/cleanX/"><img alt="PyPI" src="https://img.shields.io/pypi/v/cleanX"></a>
-
+[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/version.svg)](https://anaconda.org/doctormakeda/cleanx)
 
 
 primary author: Candace Makeda H. Moore
