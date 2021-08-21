@@ -29,11 +29,19 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 
 ## Requirements
 
-- a [python](https://www.python.org/downloads/) installation (3.7, 3.8 or 3.9)
-- ability to create virtual environments (recommended, not absolutely necessary)
-- tesseract-ocr, matplotlib, pandas, pillow and opencv
-- optional recommendation of simpleITK or pydicom for DICOM/dcm to jpg conversion
-- anaconda is now supported, but not technically necessary
+- a [python](https://www.python.org/downloads/) installation (3.7, 3.8
+  or 3.9)
+- ability to create virtual environments (recommended, not absolutely
+  necessary)
+- [`tesserocr`](https://github.com/sirfz/tesserocr),
+  [`matplotlib`](https://matplotlib.org/),
+  [`pandas`](https://pandas.pydata.org/),
+  [`pillow`](https://python-pillow.org/) and
+  [`opencv`](https://opencv.org/)
+- optional recommendation of [`SimpleITK`](https://simpleitk.org/) or
+  [`pydicom`](https://github.com/pydicom/pydicom) for DICOM/dcm to JPG
+  conversion
+- Anaconda is now supported, but not technically necessary
 
 
 ### Supported Platforms
@@ -84,61 +92,223 @@ python setup.py apidoc
 python setup.py build_sphinx
 ```
 
-The documentation will be generated in `./build/sphinx/html` directory. Documentation is generated
-automatically as new functions are added.
+The documentation will be generated in `./build/sphinx/html`
+directory. Documentation is generated automatically as new functions
+are added.
 
-Special additional documentation for medical professionals with limited programming
-ability is available on the wiki (https://github.com/drcandacemakedamoore/cleanX/wiki/Medical-professional-documentation).
-To get a high level overview of some of the functionality of the program you
-can look at the Jupyter notebooks inside workflow_demo. 
+Special additional documentation for medical professionals with
+limited programming ability is available on the wiki
+(https://github.com/drcandacemakedamoore/cleanX/wiki/Medical-professional-documentation).
+
+To get a high level overview of some of the functionality of the
+program you can look at the Jupyter notebooks inside workflow_demo.
+
 
 # Installation
-- setting up a virtual environment is desirable, but not absolutely necessary
+- setting up a virtual environment is desirable, but not absolutely
+  necessary
 
 - activate  the environment
-### Anaconda Installation
+
+
+## Anaconda Installation
 
 - use command for conda as below
 
-        conda install -c doctormakeda -c conda-forge cleanx       
+``` sh
+conda install -c doctormakeda -c conda-forge cleanx
+```
 
 You need to specify both channels because there are some cleanX
 dependencies that exist in both Anaconda main channel and in
 conda-forge
 
-### pip installation
+
+## pip installation
+
 - use pip as below
 
-        pip install cleanX
-    
-    
+``` sh
+pip install cleanX
+```
 
-## About using this library
-If you use the library, please credit me and my collaborators.  You are only free to use this library according to license. We hope that if you use the library you will open source your entire code base, and send us modifications.  You can get in touch with me by starting a discussion (https://github.com/drcandacemakedamoore/cleanX/discussions/37) if you have a legitimate reason to use my library without open-sourcing your code base, or following other conditions, and I can make you specifically a different license.
+# Getting Started
 
-We are adding new functions and classes all the time. Many unit tests are available in the test folder. Test coverage is currently partial. Some newly added functions allow for rapid automated data augmentation (in ways that are realistic for radiological data). Some other classes and functions are for cleaning datasets including ones that: 
+We will imagine a very simple scenario, where we need to automate
+normalization of the images we have.  We stored the images in
+directory `/images/to/clean/` and they all have `jpg` extension.  We
+want the cleaned images to be saved in the `cleaned` directory.
+
+Normalization here means ensuring that the lowest pixel value (the
+darkest part of the image) is as dark as possible and that the
+lightest part of the image is as light as possible.
+
+## CLI Example
+
+The problem above doesn't require writing any new Python code.  We can
+accomplish our task by calling the `cleanX` command like this:
+
+``` sh
+mkdir cleaned
+
+python -m cleanX images run-pipeline \
+    -s Acqure \
+    -s Normalize \
+    -s "Save(target='cleaned')" \
+    -j \
+    -r "/images/to/clean/*.jpg"
+```
+
+Let's look at the command's options and arguments:
+
+* `python -m cleanX` is the Python's command-line option for loading
+  the `cleanX` package.  All command-line arguments that follow this
+  part are interpreted by `cleanX`.
+* `images` sub-command is used for processing of images.
+* `run-pipeline` sub-command is used to start a `Pipeline` to process
+  the images.
+* `-s` (repeatable) option specifies `Pipeline` `Step`.  Steps map to
+  their class names as found in the `cleanX.image_work.steps` module.
+  If the `__init__` function of a step doesn't take any arguments, only
+  the class name is necessary.  If, however, it takes arguments, they
+  must be given using Python's literals, using Python's named arguments
+  syntax.
+* `-j` option instructs to create *journaling* pipeline.  Journaling
+  pipelines can be restarted from the point where they failed, or had
+  been interrupted.
+* `-r` allows to specify source for the pipeline.  While, normally, we
+  will want to start with `Acquire` step, if the pipeline was
+  interrupted, we need to tell it where to look for the initial
+  sources.
+  
+Once the command finishes, we should see the `cleaned` directory filled
+with images with the same names they had in the source directory.
 
 
-        Get image and metadata out of dcm (DICOM) files into jpeg and csv files 
+Let's consider another simple task: batch-extraction of images from
+DICOM files:
 
-        Process datasets from csv or json or other formats to generate reports
-        
-        Run on dataframes to make sure there is no image leakage
+---
 
-        Run on a dataframe to look for demographic or other biases in patients
-    
-        Crop off excessive black frames (run this on single images) one at a time
-       
-        Run on a list to make a prototype tiny Xray others can be compared to
-    
-        Run on image files which are inside a folder to check if they are "clean"
+``` sh
+mkdir extracted
 
-        Take a dataframe with image names and return plotted(visualized) images  
+python -m cleanX dicom extract-images \
+    -i dir /path/to/dicoms/
+    -o extracted
+```
 
-        Run to make a dataframe of pics in a folder (assuming they all have the same 'label'/diagnosis)
+This calls `cleanX` CLI in the way similar to the example above, however,
+it calls the `dicom` sub-command with `extract-images` subcommand.
 
-        Normalize images in terms of pixel values (multiple methods)
+* `-i` tells `cleanX` to look for directory named `/path/to/dicoms`
+* `-o` tells `cleanX` to save extracted JPGs in `extracted` directory.
 
-All important functions are documented in the online documentation for programmers. You can also check out one of our videos by clicking the linked picture below:
+This doesn't work at the moment.  Watch for
+[#40](https://github.com/drcandacemakedamoore/cleanX/issues/40) to be
+fixed.
+
+
+## Coding Example
+
+Below is the equivalent code in Python:
+
+``` python
+import os
+
+from cleanX.image_work import (
+    Acquire,
+    Save,
+    GlobSource,
+    Normalize,
+    create_pipeline,
+)
+
+dst = 'cleaned'
+os.mkdir(dst)
+
+src = GlobSource('/images/to/clean/*.jpg')
+p = create_pipeline(
+    steps=(
+        Acquire(),
+        Normalize(),
+        Save(dst),
+    ),
+    journal=True,
+)
+
+p.process(src)
+```
+
+Let's look at what's going on here.  As before, we've created a
+pipeline using `create_pipeline` with three steps: `Acquire`,
+`Normalize` and `Save`.  There are several kinds of sources available
+for pipelines.  We'll use the `GlobSource` to match our CLI example.
+We'll specify `journal=True` to match the `-j` flag in our CLI
+example.
+
+---
+
+And for the DICOM extraction we might use similar code:
+
+``` python
+imort os
+
+from cleanX.dicom_processing import rip_out_jpgs
+
+dst = 'extracted'
+os.mkdir(dst)
+
+rip_out_jpgs('/path/to/dicoms/', dst)
+```
+
+<!-- TODO(wvxvw): This should use DicomReader instead, we completely
+forgot about this.  Follow up with the issue: #40 -->
+
+This will look for the files with `dcm` extension in
+`/path/to/dicoms/` and try to extract images found in those files,
+saving them in `extracted` directory.
+
+# About using this library
+
+If you use the library, please credit me and my collaborators.  You
+are only free to use this library according to license. We hope that
+if you use the library you will open source your entire code base, and
+send us modifications.  You can get in touch with me by starting a
+discussion
+(https://github.com/drcandacemakedamoore/cleanX/discussions/37) if you
+have a legitimate reason to use my library without open-sourcing your
+code base, or following other conditions, and I can make you
+specifically a different license.
+
+We are adding new functions and classes all the time. Many unit tests
+are available in the test folder. Test coverage is currently
+partial. Some newly added functions allow for rapid automated data
+augmentation (in ways that are realistic for radiological data). Some
+other classes and functions are for cleaning datasets including ones
+that:
+
+* Get image and metadata out of dcm (DICOM) files into jpeg and csv
+  files
+* Process datasets from csv or json or other formats to generate
+  reports
+* Run on dataframes to make sure there is no image leakage
+* Run on a dataframe to look for demographic or other biases in
+  patients
+* Crop off excessive black frames (run this on single images) one at a
+  time
+* Run on a list to make a prototype tiny Xray others can be compared
+  to
+* Run on image files which are inside a folder to check if they are
+  "clean"
+* Take a dataframe with image names and return plotted(visualized)
+  images
+* Run to make a dataframe of pics in a folder (assuming they all have
+  the same 'label'/diagnosis)
+* Normalize images in terms of pixel values (multiple methods)
+
+All important functions are documented in the online documentation for
+programmers. You can also check out one of our videos by clicking the
+linked picture below:
 
 [![Video](https://raw.githubusercontent.com/drcandacemakedamoore/cleanX/main/test/cleanXpic.png)](https://youtu.be/jaX5tXmiWrQ)
