@@ -33,7 +33,44 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
 - ability to create virtual environments (recommended, not absolutely necessary)
 - tesseract-ocr, matplotlib, pandas, pillow and opencv
 - optional recommendation of simpleITK or pydicom for DICOM/dcm to jpg conversion
-- anaconda is now supported, but not technically necessary 
+- anaconda is now supported, but not technically necessary
+
+
+### Supported Platforms
+
+`cleanX` package is a pure Python package, but it has many
+dependencies on native libraries.  We try to test it on as many
+platforms as we can to see if dependencies can be installed there.
+Below is the list of platforms that will potentially work.
+
+Whether python.org Python or Anaconda Python are supported, it means
+that version 3.7, 3.8 and 3.9 are supported.  We know for certain that
+3.6 is not supported, and there will be no support in the future.
+
+
+#### 32-bit Intell and ARM
+
+We don't know if either one of these is supported.  There's a good
+chance that 32-bit Intell will work.  There's a good chance that ARM
+won't.
+
+It's unlikely that the support will be added in the future.
+
+
+#### AMD64 (x86)
+
++-----------------------------+-----------+-----------+-----------+
+|                             | Linux     | Win       | OSX       |
++:===========================:+:=========:+:=========:+:=========:+
+| ![p](etc/python-logo.png)   | Supported | Unknown   | Unknown   |
+| ![a](etc/anaconda-logo.png) | Supported | Supported | Supported |
++-----------------------------+-----------+-----------+-----------+
+
+
+#### ARM64
+
+Seems to be unsupported at the moment on both Linux and OSX, but it's
+likely that support will be added in the future.
 
 
 ## Documentation
