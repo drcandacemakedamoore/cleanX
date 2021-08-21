@@ -27,7 +27,7 @@ this part of the documentation is for you.
    :maxdepth: 2
    :caption: Contents:
 
-   modules
+   cleanX
 
 
 Command-Line Interface Documentation
