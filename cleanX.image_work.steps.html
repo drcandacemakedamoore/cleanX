@@ -41,8 +41,639 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="cleanx-image-work-steps-module">
-<h1>cleanX.image_work.steps module<a class="headerlink" href="#cleanx-image-work-steps-module" title="Permalink to this headline">¶</a></h1>
+  <section id="module-cleanX.image_work.steps">
+<span id="cleanx-image-work-steps-module"></span><h1>cleanX.image_work.steps module<a class="headerlink" href="#module-cleanX.image_work.steps" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.get_known_steps">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">get_known_steps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.get_known_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.RegisteredStep">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">RegisteredStep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clsdict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.RegisteredStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.RegisteredStep.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clsdict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.RegisteredStep.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.RegisteredStep.mro">
+<span class="sig-name descname"><span class="pre">mro</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.RegisteredStep.mro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a type’s method resolution order.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class has default implementations for methods all steps are
+expected to implement.</p>
+<p>Use this as the base class if you intend to add custom steps.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you extend this class, you need to call its <code class="code docutils literal notranslate"><span class="pre">__init__</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the method that will be called to do the actual image
+transformation.  This function must not raise exceptions, as it
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
+will be <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – Will be the data obtained when calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.read" title="cleanX.image_work.steps.Step.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+processed image data.  This should be suitable for the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of this class to write.
+Second is the error, if procesing wasn’t possible.  Only
+one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the image saved in the previvous step.  This function must not
+raise exceptions as it is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – The path to the image to read.  Unless the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of the previous step
+was modified to do it differently, the format
+of the data in the file is the serialized NumPy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
+format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method should write the image data to make it available for
+the next step.  Default implementation use NumPy’s persistence
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+therefore it must not raise exceptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Default implementation uses <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – This is the result from calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Exception if it was raised during the execution, or
+<code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.__reduce__">
+<span class="sig-name descname"><span class="pre">__reduce__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for pickle.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Step.from_cmd_args">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_cmd_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.from_cmd_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Acquire">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Acquire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
+<p>This class reads in images (to an array) from a path</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Acquire.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the image saved in the previvous step.  This function must not
+raise exceptions as it is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – The path to the image to read.  Unless the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of the previous step
+was modified to do it differently, the format
+of the data in the file is the serialized NumPy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
+format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Acquire.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you extend this class, you need to call its <code class="code docutils literal notranslate"><span class="pre">__init__</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Acquire.__reduce__">
+<span class="sig-name descname"><span class="pre">__reduce__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for pickle.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Acquire.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the method that will be called to do the actual image
+transformation.  This function must not raise exceptions, as it
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
+will be <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – Will be the data obtained when calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.read" title="cleanX.image_work.steps.Step.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+processed image data.  This should be suitable for the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of this class to write.
+Second is the error, if procesing wasn’t possible.  Only
+one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Acquire.from_cmd_args">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_cmd_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire.from_cmd_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Acquire.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Acquire.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method should write the image data to make it available for
+the next step.  Default implementation use NumPy’s persistence
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+therefore it must not raise exceptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Default implementation uses <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – This is the result from calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Exception if it was raised during the execution, or
+<code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Save">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
+<p>This class writes the images somewhere</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Save.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you extend this class, you need to call its <code class="code docutils literal notranslate"><span class="pre">__init__</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Save.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method should write the image data to make it available for
+the next step.  Default implementation use NumPy’s persistence
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+therefore it must not raise exceptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Default implementation uses <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – This is the result from calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Exception if it was raised during the execution, or
+<code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Save.__reduce__">
+<span class="sig-name descname"><span class="pre">__reduce__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for pickle.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Save.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the method that will be called to do the actual image
+transformation.  This function must not raise exceptions, as it
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
+will be <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – Will be the data obtained when calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.read" title="cleanX.image_work.steps.Step.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+processed image data.  This should be suitable for the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of this class to write.
+Second is the error, if procesing wasn’t possible.  Only
+one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Save.from_cmd_args">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_cmd_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save.from_cmd_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Save.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the image saved in the previvous step.  This function must not
+raise exceptions as it is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – The path to the image to read.  Unless the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of the previous step
+was modified to do it differently, the format
+of the data in the file is the serialized NumPy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
+format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Save.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Crop">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Crop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
+<p>This class crops image arrays of black frames</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Crop.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the method that will be called to do the actual image
+transformation.  This function must not raise exceptions, as it
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
+will be <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – Will be the data obtained when calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.read" title="cleanX.image_work.steps.Step.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+processed image data.  This should be suitable for the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of this class to write.
+Second is the error, if procesing wasn’t possible.  Only
+one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Crop.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you extend this class, you need to call its <code class="code docutils literal notranslate"><span class="pre">__init__</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Crop.__reduce__">
+<span class="sig-name descname"><span class="pre">__reduce__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for pickle.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Crop.from_cmd_args">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_cmd_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop.from_cmd_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Crop.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the image saved in the previvous step.  This function must not
+raise exceptions as it is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – The path to the image to read.  Unless the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of the previous step
+was modified to do it differently, the format
+of the data in the file is the serialized NumPy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
+format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Crop.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Crop.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method should write the image data to make it available for
+the next step.  Default implementation use NumPy’s persistence
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+therefore it must not raise exceptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Default implementation uses <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – This is the result from calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Exception if it was raised during the execution, or
+<code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Normalize">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
+<p>This class makes a simple normalizing to get values 0 to 255.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Normalize.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the method that will be called to do the actual image
+transformation.  This function must not raise exceptions, as it
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
+will be <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – Will be the data obtained when calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.read" title="cleanX.image_work.steps.Step.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+processed image data.  This should be suitable for the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of this class to write.
+Second is the error, if procesing wasn’t possible.  Only
+one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Normalize.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you extend this class, you need to call its <code class="code docutils literal notranslate"><span class="pre">__init__</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Normalize.__reduce__">
+<span class="sig-name descname"><span class="pre">__reduce__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for pickle.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Normalize.from_cmd_args">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_cmd_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize.from_cmd_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Normalize.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the image saved in the previvous step.  This function must not
+raise exceptions as it is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – The path to the image to read.  Unless the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of the previous step
+was modified to do it differently, the format
+of the data in the file is the serialized NumPy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
+format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Normalize.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.Normalize.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method should write the image data to make it available for
+the next step.  Default implementation use NumPy’s persistence
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+therefore it must not raise exceptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Default implementation uses <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – This is the result from calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Exception if it was raised during the execution, or
+<code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.HistogramNormalize">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">HistogramNormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.steps.Step</span></code></a></p>
+<p>This class allows normalization by throwing off exxtreme values on
+image histogram.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.HistogramNormalize.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you extend this class, you need to call its <code class="code docutils literal notranslate"><span class="pre">__init__</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.HistogramNormalize.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the method that will be called to do the actual image
+transformation.  This function must not raise exceptions, as it
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
+will be <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – Will be the data obtained when calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.read" title="cleanX.image_work.steps.Step.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+processed image data.  This should be suitable for the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of this class to write.
+Second is the error, if procesing wasn’t possible.  Only
+one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.HistogramNormalize.__reduce__">
+<span class="sig-name descname"><span class="pre">__reduce__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for pickle.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.HistogramNormalize.from_cmd_args">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_cmd_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize.from_cmd_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.HistogramNormalize.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the image saved in the previvous step.  This function must not
+raise exceptions as it is used in <code class="code docutils literal notranslate"><span class="pre">multiprocessing</span></code> context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – The path to the image to read.  Unless the
+<a class="reference internal" href="#cleanX.image_work.steps.Step.write" title="cleanX.image_work.steps.Step.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method of the previous step
+was modified to do it differently, the format
+of the data in the file is the serialized NumPy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>This method should return two values.  First is the
+image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
+format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.HistogramNormalize.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.steps.HistogramNormalize.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method should write the image data to make it available for
+the next step.  Default implementation use NumPy’s persistence
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+therefore it must not raise exceptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_data</strong> (Default implementation uses <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.) – This is the result from calling
+<a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> method of this class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Exception if it was raised during the execution, or
+<code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 

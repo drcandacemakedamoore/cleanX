@@ -57,8 +57,71 @@
 </ul>
 </div>
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<section id="module-cleanX.image_work">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cleanX.image_work" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.create_pipeline">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.</span></span><span class="sig-name descname"><span class="pre">create_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.create_pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a pipeline that will execute the <code class="code docutils literal notranslate"><span class="pre">steps</span></code>.  If
+<code class="code docutils literal notranslate"><span class="pre">journal</span></code> is not falsy, create a journaling pipeline, that can
+be pick up from the failed step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>steps</strong> (<em>Sequence</em><em>[</em><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><em>Step</em></a><em>]</em>) – A sequence of <code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code> to be executed in this pipeline.</p></li>
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Controls how many steps are processed concurrently.</p></li>
+<li><p><strong>journal</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code> is passed, the pipeline code will use a
+preconfigured directory to store the journal.  Otherwise,
+this must be the path to the directory to store the journal
+database.</p></li>
+<li><p><strong>keep_journal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Controls whether the journal is kept after successful
+completion of the pipeline.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a <a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline" title="cleanX.image_work.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a> object or one of its descendants.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline" title="cleanX.image_work.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.restore_pipeline">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.</span></span><span class="sig-name descname"><span class="pre">restore_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">journal_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">overrides</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.restore_pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restores previously interrupted pipeline.  The pipeline should have been
+created with <code class="code docutils literal notranslate"><span class="pre">journal</span></code> set.  If the creating code didn’t specify
+the directory to keep the journal, it may be obtained in this way:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">create_pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="n">journal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">journal_dir</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">journal_dir</span>
+<span class="c1"># After pipeline failed</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">restore_pipeline</span><span class="p">(</span><span class="n">journal_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>journal_dir</strong> (Suitable for <code class="code docutils literal notranslate"><span class="pre">os.path.join()</span></code>) – The directory containing journal database to restore
+from.</p></li>
+<li><p><strong>skip</strong> – Skip this many steps before attempting to resume the pipeline.
+This is useful if you know that the step that failed will
+fail again, but you want to execute the rest of the steps
+in the pipeline.</p></li>
+<li><p><strong>**overrides</strong> – Arguments to pass to the created pipeline instance
+that will override those restored from the journal.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Fresh <a class="reference internal" href="cleanX.image_work.journaling_pipeline.html#cleanX.image_work.journaling_pipeline.JournalingPipeline" title="cleanX.image_work.journaling_pipeline.JournalingPipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">JournalingPipeline</span></code></a> object
+fast-forwarded to the last executed step + <code class="code docutils literal notranslate"><span class="pre">skip</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html#cleanX.image_work.journaling_pipeline.JournalingPipeline" title="cleanX.image_work.journaling_pipeline.JournalingPipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">JournalingPipeline</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 
@@ -73,7 +136,7 @@
   <ul>
 <li><a class="reference internal" href="#">cleanX.image_work package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li><a class="reference internal" href="#module-cleanX.image_work">Module contents</a></li>
 </ul>
 </li>
 </ul>
