@@ -127,11 +127,9 @@ class SphinxApiDoc(Command):
     def run(self):
         from sphinx.ext.apidoc import main
 
-        src = os.path.join(project_dir, 'source')
+        src = os.path.join(project_dir, 'docs')
 
         for f in glob(os.path.join(src, '*.rst')):
-            if f.endswith('modules.rst'):
-                continue
             if f.endswith('index.rst'):
                 continue
             if f.endswith('cli.rst'):
@@ -333,8 +331,8 @@ if __name__ == '__main__':
             'build_sphinx': {
                 'project': ('setup.py', name),
                 'version': ('setup.py', version),
-                'source_dir': ('setup.py', './source'),
-                'config_dir': ('setup.py', './source'),
+                'source_dir': ('setup.py', './docs'),
+                'config_dir': ('setup.py', './docs'),
             },
         },
         setup_requires=['sphinx'],
