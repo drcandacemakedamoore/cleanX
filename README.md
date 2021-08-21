@@ -59,12 +59,10 @@ It's unlikely that the support will be added in the future.
 
 #### AMD64 (x86)
 
-+-----------------------------+-----------+-----------+-----------+
 |                             | Linux     | Win       | OSX       |
-+:===========================:+:=========:+:=========:+:=========:+
+|:---------------------------:|:---------:|:---------:|:---------:|
 | ![p](etc/python-logo.png)   | Supported | Unknown   | Unknown   |
 | ![a](etc/anaconda-logo.png) | Supported | Supported | Supported |
-+-----------------------------+-----------+-----------+-----------+
 
 
 #### ARM64
