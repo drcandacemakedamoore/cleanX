@@ -61,6 +61,9 @@ jobs:
           conda run -n cleanx-build
           python setup.py genconda -t ${{ matrix.python-version }}
       - run: conda build -c conda-forge --output-folder ./dist ./conda-pkg/
+      - run: >
+          ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
+          anaconda upload --force --label main ./dist/*/*.tar.bz2
       - uses: actions/upload-artifact@v2
         with:
           name: conda-build-${{ matrix.os }}-${{ matrix.python-version }}
