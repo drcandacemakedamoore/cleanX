@@ -46,7 +46,7 @@ version = tag[1:]
 
 class TestCommand(Command):
 
-    user_options = [('pytest-args=', 'a', "Arguments to pass into py.test")]
+    user_options = [('pytest-args=', 'a', 'Arguments to pass into py.test')]
 
     def initialize_options(self):
         self.pytest_args = ''
@@ -142,6 +142,46 @@ class SphinxApiDoc(Command):
             os.path.join(project_dir, 'cleanX'),
             '--separate',
         ]))
+
+
+class AnacondaUpload(Command):
+
+    user_options = [
+        ('token=', 't', 'Anaconda token'),
+        ('package=', 'p', 'Package to upload'),
+    ]
+
+    def initialize_options(self):
+        self.token = None
+        self.package = None
+
+    def finalize_options(self):
+        if (self.token is None) or (self.package is None):
+            sys.stderr.write('Token and package are required\n')
+            raise SystemExit(2)
+
+    def run(self):
+        env = dict(os.environ)
+        env['ANACONDA_API_TOKEN'] = self.token
+        proc = subprocess.Popen(
+            [
+                'anaconda',
+                'upload',
+                '--force',
+                '--label', 'main',
+                self.package,
+            ],
+            env=env,
+            stderr=subprocess.PIPE,
+        )
+        _, err = proc.communicate()
+        if proc.returncode:
+            sys.stderr.write('Upload to Anaconda failed\n')
+            sys.stderr.write('Stderr:\n')
+            for line in err.decode().split('\n'):
+                sys.stderr.write(line)
+                sys.stderr.write('\n')
+            raise SystemExit(1)
 
 
 class GenerateCondaYaml(Command):
@@ -302,7 +342,7 @@ if __name__ == '__main__':
     setup(
         name=name,
         version=version,
-        description="Python library for cleaning data in large datasets of Xrays",
+        description='Python library for cleaning data in large datasets of Xrays',
         long_description=readme,
         long_description_content_type='text/markdown',
         author='doctormakeda@gmail.com',
@@ -325,6 +365,7 @@ if __name__ == '__main__':
             'genconda': GenerateCondaYaml,
             'install': Install,
             'find_egg': FindEgg,
+            'anaconda_upload': AnacondaUpload,
         },
         tests_require=['pytest', 'pycodestyle'],
         command_options={
