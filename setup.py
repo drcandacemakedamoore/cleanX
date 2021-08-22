@@ -171,7 +171,7 @@ class AnacondaUpload(Command):
                 'upload',
                 '--force',
                 '--label', 'main',
-                self.package,
+                glob(self.package)[0],
             ],
             env=env,
             stderr=subprocess.PIPE,
