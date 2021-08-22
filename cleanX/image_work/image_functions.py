@@ -1121,7 +1121,7 @@ def show_images_in_df(iter_ob, length_name):
                 title = fname[-length_name:]
                 exop = cv2.imread(element, cv2.IMREAD_GRAYSCALE)
                 axarr[x, y].set_title(title)
-                axarr[x, y].imshow(exop, cmap='gray')
+                axarr[x, y].imshow(exop, cmap=plt.cm.gray)
 
     else:
         for y in range(height):
@@ -1130,7 +1130,7 @@ def show_images_in_df(iter_ob, length_name):
             fname = os.path.splitext(element)[0]
             title = fname[-length_name:]
             axarr[y].set_title(title)
-            axarr[y].imshow(exop, cmap='gray')
+            axarr[y].imshow(exop, cmap=plt.cm.gray)
             # plt.title('Outlier images')
     plt.show()
 
@@ -1688,9 +1688,9 @@ def image_quality_by_size(specific_image):
     return q
 
 
-def show_close_images(folder, compression_level, ref_mse):
+def find_close_images(folder, compression_level, ref_mse):
     """
-    This function shows potentially duplicated images by
+    This function finds potentially duplicated images by
     comparing compressed versions of the images.
 
     :param folder: folder with jpgs
@@ -1707,6 +1707,8 @@ def show_close_images(folder, compression_level, ref_mse):
     # lists of the found duplicate/similar images, images, and err
     duplicates_A = []
     duplicates_B = []
+    images_A = []
+    images_B = []
     image_files = []
     err_list = []
     # list of all files in directory
@@ -1753,40 +1755,54 @@ def show_close_images(folder, compression_level, ref_mse):
                 (imgA.astype("float") - imgB.astype("float")) ** 2
             ) / img_area
             if err < ref_mse:
-                # TODO(wvxvw): matplotlib requires instrumentation for testing
-                # so that it doesn't start interactive ui during automatic
-                # test
-
-                # fig = plt.figure()
-                # plt.suptitle("MSE: %.3f" % (err))
-                # # plot first image
-                # ax = fig.add_subplot(1, 2, 1)
-                # plt.imshow(imgA, cmap=plt.cm.gray)
-                # plt.axis("off")
-                # # plot second image
-                # ax = fig.add_subplot(1, 2, 2)
-                # plt.imshow(imgB, cmap=plt.cm.gray)
-                # plt.axis("off")
-                # # show the images
-                # plt.show()
-                print(
-                    'Similar files: {} and {}'.format(
-                        img_name_A,
-                        img_name_B,
-                    ))
                 duplicates_A.append(img_name_A)
                 duplicates_B.append(img_name_B)
                 err_list.append(err)
 
-        dupers = {
-            'twinA?': duplicates_A,
-            'twinB?': duplicates_B,
-            'mse': err_list,
-        }
-        near_dupers = pd.DataFrame(dupers)
+    dupers = {
+        'twinA?': duplicates_A,
+        'twinB?': duplicates_B,
+        'mse': err_list,
+    }
+    near_dupers = pd.DataFrame(dupers)
 
     print("\n***\n Output: ", str(len(duplicates_A)),
           " potential duplicate image pairs in ", str(len(image_files)),
           " total images.\n",
           "At compression level", compression, "and mse", ref_mse)
+
     return near_dupers
+
+def show_close_images(folder, compression_level, ref_mse, plot_limit=20):
+    """
+    This function shows potentially duplicated images by
+    comparing compressed versions of the images.
+
+    :param folder: folder with jpgs
+    :type folder: str
+    :param compression_level: size to compress down to
+    :type compression_level: float
+    :param ref_mse: mse is a mean squared error
+    :type ref_mse: float
+    :param plot_limit: How many images to plot when showing duplicates.
+                       Negative values mean to show all images.
+    :type plot_limit: int
+    """
+    df = find_close_images(folder, compression_level, ref_mse)
+    ndisplayed = min(len(df), plot_limit) if plot_limit > 0 else len(df)
+    df_displayed = df.head(ndisplayed)
+    f, axarr = plt.subplots(ndisplayed, 2, figsize=(14, ndisplayed * 4))
+
+    for i, row in df_displayed.iterrows():
+        imgA = cv2.imread(row['twinA?'], cv2.IMREAD_GRAYSCALE)
+        imgB = cv2.imread(row['twinB?'], cv2.IMREAD_GRAYSCALE)
+        nameA = os.path.basename(row['twinA?'])
+        nameB = os.path.basename(row['twinB?'])
+        mse = row['mse']
+        axarr[i, 0].set_title('{}, mse: {}'.format(nameA, mse))
+        axarr[i, 0].imshow(imgA, cmap=plt.cm.gray)
+        axarr[i, 0].axis('off')
+        axarr[i, 1].set_title('{}, mse: {}'.format(nameB, mse))
+        axarr[i, 1].imshow(imgB, cmap=plt.cm.gray)
+        axarr[i, 1].axis('off')
+    plt.show()
