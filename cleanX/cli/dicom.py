@@ -68,7 +68,64 @@ def dicom(cfg):
     These will depend on the chosen reader.
     '''
 )
+def generate_report(cfg, input, output, config_reader):
+    reader = create_reader(cfg, config_reader)
+    df = reader.read(parse_sources(input, cfg))
+    df.to_csv(os.path.join(output, 'report.csv'))
+
+
+@dicom.command()
+@click.pass_obj
+@click.option(
+    '-i',
+    '--input',
+    nargs=2,
+    multiple=True,
+    help='''
+    Repeatable.  Takes two arguments.  First argument is a type of source,
+    the second is the source description.
+
+    Supported source types are:
+
+    \b
+    * dir
+    * glob
+
+    If source type is `dir', then the source description must be a path
+    to a directory.
+
+    If source type is `glob', then the source description must be a glob
+    pattern as used by Python's builtin glob function.  Whether glob
+    pattern will be interpreted as recursive is controlled by configuration
+    setting GLOB_IS_RECURSIVE.
+    ''',
+)
+@click.option(
+    '-o',
+    '--output',
+    default='.',
+    help='''
+    The directory where the extracted images will be placed.
+    ''',
+)
+@click.option(
+    '-c',
+    '--config-reader',
+    nargs=2,
+    multiple=True,
+    help='''
+    Options to pass to the DICOM reader at initialization time.
+
+    These will depend on the chosen reader.
+    '''
+)
 def extract_images(cfg, input, output, config_reader):
+    reader = create_reader(cfg, config_reader)
+    df = reader.read(parse_sources(input, cfg))
+    df.to_csv(os.path.join(output, 'report.csv'))
+
+
+def create_reader(cfg, config_reader):
     preferred_parser = cfg.get_setting('PREFERRED_DICOM_PARSER')
     mod_name = 'cleanX.dicom_processing.'
     class_name = 'DicomReader'
@@ -101,9 +158,7 @@ def extract_images(cfg, input, output, config_reader):
         k: parse_reader_arg(k, v, dicom_mod)
         for k, v in config_reader
     }
-    reader = reader_class(**reader_args)
-    df = reader.read(parse_sources(input, cfg))
-    df.to_csv(os.path.join(output, 'report.csv'))
+    return reader_class(**reader_args)
 
 
 def pydicom_str_to_type(raw, module):

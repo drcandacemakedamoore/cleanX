@@ -113,3 +113,9 @@ class MultiSource:
         for s in self.sources:
             for key, parsed in s.items(reader, transformer):
                 yield key, parsed
+
+
+def rename_file(original, target, ext):
+    dst_file = os.path.basename(original)
+    dst_file = os.path.splitext(dst_file)[0]
+    return os.path.join(target, '{}.{}'.format(dst_file, ext))

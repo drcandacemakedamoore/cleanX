@@ -9,6 +9,8 @@ import pandas as pd
 import SimpleITK as sitk
 import cv2
 
+from .source import rename_file
+
 
 tag_dictionary = {   # 'key' , 'datapoint_name'
     '0002|0000': 'File Meta Information Group Length',
@@ -170,6 +172,22 @@ class MetadataHelper:
 
         return parsed
 
+    def fetch_image(self, dicom_file):
+        """
+        Read the pixel data of the DICOM image.
+
+        :param dicom_file: The file to extract image data from.
+        :type dicom_file: str
+
+        :return: Pixel array of the extracted image.
+        :rtype: :class:`~numpy.ndarray`
+        """
+        # TODO(wvxvw): Deal with the case when dicom_file is a stream,
+        # not a file name.
+        self.reader.SetFileName(dicom_file)
+        dcm = self.reader.Execute()
+        return sitk.GetArrayFromImage(image)
+
 
 class SimpleITKDicomReader:
     """Class for reading DICOM metadata with SimpleITK."""
@@ -254,6 +272,24 @@ class SimpleITKDicomReader:
         # TODO: We don't know how to convert this yet
         return source
 
+    def rip_out_jpgs(self, source, destination):
+        """
+        Extract image data from DICOM files and save it as JPG in
+        :code:`destination`.
+
+        :param source: A source generator.  For extended explanation see
+                       :class:`~cleanX.dicom_processing.Source`.
+        :type source: :class:`~cleanX.dicom_processing.Source`
+        :param destination: The name of the directory where JPG files
+                            should be stored.
+        :type destination: Compatible with :fn:`os.path.join`
+        """
+        reader = sitk.ImageFileReader()
+        m_reader = MetadataHelper(reader)
+
+        for entry, parsed in source.items(m_reader.fetch_metadata):
+            cv2.imwrite(rename_file(key, destination, 'jpg'), parsed[0])
+
     def read(self, source):
         """
         Read DICOM files, parse their metadata, and genrate a :code:`DataFrame`
@@ -271,6 +307,7 @@ class SimpleITKDicomReader:
         tag = source.get_tag()
         columns = {tag: []}
         known_names = set([])
+
         for entry, parsed in source.items(m_reader.fetch_metadata):
             record_names = set(parsed.keys())
             new_columns = record_names - known_names

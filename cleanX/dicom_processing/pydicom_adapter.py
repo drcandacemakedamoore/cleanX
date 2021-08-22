@@ -11,6 +11,8 @@ import cv2
 from pydicom.multival import MultiValue
 from pydicom.sequence import Sequence
 
+from .source import rename_file
+
 
 class PydicomDicomReader:
     """Class for reading DICOM metadata with pydicom."""
@@ -109,6 +111,24 @@ class PydicomDicomReader:
         #     seconds, milis = source.split('.')
         # TODO: We don't know how to conver this yet
         return source
+
+    def rip_out_jpgs(self, source, destination):
+        """
+        Extract image data from DICOM files and save it as JPG in
+        :code:`destination`.
+
+        :param source: A source generator.  For extended explanation see
+                       :class:`~cleanX.dicom_processing.Source`.
+        :type source: :class:`~cleanX.dicom_processing.Source`
+        :param destination: The name of the directory where JPG files
+                            should be stored.
+        :type destination: Compatible with :fn:`os.path.join`
+        """
+        for key, parsed in source.items(dicom.dcmread):
+            cv2.imwrite(
+                rename_file(key, destination, 'jpg'),
+                parsed.pixel_array,
+            )
 
     def read(self, source):
         """
