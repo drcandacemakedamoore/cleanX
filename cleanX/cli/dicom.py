@@ -241,4 +241,3 @@ def parse_sources(sources, cfg):
         else:
             raise LookupError('Unsupported source type: {}'.format(st))
     return MultiSource('source', *raw_result)
-
