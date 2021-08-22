@@ -108,7 +108,11 @@ intersphinx_mapping = {
 
 
 def is_error(obj, membername):
-    return issubclass(obj, Exception)
+    try:
+        return issubclass(obj, Exception)
+    except TypeError:
+        # Sometimes obj isn't a class
+        return False
 
 
 def is_inherited(obj, membername):
