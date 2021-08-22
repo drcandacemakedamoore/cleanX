@@ -82,6 +82,23 @@ extract metadata.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.simpleitk_adapter.MetadataHelper.fetch_image">
+<span class="sig-name descname"><span class="pre">fetch_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dicom_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.simpleitk_adapter.MetadataHelper.fetch_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the pixel data of the DICOM image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dicom_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The file to extract image data from.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pixel array of the extracted image.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -162,6 +179,23 @@ representation.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader.rip_out_jpgs">
+<span class="sig-name descname"><span class="pre">rip_out_jpgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader.rip_out_jpgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract image data from DICOM files and save it as JPG in
+<code class="code docutils literal notranslate"><span class="pre">destination</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Source</span></code>) – A source generator.  For extended explanation see
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Source</span></code>.</p></li>
+<li><p><strong>destination</strong> (Compatible with <a class="reference external" href="https://docs.python.org/3/library/os.path.html#os.path.join" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.join()</span></code></a>) – The name of the directory where JPG files
+should be stored.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

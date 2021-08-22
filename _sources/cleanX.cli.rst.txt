@@ -1,6 +1,17 @@
 cleanX.cli package
 ==================
 
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cleanX.cli.dataset
+   cleanX.cli.dicom
+   cleanX.cli.images
+   cleanX.cli.main
+
 Module contents
 ---------------
 

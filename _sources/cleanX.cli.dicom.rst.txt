@@ -1,0 +1,7 @@
+cleanX.cli.dicom module
+=======================
+
+.. automodule:: cleanX.cli.dicom
+   :members:
+   :undoc-members:
+   :show-inheritance:

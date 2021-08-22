@@ -1,0 +1,7 @@
+cleanX.cli.dataset module
+=========================
+
+.. automodule:: cleanX.cli.dataset
+   :members:
+   :undoc-members:
+   :show-inheritance:

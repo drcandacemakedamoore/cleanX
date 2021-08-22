@@ -1,0 +1,7 @@
+cleanX.cli.main module
+======================
+
+.. automodule:: cleanX.cli.main
+   :members:
+   :undoc-members:
+   :show-inheritance:

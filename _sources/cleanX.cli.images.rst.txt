@@ -1,0 +1,7 @@
+cleanX.cli.images module
+========================
+
+.. automodule:: cleanX.cli.images
+   :members:
+   :undoc-members:
+   :show-inheritance:
