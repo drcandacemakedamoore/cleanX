@@ -112,7 +112,7 @@ def dataset(cfg):
     * txt
     ''',
 )
-def generate_report(
+def report(
         cfg,
         train_source,
         test_source,

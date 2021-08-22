@@ -128,13 +128,15 @@ class SphinxApiDoc(Command):
         from sphinx.ext.apidoc import main
 
         src = os.path.join(project_dir, 'docs')
+        special = 'index.rst', 'cli.rst'
 
         for f in glob(os.path.join(src, '*.rst')):
-            if f.endswith('index.rst'):
-                continue
-            if f.endswith('cli.rst'):
-                continue
-            os.unlink(f)
+            for end in special:
+                if f.endswith(end):
+                    os.utime(f, None)
+                    break
+            else:
+                os.unlink(f)
 
         sys.exit(main([
             '-o', src,

@@ -6,8 +6,8 @@ be available `here <https://drcandacemakedamoore.github.io/cleanX/cli.html>`_.
 """
 
 from .main import main
-from .dicom import dicom, extract_images
+from .dicom import dicom, extract, report
 from .images import images, run_pipeline, restore_pipeline
-from .dataset import dataset, generate_report
+from .dataset import dataset, report
 
 

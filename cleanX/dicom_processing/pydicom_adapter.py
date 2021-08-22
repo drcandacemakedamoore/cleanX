@@ -122,7 +122,7 @@ class PydicomDicomReader:
         :type source: :class:`~cleanX.dicom_processing.Source`
         :param destination: The name of the directory where JPG files
                             should be stored.
-        :type destination: Compatible with :fn:`os.path.join`
+        :type destination: Compatible with :func:`os.path.join`
         """
         for key, parsed in source.items(dicom.dcmread):
             cv2.imwrite(

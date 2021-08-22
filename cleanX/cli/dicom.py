@@ -68,7 +68,7 @@ def dicom(cfg):
     These will depend on the chosen reader.
     '''
 )
-def generate_report(cfg, input, output, config_reader):
+def report(cfg, input, output, config_reader):
     reader = create_reader(cfg, config_reader)
     df = reader.read(parse_sources(input, cfg))
     df.to_csv(os.path.join(output, 'report.csv'))
@@ -119,10 +119,9 @@ def generate_report(cfg, input, output, config_reader):
     These will depend on the chosen reader.
     '''
 )
-def extract_images(cfg, input, output, config_reader):
+def extract(cfg, input, output, config_reader):
     reader = create_reader(cfg, config_reader)
-    df = reader.read(parse_sources(input, cfg))
-    df.to_csv(os.path.join(output, 'report.csv'))
+    reader.rip_out_jpgs(parse_sources(input, cfg), output)
 
 
 def create_reader(cfg, config_reader):
