@@ -47,6 +47,7 @@ from .image_functions import (
     give_size_counted_dfs,
     image_quality_by_size,
     show_close_images,
+    find_close_images,
 
     Rotator,
 )

@@ -1773,6 +1773,7 @@ def find_close_images(folder, compression_level, ref_mse):
 
     return near_dupers
 
+
 def show_close_images(folder, compression_level, ref_mse, plot_limit=20):
     """
     This function shows potentially duplicated images by
@@ -1799,10 +1800,18 @@ def show_close_images(folder, compression_level, ref_mse, plot_limit=20):
         nameA = os.path.basename(row['twinA?'])
         nameB = os.path.basename(row['twinB?'])
         mse = row['mse']
-        axarr[i, 0].set_title('{}, mse: {}'.format(nameA, mse))
-        axarr[i, 0].imshow(imgA, cmap=plt.cm.gray)
-        axarr[i, 0].axis('off')
-        axarr[i, 1].set_title('{}, mse: {}'.format(nameB, mse))
-        axarr[i, 1].imshow(imgB, cmap=plt.cm.gray)
-        axarr[i, 1].axis('off')
+        if ndisplayed > 1:
+            axarr[i, 0].set_title('{}, mse: {}'.format(nameA, mse))
+            axarr[i, 0].imshow(imgA, cmap=plt.cm.gray)
+            axarr[i, 0].axis('off')
+            axarr[i, 1].set_title('{}, mse: {}'.format(nameB, mse))
+            axarr[i, 1].imshow(imgB, cmap=plt.cm.gray)
+            axarr[i, 1].axis('off')
+        else:
+            axarr[0].set_title('{}, mse: {}'.format(nameA, mse))
+            axarr[0].imshow(imgA, cmap=plt.cm.gray)
+            axarr[0].axis('off')
+            axarr[1].set_title('{}, mse: {}'.format(nameB, mse))
+            axarr[1].imshow(imgB, cmap=plt.cm.gray)
+            axarr[1].axis('off')
     plt.show()

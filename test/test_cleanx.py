@@ -413,19 +413,30 @@ def test_dataset_creation():
         all_df = setup.concat_dataframe()
         assert len(m1) == len(all_df.columns)
 
+
 def test_give_size_counted_dfs():
     df_by_size = iwork.give_size_counted_dfs(image_directory)
     assert len(df_by_size) > 0
 
+
 def test_give_size_count_df():
     df_by_size = iwork.give_size_count_df(image_directory)
     assert len(df_by_size) > 0
+
 
 def test_image_quality_by_size():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
     quality = iwork.image_quality_by_size(vovo)
     assert quality > 0
 
-def test_show_close_images():
-    output1 = iwork.show_close_images(image_directory, 2, 190)
+
+def test_find_close_images():
+    output1 = iwork.find_close_images(image_directory, 2, 190)
     assert len(output1) > 0
+
+
+def test_show_close_images(monkeypatch):
+    # TODO(wvxvw): Find out if anything can be verified about the
+    # result of plt.show()
+    monkeypatch.setattr(iwork.image_functions.plt, 'show', lambda: None)
+    iwork.show_close_images(image_directory, 2, 190)
