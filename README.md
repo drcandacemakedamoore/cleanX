@@ -193,7 +193,7 @@ DICOM files:
 ``` sh
 mkdir extracted
 
-python -m cleanX dicom extract-images \
+python -m cleanX dicom extract \
     -i dir /path/to/dicoms/
     -o extracted
 ```
@@ -254,16 +254,14 @@ And for the DICOM extraction we might use similar code:
 ``` python
 imort os
 
-from cleanX.dicom_processing import rip_out_jpgs
+from cleanX.dicom_processing import DicomReader, DirectorySource
 
 dst = 'extracted'
 os.mkdir(dst)
 
-rip_out_jpgs('/path/to/dicoms/', dst)
+reader = DicomReader()
+reader.rip_out_jpgs(DirectorySource('/path/to/dicoms/', 'file'), dst)
 ```
-
-<!-- TODO(wvxvw): This should use DicomReader instead, we completely
-forgot about this.  Follow up with the issue: #40 -->
 
 This will look for the files with `dcm` extension in
 `/path/to/dicoms/` and try to extract images found in those files,
