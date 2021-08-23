@@ -204,9 +204,9 @@ it calls the `dicom` sub-command with `extract-images` subcommand.
 * `-i` tells `cleanX` to look for directory named `/path/to/dicoms`
 * `-o` tells `cleanX` to save extracted JPGs in `extracted` directory.
 
-This doesn't work at the moment.  Watch for
-[#40](https://github.com/drcandacemakedamoore/cleanX/issues/40) to be
-fixed.
+If you have any problems with this check
+[#40](https://github.com/drcandacemakedamoore/cleanX/issues/40) and add
+issues or discussions.
 
 
 ## Coding Example
