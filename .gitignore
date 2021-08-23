@@ -17,3 +17,4 @@ test/target/
 /docs/modules.rst
 /docs/cleanX.*.rst
 /workflow_demo/Coronahack-Chest-XRay-Dataset
+/workflow_demo/refined
