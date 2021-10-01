@@ -100,10 +100,10 @@ jobs:
       - run: conda run -n cleanx-build python setup.py genconda
         # conda-build installation and the build cannot be in an
         # environment
-      - run: conda install conda-build
+      - run: conda install -yq conda-build
       - run: conda build -c conda-forge ./conda-pkg/
-      - run: conda install -n cleanx-build --use-local cleanx
-      - run: conda install -n cleanx-build pytest pycodestyle
+      - run: conda install -yq -n cleanx-build --use-local cleanx
+      - run: conda install -yq -n cleanx-build pytest pycodestyle
       - run: conda info
       - run: conda list -n cleanx-build
       - run: >-
@@ -112,7 +112,7 @@ jobs:
           ./setup.py test
           --pytest-args
           "--junit-xml report-conda-${{ matrix.os }}-${{ matrix.python-version }}.xml"
-      - run: conda install -c conda-forge -n cleanx-build sphinx pycodestyle pytest
+      - run: conda install -yq -c conda-forge -n cleanx-build sphinx pycodestyle pytest
       - run: conda run -n cleanx-build python setup.py anaconda_gen_env
       - uses: actions/upload-artifact@v2
         if: always()
