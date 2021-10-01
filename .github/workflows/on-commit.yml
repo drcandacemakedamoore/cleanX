@@ -112,11 +112,17 @@ jobs:
           ./setup.py test
           --pytest-args
           "--junit-xml report-conda-${{ matrix.os }}-${{ matrix.python-version }}.xml"
+      - run: conda install -c conda-forge -n cleanx-build sphinx pycodestyle pytest
+      - run: conda run -n cleanx-build python setup.py anaconda_gen_env
       - uses: actions/upload-artifact@v2
         if: always()
         with:
           name: conda-junit-${{ matrix.python-version }}-${{ matrix.os }}
           path: report-*.xml
+      - uses: actions/upload-artifact@v2
+        with:
+          name: cleanx-env-${{ matrix.python-version }}-${{ matrix.os }}
+          path: cleanx-env-*.yml
 
   PublishJUnit:
     runs-on: ubuntu-latest

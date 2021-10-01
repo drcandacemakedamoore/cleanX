@@ -44,6 +44,32 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
   conversion
 - Anaconda is now supported, but not technically necessary
 
+### Developing Using Anaconda
+
+There is a helper command in [setup.py](setup.py) for generating
+environment file that can be used to create development environment.
+
+```sh
+python ./setup.py anaconda_gen_env
+```
+
+Unfortunately, it must be run in an enviroment, where `cleanX` is
+already installed (or, at least, you already have all dependencies
+installed).  We use it in CI to generate environment files, which you
+can download from artifacts
+[here](https://github.com/drcandacemakedamoore/cleanX/actions/runs/).
+Select the job for the branch you are interested in, scroll to the
+"Artifacts" section, and select "conda-environments".
+
+Once you generate or download the environment file, you can execute
+
+```sh
+conda env create -f ./cleanx-env-linux-py38.yml
+```
+
+assuming `cleanx-env-linux-py38.yml` is the correct environment for
+your operating system and Python version.
+
 
 ### Supported Platforms
 

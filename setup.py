@@ -6,9 +6,12 @@ import os
 import subprocess
 import site
 import shutil
+import platform
 
 from glob import glob
 from distutils.dir_util import copy_tree
+from io import BytesIO
+from string import Template
 
 from setuptools import setup
 from setuptools.command.install import install as InstallCommand
@@ -204,11 +207,11 @@ class GenerateCondaYaml(Command):
             self.target_python = '{}.{}'.format(maj, min)
 
     def run(self):
-        from string import Template
-
         tpls = glob(os.path.join(project_dir, 'conda-pkg/*.in'))
 
         for tpl_path in tpls:
+            if tpl_path.endswith('/env.yml.in'):
+                continue
             with open(tpl_path) as f:
                 tpl = Template(f.read())
 
@@ -234,6 +237,63 @@ class FindEgg(Command):
 
     def run(self):
         print(glob('./dist/*.egg')[0])
+
+
+class GenCondaEnv(Command):
+
+    user_options = [(
+        'output=',
+        'o',
+        'File to save the environmnent description',
+    )]
+
+    def initialize_options(self):
+        self.output = None
+
+    def finalize_options(self):
+        if self.output is None:
+            self.output = 'cleanx-env-{}-py{}{}.yml'.format(
+                platform.system().lower(),
+                sys.version_info[0],
+                sys.version_info[1],
+            )
+
+    def run(self):
+        if os.environ.get('CONDA_DEFAULT_ENV') is None:
+            raise RuntimeError(
+                'This command can only run in conda environmnent',
+            )
+        env_tpl_path = os.path.join(
+            os.path.dirname(__file__),
+            'conda-pkg',
+            'env.yml.in',
+        )
+        with open(env_tpl_path) as f:
+            tpl = Template(f.read())
+        conda_recs = []
+        # TODO(wvxvw): Add flags to also include extras
+        all_recs = (
+            self.distribution.install_requires +
+            self.distribution.tests_require +
+            self.distribution.setup_requires
+        )
+        for rec in all_recs:
+            result = subprocess.check_output(['conda', 'list', '-e', rec])
+            for line in BytesIO(result):
+                if not line.startswith(b'#'):
+                    conda_recs.append(line.strip().decode())
+                    break
+            else:
+                raise RuntimeError(
+                    'Missing {}\n'.format(rec) +
+                    'run "conda install -c conda-forge {}"'.format(rec),
+                )
+        output_contents = tpl.substitute(
+            env_name=os.path.splitext(self.output)[0],
+            conda_recs='\n  - '.join(conda_recs),
+        )
+        with open(self.output, 'w') as f:
+            f.write(output_contents)
 
 
 class Install(InstallCommand):
@@ -368,6 +428,7 @@ if __name__ == '__main__':
             'install': Install,
             'find_egg': FindEgg,
             'anaconda_upload': AnacondaUpload,
+            'anaconda_gen_env': GenCondaEnv,
         },
         tests_require=['pytest', 'pycodestyle'],
         command_options={
