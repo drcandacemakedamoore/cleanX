@@ -210,7 +210,7 @@ class GenerateCondaYaml(Command):
         tpls = glob(os.path.join(project_dir, 'conda-pkg/*.in'))
 
         for tpl_path in tpls:
-            if tpl_path.endswith('/env.yml.in'):
+            if tpl_path.endswith('env.yml.in'):
                 continue
             with open(tpl_path) as f:
                 tpl = Template(f.read())
