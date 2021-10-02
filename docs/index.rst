@@ -35,6 +35,11 @@ Command-Line Interface Documentation
 
 :doc:`CLI <../cli>`
 
+Developer's Guide
+----------------------------------------
+
+:doc:`Developer's Guide <../developers>`
+
 
 Indices and tables
 ==================

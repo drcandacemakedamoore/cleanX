@@ -88,6 +88,8 @@ class TestCommand(Command):
 
 class PyTest(TestCommand):
 
+    description = 'run unit tests'
+
     def run_tests(self):
         import pytest
 
@@ -96,6 +98,8 @@ class PyTest(TestCommand):
 
 
 class Pep8(TestCommand):
+
+    description = 'validate sources against PEP8'
 
     def run_tests(self):
         from pycodestyle import StyleGuide
@@ -119,6 +123,8 @@ class Pep8(TestCommand):
 
 class SphinxApiDoc(Command):
 
+    description = 'run apidoc to generate documentation'
+
     user_options = []
 
     def initialize_options(self):
@@ -131,7 +137,7 @@ class SphinxApiDoc(Command):
         from sphinx.ext.apidoc import main
 
         src = os.path.join(project_dir, 'docs')
-        special = 'index.rst', 'cli.rst'
+        special = 'index.rst', 'cli.rst', 'developers.rst'
 
         for f in glob(os.path.join(src, '*.rst')):
             for end in special:
@@ -150,6 +156,8 @@ class SphinxApiDoc(Command):
 
 
 class AnacondaUpload(Command):
+
+    description = 'upload packages for Anaconda'
 
     user_options = [
         ('token=', 't', 'Anaconda token'),
@@ -191,6 +199,8 @@ class AnacondaUpload(Command):
 
 class GenerateCondaYaml(Command):
 
+    description = 'generate metadata for conda package'
+
     user_options = [(
         'target-python=',
         't',
@@ -227,6 +237,8 @@ class GenerateCondaYaml(Command):
 
 class FindEgg(Command):
 
+    description = 'find Eggs built by this script'
+
     user_options = []
 
     def initialize_options(self):
@@ -240,6 +252,10 @@ class FindEgg(Command):
 
 
 class GenCondaEnv(Command):
+
+    description = (
+        'generate YAML file with requirements for conda environmnent'
+    )
 
     user_options = [(
         'output=',
@@ -377,6 +393,29 @@ class Install(InstallCommand):
                 copy_tree(package_contents, self.root)
 
 
+class InstallDev(Install):
+
+    def run(self):
+        super().run()
+        if os.environ.get('CONDA_DEFAULT_ENV'):
+            cmd = [
+                'conda',
+                'install',
+                '-c', 'conda-forge',
+                '-y',
+            ] + self.distribution.extras_require['dev']
+            if subprocess.call(cmd):
+                raise RuntimeError('Couldn\'t install {} package'.format(name))
+        else:
+            extras_dist = Distribution()
+            extras_dist.install_requires = self.distribution.extras_require['dev']
+            ezcmd = EZInstallCommand(extras_dist)
+            ezcmd.initialize_options()
+            ezcmd.args = self.distribution.extras_require['dev']
+            ezcmd.always_copy = True
+            ezcmd.finalize_options()
+            ezcmd.run()
+
 def install_requires():
     if os.environ.get('CONDA_DEFAULT_ENV'):
         return [
@@ -426,6 +465,7 @@ if __name__ == '__main__':
             'apidoc': SphinxApiDoc,
             'genconda': GenerateCondaYaml,
             'install': Install,
+            'install_dev': InstallDev,
             'find_egg': FindEgg,
             'anaconda_upload': AnacondaUpload,
             'anaconda_gen_env': GenCondaEnv,
@@ -445,6 +485,15 @@ if __name__ == '__main__':
             'cli': ['click'],
             'pydicom': ['pydicom'],
             'simpleitk': ['SimpleITK'],
+            'dev': [
+                'wheel',
+                'sphinx',
+                'pytest',
+                'codestyle',
+                'click',
+                'pydicom',
+                'SimpleITK',
+            ],
         },
         zip_safe=False,
     )

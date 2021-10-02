@@ -44,32 +44,40 @@ other authors + contributors: Oleg Sivokon, Andrew Murphy
   conversion
 - Anaconda is now supported, but not technically necessary
 
-### Developing Using Anaconda
+## Developer's Guide
 
-There is a helper command in [setup.py](setup.py) for generating
-environment file that can be used to create development environment.
+Please refer to [Developer's Giude](https://drcandacemakedamoore.github.io/cleanX/developers.html)
+for more detailed explanation.
 
-```sh
-python ./setup.py anaconda_gen_env
-```
+### Developing Using Anaconda's Python
 
-Unfortunately, it must be run in an enviroment, where `cleanX` is
-already installed (or, at least, you already have all dependencies
-installed).  We use it in CI to generate environment files, which you
-can download from artifacts
-[here](https://github.com/drcandacemakedamoore/cleanX/actions/runs/).
-Select the job for the branch you are interested in, scroll to the
-"Artifacts" section, and select "conda-environments".
-
-Once you generate or download the environment file, you can execute
+Use Git to check out the project's source, then, in the source
+directory run:
 
 ```sh
-conda env create -f ./cleanx-env-linux-py38.yml
+conda create -n cleanx
+conda activate -n cleanx
+python ./setup.py install_dev
 ```
 
-assuming `cleanx-env-linux-py38.yml` is the correct environment for
-your operating system and Python version.
+You may have to do this for Python 3.7, Python 3.8 and Python 3.9 if
+you need to check that your changes will work in all supported
+versions.
 
+### Developing Using python.org's Python
+
+Use Git to check out the project's source, then in the source
+directory run:
+
+```sh
+python -m venv .venv
+. ./.venv/bin/activate
+python ./setup.py install_dev
+```
+
+Similar to `conda` based setup, you may have to use Python versions
+3.7, 3.8 and 3.9 to create three different environments to recreate
+our CI process.
 
 ### Supported Platforms
 
