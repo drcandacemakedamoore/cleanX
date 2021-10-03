@@ -4,6 +4,18 @@
 
 # cleanX
 
+ <a href="https://doi.org/10.5281/zenodo.4725904"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg" alt="(DOI)"></a> <a href="https://github.com/drcandacemakedamoore/cleanX/blob/master/LICENSE"><img alt="License: GPL-3" src="https://img.shields.io/github/license/drcandacemakedamoore/cleanX"></a>[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/license.svg)](https://anaconda.org/doctormakeda/cleanx)  <a href="https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a"><img src="https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a/status.svg"></a>
+Markdown: [![status](https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a/status.svg)](https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a) 
+
+[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/platforms.svg)](https://anaconda.org/doctormakeda/cleanx)
+
+<a href="https://pypi.org/project/cleanX/"><img alt="PyPI" src="https://img.shields.io/pypi/v/cleanX"></a>
+[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/version.svg)](https://anaconda.org/doctormakeda/cleanx)
+
+[![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml)
+[![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml)
+
+
 CleanX <a href="https://doi.org/10.5281/zenodo.4725904"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg" alt="(DOI)"></a> <a href="https://github.com/drcandacemakedamoore/cleanX/blob/master/LICENSE"><img alt="License: GPL-3" src="https://img.shields.io/github/license/drcandacemakedamoore/cleanX"></a>[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/license.svg)](https://anaconda.org/doctormakeda/cleanx)
 is an open source  python library
 for exploring, cleaning and augmenting large datasets of X-rays, or certain other types of radiological images.
