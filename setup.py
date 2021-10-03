@@ -137,7 +137,12 @@ class SphinxApiDoc(Command):
         from sphinx.ext.apidoc import main
 
         src = os.path.join(project_dir, 'docs')
-        special = 'index.rst', 'cli.rst', 'developers.rst'
+        special = (
+            'index.rst',
+            'cli.rst',
+            'developers.rst',
+            'medical-professionals.rst',
+        )
 
         for f in glob(os.path.join(src, '*.rst')):
             for end in special:

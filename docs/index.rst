@@ -36,9 +36,14 @@ Command-Line Interface Documentation
 :doc:`CLI <../cli>`
 
 Developer's Guide
-----------------------------------------
+-----------------
 
 :doc:`Developer's Guide <../developers>`
+
+Medical Professionals Documentation
+-----------------------------------
+
+:doc:`Medical Professionals Documentation <../medical-professionals>`
 
 
 Indices and tables
