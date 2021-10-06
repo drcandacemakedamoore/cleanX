@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Developer’s Guide &#8212; cleanX 0.1.12 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Developer’s Guide</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="developer-s-guide">
+<h1>Developer’s Guide<a class="headerlink" href="#developer-s-guide" title="Permalink to this headline">¶</a></h1>
+<section id="sending-your-work">
+<h2>Sending Your Work<a class="headerlink" href="#sending-your-work" title="Permalink to this headline">¶</a></h2>
+<p>We accept pull requests made through GitHub.  Alternatively, you can
+send patch files in an email (please find developers’ emails on their
+profile pages).  As is usual, we request that the changes be rebased
+on the branch they are to be integrated into.  We also request that</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python ./setup.py <span class="nb">test</span>
+python ./setup.py lint
+</pre></div>
+</div>
+<p>succeed with your changes applied.  We’ll try our best to attribute
+your work to you, however, you need to release your work under
+compatible license for us to be able to use it.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>We don’t use <cite>git-merge</cite> command, and if your submission has merge
+commits, we’ll have to remove them.  This means that in such case
+commit hashes will be different from those in your original
+submission.</p>
+</div>
+</section>
+<section id="setting-up-development-environment">
+<h2>Setting Up Development Environment<a class="headerlink" href="#setting-up-development-environment" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You may find this setup unusual.  Please read the <a class="reference internal" href="#rationale">Rationale</a>
+section to satisfy your curiosity.</p>
+</div>
+<p>There isn’t <em>a</em> development environment.  You may need to create an
+environment for every combination of supported versions of operating
+system, Python distribution and Python version.  If you believe that
+your code is portable accross versions and platforms, then, of course,
+you don’t need all the possible combinations.  Our CI should be able
+to pick up the most obvious incompatibilities between those.</p>
+<section id="the-way-we-do-it">
+<h3>The Way We Do It<a class="headerlink" href="#the-way-we-do-it" title="Permalink to this headline">¶</a></h3>
+<p>Suppose you want to check your changes against Python 3.7 from
+python.org on Linux, then you would check out our sources using <cite>git</cite>
+from our <a class="reference external" href="https://github.com/drcandacemakedamoore/cleanX.git">GitHub repo</a>, and:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3.7 -m venv .venv37
+. ./.venv3.7/bin/activate
+python ./setup.py install_dev
+</pre></div>
+</div>
+<p>What this will do is quite a bit different from what
+<cite>setuptools.install</cite> command would normally do: It will create an Egg
+with <cite>cleanX</cite> sources, install it, then it will look for development
+dependencies, and install them too.  This is likely to take a lot longer
+than what a typical project setup would do.  Please, be patient.</p>
+<p>Similarly, if you want to develop using Anaconda Python, you would:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n cleanx-37
+conda activate -n cleanx-37
+conda run -n cleanx-37 python ./setup.py install_dev
+</pre></div>
+</div>
+<p>Similar to above, this will create a virtual environment, build
+<cite>conda</cite> package, install it and then add development dependencies to
+what was installed.  This will likely take a <em>very</em> long time.
+Please, be patient.</p>
+</section>
+<section id="the-traditional-way">
+<h3>The Traditional Way<a class="headerlink" href="#the-traditional-way" title="Permalink to this headline">¶</a></h3>
+<p>Regradless of the downsides of this approach, we try to support more
+common ways to work with Python projects.  It’s a common practice to
+“install” a project during development by either using <cite>pip install
+–editable</cite> command, or by using <cite>conda</cite> environment files.</p>
+<p>We provide limited support for this approach.  For instance, if you
+want to work on the project using <cite>pip</cite>, you could try:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3.7 -m venv .venv37
+. ./.venv/bin/activate
+pip install -e .<span class="o">[</span>dev<span class="o">]</span>
+</pre></div>
+</div>
+<p>If you encounter problems with this approach related to runnig tests
+or generating documentation, please let us know.  Unfortunately,
+supporting this worklfow is a low-priority task for us, as internally
+we don’t rely on this to work.</p>
+<p>Similarly, if you want to develop using <cite>conda</cite> environment files, we
+provide limited support for that.</p>
+<p>The environment files are generated using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda run -n cleanx-build python setup.py anaconda_gen_env
+</pre></div>
+</div>
+<p>However, this means you already have to have all dependencies
+installed.  We run this script in CI and archive the environment files
+it produces.  To find such file suitable for your platform you will
+need to navigate to <a class="reference external" href="https://github.com/drcandacemakedamoore/cleanX/actions/runs">GitHub Actions dashboard</a>, and look in the
+artifacts section of the selected job for artifacts named
+<cite>cleanx-env-$python_version-$os</cite>.  Select the one that applies to your
+Python version and operating system, download and unzip it in the
+directory where you checked out the <cite>cleanX</cite> sources.  Afterwards,
+you can:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create -f ./cleanx-env-*.yml
+</pre></div>
+</div>
+<p>You don’t have to do this for every supported platform to be able to
+work on the project in some capacity, however, this is the way to
+reproduce problems that either happen in our CI or are reported on
+platforms different from the one you develop on.</p>
+</section>
+<section id="rationale">
+<h3>Rationale<a class="headerlink" href="#rationale" title="Permalink to this headline">¶</a></h3>
+<p>There are several problems with traditional way Python programmers are
+taught to organize their development environment.  The way a typical
+Python project is developed, it is designed to support a single
+version of Python, rarely multiple Python distributions or operating
+systems.  This, of course, makes development process easy, and it is
+completely justifed if the goal of the project is to be deployed in a
+highly controlled environment, such as a rented or private server, or
+a system maintained by the IT department of the organziation for which
+the product is designed.</p>
+<p>In the situation above, it’s typical to rely on <cite>requirements.txt</cite> or
+<cite>environment.yml</cite> to manage development dependencies.  These formats,
+however, are inappropriate if the project needs to support multiple
+platforms with dependencies that vary based on the platform.  We
+didn’t find, nor did we invent a better format for describing
+cross-platform dependencies.  We don’t have the capacity for such
+things, and the task itself would, probably be at least as difficult
+as working on the source code of the project.</p>
+<p>Since producing distributable packages is an essential goal for the
+project, we decided to base our development setup on our ability to
+produce those.  It is already cross-platform and supports at least the
+platform we intend to support.</p>
+<p>Another traditional aspect of Python development process is the use of
+<cite>pip</cite>.  We found that in all essential aspects of our project’s
+lifecycle <cite>pip</cite> defers to <cite>setuptools</cite>.  <cite>setuptools</cite> are also a
+convenient middle ground between <cite>conda</cite> and <cite>pip</cite>.  Therefore we try
+to avoid the use of <cite>pip</cite> everywhere in our development process.
+<cite>setuptools</cite> is complex and unreliable as it is, adding another layer
+of unreliability, especially in the situation where multiple platforms
+are to be supported seems like a bad choice.</p>
+<p>We may, eventually, support development workflows that incorporate
+<cite>pip</cite>, but this is a low priority task aimed at developers outside of
+the core of our project.</p>
+</section>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>The project must be installed in order to run the tests.  It doesn’t
+have to be instaleld with development dependencies though.  Once that
+is done, you may run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python ./setup.py <span class="nb">test</span>
+</pre></div>
+</div>
+<p>Under the hood, this runs <cite>pytest</cite> command on the tests found in
+<cite>tests</cite> directory.  The <cite>test</cite> command has an option to pass <cite>pytest</cite>
+arguments down to <cite>pytest</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python ./setup.py --pytest-args<span class="o">=</span><span class="s1">&#39;-s -k dicom&#39;</span>
+</pre></div>
+</div>
+<p>For example, if you want to only run tests related to DICOM integration.</p>
+<section id="style-guide-for-python-code">
+<h3>Style Guide for Python Code<a class="headerlink" href="#style-guide-for-python-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python ./setup.py lint
+</pre></div>
+</div>
+<p>This is vanilla PEP8 linter, just do what PEP8 tells you to do and you
+should be fine.</p>
+</section>
+<section id="continuous-integration">
+<h3>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">¶</a></h3>
+<p>This project has extensive CI setup that uses GitHub Actions platform.
+There’s an experimental branch with Jenkins setup, but it’s far from
+being ready yet, and we currently don’t work on it.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please note that CI has automated release build and publishing: if
+a tag is pushed with a name that starts with <cite>v</cite>, (eg. <cite>v1.2.3</cite>),
+CI will interpret this as asking to create a release for that
+version.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Developer’s Guide</a><ul>
+<li><a class="reference internal" href="#sending-your-work">Sending Your Work</a></li>
+<li><a class="reference internal" href="#setting-up-development-environment">Setting Up Development Environment</a><ul>
+<li><a class="reference internal" href="#the-way-we-do-it">The Way We Do It</a></li>
+<li><a class="reference internal" href="#the-traditional-way">The Traditional Way</a></li>
+<li><a class="reference internal" href="#rationale">Rationale</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing">Testing</a><ul>
+<li><a class="reference internal" href="#style-guide-for-python-code">Style Guide for Python Code</a></li>
+<li><a class="reference internal" href="#continuous-integration">Continuous Integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/developers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Developer’s Guide</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, doctormakeda@gmail.com.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

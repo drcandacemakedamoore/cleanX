@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>cleanX.image_work.steps module &#8212; cleanX 0.1.11 documentation</title>
+    <title>cleanX.image_work.steps module &#8212; cleanX 0.1.12 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -29,7 +29,7 @@
         <li class="right" >
           <a href="cleanX.image_work.pipeline.html" title="cleanX.image_work.pipeline module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="cleanX.html" >cleanX package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cleanX.image_work.html" accesskey="U">cleanX.image_work package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cleanX.image_work.steps module</a></li> 
@@ -51,7 +51,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.steps.RegisteredStep">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">RegisteredStep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clsdict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.RegisteredStep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.image_work.steps.RegisteredStep.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clsdict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.RegisteredStep.__init__" title="Permalink to this definition">¶</a></dt>
@@ -68,7 +68,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.steps.Step">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.steps.</span></span><span class="sig-name descname"><span class="pre">Step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class has default implementations for methods all steps are
 expected to implement.</p>
 <p>Use this as the base class if you intend to add custom steps.</p>
@@ -83,7 +83,7 @@ expected to implement.</p>
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the method that will be called to do the actual image
 transformation.  This function must not raise exceptions, as it
-is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
@@ -98,7 +98,7 @@ Second is the error, if procesing wasn’t possible.  Only
 one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -119,11 +119,11 @@ of the data in the file is the serialized NumPy array</p>
 <dd class="field-even"><p>This method should return two values.  First is the
 image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
 format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
-<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
 one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -133,7 +133,7 @@ one element in the tuple may be <code class="code docutils literal notranslate">
 <span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Step.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method should write the image data to make it available for
 the next step.  Default implementation use NumPy’s persistence
-format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
 therefore it must not raise exceptions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -145,7 +145,7 @@ therefore it must not raise exceptions.</p>
 <code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -189,11 +189,11 @@ of the data in the file is the serialized NumPy array</p>
 <dd class="field-even"><p>This method should return two values.  First is the
 image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
 format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
-<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
 one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -215,7 +215,7 @@ one element in the tuple may be <code class="code docutils literal notranslate">
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the method that will be called to do the actual image
 transformation.  This function must not raise exceptions, as it
-is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
@@ -230,7 +230,7 @@ Second is the error, if procesing wasn’t possible.  Only
 one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -250,7 +250,7 @@ one element of the tuple should be <code class="code docutils literal notranslat
 <span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Acquire.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method should write the image data to make it available for
 the next step.  Default implementation use NumPy’s persistence
-format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
 therefore it must not raise exceptions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -262,7 +262,7 @@ therefore it must not raise exceptions.</p>
 <code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -285,7 +285,7 @@ therefore it must not raise exceptions.</p>
 <span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method should write the image data to make it available for
 the next step.  Default implementation use NumPy’s persistence
-format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
 therefore it must not raise exceptions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -297,7 +297,7 @@ therefore it must not raise exceptions.</p>
 <code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -313,7 +313,7 @@ therefore it must not raise exceptions.</p>
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Save.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the method that will be called to do the actual image
 transformation.  This function must not raise exceptions, as it
-is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
@@ -328,7 +328,7 @@ Second is the error, if procesing wasn’t possible.  Only
 one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -354,11 +354,11 @@ of the data in the file is the serialized NumPy array</p>
 <dd class="field-even"><p>This method should return two values.  First is the
 image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
 format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
-<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
 one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -380,7 +380,7 @@ one element in the tuple may be <code class="code docutils literal notranslate">
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the method that will be called to do the actual image
 transformation.  This function must not raise exceptions, as it
-is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
@@ -395,7 +395,7 @@ Second is the error, if procesing wasn’t possible.  Only
 one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -433,11 +433,11 @@ of the data in the file is the serialized NumPy array</p>
 <dd class="field-even"><p>This method should return two values.  First is the
 image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
 format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
-<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
 one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -452,7 +452,7 @@ one element in the tuple may be <code class="code docutils literal notranslate">
 <span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Crop.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method should write the image data to make it available for
 the next step.  Default implementation use NumPy’s persistence
-format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
 therefore it must not raise exceptions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -464,7 +464,7 @@ therefore it must not raise exceptions.</p>
 <code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -481,7 +481,7 @@ therefore it must not raise exceptions.</p>
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the method that will be called to do the actual image
 transformation.  This function must not raise exceptions, as it
-is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
@@ -496,7 +496,7 @@ Second is the error, if procesing wasn’t possible.  Only
 one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -534,11 +534,11 @@ of the data in the file is the serialized NumPy array</p>
 <dd class="field-even"><p>This method should return two values.  First is the
 image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
 format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
-<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
 one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -553,7 +553,7 @@ one element in the tuple may be <code class="code docutils literal notranslate">
 <span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.Normalize.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method should write the image data to make it available for
 the next step.  Default implementation use NumPy’s persistence
-format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
 therefore it must not raise exceptions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -565,7 +565,7 @@ therefore it must not raise exceptions.</p>
 <code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -589,7 +589,7 @@ image histogram.</p>
 <span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the method that will be called to do the actual image
 transformation.  This function must not raise exceptions, as it
-is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
+is used in the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image_data</strong> (Unless this class overrides the defaults, this
@@ -604,7 +604,7 @@ Second is the error, if procesing wasn’t possible.  Only
 one element of the tuple should be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -636,11 +636,11 @@ of the data in the file is the serialized NumPy array</p>
 <dd class="field-even"><p>This method should return two values.  First is the
 image data read from <code class="code docutils literal notranslate"><span class="pre">path</span></code>.  It should be in the
 format suitable for <a class="reference internal" href="#cleanX.image_work.steps.Step.apply" title="cleanX.image_work.steps.Step.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>.  Second is the
-<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
+<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> if the read was not successful.  Only
 one element in the tuple may be <code class="code docutils literal notranslate"><span class="pre">not</span> <span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a>]</p>
+<dd class="field-odd"><p>Tuple[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -655,7 +655,7 @@ one element in the tuple may be <code class="code docutils literal notranslate">
 <span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.steps.HistogramNormalize.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method should write the image data to make it available for
 the next step.  Default implementation use NumPy’s persistence
-format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
+format.  This method is used in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.10)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> context,
 therefore it must not raise exceptions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -667,7 +667,7 @@ therefore it must not raise exceptions.</p>
 <code class="code docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)">Exception</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)">Exception</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -719,7 +719,7 @@ therefore it must not raise exceptions.</p>
         <li class="right" >
           <a href="cleanX.image_work.pipeline.html" title="cleanX.image_work.pipeline module"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="cleanX.html" >cleanX package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cleanX.image_work.html" >cleanX.image_work package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cleanX.image_work.steps module</a></li> 

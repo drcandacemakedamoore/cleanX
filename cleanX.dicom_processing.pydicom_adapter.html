@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>cleanX.dicom_processing.pydicom_adapter module &#8212; cleanX 0.1.11 documentation</title>
+    <title>cleanX.dicom_processing.pydicom_adapter module &#8212; cleanX 0.1.12 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -33,7 +33,7 @@
         <li class="right" >
           <a href="cleanX.dicom_processing.html" title="cleanX.dicom_processing package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="cleanX.html" >cleanX package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cleanX.dicom_processing.html" accesskey="U">cleanX.dicom_processing package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cleanX.dicom_processing.pydicom_adapter module</a></li> 
@@ -50,7 +50,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.pydicom_adapter.</span></span><span class="sig-name descname"><span class="pre">PydicomDicomReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exclude_field_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Class for reading DICOM metadata with pydicom.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.__init__">
@@ -59,21 +59,21 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>exclude_field_types</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><em>type</em></a><em>]</em>) – <p>Some DICOM types have internal structure
+<li><p><strong>exclude_field_types</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.10)"><em>type</em></a><em>]</em>) – <p>Some DICOM types have internal structure
 difficult to represent in a dataframe.
 These are filtered by default:</p>
 <ul>
 <li><p><a class="reference external" href="https://pydicom.github.io/pydicom/stable/reference/generated/pydicom.sequence.Sequence.html#pydicom.sequence.Sequence" title="(in pydicom v2.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a></p></li>
 <li><p><a class="reference external" href="https://pydicom.github.io/pydicom/stable/reference/generated/pydicom.multival.MultiValue.html#pydicom.multival.MultiValue" title="(in pydicom v2.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiValue</span></code></a></p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> (this is usually the
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> (this is usually the
 image data)</p></li>
 </ul>
 </p></li>
-<li><p><strong>date_fields</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – Fields that should be interpreted as having
+<li><p><strong>date_fields</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – Fields that should be interpreted as having
 date information in them.</p></li>
-<li><p><strong>time_fields</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – Fields that should be interpreted as having
+<li><p><strong>time_fields</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – Fields that should be interpreted as having
 time information in them.</p></li>
-<li><p><strong>exclude_fields</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em>) – Fields to exclude (in addition to those selected
+<li><p><strong>exclude_fields</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – Fields to exclude (in addition to those selected
 by <code class="code docutils literal notranslate"><span class="pre">exclude_field_types</span></code></p></li>
 </ul>
 </dd>
@@ -111,16 +111,16 @@ other reason.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.dicom_date_to_date">
 <span class="sig-name descname"><span class="pre">dicom_date_to_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.dicom_date_to_date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Utility method to help translate DICOM dates to <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
+<dd><p>Utility method to help translate DICOM dates to <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Date stored as a string in DICOM file.</p>
+<dd class="field-odd"><p><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Date stored as a string in DICOM file.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Python date object.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -129,7 +129,7 @@ other reason.</p>
 <dt class="sig sig-object py" id="cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.dicom_time_to_time">
 <span class="sig-name descname"><span class="pre">dicom_time_to_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.dicom_time_to_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Utility method to help translate DICOM date and time objects to python
-<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>.</p>
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This isn’t implemented yet.  Needs research on DICOM time
@@ -137,13 +137,13 @@ representation.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Date and time stored in DICOM as a string.</p>
+<dd class="field-odd"><p><strong>source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Date and time stored in DICOM as a string.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Python’s datetime object.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -158,7 +158,7 @@ representation.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Source</span></code>) – A source generator.  For extended explanation see
 <code class="xref py py-class docutils literal notranslate"><span class="pre">Source</span></code>.</p></li>
-<li><p><strong>destination</strong> (Compatible with <a class="reference external" href="https://docs.python.org/3/library/os.path.html#os.path.join" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.join()</span></code></a>) – The name of the directory where JPG files
+<li><p><strong>destination</strong> (Compatible with <a class="reference external" href="https://docs.python.org/3/library/os.path.html#os.path.join" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.join()</span></code></a>) – The name of the directory where JPG files
 should be stored.</p></li>
 </ul>
 </dd>
@@ -196,15 +196,15 @@ an out put directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dicom_folder_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – dicomfile_directory, directory with dicom/.dcm</p></li>
-<li><p><strong>jpg_folder_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – output_directory, where they should be placed</p></li>
+<li><p><strong>dicom_folder_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – dicomfile_directory, directory with dicom/.dcm</p></li>
+<li><p><strong>jpg_folder_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – output_directory, where they should be placed</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>love (will put your images in the new folder but not return them)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -260,7 +260,7 @@ an out put directory.</p>
         <li class="right" >
           <a href="cleanX.dicom_processing.html" title="cleanX.dicom_processing package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="cleanX.html" >cleanX package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cleanX.dicom_processing.html" >cleanX.dicom_processing package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cleanX.dicom_processing.pydicom_adapter module</a></li> 

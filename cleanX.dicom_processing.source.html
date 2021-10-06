@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>cleanX.dicom_processing.source module &#8212; cleanX 0.1.11 documentation</title>
+    <title>cleanX.dicom_processing.source module &#8212; cleanX 0.1.12 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -33,7 +33,7 @@
         <li class="right" >
           <a href="cleanX.dicom_processing.simpleitk_adapter.html" title="cleanX.dicom_processing.simpleitk_adapter module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="cleanX.html" >cleanX package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cleanX.dicom_processing.html" accesskey="U">cleanX.dicom_processing package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cleanX.dicom_processing.source module</a></li> 
@@ -50,7 +50,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.Source">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">Source</span></span><a class="headerlink" href="#cleanX.dicom_processing.source.Source" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>This class is provided as a helper for those who want to implement
 their own sources.</p>
 <p>It is not necessary to extend this class.  cleanX code doesn’t do
@@ -93,7 +93,7 @@ in the source column of the resulting DataFrame</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.DirectorySource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">DirectorySource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.DirectorySource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Class to aid reading DICOMs, package agnostically</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.DirectorySource.__init__">
@@ -115,7 +115,7 @@ in the source column of the resulting DataFrame</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.GlobSource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">GlobSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.GlobSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Class to aid finding files from path (for later reading out DICOM)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.GlobSource.__init__">
@@ -137,7 +137,7 @@ in the source column of the resulting DataFrame</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.MultiSource">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">MultiSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.MultiSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.MultiSource.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.MultiSource.__init__" title="Permalink to this definition">¶</a></dt>
@@ -211,7 +211,7 @@ in the source column of the resulting DataFrame</p></li>
         <li class="right" >
           <a href="cleanX.dicom_processing.simpleitk_adapter.html" title="cleanX.dicom_processing.simpleitk_adapter module"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="cleanX.html" >cleanX package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cleanX.dicom_processing.html" >cleanX.dicom_processing package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cleanX.dicom_processing.source module</a></li> 
