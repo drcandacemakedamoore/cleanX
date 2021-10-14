@@ -1,104 +1,39 @@
-<p align="center">
-<img style="width: 30%; height: 30%" src="https://github.com/drcandacemakedamoore/cleanX/blob/main/test/cleanXpic.png">
-</p>
-
-# cleanX
-
- <a href="https://doi.org/10.5281/zenodo.4725904"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg" alt="(DOI)"></a> <a href="https://github.com/drcandacemakedamoore/cleanX/blob/master/LICENSE"><img alt="License: GPL-3" src="https://img.shields.io/github/license/drcandacemakedamoore/cleanX"></a>[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/license.svg)](https://anaconda.org/doctormakeda/cleanx)  <a href="https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a"><img src="https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a/status.svg"></a> [![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/platforms.svg)](https://anaconda.org/doctormakeda/cleanx) <a href="https://pypi.org/project/cleanX/"><img alt="PyPI" src="https://img.shields.io/pypi/v/cleanX"></a>  [![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/version.svg)](https://anaconda.org/doctormakeda/cleanx) [![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml) [![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml)
-
-
-CleanX is an open source  python library for exploring, cleaning and augmenting large datasets of X-rays, or certain other types of radiological images.
-JPEG files can be extracted from [DICOM](https://www.dicomstandard.org/) files or used directly.
-
-
-
-### The latest official release:
-
-<a href="https://pypi.org/project/cleanX/"><img alt="PyPI" src="https://img.shields.io/pypi/v/cleanX"></a>
-[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/version.svg)](https://anaconda.org/doctormakeda/cleanx)
-
-
-primary author: Candace Makeda H. Moore
-
-other authors + contributors: Oleg Sivokon, Andrew Murphy
-
-## Continous Integration (CI) status
+![cleanX logo](https://github.com/drcandacemakedamoore/cleanX/blob/main/test/cleanXpic.png)
 
 [![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml)
 [![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml)
+[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/version.svg)](https://anaconda.org/doctormakeda/cleanx)
+[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/license.svg)](https://anaconda.org/doctormakeda/cleanx)
+[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/platforms.svg)](https://anaconda.org/doctormakeda/cleanx)
+[![JOSS Publication](https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a/status.svg)](https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a)
+[![PYPI Version](https://img.shields.io/pypi/v/cleanX.svg)](https://pypi.org/project/cleanX)
+[![License GPL-3](https://img.shields.io/github/license/drcandacemakedamoore/cleanX.svg)](https://raw.githubusercontent.com/drcandacemakedamoore/cleanX/main/LICENSE)
+[![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg)](https://doi.org/10.5281/zenodo.4725904)
+![GitHub Discussions](https://img.shields.io/github/discussions/drcandacemakedamoore/cleanX)
+**`Documentation`** |
+------------------- |
+[![Documentation](https://img.shields.io/static/v1?label=docs&message=release&color=green)](https://drcandacemakedamoore.github.io/cleanX) |
 
+# cleanX
+CleanX is an open source  python library for exploring, cleaning and augmenting large datasets of X-rays, or certain other types of radiological images.
+JPEG files can be extracted from [DICOM](https://www.dicomstandard.org/) files or used directly.
 
 ## Requirements
 
-- a [python](https://www.python.org/downloads/) installation (3.7, 3.8
-  or 3.9)
-- ability to create virtual environments (recommended, not absolutely
+- [Python](https://www.python.org/downloads/) >=3.7
+- Ability to create virtual environments (recommended, not absolutely
   necessary)
 - [`tesserocr`](https://github.com/sirfz/tesserocr),
   [`matplotlib`](https://matplotlib.org/),
   [`pandas`](https://pandas.pydata.org/),
   [`pillow`](https://python-pillow.org/) and
   [`opencv`](https://opencv.org/)
-- optional recommendation of [`SimpleITK`](https://simpleitk.org/) or
+- Optional recommendation of [`SimpleITK`](https://simpleitk.org/) or
   [`pydicom`](https://github.com/pydicom/pydicom) for DICOM/dcm to JPG
   conversion
 - Anaconda is now supported, but not technically necessary
 
-## Developer's Guide
-
-Please refer to [Developer's Giude](https://drcandacemakedamoore.github.io/cleanX/developers.html)
-for more detailed explanation.
-
-### Developing Using Anaconda's Python
-
-Use Git to check out the project's source, then, in the source
-directory run:
-
-```sh
-conda create -n cleanx
-conda activate -n cleanx
-python ./setup.py install_dev
-```
-
-You may have to do this for Python 3.7, Python 3.8 and Python 3.9 if
-you need to check that your changes will work in all supported
-versions.
-
-### Developing Using python.org's Python
-
-Use Git to check out the project's source, then in the source
-directory run:
-
-```sh
-python -m venv .venv
-. ./.venv/bin/activate
-python ./setup.py install_dev
-```
-
-Similar to `conda` based setup, you may have to use Python versions
-3.7, 3.8 and 3.9 to create three different environments to recreate
-our CI process.
-
 ### Supported Platforms
-
-`cleanX` package is a pure Python package, but it has many
-dependencies on native libraries.  We try to test it on as many
-platforms as we can to see if dependencies can be installed there.
-Below is the list of platforms that will potentially work.
-
-Whether python.org Python or Anaconda Python are supported, it means
-that version 3.7, 3.8 and 3.9 are supported.  We know for certain that
-3.6 is not supported, and there will be no support in the future.
-
-
-#### 32-bit Intell and ARM
-
-We don't know if either one of these is supported.  There's a good
-chance that 32-bit Intell will work.  There's a good chance that ARM
-won't.
-
-It's unlikely that the support will be added in the future.
-
 
 #### AMD64 (x86)
 
@@ -112,32 +47,6 @@ It's unlikely that the support will be added in the future.
 
 Seems to be unsupported at the moment on both Linux and OSX, but it's
 likely that support will be added in the future.
-
-
-## Documentation
-
-Online documentation at https://drcandacemakedamoore.github.io/cleanX/
-
-You can also build up-to-date documentation by command.
-
-Documentation can be generated by command:
-
-``` sh
-python setup.py apidoc
-python setup.py build_sphinx
-```
-
-The documentation will be generated in `./build/sphinx/html`
-directory. Documentation is generated automatically as new functions
-are added.
-
-Special additional documentation for medical professionals with
-limited programming ability is available on the wiki
-(https://github.com/drcandacemakedamoore/cleanX/wiki/Medical-professional-documentation).
-
-To get a high level overview of some of the functionality of the
-program you can look at the Jupyter notebooks inside workflow_demo.
-
 
 # Installation
 - setting up a virtual environment is desirable, but not absolutely
@@ -302,14 +211,68 @@ This will look for the files with `dcm` extension in
 `/path/to/dicoms/` and try to extract images found in those files,
 saving them in `extracted` directory.
 
+## Developer's Guide
+
+Please refer to [Developer's Giude](https://drcandacemakedamoore.github.io/cleanX/developers.html)
+for more detailed explanation.
+
+### Developing Using Anaconda's Python
+
+Use Git to check out the project's source, then, in the source
+directory run:
+
+```sh
+conda create -n cleanx
+conda activate -n cleanx
+python ./setup.py install_dev
+```
+
+You may have to do this for Python 3.7, Python 3.8 and Python 3.9 if
+you need to check that your changes will work in all supported
+versions.
+
+### Developing Using python.org's Python
+
+Use Git to check out the project's source, then in the source
+directory run:
+
+```sh
+python -m venv .venv
+. ./.venv/bin/activate
+python ./setup.py install_dev
+```
+
+Similar to `conda` based setup, you may have to use Python versions
+3.7, 3.8 and 3.9 to create three different environments to recreate
+our CI process.
+
+### Build up-to-date documentation
+
+Documentation can be generated by command:
+
+``` sh
+python setup.py apidoc
+python setup.py build_sphinx
+```
+
+The documentation will be generated in `./build/sphinx/html`
+directory. Documentation is generated automatically as new functions
+are added.
+
+Special additional documentation for medical professionals with
+limited programming ability is available on the wiki
+(https://github.com/drcandacemakedamoore/cleanX/wiki/Medical-professional-documentation).
+
+To get a high level overview of some of the functionality of the
+program you can look at the Jupyter notebooks inside workflow_demo.
+
+
 # About using this library
 
-If you use the library, please credit me and my collaborators.  You
-are only free to use this library according to license. We hope that
-if you use the library you will open source your entire code base, and
-send us modifications.  You can get in touch with me by starting a
-discussion
-(https://github.com/drcandacemakedamoore/cleanX/discussions/37) if you
+If you use the library, please cite the package.
+Only free to use this library according to license.
+
+You can get in touch with me by starting a [discussion](https://github.com/drcandacemakedamoore/cleanX/discussions/37) if you
 have a legitimate reason to use my library without open-sourcing your
 code base, or following other conditions, and I can make you
 specifically a different license.
@@ -344,4 +307,6 @@ All important functions are documented in the online documentation for
 programmers. You can also check out one of our videos by clicking the
 linked picture below:
 
-[![Video](https://raw.githubusercontent.com/drcandacemakedamoore/cleanX/main/test/cleanXpic.png)](https://youtu.be/jaX5tXmiWrQ)
+### cleanX: video demonstration
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/jaX5tXmiWrQ/0.jpg)](https://www.youtube.com/watch?v=jaX5tXmiWrQ)
