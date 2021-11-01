@@ -20,7 +20,8 @@ JPEG files can be extracted from [DICOM](https://www.dicomstandard.org/) files o
 
 ## Requirements
 
-- [Python](https://www.python.org/downloads/) >=3.7
+- [Python](https://www.python.org/downloads/) 3.7, 3.8, 3.9.  Python
+  3.10 has not been tested yet.
 - Ability to create virtual environments (recommended, not absolutely
   necessary)
 - [`tesserocr`](https://github.com/sirfz/tesserocr),
