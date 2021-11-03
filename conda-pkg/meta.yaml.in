@@ -24,6 +24,8 @@ requirements:
     - tesserocr
 
 test:
+  requires:
+    - python==${python_version}
   imports:
     - cleanX
 

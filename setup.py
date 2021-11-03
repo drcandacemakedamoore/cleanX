@@ -321,8 +321,18 @@ class Install(InstallCommand):
 
     def run(self):
         if os.environ.get('CONDA_DEFAULT_ENV'):
+            # Apparently, we need to specify this. You'd think that a
+            # sane package installer would leave your Python alone,
+            # and yet...
+            frozen = 'python={}.{}'.format(*sys.version_info[:2])
             packages = subprocess.check_output(['conda', 'list', '--export'])
-            cmd = ['conda', 'install', '-y', 'conda-build', 'conda-verify']
+            cmd = [
+                'conda',
+                'install', '-y',
+                'conda-build',
+                'conda-verify',
+                frozen,
+            ]
             for line in packages.split(b'\n'):
                 if line.startswith(b'conda-build='):
                     break
@@ -403,11 +413,13 @@ class InstallDev(Install):
     def run(self):
         super().run()
         if os.environ.get('CONDA_DEFAULT_ENV'):
+            frozen = 'python={}.{}'.format(*sys.version_info[:2])
             cmd = [
                 'conda',
                 'install',
                 '-c', 'conda-forge',
                 '-y',
+                frozen,
             ] + self.distribution.extras_require['dev']
             if subprocess.call(cmd):
                 raise RuntimeError('Couldn\'t install {} package'.format(name))
@@ -420,6 +432,7 @@ class InstallDev(Install):
             ezcmd.always_copy = True
             ezcmd.finalize_options()
             ezcmd.run()
+
 
 def install_requires():
     if os.environ.get('CONDA_DEFAULT_ENV'):
@@ -439,6 +452,28 @@ def install_requires():
         'tesserocr',
         'opencv-python',
         'pytz',
+    ]
+
+
+def dev_deps():
+    if os.environ.get('CONDA_DEFAULT_ENV'):
+        return [
+            'wheel',
+            'sphinx',
+            'pytest',
+            'pycodestyle',
+            'click',
+            'pydicom',
+            'SimpleITK',
+        ]
+    return [
+        'wheel',
+        'sphinx',
+        'pytest',
+        'codestyle',
+        'click',
+        'pydicom',
+        'SimpleITK',
     ]
 
 
@@ -490,15 +525,7 @@ if __name__ == '__main__':
             'cli': ['click'],
             'pydicom': ['pydicom'],
             'simpleitk': ['SimpleITK'],
-            'dev': [
-                'wheel',
-                'sphinx',
-                'pytest',
-                'codestyle',
-                'click',
-                'pydicom',
-                'SimpleITK',
-            ],
+            'dev': dev_deps(),
         },
         zip_safe=False,
     )
