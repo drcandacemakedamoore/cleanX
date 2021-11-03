@@ -224,13 +224,19 @@ directory run:
 
 ```sh
 conda create -n cleanx
-conda activate -n cleanx
+conda activate cleanx
+python ./setup.py genconda
 python ./setup.py install_dev
 ```
 
 You may have to do this for Python 3.7, Python 3.8 and Python 3.9 if
 you need to check that your changes will work in all supported
 versions.
+
+The `genconda` command needs to run only once per checkout and version
+of Python used.  At the moment, it's not possible to have multiple
+`conda` package configurations generated at the same time.  So, if you
+are switching Python versions, you will need to rerun this command.
 
 ### Developing Using python.org's Python
 
