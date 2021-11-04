@@ -440,3 +440,14 @@ def test_show_close_images(monkeypatch):
     # result of plt.show()
     monkeypatch.setattr(iwork.image_functions.plt, 'show', lambda: None)
     iwork.show_close_images(image_directory, 2, 190)
+
+def test_image_to_histo(image):
+    outpic = cv2.imread('testtocrop.jpg')
+    hist = iwork.image_to_histo(outpic)
+    assert len(hist) > 0
+
+def black_end_ratio(image_array):
+    outpic = cv2.imread('testtocrop.jpg')
+    hist = iwork.black_end_ratio(outpic)
+    assert hist > 0
+
