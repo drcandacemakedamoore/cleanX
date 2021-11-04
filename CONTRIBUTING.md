@@ -24,5 +24,5 @@ Dicoogle or Othanc, please keep us updated on any progress!
 ## Urgent Non-Developer/No Code Contributions: 
 We continue to add documentation for professionals who are not primarily programmers.
 If you want to contribute to helping us understand the needs of people who do not
-want to code, but do want to develop AI for chest X-rays drop me an email 
+want to code a lot, but do want to develop AI for chest X-rays drop me an email 
 (doctormakeda@gmail.com).  
