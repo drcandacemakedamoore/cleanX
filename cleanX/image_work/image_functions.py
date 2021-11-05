@@ -1818,11 +1818,17 @@ def show_close_images(folder, compression_level, ref_mse, plot_limit=20):
 
 
 def image_to_histo(image):
-    """This is a small helper function that makes returns the arrray of an
-    image histogram
     """
-    histogram, bin_edges = np.histogram(image, bins=256, range=(0, 255))
-    return histogram
+    This is a small helper function that makes returns the arrray of an
+    image histogram
+    :param image: the image as an array (not filename)
+    :type image: array
+
+    :return: histogram
+    :rtype: float
+    """
+    histogram = np.histogram(image, bins=256, range=(0, 255))
+    return histogram[0]
 
 
 def black_end_ratio(image_array):
