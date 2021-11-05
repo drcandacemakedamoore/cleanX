@@ -49,7 +49,7 @@ from .image_functions import (
     show_close_images,
     find_close_images,
     image_to_histo,
-    black_end_ratio
+    black_end_ratio,
 
     Rotator,
 )
