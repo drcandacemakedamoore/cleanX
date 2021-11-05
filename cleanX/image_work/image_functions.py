@@ -1816,6 +1816,7 @@ def show_close_images(folder, compression_level, ref_mse, plot_limit=20):
             axarr[1].axis('off')
     plt.show()
 
+
 def image_to_histo(image):
     """This is a small helper function that makes returns the arrray of an
     image histogram
@@ -1823,18 +1824,19 @@ def image_to_histo(image):
     histogram, bin_edges = np.histogram(image, bins=256, range=(0, 255))
     return histogram
 
+
 def black_end_ratio(image_array):
     """
     This is a function to assess a specific parameter of image quality.
     The parameter checked is whether there are enough very dark/black pixels.
-    In a normal chest X-ray we would expect black 
+    In a normal chest X-ray we would expect black
     around the neck, and therefore have a lot of those low values.
     If the image was shot without the neck, we will assume poor technique (note
     in some theoretical cases this technique might have been requested,
     but it is not standard at ALL)
     If the ratio is below 0.3, you have a chestX-ray that is unusal in value
     distributions, and in 9.9/10 cases one shot with poor technique.
-    The images MUST be cropped of any frames and normalized to 0-255. 
+    The images MUST be cropped of any frames and normalized to 0-255.
 
     :param image_array: the image as an array
     :type image_array: array
@@ -1847,6 +1849,6 @@ def black_end_ratio(image_array):
     mid_2 = image_to_histo(image_array)[101:150].sum()
     mid_3 = image_to_histo(image_array)[151:200].sum()
     ender = image_to_histo(image_array)[200:255].sum()
-    ratio = low_end/np.mean([mid_1,mid_2,mid_3,ender])
+    ratio = low_end/np.mean([mid_1, mid_2, mid_3, ender])
     return ratio
-    
+
