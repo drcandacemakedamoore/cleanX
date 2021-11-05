@@ -444,7 +444,7 @@ def test_show_close_images(monkeypatch):
 def test_image_to_histo():
     outpic = cv2.imread('testtocrop.jpg')
     hist = iwork.image_to_histo(outpic)
-    assert type(hist) > np.ndarray
+    assert type(hist) is np.ndarray
 
 def black_end_ratio():
     outpic = cv2.imread('testtocrop.jpg')
