@@ -1851,4 +1851,3 @@ def black_end_ratio(image_array):
     ender = image_to_histo(image_array)[200:255].sum()
     ratio = low_end/np.mean([mid_1, mid_2, mid_3, ender])
     return ratio
-
