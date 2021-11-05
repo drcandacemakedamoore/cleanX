@@ -1,22 +1,43 @@
-![cleanX logo](https://github.com/drcandacemakedamoore/cleanX/blob/main/test/cleanXpic.png)
+<p align="center">
+    <img style="width: 30%; height: 30%"
+        src="https://github.com/drcandacemakedamoore/cleanX/blob/main/test/cleanXpic.png">
+</p>
 
+[![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg)](https://doi.org/10.5281/zenodo.4725904)
+[![License GPL-3](https://img.shields.io/github/license/drcandacemakedamoore/cleanX.svg)](https://raw.githubusercontent.com/drcandacemakedamoore/cleanX/main/LICENSE)
+[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/license.svg)](https://anaconda.org/doctormakeda/cleanx)
+[![JOSS Publication](https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a/status.svg)](https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a)
+[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/platforms.svg)](https://anaconda.org/doctormakeda/cleanx)
+[![PYPI Version](https://img.shields.io/pypi/v/cleanX.svg)](https://pypi.org/project/cleanX)
+[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/version.svg)](https://anaconda.org/doctormakeda/cleanx)
 [![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml)
 [![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml)
-[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/version.svg)](https://anaconda.org/doctormakeda/cleanx)
-[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/license.svg)](https://anaconda.org/doctormakeda/cleanx)
-[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/platforms.svg)](https://anaconda.org/doctormakeda/cleanx)
-[![JOSS Publication](https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a/status.svg)](https://joss.theoj.org/papers/47ee52ff835dcd67c1f0b4c9cb74225a)
+
+
+CleanX is an open source python library for exploring, cleaning and
+augmenting large datasets of X-rays, or certain other types of
+radiological images.  JPEG files can be extracted from
+[DICOM](https://www.dicomstandard.org/) files or used directly.
+
+
+### The latest official release:
+
 [![PYPI Version](https://img.shields.io/pypi/v/cleanX.svg)](https://pypi.org/project/cleanX)
-[![License GPL-3](https://img.shields.io/github/license/drcandacemakedamoore/cleanX.svg)](https://raw.githubusercontent.com/drcandacemakedamoore/cleanX/main/LICENSE)
-[![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg)](https://doi.org/10.5281/zenodo.4725904)
-![GitHub Discussions](https://img.shields.io/github/discussions/drcandacemakedamoore/cleanX)
-**`Documentation`** |
-------------------- |
-[![Documentation](https://img.shields.io/static/v1?label=docs&message=release&color=green)](https://drcandacemakedamoore.github.io/cleanX) |
+[![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/version.svg)](https://anaconda.org/doctormakeda/cleanx)
+
+Primary author: Candace Makeda H. Moore
+
+Other authors and contributors: Oleg Sivokon, Andrew Murphy
+
+### Documentation
+[![Documentation](https://img.shields.io/static/v1?label=docs&message=release&color=green)](https://drcandacemakedamoore.github.io/cleanX)
 
 # cleanX
-CleanX is an open source  python library for exploring, cleaning and augmenting large datasets of X-rays, or certain other types of radiological images.
-JPEG files can be extracted from [DICOM](https://www.dicomstandard.org/) files or used directly.
+
+CleanX is an open source python library for exploring, cleaning and
+augmenting large datasets of X-rays, or certain other types of
+radiological images.  JPEG files can be extracted from
+[DICOM](https://www.dicomstandard.org/) files or used directly.
 
 ## Requirements
 
