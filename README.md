@@ -21,7 +21,7 @@
 CleanX is an open source python library for exploring, cleaning and augmenting
 large datasets of X-rays, or certain other types of radiological images.  JPEG
 files can be extracted from [DICOM](https://www.dicomstandard.org/) files or
-used directly.The primary authors are Candace Makeda H. Moore, Oleg Sivokon,
+used directly. The primary authors are Candace Makeda H. Moore, Oleg Sivokon,
 and Andrew Murphy.
 
 
@@ -30,7 +30,7 @@ and Andrew Murphy.
 [![PYPI Version](https://img.shields.io/pypi/v/cleanX.svg)](https://pypi.org/project/cleanX)
 [![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/version.svg)](https://anaconda.org/doctormakeda/cleanx)
 
-### Continous Integration (CI) status
+### Continuous Integration (CI) status
 
 [![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml)
 [![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml)
@@ -231,7 +231,7 @@ example.
 And for the DICOM extraction we might use similar code:
 
 ``` python
-imort os
+import os
 
 from cleanX.dicom_processing import DicomReader, DirectorySource
 
@@ -248,7 +248,7 @@ saving them in `extracted` directory.
 
 ## Developer's Guide
 
-Please refer to [Developer's Giude](https://drcandacemakedamoore.github.io/cleanX/developers.html)
+Please refer to [Developer's Guide](https://drcandacemakedamoore.github.io/cleanX/developers.html)
 for more detailed explanation.
 
 ### Developing Using Anaconda's Python
