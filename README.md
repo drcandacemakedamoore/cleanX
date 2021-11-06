@@ -27,15 +27,14 @@ directly. The primary authors are Candace Makeda H. Moore, Oleg Sivokon, and And
 ### Documentation
 
 Online documentation at https://drcandacemakedamoore.github.io/cleanX/
-You can also build up-to-date documentation by command as follows:
+You can also build up-to-date documentation, which will be generated in ./build/sphinx/html directory, by command as follows:
 
 
     python setup.py apidoc    
     python setup.py build_sphinx
 
-The documentation will be generated in ./build/sphinx/html directory. 
 
-Special additional documentation for medical professionals with limited programming ability is available on the wiki (https://github.com/drcandacemakedamoore/cleanX/wiki/Legacy-medical-professional-documentation). To get a high level overview of some of the functionality of the program you can look at the Jupyter notebooks inside workflow_demo folder.
+Special additional documentation for medical professionals with limited programming ability is available [here](https://github.com/drcandacemakedamoore/cleanX/wiki/Legacy-medical-professional-documentation) on the project wiki. To get a high level overview of some of the functionality of the program you can look at the Jupyter notebooks inside [workflow_demo folder](https://github.com/drcandacemakedamoore/cleanX/tree/main/workflow_demo).
 
 ## Requirements
 
