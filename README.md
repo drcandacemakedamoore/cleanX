@@ -70,6 +70,12 @@ Special additional documentation for medical professionals with limited programm
 
 ### Supported Platforms
 
+cleanX is a pure Python package, but it has many dependencies on native libraries.
+We try to test it on as many platforms as we can to see if dependencies can be installed there.
+Below is the list of platforms that will potentially work.
+
+Where python.org Python or Anaconda Python are supported, it means that versions 3.7, 3.8 and 3.9 (but not 3.10) are supported.
+
 #### AMD64 (x86)
 
 |                             | Linux     | Win       | OSX       |
