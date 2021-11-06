@@ -19,10 +19,9 @@
 
 
 CleanX is an open source python library for exploring, cleaning and augmenting
-large datasets of X-rays, or certain other types of radiological images.  JPEG
-files can be extracted from [DICOM](https://www.dicomstandard.org/) files or
-used directly. The primary authors are Candace Makeda H. Moore, Oleg Sivokon,
-and Andrew Murphy.
+large datasets of X-rays, or certain other types of radiological images.  The images
+can be extracted from [DICOM](https://www.dicomstandard.org/) files or used 
+directly. The primary authors are Candace Makeda H. Moore, Oleg Sivokon, and Andrew Murphy.
 
 
 ### The latest official release:
@@ -72,9 +71,8 @@ Special additional documentation for medical professionals with limited programm
 
 cleanX is a pure Python package, but it has many dependencies on native libraries.
 We try to test it on as many platforms as we can to see if dependencies can be installed there.
-Below is the list of platforms that will potentially work.
-
-Where python.org Python or Anaconda Python are supported, it means that versions 3.7, 3.8 and 3.9 (but not 3.10) are supported.
+Below is the list of platforms that will potentially work. Please note that where python.org Python
+or Anaconda Python stated as supported, it means that versions 3.7, 3.8 and 3.9 (but not 3.10) are supported.
 
 #### AMD64 (x86)
 
@@ -86,8 +84,13 @@ Where python.org Python or Anaconda Python are supported, it means that versions
 
 #### ARM64
 
-Seems to be unsupported at the moment on both Linux and OSX, but it's
-likely that support will be added in the future.
+Unsupported at the moment on both Linux and OSX, but it's likely that support will be added in the future.
+
+#### 32-bit Intell and ARM
+
+We don't know if either one of these is supported. There's a good chance that 32-bit Intell will work. There's a good chance that ARM won't.
+
+It's unlikely that the support will be added in the future.
 
 ## Installation
 - setting up a virtual environment is desirable, but not absolutely
