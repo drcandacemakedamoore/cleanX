@@ -24,9 +24,9 @@ can be extracted from [DICOM](https://www.dicomstandard.org/) files or used
 directly. The primary authors are Candace Makeda H. Moore, Oleg Sivokon, and Andrew Murphy.
 
 
-### Documentation
+## Documentation
 
-Online documentation at https://drcandacemakedamoore.github.io/cleanX/
+Online documentation is at https://drcandacemakedamoore.github.io/cleanX/.
 You can also build up-to-date documentation, which will be generated in ./build/sphinx/html directory, by command as follows:
 
 
