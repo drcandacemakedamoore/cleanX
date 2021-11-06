@@ -73,9 +73,7 @@ Unsupported at the moment on both Linux and OSX, but it's likely that support wi
 
 #### 32-bit Intell and ARM
 
-We don't know if either one of these is supported. There's a good chance that 32-bit Intell will work. There's a good chance that ARM won't.
-
-It's unlikely that the support will be added in the future.
+We don't know if either one of these is supported. There's a good chance that 32-bit Intell will work. There's a good chance that ARM won't. It's unlikely that the support for ARM will be added in the future.
 
 ## Installation
 - setting up a virtual environment is desirable, but not absolutely
@@ -109,7 +107,7 @@ pip install cleanX
 
 We will imagine a very simple scenario, where we need to automate
 normalization of the images we have.  We stored the images in
-directory `/images/to/clean/` and they all have `jpg` extension.  We
+directory `/images/to/clean/` and they all have a `jpg` extension.  We
 want the cleaned images to be saved in the `cleaned` directory.
 
 Normalization here means ensuring that the lowest pixel value (the
