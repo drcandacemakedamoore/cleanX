@@ -15,6 +15,8 @@
 [![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml)
 [![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml)
 [![Documentation](https://img.shields.io/static/v1?label=docs&message=release&color=green)](https://drcandacemakedamoore.github.io/cleanX)
+[![GitHub issues](https://img.shields.io/github/issues/drcandacemakedamoore/cleanX)](https://github.com/drcandacemakedamoore/cleanX/issues)
+[![GitHub Discussions](https://img.shields.io/github/discussions/drcandacemakedamoore/cleanX)](https://github.com/drcandacemakedamoore/cleanX/discussions)
 
 
 
