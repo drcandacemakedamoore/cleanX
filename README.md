@@ -21,15 +21,21 @@ augmenting large datasets of X-rays, or certain other types of
 radiological images.  JPEG files can be extracted from
 [DICOM](https://www.dicomstandard.org/) files or used directly.
 
+Primary authors: Candace Makeda H. Moore, Oleg Sivokon, Andrew Murphy
+
 
 ### The latest official release:
 
 [![PYPI Version](https://img.shields.io/pypi/v/cleanX.svg)](https://pypi.org/project/cleanX)
 [![Anaconda-Server Badge](https://anaconda.org/doctormakeda/cleanx/badges/version.svg)](https://anaconda.org/doctormakeda/cleanx)
 
-Primary authors: Candace Makeda H. Moore, Oleg Sivokon, Andrew Murphy
+### Continous Integration (CI) status
+
+[![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-commit.yml)
+[![Sanity](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml/badge.svg)](https://github.com/drcandacemakedamoore/cleanX/actions/workflows/on-tag.yml)
 
 ### Documentation
+
 [![Documentation](https://img.shields.io/static/v1?label=docs&message=release&color=green)](https://drcandacemakedamoore.github.io/cleanX)
 
 Online documentation at https://drcandacemakedamoore.github.io/cleanX/
