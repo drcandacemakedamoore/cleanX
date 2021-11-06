@@ -83,14 +83,14 @@ Special additional documentation for medical professionals with limited programm
 Seems to be unsupported at the moment on both Linux and OSX, but it's
 likely that support will be added in the future.
 
-# Installation
+## Installation
 - setting up a virtual environment is desirable, but not absolutely
   necessary
 
 - activate  the environment
 
 
-## Anaconda Installation
+### Anaconda Installation
 
 - use command for conda as below
 
@@ -103,7 +103,7 @@ dependencies that exist in both Anaconda main channel and in
 conda-forge
 
 
-## pip installation
+### pip installation
 
 - use pip as below
 
@@ -111,7 +111,7 @@ conda-forge
 pip install cleanX
 ```
 
-# Getting Started
+## Getting Started
 
 We will imagine a very simple scenario, where we need to automate
 normalization of the images we have.  We stored the images in
@@ -122,7 +122,7 @@ Normalization here means ensuring that the lowest pixel value (the
 darkest part of the image) is as dark as possible and that the
 lightest part of the image is as light as possible.
 
-## CLI Example
+### CLI Example
 
 The problem above doesn't require writing any new Python code.  We can
 accomplish our task by calling the `cleanX` command like this:
@@ -131,7 +131,7 @@ accomplish our task by calling the `cleanX` command like this:
 mkdir cleaned
 
 python -m cleanX images run-pipeline \
-    -s Acqure \
+    -s Acquire \
     -s Normalize \
     -s "Save(target='cleaned')" \
     -j \
@@ -188,7 +188,7 @@ If you have any problems with this check
 issues or discussions.
 
 
-## Coding Example
+### Coding Example
 
 Below is the equivalent code in Python:
 
@@ -308,7 +308,7 @@ To get a high level overview of some of the functionality of the
 program you can look at the Jupyter notebooks inside workflow_demo.
 
 
-# About using this library
+## About using this library
 
 If you use the library, please cite the package.
 CleanX is free ONLY when used according to license.
