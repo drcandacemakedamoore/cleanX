@@ -227,7 +227,7 @@ class Salt(Step):
             iterations=self.dilation_iterations,
         )
         salty_noised = (image_data + (erosion - dilation))
-        return salty_noised
+        return salty_noised, None
 
 
 class Normalize(Step):
