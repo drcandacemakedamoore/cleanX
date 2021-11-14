@@ -197,6 +197,7 @@ class Crop(Step):
         # Unfinished
 #     def apply(self, image_data):
 
+
 class Salt(Step):
     """This class takes the image and applies the salting function
     (augments with noise). In present version reccomended to run on copies.
@@ -204,7 +205,7 @@ class Salt(Step):
 
     def __init__(
         self,
-        kernel=(5,5),
+        kernel=(5, 5),
         erosion_interations=90,
         dilation_iterations=10,
         cache_dir=None,
@@ -227,6 +228,7 @@ class Salt(Step):
         )
         salty_noised = (image_data + (erosion - dilation))
         return salty_noised
+
 
 class Normalize(Step):
     """This class makes a simple normalizing to get values 0 to 255."""
