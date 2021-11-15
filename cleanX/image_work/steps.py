@@ -234,7 +234,7 @@ class Sharpie(Step):
     """This class takes the image and applies a variant of thethe subtle
     sharpie  function, but with control over the degree. In present version,
     it is reccomended to run on copies.
-    In future versions can be run after a Tee step. For a subtle sharpening 
+    In future versions can be run after a Tee step. For a subtle sharpening
     a ksize of (2,2) is reccomended"""
 
     def __init__(
@@ -246,7 +246,7 @@ class Sharpie(Step):
         self.ksize = ksize
 
     def apply(self, image_data):
-        blur_mask = cv2.blur(image_data, ksize=self.ksize )
+        blur_mask = cv2.blur(image_data, ksize=self.ksize)
         new_image_array = 2 * image_data - blur_mask
         return new_image_array, None
 
@@ -285,7 +285,6 @@ class BlurEdges(Step):
         return edge_image, None
 
 
-
 class Rotate(Step):
     """This class takes the image and applies a rotation  function,
     with control over the degree. In present version, it is reccomended to run
@@ -300,9 +299,9 @@ class Rotate(Step):
         self.angle = angle
 
     def apply(self, image_data):
-        rotated1 = image_data.rotate(angle =self.angle)
+        rotated1 = image_data.rotate(angle=self.angle)
         return rotated1, None
-       
+
 
 class Normalize(Step):
     """This class makes a simple normalizing to get values 0 to 255."""
