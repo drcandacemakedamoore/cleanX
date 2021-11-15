@@ -205,17 +205,17 @@ class Crop(Step):
 #     
 #     In future versions should be be run after a Tee step"""
 
-#     def __init__(
-#         self,
-#         kernel=(5, 5),
-#         erosion_interations=90,
-#         dilation_iterations=10,
-#         cache_dir=None,
-#     ):
-#         super().__init__(cache_dir)
-#         self.kernel = kernel
-#         self.erosion_iterations = erosion_interations
-#         self.dilation_iterations = dilation_iterations
+    def __init__(
+        self,
+        kernel=(5, 5),
+        erosion_iterations=90,
+        dilation_iterations=10,
+        cache_dir=None,
+    ):
+        super().__init__(cache_dir)
+        self.kernel = kernel
+        self.erosion_iterations = erosion_iterations
+        self.dilation_iterations = dilation_iterations
 
 #     def apply(self, image_data):
 #         erosion = cv2.erode(
@@ -230,6 +230,14 @@ class Crop(Step):
 #         )
 #         salty_noised = (image_data + (erosion - dilation))
 #         return salty_noised, None
+
+    def __reduce__(self):
+        return self.__class__, (
+            self.kernel,
+            self.erosion_interations,
+            self.dilation_iterations,
+            self.cache_dir,
+        )
 
 
 class Sharpie(Step):
@@ -252,6 +260,12 @@ class Sharpie(Step):
         blur_mask = cv2.blur(image_data, ksize=self.ksize)
         new_image_array = 2 * image_data - blur_mask
         return new_image_array, None
+
+    def __reduce__(self):
+        return self.__class__, (
+            self.ksize,
+            self.cache_dir,
+        )
 
 
 class BlurEdges(Step):
@@ -286,6 +300,12 @@ class BlurEdges(Step):
         filtered = cv2.blur(image_data, ksize)
         edge_image = image_data * (msk / 255) + filtered * ((255 - msk) / 255)
         return edge_image, None
+
+    def __reduce__(self):
+        return self.__class__, (
+            self.ksize,
+            self.cache_dir,
+        )
 
 
 # class Rotate(Step):

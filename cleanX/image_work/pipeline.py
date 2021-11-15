@@ -233,6 +233,7 @@ class Pipeline:
         """
         :meta private:
         """
+        print('applying step', step)
         # Forking only works on Linux.  The garbage that Python
         # multiprocessing is it requires a lot of workarounds...
         ctx = multiprocessing.get_context('spawn')
