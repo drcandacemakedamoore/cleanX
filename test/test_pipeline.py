@@ -48,7 +48,6 @@ def test_alter_images():
         src = DirectorySource(src_dir)
         p = create_pipeline(steps=(
             Acquire(),
-            Salt(),
             BlurEdges(),
             Sharpie(),
             Save(td),
