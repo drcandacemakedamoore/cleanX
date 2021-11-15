@@ -235,7 +235,8 @@ class Sharpie(Step):
     sharpie  function, but with control over the degree. In present version,
     it is reccomended to run on copies.
     In future versions can be run after a Tee step. For a subtle sharpening
-    a ksize of (2,2) is reccomended"""
+    a ksize of (2,2) is reccomended, and a run of normalization afterwards is 
+    highly reccomended (or you may get vals over 255 for whites)"""
 
     def __init__(
         self,
@@ -285,22 +286,26 @@ class BlurEdges(Step):
         return edge_image, None
 
 
-class Rotate(Step):
-    """This class takes the image and applies a rotation  function,
-    with control over the degree. In present version, it is reccomended to run
-    on copies. In future versions can be run after a Tee step. """
+# class Rotate(Step):
+#     """This class takes the image and applies a rotation  function,
+#     with control over the degree. In present version, it is reccomended to 
+#     run on copies. In future versions can be run after a Tee step.
+#     UNDER DEVELOPMENT """
 
-    def __init__(
-        self,
-        angle=2,
-        cache_dir=None,
-    ):
-        super().__init__(cache_dir)
-        self.angle = angle
+#     def __init__(
+#         self,
+#         angle=2,
+#         center=
+#         scale=
+#         cache_dir=None,
+#     ):
+#         super().__init__(cache_dir)
+#         self.angle = angle
 
-    def apply(self, image_data):
-        rotated1 = image_data.rotate(angle=self.angle)
-        return rotated1, None
+#     def apply(self, image_data):
+#         matrix = cv2.getRotationMatrix2D(self.center, angle, self.scale)
+#         rotated = cv2.warpAffine(image_data, matrix, (image_data.shape[0], image_data.shape[1]))
+#         return rotated, None
 
 
 class Normalize(Step):

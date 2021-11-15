@@ -68,6 +68,10 @@ from .steps import (
     Crop,
     Normalize,
     HistogramNormalize,
+    Sharpie,
+    Salt,
+    BlurEdges,
+    Rotate,
 )
 
 
