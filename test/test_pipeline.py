@@ -12,8 +12,6 @@ from cleanX.image_work import (
     Acquire,
     Save,
     DirectorySource,
-    Step,
-    Salt,
     BlurEdges,
     Sharpie,
     PipelineError,
