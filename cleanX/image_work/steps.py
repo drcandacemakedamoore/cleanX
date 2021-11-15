@@ -202,21 +202,19 @@ class Crop(Step):
 #     """This class is currently canceled. It was to take the image and apply
 #      the salting function (augments with noise). In present version there
 #     seems to be a problem with mutex and cv2- UNDER investigation.
-#
 #     In future versions should be be run after a Tee step"""
 
-
-    def __init__(
-        self,
-        kernel=(5, 5),
-        erosion_iterations=90,
-        dilation_iterations=10,
-        cache_dir=None,
-    ):
-        super().__init__(cache_dir)
-        self.kernel = kernel
-        self.erosion_iterations = erosion_iterations
-        self.dilation_iterations = dilation_iterations
+    # def __init__(
+    #     self,
+    #     kernel=(5, 5),
+    #     erosion_iterations=90,
+    #     dilation_iterations=10,
+    #     cache_dir=None,
+    # ):
+    #     super().__init__(cache_dir)
+    #     self.kernel = kernel
+    #     self.erosion_iterations = erosion_iterations
+    #     self.dilation_iterations = dilation_iterations
 
 #     def apply(self, image_data):
 #         erosion = cv2.erode(
@@ -232,13 +230,13 @@ class Crop(Step):
 #         salty_noised = (image_data + (erosion - dilation))
 #         return salty_noised, None
 
-    def __reduce__(self):
-        return self.__class__, (
-            self.kernel,
-            self.erosion_interations,
-            self.dilation_iterations,
-            self.cache_dir,
-        )
+    # def __reduce__(self):
+    #     return self.__class__, (
+    #         self.kernel,
+    #         self.erosion_interations,
+    #         self.dilation_iterations,
+    #         self.cache_dir,
+    #     )
 
 
 class Sharpie(Step):
