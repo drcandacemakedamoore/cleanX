@@ -71,7 +71,6 @@ from .steps import (
     Sharpie,
     Salt,
     BlurEdges,
-    Rotate,
 )
 
 
