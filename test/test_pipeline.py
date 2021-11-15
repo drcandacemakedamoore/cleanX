@@ -13,6 +13,9 @@ from cleanX.image_work import (
     Save,
     DirectorySource,
     Step,
+    Salt,
+    BlurEdges,
+    Sharpie,
     PipelineError,
 )
 
@@ -39,6 +42,21 @@ def test_copy_images():
         dst_files = set(os.listdir(td))
         assert src_files == dst_files
 
+def test_alter_images():
+    src_dir = image_directory
+    with TemporaryDirectory() as td:
+        src = DirectorySource(src_dir)
+        p = create_pipeline(steps=(
+            Acquire(),
+            Salt(),
+            BlurEdges(),
+            Sharpie(),
+            Save(td),
+        ))
+        p.process(src)
+        src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
+        dst_files = set(os.listdir(td))
+        assert src_files == dst_files
 
 def test_journaling_pipeline():
     src_dir = image_directory
