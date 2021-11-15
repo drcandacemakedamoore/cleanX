@@ -69,7 +69,6 @@ from .steps import (
     Normalize,
     HistogramNormalize,
     Sharpie,
-    Salt,
     BlurEdges,
 )
 

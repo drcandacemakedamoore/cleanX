@@ -198,36 +198,38 @@ class Crop(Step):
 #     def apply(self, image_data):
 
 
-class Salt(Step):
-    """This class takes the image and applies the salting function
-    (augments with noise). In present version reccomended to run on copies.
-    In future versions can be run after a Tee step"""
+# class Salt(Step):
+#     """This class is currently canceled. It was to take the image and apply
+#      the salting function (augments with noise). In present version there
+#     seems to be a problem with mutex and cv2- UNDER investigation.
+#     
+#     In future versions should be be run after a Tee step"""
 
-    def __init__(
-        self,
-        kernel=(5, 5),
-        erosion_interations=90,
-        dilation_iterations=10,
-        cache_dir=None,
-    ):
-        super().__init__(cache_dir)
-        self.kernel = kernel
-        self.erosion_iterations = erosion_interations
-        self.dilation_iterations = dilation_iterations
+#     def __init__(
+#         self,
+#         kernel=(5, 5),
+#         erosion_interations=90,
+#         dilation_iterations=10,
+#         cache_dir=None,
+#     ):
+#         super().__init__(cache_dir)
+#         self.kernel = kernel
+#         self.erosion_iterations = erosion_interations
+#         self.dilation_iterations = dilation_iterations
 
-    def apply(self, image_data):
-        erosion = cv2.erode(
-            image_data,
-            self.kernel,
-            iterations=self.erosion_iterations,
-        )
-        dilation = cv2.dilate(
-            erosion,
-            self.kernel,
-            iterations=self.dilation_iterations,
-        )
-        salty_noised = (image_data + (erosion - dilation))
-        return salty_noised, None
+#     def apply(self, image_data):
+#         erosion = cv2.erode(
+#             image_data,
+#             self.kernel,
+#             iterations=self.erosion_iterations,
+#         )
+#         dilation = cv2.dilate(
+#             erosion,
+#             self.kernel,
+#             iterations=self.dilation_iterations,
+#         )
+#         salty_noised = (image_data + (erosion - dilation))
+#         return salty_noised, None
 
 
 class Sharpie(Step):
