@@ -230,6 +230,80 @@ class Salt(Step):
         return salty_noised, None
 
 
+class Sharpie(Step):
+    """This class takes the image and applies a variant of thethe subtle
+    sharpie  function, but with control over the degree. In present version,
+    it is reccomended to run on copies.
+    In future versions can be run after a Tee step. For a subtle sharpening 
+    a ksize of (2,2) is reccomended"""
+
+    def __init__(
+        self,
+        ksize=(2, 2),
+        cache_dir=None,
+    ):
+        super().__init__(cache_dir)
+        self.ksize = ksize
+
+    def apply(self, image_data):
+        blur_mask = cv2.blur(image_data, ksize=self.ksize )
+        new_image_array = 2 * image_data - blur_mask
+        return new_image_array, None
+
+
+class BlurEdges(Step):
+    """This class takes the image and applies a variant of thethe blur out
+    edges  function, which does what it sounds like (returns an image with
+    edges blurred out called edge_image). For a good effect a ksize of
+    (600,600) is reccomended. In present version,it is reccomended to run on
+    copies.In future versions can be run after a Tee step. """
+
+    def __init__(
+        self,
+        ksize=(600, 600),
+        cache_dir=None,
+    ):
+        super().__init__(cache_dir)
+        self.ksize = ksize
+
+    def apply(self, image_data):
+        msk = np.zeros(image_data.shape)
+        center_coordinates = (
+            image_data.shape[1] // 2,
+            image_data.shape[0] // 2,
+        )
+        radius = int(
+            (min(image_data.shape) // 100) * (min(image_data.shape)/40)
+        )
+        color = 255
+        thickness = -1
+        msk = cv2.circle(msk, center_coordinates, radius, color, thickness)
+        ksize = self.ksize
+        msk = cv2.blur(msk, ksize)
+        filtered = cv2.blur(image_data, ksize)
+        edge_image = image_data * (msk / 255) + filtered * ((255 - msk) / 255)
+        return edge_image, None
+
+
+
+class Rotate(Step):
+    """This class takes the image and applies a rotation  function,
+    with control over the degree. In present version, it is reccomended to run
+    on copies. In future versions can be run after a Tee step. """
+
+    def __init__(
+        self,
+        angle=2,
+        cache_dir=None,
+    ):
+        super().__init__(cache_dir)
+        self.angle = angle
+
+    def apply(self, image_data):
+        rotated1 = image_data.rotate(angle =self.angle)
+        return rotated1, None
+       
+
 class Normalize(Step):
     """This class makes a simple normalizing to get values 0 to 255."""
 
