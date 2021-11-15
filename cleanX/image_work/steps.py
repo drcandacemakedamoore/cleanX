@@ -202,8 +202,9 @@ class Crop(Step):
 #     """This class is currently canceled. It was to take the image and apply
 #      the salting function (augments with noise). In present version there
 #     seems to be a problem with mutex and cv2- UNDER investigation.
-#     
+#
 #     In future versions should be be run after a Tee step"""
+
 
     def __init__(
         self,
