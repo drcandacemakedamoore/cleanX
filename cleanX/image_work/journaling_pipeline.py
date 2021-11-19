@@ -126,7 +126,8 @@ class JournalingPipeline(Pipeline):
                 'Creating journal in existing directory: {}'.forma(journal),
             )
             pass
-        serialized = [(pickle.dumps(s),) for s in self.steps]
+        # TODO(olegs): This needs more work to dump and restore ids
+        serialized = [(pickle.dumps(s),) for i, s in self.steps.as_dict()]
         self.journal_dir = journal
         self.db_file = os.path.join(self.journal_dir, 'journal.db')
 

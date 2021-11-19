@@ -5,11 +5,12 @@ import shutil
 import logging
 import multiprocessing
 
+from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor
 from tempfile import TemporaryDirectory
 from glob import glob
 
-from .steps import Aggregate
+from .steps import Aggregate, Step
 
 
 class MultiSource:
@@ -103,6 +104,85 @@ class PipelineError(RuntimeError):
     pass
 
 
+class NoPathToGoal(LookupError):
+    pass
+
+
+class PSG:
+
+    @classmethod
+    def create(cls, source):
+        if not source:
+            return cls(())
+        if isinstance(source[0], Step):
+            pairs = tuple(zip(source[1:], source))
+        else:
+            pairs = source
+        return cls(pairs)
+
+    def __init__(self, pairs):
+        # pairs:
+        #   A -> B
+        #   B -> C
+        #   A -> C
+        #   D -> A
+        #   B -> E
+        #
+        # goal: D
+        #
+        #     [D]
+        #      |
+        #      v
+        #     [A]     [F]
+        #    /   \     |
+        #   v     v    v
+        #  [B] -> [C] [G]
+        #   |
+        #   v
+        #  [E]
+        #
+        # In order to compute D, we need to compute A.
+        # In order to compute A, we need to compute B and C.
+        # In order to compute B, we need to compute C and E.
+        # C and E have no dependencies.
+        # F and G don't contribute to computing D, therefore
+        # should be removed.
+        #
+        # Steps may be iterated in this order:
+        #   E, C, B, A, D
+        # or;
+        #   C, E, B, A, D
+        mapping = defaultdict(list)
+        nodes = {}
+        for a, b in pairs:
+            mapping[a.id()].append(b)
+            nodes[a.id()] = a
+            nodes[b.id()] = b
+        for a, b in pairs:
+            if b.id() not in mapping:
+                mapping[b.id()] = []
+        self._deps = dict(mapping)
+        self._nodes = nodes
+
+    def as_dict(self):
+        return self._nodes.items()
+
+    def dependencies(self, goal):
+        pairs = dict(self._deps)
+        tier = pairs[goal.id()]
+        del pairs[goal.id()]
+
+        yield goal
+
+        while tier:
+            next_tier = []
+            for t in tier:
+                next_tier += pairs[t.id()]
+                del pairs[t.id()]
+                yield t
+            tier = next_tier
+
+
 class Pipeline:
     """
     This class is the builder for the image processing pipeline.
@@ -125,7 +205,7 @@ class Pipeline:
                            in parallel.
         :type batch_size: int
         """
-        self.steps = tuple(steps) if steps else ()
+        self.steps = PSG.create(steps)
         try:
             self.batch_size = batch_size or len(os.sched_getaffinity(0))
         except AttributeError:
@@ -165,7 +245,7 @@ class Pipeline:
         """
         return None
 
-    def process(self, source):
+    def process(self, source, goal):
         """
         Starts this pipeline.
 
@@ -177,7 +257,8 @@ class Pipeline:
             with self.workspace() as td:
                 previous_step = self.find_previous_step()
                 processed_step = None
-                for step in self.steps:
+                deps = tuple(self.steps.dependencies(goal))
+                for step in reversed(deps):
                     step.cache_dir = os.path.join(td, str(self.counter))
                     os.mkdir(step.cache_dir)
                     self.counter += 1

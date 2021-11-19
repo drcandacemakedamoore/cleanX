@@ -40,11 +40,12 @@ def test_copy_images():
     src_dir = image_directory
     with TemporaryDirectory() as td:
         src = DirectorySource(src_dir)
+        goal = Save(td)
         p = create_pipeline(steps=(
             Acquire(),
-            Save(td),
+            goal,
         ))
-        p.process(src)
+        p.process(src, goal)
         src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
         dst_files = set(os.listdir(td))
         assert src_files == dst_files
@@ -54,13 +55,14 @@ def test_alter_images():
     src_dir = image_directory
     with TemporaryDirectory() as td:
         src = DirectorySource(src_dir)
+        goal = Save(td)
         p = create_pipeline(steps=(
             Acquire(),
             BlurEdges(),
             Sharpie(),
-            Save(td),
+            goal,
         ))
-        p.process(src)
+        p.process(src, goal)
         src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
         dst_files = set(os.listdir(td))
         assert src_files == dst_files
@@ -128,36 +130,39 @@ def test_aggregate():
     src_dir = image_directory
     with TemporaryDirectory() as td:
         src = DirectorySource(src_dir)
+        goal = Save(td)
         p = create_pipeline(steps=(
             Acquire(),
             Mean(),
-            Save(td),
+            goal,
         ))
-        p.process(src)
+        p.process(src, goal)
         assert len(os.listdir(td)) == 1
+
 
 def test_grouphistohtwt():
     src_dir = image_directory
     with TemporaryDirectory() as td:
         src = DirectorySource(src_dir)
+        goal = GroupHistoHtWt(td)
         p = create_pipeline(steps=(
             Acquire(),
-            GroupHistoHtWt(td),
-            #Save(td),
+            goal,
         ))
-        p.process(src)
+        p.process(src, goal)
         assert len(os.listdir(td)) == 1
+
 
 def test_grouphistopor():
     src_dir = image_directory
     with TemporaryDirectory() as td:
         src = DirectorySource(src_dir)
+        goal = GroupHistoPorportion(td)
         p = create_pipeline(steps=(
             Acquire(),
-            GroupHistoPorportion(td),
-            #Save(td),
+            goal,
         ))
-        p.process(src)
+        p.process(src, goal)
         assert len(os.listdir(td)) == 1
 
 
@@ -165,11 +170,12 @@ def test_journaling_pipeline():
     src_dir = image_directory
     with TemporaryDirectory() as td:
         src = DirectorySource(src_dir)
+        goal = Save(td)
         p = create_pipeline(
             steps=(
                 Acquire(),
                 Fail(),
-                Save(td),
+                goal,
             ),
             journal=True,
             keep_journal=True,
@@ -178,10 +184,10 @@ def test_journaling_pipeline():
         journal_dir = p.journal_dir
 
         with pytest.raises(PipelineError):
-            p.process(src)
+            p.process(src, goal)
 
         p = restore_pipeline(journal_dir, skip=1)
-        p.process(src)
+        p.process(src, goal)
 
         src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
         dst_files = set(os.listdir(td))
