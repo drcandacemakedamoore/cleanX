@@ -4,6 +4,8 @@ import logging
 import os
 import json
 import inspect
+from multiprocessing import Queue
+from queue import Empty
 
 import numpy as np
 import cv2
@@ -37,8 +39,9 @@ class Step(metaclass=RegisteredStep):
         """
         self.cache_dir = cache_dir
         self.position = None
+        self.transaction_started = False
 
-    def apply(self, image_data):
+    def apply(self, image_data, image_name):
         """
         This is the method that will be called to do the actual image
         transformation.  This function must not raise exceptions, as it
@@ -109,6 +112,12 @@ class Step(metaclass=RegisteredStep):
             logging.exception(e)
             return e
 
+    def begin_transaction(self):
+        self.transaction_started = True
+
+    def commit_transaction(self):
+        self.transaction_started = False
+
     def __reduce__(self):
         return self.__class__, (self.cache_dir,)
 
@@ -127,6 +136,71 @@ class Step(metaclass=RegisteredStep):
     def from_cmd_args(cls, cmd_args):
         evaled_args = eval('dict({})'.format(cmd_args))
         return cls(**evaled_args)
+
+
+class Aggregate(Step):
+
+    def __init__(self, pre, agg, post, cache_dir=None):
+        super().__init__(cache_dir=cache_dir)
+        self.pre = pre
+        self.agg = agg
+        self.post = post
+        self.accumulator = None
+
+    def begin_transaction(self):
+        super().begin_transaction()
+        self.accumulator = self.pre()
+
+    def commit_transaction(self):
+        super().commit_transaction()
+        super().write(*self.post(self.accumulator))
+
+    def aggregate(self, accum, new):
+        try:
+            self.accumulator = self.agg(accum[0], accum[1], new[0], new[1])
+        except Exception as e:
+            return None, e
+        return self.accumulator, None
+
+    def __reduce__(self):
+        return self.__class__, (
+            self.pre,
+            self.agg,
+            self.post,
+            self.cache_dir,
+        )
+
+
+class Mean(Aggregate):
+
+    def __init__(self, cache_dir=None):
+        super().__init__(
+            pre=self.do_pre,
+            agg=self.do_agg,
+            post=self.do_post,
+            cache_dir=cache_dir,
+        )
+
+    def do_pre(self):
+        return None, None
+
+    def do_agg(self, acc_data, acc_name, image_data, image_name):
+        if acc_data is None:
+            return image_data, [image_name]
+        acc_name.append(image_name)
+        accw, acch = acc_data.shape[:2]
+        iw, ih = image_data.shape[:2]
+        mw = max(accw, iw)
+        mh = max(acch, ih)
+        acc_data = np.float32(cv2.resize(acc_data, (mw, mh)))
+        image_data = np.float32(cv2.resize(image_data, (mw, mh)))
+        return acc_data + image_data, acc_name
+
+    def do_post(self, acc):
+        return np.uint8(acc[0] / len(acc[1])), acc[1][-1]
+
+    def __reduce__(self):
+        return self.__class__, (self.cache_dir,)
 
 
 class Acquire(Step):
@@ -158,6 +232,7 @@ class Save(Step):
             self.extension,
         )
         try:
+            print("exporting", path)
             cv2.imwrite(
                 os.path.join(self.target, name),
                 image_data,
@@ -177,13 +252,13 @@ class Save(Step):
 class Crop(Step):
     """This class crops image arrays of black frames"""
 
-    def apply(self, image_data):
+    def apply(self, image_data, image_name):
 
         try:
             nonzero = np.nonzero(image_data)
             y_nonzero = nonzero[0]
             x_nonzero = nonzero[1]
-    # , x_nonzero, _ = np.nonzero(image)
+            # , x_nonzero, _ = np.nonzero(image)
             return image_data[
                 np.min(y_nonzero):np.max(y_nonzero),
                 np.min(x_nonzero):np.max(x_nonzero)
@@ -255,7 +330,7 @@ class Sharpie(Step):
         super().__init__(cache_dir)
         self.ksize = ksize
 
-    def apply(self, image_data):
+    def apply(self, image_data, image_name):
         blur_mask = cv2.blur(image_data, ksize=self.ksize)
         new_image_array = 2 * image_data - blur_mask
         return new_image_array, None
@@ -282,7 +357,7 @@ class BlurEdges(Step):
         super().__init__(cache_dir)
         self.ksize = ksize
 
-    def apply(self, image_data):
+    def apply(self, image_data, image_name):
         msk = np.zeros(image_data.shape)
         center_coordinates = (
             image_data.shape[1] // 2,
@@ -336,7 +411,7 @@ class BlurEdges(Step):
 class Normalize(Step):
     """This class makes a simple normalizing to get values 0 to 255."""
 
-    def apply(self, image_data):
+    def apply(self, image_data, image_name):
         try:
             new_max_value = 255
 
@@ -360,7 +435,7 @@ class HistogramNormalize(Step):
         super().__init__(cache_dir)
         self.tail_cut_percent = tail_cut_percent
 
-    def apply(self, image_data):
+    def apply(self, image_data, image_name):
         try:
             new_max_value = 255
             img_py = np.array((image_data), dtype='int64')
