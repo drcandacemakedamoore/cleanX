@@ -3,6 +3,7 @@
 import os
 
 from tempfile import TemporaryDirectory
+from multiprocessing import Queue
 
 import pytest
 
@@ -16,6 +17,7 @@ from cleanX.image_work import (
     BlurEdges,
     Sharpie,
     PipelineError,
+    Mean,
 )
 
 
@@ -41,6 +43,7 @@ def test_copy_images():
         dst_files = set(os.listdir(td))
         assert src_files == dst_files
 
+
 def test_alter_images():
     src_dir = image_directory
     with TemporaryDirectory() as td:
@@ -55,6 +58,20 @@ def test_alter_images():
         src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
         dst_files = set(os.listdir(td))
         assert src_files == dst_files
+
+
+def test_aggregate():
+    src_dir = image_directory
+    with TemporaryDirectory() as td:
+        src = DirectorySource(src_dir)
+        p = create_pipeline(steps=(
+            Acquire(),
+            Mean(),
+            Save(td),
+        ))
+        p.process(src)
+        assert len(os.listdir(td)) == 1
+
 
 def test_journaling_pipeline():
     src_dir = image_directory

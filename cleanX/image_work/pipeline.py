@@ -9,6 +9,8 @@ from concurrent.futures import ProcessPoolExecutor
 from tempfile import TemporaryDirectory
 from glob import glob
 
+from .steps import Aggregate
+
 
 class MultiSource:
     """
@@ -149,13 +151,13 @@ class Pipeline:
         """
         :meta private:
         """
-        pass
+        step.begin_transaction()
 
     def commit_transaction(self, step):
         """
         :meta private:
         """
-        pass
+        step.commit_transaction()
 
     def find_previous_step(self):
         """
@@ -182,41 +184,14 @@ class Pipeline:
                     self.begin_transaction(step)
 
                     if previous_step is None:
-                        batch = []
-                        for i, s in enumerate(source):
-                            step.position = i
-                            # TODO(wvxvw): Move reading into multiple
-                            # processes
-                            sdata, err = step.read(s)
-                            if err is not None:
-                                raise err
-                            n = os.path.join(
-                                step.cache_dir,
-                                os.path.basename(s),
-                            )
-                            batch.append((n, sdata))
-                            if (i + 1) % self.batch_size == 0:
-                                self.process_batch(batch, step)
-                                batch = []
-                        if batch:
-                            self.process_batch(batch, step)
+                        srciter = enumerate(source)
                     else:
-                        batch = []
                         files = os.listdir(previous_step.cache_dir)
-                        for i, f in enumerate(files):
-                            step.position = i
-                            sdata, err = step.read(
-                                os.path.join(previous_step.cache_dir, f),
-                            )
-                            if err is not None:
-                                raise err
-                            s = os.path.join(step.cache_dir, f)
-                            batch.append((s, sdata))
-                            if (i + 1) % self.batch_size == 0:
-                                self.process_batch(batch, step)
-                                batch = []
-                        if batch:
-                            self.process_batch(batch, step)
+                        srciter = (
+                            (i, os.path.join(previous_step.cache_dir, f))
+                            for i, f in enumerate(files)
+                        )
+                    self.process_step(step, srciter)
 
                     processed_step = previous_step
                     previous_step = step
@@ -229,18 +204,59 @@ class Pipeline:
                 self.counter = 0
                 self.update_counter()
 
+    def process_step(self, step, srciter):
+        batch = []
+        for i, s in srciter:
+            logging.info('processing image: %s', s)
+            step.position = i
+            # TODO(wvxvw): Move reading into multiple processes.
+            sdata, err = step.read(s)
+            if err is not None:
+                raise err
+            n = os.path.join(step.cache_dir, os.path.basename(s))
+            batch.append((n, sdata))
+            if (i + 1) % self.batch_size == 0:
+                self.process_batch(batch, step)
+                batch = []
+        if batch:
+            self.process_batch(batch, step)
+
     def process_batch(self, batch, step):
         """
         :meta private:
         """
-        print('applying step', step)
+        logging.info('applying step: %s', step)
+        if isinstance(step, Aggregate):
+            self.process_batch_agg(batch, step)
+        else:
+            self.process_batch_parallel(batch, step)
+
+    def process_batch_agg(self, batch, step):
+        # TODO(olegs): In principle, this can also be done in
+        # parallel, but we'll implement the parallel reduction some
+        # time later.
+        accum, errors = step.accumulator, []
+        # TODO(olegs): Use consistent order of image and name
+        for name, img in batch:
+            naccum, err = step.aggregate(accum, (img, name))
+            if err is not None:
+                errors.append(err)
+            else:
+                accum = naccum
+        if errors:
+            raise PipelineError(
+                'Step {} had errors:\n  '.format(type(step).__name__) +
+                '\n  '.join(str(err) for err in errors),
+            )
+
+    def process_batch_parallel(self, batch, step):
         # Forking only works on Linux.  The garbage that Python
         # multiprocessing is it requires a lot of workarounds...
         ctx = multiprocessing.get_context('spawn')
         with ProcessPoolExecutor(mp_context=ctx) as ex:
             results, errors = [], []
             batch_names, batch_data = zip(*batch)
-            for res, err in ex.map(step.apply, batch_data):
+            for res, err in ex.map(step.apply, batch_data, batch_names):
                 if err:
                     errors.append(err)
                 elif res is not None:
@@ -251,7 +267,7 @@ class Pipeline:
                     ))
             if errors:
                 raise PipelineError(
-                    'Step {} had errors:\n'.format(type(step).__name__) +
+                    'Step {} had errors:\n  '.format(type(step).__name__) +
                     '\n  '.join(str(err) for err in errors),
                 )
 
