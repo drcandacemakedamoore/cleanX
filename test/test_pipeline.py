@@ -26,7 +26,7 @@ image_directory = os.path.join(os.path.dirname(__file__), 'directory')
 
 class Fail(Step):
 
-    def apply(self, image_data):
+    def apply(self, image_data, image_name):
         return None, RuntimeError('Test error')
 
 
