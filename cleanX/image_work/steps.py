@@ -140,11 +140,8 @@ class Step(metaclass=RegisteredStep):
 
 class Aggregate(Step):
 
-    def __init__(self, pre, agg, post, cache_dir=None):
+    def __init__(self, cache_dir=None):
         super().__init__(cache_dir=cache_dir)
-        self.pre = pre
-        self.agg = agg
-        self.post = post
         self.accumulator = None
 
     def begin_transaction(self):
@@ -154,6 +151,15 @@ class Aggregate(Step):
     def commit_transaction(self):
         super().commit_transaction()
         super().write(*self.post(self.accumulator))
+
+    def pre(self):
+        return None, None
+
+    def post(self, accumulator):
+        return accumulator
+
+    def agg(self, acc_data, acc_name, image_data, image_name):
+        raise NotImplementedError("Subclasses must implement this")
 
     def aggregate(self, accum, new):
         try:
@@ -173,18 +179,7 @@ class Aggregate(Step):
 
 class Mean(Aggregate):
 
-    def __init__(self, cache_dir=None):
-        super().__init__(
-            pre=self.do_pre,
-            agg=self.do_agg,
-            post=self.do_post,
-            cache_dir=cache_dir,
-        )
-
-    def do_pre(self):
-        return None, None
-
-    def do_agg(self, acc_data, acc_name, image_data, image_name):
+    def agg(self, acc_data, acc_name, image_data, image_name):
         if acc_data is None:
             return image_data, [image_name]
         acc_name.append(image_name)
@@ -196,7 +191,7 @@ class Mean(Aggregate):
         image_data = np.float32(cv2.resize(image_data, (mw, mh)))
         return acc_data + image_data, acc_name
 
-    def do_post(self, acc):
+    def post(self, acc):
         return np.uint8(acc[0] / len(acc[1])), acc[1][-1]
 
     def __reduce__(self):
