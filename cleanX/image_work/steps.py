@@ -4,6 +4,8 @@ import logging
 import os
 import json
 import inspect
+import matplotlib.pyplot as plt
+import pandas as pd
 from multiprocessing import Queue
 from queue import Empty
 
@@ -196,6 +198,53 @@ class Mean(Aggregate):
 
     def __reduce__(self):
         return self.__class__, (self.cache_dir,)
+
+class GroupHisto(Aggregate):
+    
+    def __init__(self, histo_dir, cache_dir=None):
+        super().__init__(cache_dir=cache_dir)
+        self.histo_dir = histo_dir
+
+    def agg(self, acc_data, acc_name, image_data, image_name):
+        iw, ih = image_data.shape[:2]
+        if acc_data is None:
+            return [(iw, ih)], None
+        return acc_data + [(iw, ih)], None
+
+    def post(self, acc):
+        tuple_like = acc[0]
+        #print(tuple_like)
+        list_like = []
+        for element in tuple_like:
+            list_like.append(list(element))
+        #print(list_like) 
+        height = [el[0] for el in list_like]
+        width =  [el[1] for el in list_like]
+        new_datafrme = pd.DataFrame({
+            'height':  height,
+            'width': width
+        })
+        fig, ax = plt.subplots(1, 1)
+
+        # Add axis labels
+        ax.set_xlabel('dimension size')
+        ax.set_ylabel('count')
+
+        # Generate the histogram
+        histo_ht_wt = ax.hist(
+            (new_datafrme.height, new_datafrme.width),
+            bins=10
+        )
+
+        # Add a legend
+        ax.legend(('height', 'width'), loc='upper right')
+
+#        
+        fig.savefig('example4.jpg')
+        return np.zeros([16, 16, 3]), 'example4.jpg'
+
+    def __reduce__(self):
+        return self.__class__, (self.histo_dir, self.cache_dir,)
 
 
 class Acquire(Step):
