@@ -81,7 +81,7 @@ def test_grouphistohtwt():
         src = DirectorySource(src_dir)
         p = create_pipeline(steps=(
             Acquire(),
-            GroupHistoHtWt,
+            GroupHistoHtWt(),
             Save(td),
         ))
         p.process(src)
