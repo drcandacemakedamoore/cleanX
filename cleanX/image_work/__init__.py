@@ -71,6 +71,8 @@ from .steps import (
     Sharpie,
     BlurEdges,
     Aggregate,
+    GroupHistoHtWt,
+    GroupHistoPorportion,
     Mean,
 )
 

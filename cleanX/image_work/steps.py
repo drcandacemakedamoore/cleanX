@@ -199,8 +199,12 @@ class Mean(Aggregate):
     def __reduce__(self):
         return self.__class__, (self.cache_dir,)
 
-class GroupHisto(Aggregate):
-    
+
+class GroupHistoHtWt(Aggregate):
+    """
+    This class inherits from Aggregate, and builds a histogram of 
+    individual image heights and widths.
+    """
     def __init__(self, histo_dir, cache_dir=None):
         super().__init__(cache_dir=cache_dir)
         self.histo_dir = histo_dir
@@ -213,13 +217,11 @@ class GroupHisto(Aggregate):
 
     def post(self, acc):
         tuple_like = acc[0]
-        #print(tuple_like)
         list_like = []
         for element in tuple_like:
             list_like.append(list(element))
-        #print(list_like) 
         height = [el[0] for el in list_like]
-        width =  [el[1] for el in list_like]
+        width = [el[1] for el in list_like]
         new_datafrme = pd.DataFrame({
             'height':  height,
             'width': width
@@ -238,10 +240,53 @@ class GroupHisto(Aggregate):
 
         # Add a legend
         ax.legend(('height', 'width'), loc='upper right')
+        
+        fig.savefig(os.path.join(self.histo_dir, 'example4.jpg'))
+        return np.zeros([8, 8, 3]), 'example4.jpg'
 
-#        
-        fig.savefig('example4.jpg')
-        return np.zeros([16, 16, 3]), 'example4.jpg'
+    def __reduce__(self):
+        return self.__class__, (self.histo_dir, self.cache_dir,)
+
+
+class GroupHistoPorportion(Aggregate):
+
+    """
+    This class makes a histogram of all the image's proportions.
+    """
+    def __init__(self, histo_dir, cache_dir=None):
+        super().__init__(cache_dir=cache_dir)
+        self.histo_dir = histo_dir
+
+    def agg(self, acc_data, acc_name, image_data, image_name):
+        iw, ih = image_data.shape[:2]
+        if acc_data is None:
+            return [(iw, ih)], None
+        return acc_data + [(iw, ih)], None
+
+    def post(self, acc):
+        tuple_like = acc[0]
+        #print(tuple_like)
+        list_like = []
+        for element in tuple_like:
+            list_like.append(list(element))
+        #print(list_like)
+        height = [el[0] for el in list_like]
+        width =  [el[1] for el in list_like]
+        porpor = [el[0]/el[1] for el in list_like]
+        fig, ax = plt.subplots(1, 1)
+        # Add axis labels
+        ax.set_xlabel('h/w')
+        ax.set_ylabel('count')
+        # Generate the histogram
+        histo_ht_wt = ax.hist(
+            (porpor),
+            bins=10
+        )
+        # Add a legend
+        ax.legend(('height/width'), loc='upper right')
+
+        fig.savefig('example5.jpg')
+        return np.zeros([2, 2, 3]), 'example5.jpg'
 
     def __reduce__(self):
         return self.__class__, (self.histo_dir, self.cache_dir,)
