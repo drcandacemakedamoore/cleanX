@@ -70,6 +70,7 @@ from .steps import (
     HistogramNormalize,
     Sharpie,
     BlurEdges,
+    Aggregate,
     Mean,
 )
 
