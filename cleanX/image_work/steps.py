@@ -202,7 +202,7 @@ class Mean(Aggregate):
 
 class GroupHistoHtWt(Aggregate):
     """
-    This class inherits from Aggregate, and builds a histogram of 
+    This class inherits from Aggregate, and builds a histogram of
     individual image heights and widths.
     """
     def __init__(self, histo_dir, cache_dir=None):
@@ -240,7 +240,7 @@ class GroupHistoHtWt(Aggregate):
 
         # Add a legend
         ax.legend(('height', 'width'), loc='upper right')
-        
+    
         fig.savefig(os.path.join(self.histo_dir, 'example4.jpg'))
         return np.zeros([8, 8, 3]), 'example4.jpg'
 
@@ -265,13 +265,11 @@ class GroupHistoPorportion(Aggregate):
 
     def post(self, acc):
         tuple_like = acc[0]
-        #print(tuple_like)
         list_like = []
         for element in tuple_like:
             list_like.append(list(element))
-        #print(list_like)
         height = [el[0] for el in list_like]
-        width =  [el[1] for el in list_like]
+        width = [el[1] for el in list_like]
         porpor = [el[0]/el[1] for el in list_like]
         fig, ax = plt.subplots(1, 1)
         # Add axis labels
@@ -285,7 +283,7 @@ class GroupHistoPorportion(Aggregate):
         # Add a legend
         ax.legend(('height/width'), loc='upper right')
 
-        fig.savefig('example5.jpg')
+        fig.savefig(os.path.join(self.histo_dir, 'example5.jpg'))
         return np.zeros([2, 2, 3]), 'example5.jpg'
 
     def __reduce__(self):
