@@ -81,8 +81,8 @@ def test_grouphistohtwt():
         src = DirectorySource(src_dir)
         p = create_pipeline(steps=(
             Acquire(),
-            GroupHistoHtWt(),
-            Save(td),
+            GroupHistoHtWt(td),
+            #Save(td),
         ))
         p.process(src)
         assert len(os.listdir(td)) == 1
