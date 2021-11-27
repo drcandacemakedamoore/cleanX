@@ -240,7 +240,7 @@ class GroupHistoHtWt(Aggregate):
 
         # Add a legend
         ax.legend(('height', 'width'), loc='upper right')
-    
+
         fig.savefig(os.path.join(self.histo_dir, 'example4.jpg'))
         return np.zeros([8, 8, 3]), 'example4.jpg'
 

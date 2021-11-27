@@ -17,6 +17,9 @@ from cleanX.image_work import (
     BlurEdges,
     Sharpie,
     PipelineError,
+    Aggregate,
+    GroupHistoHtWt,
+    GroupHistoPorportion,
     Mean,
 )
 
@@ -67,6 +70,18 @@ def test_aggregate():
         p = create_pipeline(steps=(
             Acquire(),
             Mean(),
+            Save(td),
+        ))
+        p.process(src)
+        assert len(os.listdir(td)) == 1
+
+def test_grouphistohtwt():
+    src_dir = image_directory
+    with TemporaryDirectory() as td:
+        src = DirectorySource(src_dir)
+        p = create_pipeline(steps=(
+            Acquire(),
+            GroupHistoHtWt,
             Save(td),
         ))
         p.process(src)
