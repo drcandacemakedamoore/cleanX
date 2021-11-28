@@ -87,6 +87,18 @@ def test_grouphistohtwt():
         p.process(src)
         assert len(os.listdir(td)) == 1
 
+def test_grouphistopor():
+    src_dir = image_directory
+    with TemporaryDirectory() as td:
+        src = DirectorySource(src_dir)
+        p = create_pipeline(steps=(
+            Acquire(),
+            GroupHistoPorportion(td),
+            #Save(td),
+        ))
+        p.process(src)
+        assert len(os.listdir(td)) == 1
+
 
 def test_journaling_pipeline():
     src_dir = image_directory
