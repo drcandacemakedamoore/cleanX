@@ -1094,47 +1094,6 @@ def find_duplicated_images_todf(directory):
     return final_df
 
 
-def play_images_in_df(iter_ob, length_name):
-    """
-    Shows images by taking them off a :code:`DataFrame` column, and puts
-    them up but smaller, so they can be compared quickly
-    :param iter_ob: List, chould be a :code:`DataFrame` column, use .to_list()
-    :type iter_ob: list
-    :param length_name: Size of image name going from end
-    :type length_name: int
-    :return: technically no return but makes a plot of images with names
-    :rtype: none
-    """
-
-    width = int(math.sqrt(len(iter_ob)))
-    print(iter_ob)
-    height = int(math.ceil(len(iter_ob) / width))
-    print(height, width)
-    f, axarr = plt.subplots(width, height, figsize=(14, 14))
-    multiplier = width * height
-    if width > 1:
-        for x in range(width):
-            for y in range(height):
-                multiplier -=1
-                element = iter_ob[multiplier]
-                fname = os.path.splitext(element)[0]
-                title = fname[-length_name:]
-                exop = cv2.imread(element, cv2.IMREAD_GRAYSCALE)
-                axarr[x, y].set_title(title)
-                axarr[x, y].imshow(exop, cmap=plt.cm.gray)
-
-    else:
-        for y in range(height):
-            element = iter_ob[y]
-            exop = cv2.imread(element, cv2.IMREAD_GRAYSCALE)
-            fname = os.path.splitext(element)[0]
-            title = fname[-length_name:]
-            axarr[y].set_title(title)
-            axarr[y].imshow(exop, cmap=plt.cm.gray)
-            
-    plt.show()
-
-
 def show_images_in_df(iter_ob, length_name):
     """
     Shows images by taking them off a :code:`DataFrame` column, and puts
