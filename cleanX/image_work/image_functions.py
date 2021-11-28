@@ -1155,7 +1155,7 @@ def show_images_in_df(iter_ob, length_name):
     if width > 1:
         for x in range(width):
             for y in range(height):
-                element = iter_ob[x * width + y]
+                element = iter_ob[x * height + y]
                 fname = os.path.splitext(element)[0]
                 title = fname[-length_name:]
                 exop = cv2.imread(element, cv2.IMREAD_GRAYSCALE)
