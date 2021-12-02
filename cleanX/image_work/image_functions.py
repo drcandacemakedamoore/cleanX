@@ -1855,3 +1855,37 @@ def black_end_ratio(image_array):
     ender = image_to_histo(image_array)[200:255].sum()
     ratio = low_end/np.mean([mid_1, mid_2, mid_3, ender])
     return ratio
+
+
+def outline_segment_by_otsu(image_to_transform):
+    # read in  image
+    image_to_transform = cv2.imread(image_to_transform, cv2.IMREAD_GRAYSCALE)
+    # find it's np.histogram
+    bins_num = 256
+
+    hist, bin_edges = np.histogram(image_to_transform, bins=bins_num)
+
+    # find the threshold for Otsu segmentation
+    bin_mids = (bin_edges[:-1] + bin_edges[1:]) / 2
+    wght = np.cumsum(hist)
+    wght2 = np.cumsum(hist[::-1])[::-1]
+    mean1 = np.cumsum(hist * bin_mids) / wght
+    mean2 = (np.cumsum((hist * bin_mids)[::-1]) / wght2[::-1])[::-1]
+    # compute interclass variance
+    inter_class_vari = wght[:-1] * wght2[1:] * (mean1[:-1] - mean2[1:]) ** 2
+
+    index_of_max_val = np.argmax(inter_class_vari)
+
+    thresh = bin_mids[:-1][index_of_max_val]
+    width , height = image_to_transform.shape[0],image_to_transform.shape[1]
+    # this gave the thresh based on Otsu, now apply it
+    output_image= image_to_transform
+    for x in range(width):
+        for y in range(height):
+            # for the given pixel at w,h, check value against the threshold 
+            if output_image[x,y ]< thresh :
+                # lets set this to zero
+                output_image[x,y] = 0
+    # now use canny to get edges
+    edges = cv2.Canny(output_image, 50, 230)
+    return edges

@@ -50,6 +50,7 @@ from .image_functions import (
     find_close_images,
     image_to_histo,
     black_end_ratio,
+    outline_segment_by_otsu,
 
     Rotator,
 )
