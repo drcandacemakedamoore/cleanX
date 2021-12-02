@@ -49,16 +49,23 @@ version = tag[1:]
 
 class TestCommand(Command):
 
-    user_options = [('pytest-args=', 'a', 'Arguments to pass into py.test')]
+    user_options = [
+        ('pytest-args=', 'a', 'Arguments to pass into py.test'),
+        ('fast', 'f', (
+            'Don\'t install dependencies, test in the current environment'
+            )
+        ),
+    ]
 
     def initialize_options(self):
         self.pytest_args = ''
+        self.fast = False
 
     def finalize_options(self):
         self.test_args = []
         self.test_suite = True
 
-    def run(self):
+    def prepare(self):
         recs = self.distribution.tests_require
 
         if os.environ.get('CONDA_DEFAULT_ENV'):
@@ -83,6 +90,9 @@ class TestCommand(Command):
             ezcmd.run()
             site.main()
 
+    def run(self):
+        if not self.fast:
+            self.prepare()
         self.run_tests()
 
 
@@ -93,6 +103,9 @@ class PyTest(TestCommand):
     def run_tests(self):
         import pytest
 
+        if self.fast:
+            here = os.path.dirname(os.path.abspath(__file__))
+            sys.path.insert(0, here)
         errno = pytest.main(shlex.split(self.pytest_args))
         sys.exit(errno)
 

@@ -257,6 +257,20 @@ python ./setup.py genconda
 python ./setup.py install_dev
 ```
 
+Note that the last command may result in errors related to `conda-build`
+being unable to delete Microsoft's C++ runtime DLL.  This is typical
+behavior of `conda-build` as can be seen here: 
+https://github.com/conda/conda/issues/7682
+
+The workaround is to add:
+
+```sh
+conda config --set always_copy true
+```
+
+And re-run the last step (this will make virtual environment created with
+`conda` noticeably bigger).
+
 You may have to do this for Python 3.7, Python 3.8 and Python 3.9 if
 you need to check that your changes will work in all supported
 versions.
