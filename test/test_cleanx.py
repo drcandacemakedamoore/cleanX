@@ -447,8 +447,12 @@ def test_show_close_images(monkeypatch):
 #     hist = iwork.image_to_histo(outpic)
 #     assert type(hist) is np.ndarray
 
-def black_end_ratio():
+def test_black_end_ratio():
     outpic = cv2.imread('testtocrop.jpg')
     ratio = iwork.black_end_ratio(outpic)
     assert ratio > 0
 
+def test_outline_segment_by_otsu():
+    outpic = 'testtocrop.jpg'
+    outlined = iwork.test_outline_segment_by_otsu(outpic)
+    assert type(outlined) >  np.ndarray 
