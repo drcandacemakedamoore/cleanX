@@ -1862,7 +1862,7 @@ def outline_segment_by_otsu(image_to_transform, blur_k_size=1):
     This is a function to turn an Xray into an outline
     with a specific method that involves an implementation
     of Otsu's algorithm, and cv2 version of Canny
-    the result is line images that can be very useful 
+    the result is line images that can be very useful
     in and of themselves to run a nueral net on
     or can be used for segmentation in some cases
     blur_k_size used in a blur to make ourlines less detailed
@@ -1870,7 +1870,7 @@ def outline_segment_by_otsu(image_to_transform, blur_k_size=1):
 
     :param image_to_transform: the image name
     :type image_to_transform: string
-    :param blur_k_size: must be odd and value <100, kernel to blur 
+    :param blur_k_size: must be odd and value <100, kernel to blur
     to make ourlines less detailed
     :type blur_k_size: int
 
@@ -1905,12 +1905,12 @@ def outline_segment_by_otsu(image_to_transform, blur_k_size=1):
             if output_image[x, y] < thresh:
                 # lets set this to zero
                 output_image[x, y] = 0
-    if blur_k_size % 2 !=0:
-    # blur
-        output_image = cv2.medianBlur(output_image,blur_k_size)
-    else:    
-        output_image = cv2.medianBlur(output_image,(blur_k_size + 1))
-               
+    if blur_k_size % 2 != 0:
+        # blur
+        output_image = cv2.medianBlur(output_image, blur_k_size)
+    else:
+        output_image = cv2.medianBlur(output_image, (blur_k_size + 1))
+
     # now use canny to get edges
     edges = cv2.Canny(output_image, 50, 230)
     return edges
