@@ -450,9 +450,9 @@ def test_show_close_images(monkeypatch):
 def test_black_end_ratio():
     outpic = cv2.imread('testtocrop.jpg')
     ratio = iwork.black_end_ratio(outpic)
-    assert ratio != 0
+    assert type(ratio) is 0
 
 def test_outline_segment_by_otsu():
     outpic = 'testtocrop.jpg'
     outlined = iwork.test_outline_segment_by_otsu(outpic,11)
-    assert type(outlined) >  np.ndarray 
+    assert type(outlined) is np.ndarray 
