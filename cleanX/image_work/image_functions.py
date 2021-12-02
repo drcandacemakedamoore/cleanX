@@ -1858,6 +1858,20 @@ def black_end_ratio(image_array):
 
 
 def outline_segment_by_otsu(image_to_transform):
+    """
+    This is a function to turn an Xray into an outline
+    with a specific method that involves an implementation
+    of Otsu's algorithm, and cv2 version of Canny
+    the result is line images that can be very useful 
+    in and of themselves to run a nueral net on
+    or can be used for segmentation in some cases
+
+    :param image_to_transform: the image name
+    :type image_to_transform: string
+
+    :return: edges (an image with lines)
+    :rtype: numpy.ndarray
+    """
     # read in  image
     image_to_transform = cv2.imread(image_to_transform, cv2.IMREAD_GRAYSCALE)
     # find it's np.histogram
