@@ -1883,7 +1883,7 @@ def outline_segment_by_otsu(image_to_transform):
     for x in range(width):
         for y in range(height):
             # for the given pixel at w,h, check value against the threshold
-            if output_image[x, y ] < thresh:
+            if output_image[x, y] < thresh:
                 # lets set this to zero
                 output_image[x, y] = 0
     # now use canny to get edges
