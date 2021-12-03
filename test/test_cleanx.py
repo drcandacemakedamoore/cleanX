@@ -451,7 +451,7 @@ def test_black_end_ratio():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
     outpic = cv2.imread(vovo)
     ratio = iwork.black_end_ratio(outpic)
-    assert type(ratio) is float
+    assert type(ratio) is np.float64
 
 def test_outline_segment_by_otsu():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
