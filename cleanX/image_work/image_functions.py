@@ -1914,3 +1914,58 @@ def outline_segment_by_otsu(image_to_transform, blur_k_size=1):
     # now use canny to get edges
     edges = cv2.Canny(output_image, 50, 230)
     return edges
+
+
+def binarize_by_otsu(image_to_transform, blur_k_size):
+    """
+    This is a function to turn an Xray into an binarized image
+    with a specific method that involves an implementation
+    of Otsu's algorithm,
+    the result is line images that can be very useful
+    in and of themselves to run a nueral net on
+    or can be used for segmentation in some cases
+    blur_k_size used in a blur to make our lines less detailed
+    if set to a higher value, 0 < values < 100, and odd
+
+    :param image_to_transform: the image name
+    :type image_to_transform: string
+    :param blur_k_size: must be odd and value <100, kernel to blur
+    to make ourlines less detailed
+    :type blur_k_size: int
+
+    :return: output_image (an image binarized to 0s or 255s)
+    :rtype: numpy.ndarray
+    """
+    # read in  image
+    image_to_transform = cv2.imread(image_to_transform, cv2.IMREAD_GRAYSCALE)
+    # find it's np.histogram
+    bins_num = 256
+
+    hist, bin_edges = np.histogram(image_to_transform, bins=bins_num)
+
+    # find the threshold for Otsu segmentation
+    bin_mids = (bin_edges[:-1] + bin_edges[1:]) / 2
+    wght = np.cumsum(hist)
+    wght2 = np.cumsum(hist[::-1])[::-1]
+    mean1 = np.cumsum(hist * bin_mids) / wght
+    mean2 = (np.cumsum((hist * bin_mids)[::-1]) / wght2[::-1])[::-1]
+    # compute interclass variance
+    inter_class_vari = wght[:-1] * wght2[1:] * (mean1[:-1] - mean2[1:]) ** 2
+
+    index_of_max_val = np.argmax(inter_class_vari)
+
+    thresh = bin_mids[:-1][index_of_max_val]
+    width, height = image_to_transform.shape[0], image_to_transform.shape[1]
+    # this gave the thresh based on Otsu, now apply it
+    output_image = image_to_transform
+    for x in range(width):
+        for y in range(height):
+            # for the given pixel at w,h, check value against the threshold
+            if output_image[x, y] < thresh:
+                # lets set this to zero
+                output_image[x, y] = 0
+            else:
+                output_image[x, y] = 255
+    # now use canny to get edges
+    output_image = cv2.medianBlur(output_image, blur_k_size)
+    return output_image
