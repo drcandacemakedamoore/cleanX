@@ -280,6 +280,43 @@ of Python used.  At the moment, it's not possible to have multiple
 `conda` package configurations generated at the same time.  So, if you
 are switching Python versions, you will need to rerun this command.
 
+Also note that the build will package only the changes committed to
+the Git repository.  This means that if you are building with
+uncommitted changes, they will not make it into the built package.
+The decision to do this was motivated by the presence of symbolic
+links in the working directory, which makes it impossible to build
+without superuser permissions on MS Windows.  It is possible that in
+the future we will add a flag to `setup.py install` to allow "dirty"
+builds.
+
+To run unit test and linter you may use:
+
+```sh
+python setup.py lint
+```
+
+and
+
+```sh
+python setup.py test
+```
+
+respectively.  Note that by default, these commands will try to install
+`cleanX` and its dependencies before doing any work.  This may take a
+very long time, especially on MS Windows.  There is a way to skip the
+installation part by running:
+
+```sh
+python setup.py lint --fast
+```
+
+and
+
+```sh
+python setup.py test --fast
+```
+
+
 ### Developing Using python.org's Python
 
 Use Git to check out the project's source, then in the source
