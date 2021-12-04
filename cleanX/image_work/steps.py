@@ -657,3 +657,28 @@ class OtsuLines(Step):
 
     def __reduce__(self):
         return self.__class__, (self.ksize, self.cache_dir)
+
+
+class Projection(Step):
+    """This class makes two one dimensional projections on the same graph,
+    one for horizontal, and one for vertical. Projections can be used in many
+    processeses including registration, and analysis."""
+
+    def apply(self, image_data, image_name):
+        try:
+            # find it's np.histogram
+            sumpix0 = np.sum(image_data, 0)
+            sumpix1 = np.sum(image_data, 1)
+            plt.plot(sumpix0)
+            plt.plot(sumpix1)
+            plt.title('Sum pixels along (vertical and horizontal) columns')
+            plt.xlabel('Column number')
+            plt.ylabel('Sum of column')
+            plt.savefig('example_columns.jpg')
+            new_graph_img = cv2.imread('example_columns.jpg')
+
+            return new_graph_img, None
+
+        except Exception as e:
+            logging.exception(e)
+            return None, e

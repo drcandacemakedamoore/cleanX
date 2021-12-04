@@ -2006,7 +2006,7 @@ def column_sum_folder(directory):
         sumpix1 = 0
         img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
         sumpix0 = np.sum(img, 0)
-        sumpix1 = np.sum(cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE), 0)
+        sumpix1 = np.sum(img, 1)
         fig, axes = plt.subplots(1, 1, figsize=(10, 10))
         axes.clear()
         plt.plot(sumpix0)
@@ -2016,7 +2016,6 @@ def column_sum_folder(directory):
         plt.ylabel('Sum of column')
         fig.savefig(file_path)
 
-        sumpix = [sumpix0, sumpix1]
         sumpix_list0.append(sumpix0)
         sumpix_list1.append(sumpix1)
         names_list.append(pic)

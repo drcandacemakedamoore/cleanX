@@ -79,6 +79,7 @@ from .steps import (
     Mean,
     OtsuBinarize,
     OtsuLines,
+    Projection,
 )
 
 
