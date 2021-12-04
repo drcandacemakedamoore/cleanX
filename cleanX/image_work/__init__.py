@@ -78,6 +78,7 @@ from .steps import (
     GroupHistoPorportion,
     Mean,
     OtsuBinarize,
+    OtsuLines,
 )
 
 

@@ -564,7 +564,8 @@ class HistogramNormalize(Step):
 
 class OtsuBinarize(Step):
     """This class makes binarized images with values of only 0 to 255, based on
-    an Otsu segmentaation with more or less blurring ."""
+    an Otsu segmentaation with more or less blurring. ksize parameter should
+    be between 1 and 99, and odd"""
     def __init__(
         self,
         ksize=5,
@@ -574,7 +575,6 @@ class OtsuBinarize(Step):
         self.ksize = ksize
 
     def apply(self, image_data, image_name):
-        print(0)
         try:
             # find it's np.histogram
             bins_num = 256
@@ -596,9 +596,61 @@ class OtsuBinarize(Step):
 
             # this gave the thresh based on Otsu, now apply it
             output_image = np.uint8((image_data < thresh) * 255)
+            if self.ksize % 2 == 0:
+                self.ksize = self.ksize + 1
 
             return cv2.medianBlur(output_image, self.ksize), None
 
+        except Exception as e:
+            logging.exception(e)
+            return None, e
+
+    def __reduce__(self):
+        return self.__class__, (self.ksize, self.cache_dir)
+
+
+class OtsuLines(Step):
+    """This class makes an outline around asegemnted image segmentedbased on
+    the an Otsu segmentation with more or less blurring. ksize parameter should
+    be between 1 and 99, and odd"""
+    def __init__(
+        self,
+        ksize=5,
+        cache_dir=None,
+    ):
+        super().__init__(cache_dir)
+        self.ksize = ksize
+
+    def apply(self, image_data, image_name):
+        try:
+            # find it's np.histogram
+            bins_num = 256
+            hist, bin_edges = np.histogram(image_data, bins=bins_num)
+
+            # find the threshold for Otsu segmentation
+            bin_mids = (bin_edges[:-1] + bin_edges[1:]) / 2
+            wght = np.cumsum(hist)
+            wght2 = np.cumsum(hist[::-1])[::-1]
+            mean1 = np.cumsum(hist * bin_mids) / wght
+            mean2 = (np.cumsum((hist * bin_mids)[::-1]) / wght2[::-1])[::-1]
+
+            # compute interclass variance
+            inter_class_vari = (
+                wght[:-1] * wght2[1:] * (mean1[:-1] - mean2[1:]) ** 2
+            )
+            index_of_max_val = np.argmax(inter_class_vari)
+            thresh = bin_mids[:-1][index_of_max_val]
+
+            # this gave the thresh based on Otsu, now apply it
+            output_image = np.uint8((image_data < thresh) * 255)
+            if self.ksize % 2 != 0:
+                # blur
+                output_image = cv2.medianBlur(output_image, self.ksize)
+            else:
+                output_image = cv2.medianBlur(output_image, (self.ksize + 1))
+            # now use canny to get edges
+            edges_image = cv2.Canny(output_image, 50, 230)
+            return edges_image, None
         except Exception as e:
             logging.exception(e)
             return None, e
