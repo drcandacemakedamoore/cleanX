@@ -1955,17 +1955,68 @@ def binarize_by_otsu(image_to_transform, blur_k_size):
     index_of_max_val = np.argmax(inter_class_vari)
 
     thresh = bin_mids[:-1][index_of_max_val]
-    width, height = image_to_transform.shape[0], image_to_transform.shape[1]
     # this gave the thresh based on Otsu, now apply it
     output_image = image_to_transform
-    for x in range(width):
-        for y in range(height):
-            # for the given pixel at w,h, check value against the threshold
-            if output_image[x, y] < thresh:
-                # lets set this to zero
-                output_image[x, y] = 0
-            else:
-                output_image[x, y] = 255
+    mask = output_image < thresh
+    output_image[mask] = 0
+    output_image[~mask] = 255
     # now use canny to get edges
     output_image = cv2.medianBlur(output_image, blur_k_size)
     return output_image
+
+
+def column_sum_folder(directory):
+    """
+    Takes images in directory and makes a graph for each image
+    of sums along horizontal or vertical lines
+    this is saved as an accompanying image.
+    Returns a dataframe with this information for each image,
+    but also deposits new images into a new folder
+    because each run will include the newly made images.
+    NB: This is a home-made projection algorithm.
+    Projection algorithms can be used in image registration,
+    and future versions of cleanX will have more efficient projectiion
+    algorithms.Also note the df will be enourmous...
+
+    :param directory: Directory with set_of_images.
+    :type directory: string
+    :param sumpix_df: df with info from new images of column sums
+    :type sumpix_df: pandas.core.frame.DataFrame
+    """
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
+    suspects = suspects1 + suspects2
+    names_list = []
+    sumpix_list0 = []
+    sumpix_list1 = []
+    for pic in suspects:
+        pic_name = pic.split('\\')[1]
+        # check if directory exists or not yet
+        new_directory = os.path.join(directory, 'column_pics')
+        if not os.path.exists(new_directory):
+            os.makedirs(new_directory)
+
+        if os.path.exists(new_directory):
+            file_path = os.path.join(new_directory, pic_name)
+
+        sumpix0 = 0
+        sumpix1 = 0
+        img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
+        sumpix0 = np.sum(img, 0)
+        sumpix1 = np.sum(cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE), 0)
+        fig, axes = plt.subplots(1, 1, figsize=(10, 10))
+        axes.clear()
+        plt.plot(sumpix0)
+        plt.plot(sumpix1)
+        plt.title('Sum pixels along (vertical and horizontal) columns')
+        plt.xlabel('Column number')
+        plt.ylabel('Sum of column')
+        fig.savefig(file_path)
+
+        sumpix = [sumpix0, sumpix1]
+        sumpix_list0.append(sumpix0)
+        sumpix_list1.append(sumpix1)
+        names_list.append(pic)
+    data = list(zip(sumpix_list0, sumpix_list1))
+    sumpix_df = pd.DataFrame(data, index=names_list)
+    return sumpix_df
