@@ -167,6 +167,11 @@ class PSG:
     def as_dict(self):
         return self._nodes.items()
 
+    def depends(self, step, others):
+        ids = set(o.id() for o in others)
+        deps = set(s.id() for s in self._deps[step.id()])
+        return ids.intersection(deps)
+
     def dependencies(self, goal):
         pairs = dict(self._deps)
         tier = pairs[goal.id()]
@@ -245,6 +250,18 @@ class Pipeline:
         """
         return None
 
+    def cleanup(self, dirty, pending):
+        new = []
+        for d in dirty:
+            if d is None:
+                continue
+            if self.steps.depends(d, pending):
+                new.append(d)
+                continue
+            if os.path.isdir(d.cache_dir):
+                shutil.rmtree(d.cache_dir)
+        return new
+
     def process(self, source, goal):
         """
         Starts this pipeline.
@@ -257,8 +274,9 @@ class Pipeline:
             with self.workspace() as td:
                 previous_step = self.find_previous_step()
                 processed_step = None
-                deps = tuple(self.steps.dependencies(goal))
-                for step in reversed(deps):
+                deps = tuple(reversed(tuple(self.steps.dependencies(goal))))
+                dirty = []
+                for n, step in enumerate(deps):
                     step.cache_dir = os.path.join(td, str(self.counter))
                     os.mkdir(step.cache_dir)
                     self.counter += 1
@@ -277,9 +295,8 @@ class Pipeline:
                     processed_step = previous_step
                     previous_step = step
 
-                    if processed_step is not None:
-                        if os.path.isdir(processed_step.cache_dir):
-                            shutil.rmtree(processed_step.cache_dir)
+                    dirty.append(processed_step)
+                    dirty = self.cleanup(dirty, deps[n:])
                     self.commit_transaction(step)
 
                 self.counter = 0
