@@ -6,11 +6,13 @@ import logging
 import multiprocessing
 
 from collections import defaultdict
-from concurrent.futures import ProcessPoolExecutor
+from multiprocessing.pool import Pool
 from tempfile import TemporaryDirectory
 from glob import glob
 
-from .steps import Aggregate, Step
+from .steps import Aggregate, Step, Serial, Parallel
+
+import numpy as np
 
 
 class MultiSource:
@@ -172,6 +174,9 @@ class PSG:
         deps = set(s.id() for s in self._deps[step.id()])
         return ids.intersection(deps)
 
+    def immediate_dependencies(self, step):
+        yield from self._deps[step.id()]
+
     def dependencies(self, goal):
         pairs = dict(self._deps)
         tier = pairs[goal.id()]
@@ -217,8 +222,6 @@ class Pipeline:
             self.batch_size = batch_size or os.cpu_count() or 1
 
         self.counter = 0
-
-        self.process_lock = multiprocessing.Lock()
 
     def workspace(self):
         """
@@ -270,111 +273,113 @@ class Pipeline:
                        for the images to be processed.
         :type source: Iterable
         """
-        with self.process_lock:
-            with self.workspace() as td:
-                previous_step = self.find_previous_step()
-                processed_step = None
-                deps = tuple(reversed(tuple(self.steps.dependencies(goal))))
-                dirty = []
-                for n, step in enumerate(deps):
-                    step.cache_dir = os.path.join(td, str(self.counter))
-                    os.mkdir(step.cache_dir)
-                    self.counter += 1
-                    self.begin_transaction(step)
+        with self.workspace() as td:
+            previous_step = self.find_previous_step()
+            processed_step = None
+            deps = tuple(reversed(tuple(self.steps.dependencies(goal))))
+            dirty = []
+            for n, step in enumerate(deps):
+                step.cache_dir = os.path.join(td, str(self.counter))
+                os.mkdir(step.cache_dir)
+                self.counter += 1
+                self.begin_transaction(step)
+                sdeps = tuple(self.steps.immediate_dependencies(step))
 
-                    if previous_step is None:
-                        srciter = enumerate(source)
-                    else:
-                        files = os.listdir(previous_step.cache_dir)
-                        srciter = (
-                            (i, os.path.join(previous_step.cache_dir, f))
-                            for i, f in enumerate(files)
+                if previous_step is None:
+                    srciter = ((s,) for s in source)
+                else:
+                    transposed, longest = [], 0
+                    for d in sdeps:
+                        abspaths = tuple(
+                            os.path.join(d.cache_dir, f)
+                            for f in os.listdir(d.cache_dir)
                         )
-                    self.process_step(step, srciter)
+                        longest = max(longest, len(abspaths))
+                        transposed.append(abspaths)
+                    for t in transposed:
+                        t.extend([None] * (longest - len(t)))
+                    scriter = np.array(transposed).T
+                self.process_step(step, srciter, sdeps)
 
-                    processed_step = previous_step
-                    previous_step = step
+                processed_step = previous_step
+                previous_step = step
 
-                    dirty.append(processed_step)
-                    dirty = self.cleanup(dirty, deps[n:])
-                    self.commit_transaction(step)
+                dirty.append(processed_step)
+                dirty = self.cleanup(dirty, deps[n:])
+                self.commit_transaction(step)
 
-                self.counter = 0
-                self.update_counter()
+            self.counter = 0
+            self.update_counter()
 
-    def process_step(self, step, srciter):
-        batch = []
-        for i, s in srciter:
-            logging.info('processing image: %s', s)
-            step.position = i
-            # TODO(wvxvw): Move reading into multiple processes.
-            sdata, err = step.read(s)
-            if err is not None:
-                raise err
-            n = os.path.join(step.cache_dir, os.path.basename(s))
-            batch.append((n, sdata))
-            if (i + 1) % self.batch_size == 0:
-                self.process_batch(batch, step)
-                batch = []
-        if batch:
-            self.process_batch(batch, step)
-
-    def process_batch(self, batch, step):
+    def process_step(self, step, srciter, source):
         """
         :meta private:
         """
         logging.info('applying step: %s', step)
         if isinstance(step, Aggregate):
-            self.process_batch_agg(batch, step)
+            self.process_batch_agg(scriter, step, source)
+        elif isinstance(step, Serial):
+            self.process_batch_serial(srciter, step, source)
         else:
-            self.process_batch_parallel(batch, step)
+            self.process_batch_parallel(srciter, step, source)
 
-    def process_batch_agg(self, batch, step):
+    def process_batch_agg(self, srciter, step, source):
         # TODO(olegs): In principle, this can also be done in
         # parallel, but we'll implement the parallel reduction some
         # time later.
-        accum, errors = step.accumulator, []
-        # TODO(olegs): Use consistent order of image and name
-        for name, img in batch:
-            naccum, err = step.aggregate(accum, (img, name))
+        iaccum, maccum = step.initial()
+        for name in srciter:
+            img, err = step.read(name)
+            if err is not None:
+                errors.append(err)
+                continue
+            niaccum, nmaccum, err = step.aggregate(
+                iaccum,
+                maccum,
+                img,
+                name,
+                source,
+            )
             if err is not None:
                 errors.append(err)
             else:
-                accum = naccum
+                iaccum = niaccum
+                maccum = nmaccum
+
         if errors:
             raise PipelineError(
                 'Step {} had errors:\n  '.format(type(step).__name__) +
                 '\n  '.join(str(err) for err in errors),
             )
 
-    def process_batch_parallel(self, batch, step):
+    def process_batch_parallel(self, srciter, step, source):
+        pass
+
+    def process_image(self, args):
+        step, name, source = args
+        print('process_image', name)
+        img, err = step.read(name)
+        if err:
+            return None, err
+        res, err = step.apply_one(img, name, source)
+        if err:
+            return None, err
+        if res:
+            return step.write(res, os.path.basename(name))
+
+    def process_batch_serial(self, srciter, step, source):
         # Forking only works on Linux.  The garbage that Python
         # multiprocessing is it requires a lot of workarounds...
         ctx = multiprocessing.get_context('spawn')
-        with ProcessPoolExecutor(mp_context=ctx) as ex:
-            results, errors = [], []
-            batch_names, batch_data = zip(*batch)
-            for res, err in ex.map(step.apply, batch_data, batch_names):
-                if err:
-                    errors.append(err)
-                elif res is not None:
-                    results.append(res)
-                else:
-                    errors.append(PipelineError(
-                        'step.apply returned neither error nor result',
-                    ))
+        with Pool(context=ctx) as ex:
+            errors = []
+            metas = tuple(srciter)
+            steps = tuple(step for _ in metas)
+            sources = tuple(source for _ in metas)
+            driver = ex.map(self.process_image, zip(steps, metas, sources))
+            errors = tuple(e for e in driver if e)
             if errors:
                 raise PipelineError(
                     'Step {} had errors:\n  '.format(type(step).__name__) +
                     '\n  '.join(str(err) for err in errors),
-                )
-
-            for err in ex.map(step.write, results, batch_names):
-                if err:
-                    errors.append(err)
-            if errors:
-                raise PipelineError(
-                    'Step {} couldn\'t save intermediate results:\n'.format(
-                        type(step).__name__,
-                    ) + '\n  '.join(str(err) for err in errors),
                 )

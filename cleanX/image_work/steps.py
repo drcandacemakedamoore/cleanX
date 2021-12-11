@@ -34,6 +34,18 @@ class RegisteredStep(type):
         super().__init__(name, bases, clsdict)
 
 
+class Strategy:
+    pass
+
+
+class Serial(Strategy):
+    pass
+
+
+class Parallel(Strategy):
+    pass
+
+
 class Step(metaclass=RegisteredStep):
     """
     This class has default implementations for methods all steps are
@@ -56,16 +68,28 @@ class Step(metaclass=RegisteredStep):
     def id(self):
         return self._id
 
-    def apply(self, image_data, image_name):
+    def combine(self, new, accum):
+        rnew, enew = new
+        raccum, eaccum = accum
+        return raccum + rnew, eaccum + [enew]
+
+    def apply(self, images, metas, sources):
+        r, e = self.apply_one(images[0], metas[0], sources[0])
+        e = [e]
+        for i, m, s in zip(images[1:], metas[1:], sources[1:]):
+            r, e = self.combine(self.apply_one(i, m, s), (r, e))
+        return r, e
+
+    def apply_one(self, image, meta, source):
         """
         This is the method that will be called to do the actual image
         transformation.  This function must not raise exceptions, as it
         is used in the :mod:`multiprocessing` context.
 
-        :param image_data: Will be the data obtained when calling
-                           :meth:`~.Step.read()` method of this class.
-        :type image_data: Unless this class overrides the defaults, this
-                          will be :class:`~numpy.ndarray`.
+        :param image: Will be the data obtained when calling
+                      :meth:`~.Step.read()` method of this class.
+        :type image: Unless this class overrides the defaults, this
+                     will be :class:`~numpy.ndarray`.
 
         :return: This method should return two values.  First is the
                  processed image data.  This should be suitable for the
@@ -74,7 +98,7 @@ class Step(metaclass=RegisteredStep):
                  one element of the tuple should be :code:`not None`.
         :rtype: Tuple[numpy.ndarray, Exception]
         """
-        return image_data, None
+        return image, None
 
     def read(self, path):
         """
@@ -100,16 +124,16 @@ class Step(metaclass=RegisteredStep):
             logging.exception(e)
             return None, e
 
-    def write(self, image_data, path):
+    def write(self, image, path):
         """
         This method should write the image data to make it available for
         the next step.  Default implementation use NumPy's persistence
         format.  This method is used in :mod:`multiprocessing` context,
         therefore it must not raise exceptions.
 
-        :param image_data: This is the result from calling
-                           :meth:`~.Step.apply()` method of this class.
-        :type image_data: Default implementation uses :class:`~numpy.ndarray`.
+        :param image: This is the result from calling
+                     :meth:`~.Step.apply()` method of this class.
+        :type image: Default implementation uses :class:`~numpy.ndarray`.
         :return: Exception if it was raised during the execution, or
                  :code:`None`.
         :rtype: Exception
@@ -121,7 +145,7 @@ class Step(metaclass=RegisteredStep):
                     path,
                 ))
             path = os.path.splitext(path)[0]
-            np.save(path, image_data)
+            np.save(os.path.join(self.cache_dir, path), image)
             return None
         except Exception as e:
             logging.exception(e)
@@ -160,41 +184,19 @@ class Aggregate(Step):
     the individual images processed in a step.
     """
 
-    def __init__(self, cache_dir=None):
-        super().__init__(cache_dir=cache_dir)
-        self.accumulator = None
-
-    def begin_transaction(self):
-        super().begin_transaction()
-        self.accumulator = self.pre()
-
-    def commit_transaction(self):
-        super().commit_transaction()
-        super().write(*self.post(self.accumulator))
-
-    def pre(self):
+    def initial(self):
         return None, None
 
-    def post(self, accumulator):
-        return accumulator
+    def aggregate(self, iaccum, maccum, image, meta, source):
+        raise NotImplementedError('Subclasses must implement this method')
 
-    def agg(self, acc_data, acc_name, image_data, image_name):
-        raise NotImplementedError("Subclasses must implement this")
 
-    def aggregate(self, accum, new):
-        try:
-            self.accumulator = self.agg(accum[0], accum[1], new[0], new[1])
-        except Exception as e:
-            return None, e
-        return self.accumulator, None
+class Or(Step, Parallel):
 
-    def __reduce__(self):
-        return self.__class__, (
-            self.pre,
-            self.agg,
-            self.post,
-            self.cache_dir,
-        )
+    def combine(self, new, accum):
+        rnew, enew = new
+        raccum, eaccum = accum
+        return cv2.bitwise_or(raccum, rnew), eaccum + [enew]
 
 
 class Mean(Aggregate):
@@ -202,7 +204,7 @@ class Mean(Aggregate):
     This class builds an averaged (by mean) image.
     """
 
-    def agg(self, acc_data, acc_name, image_data, image_name):
+    def aggregate(self, aimage, ameta, nimage, nmeta, source):
         if acc_data is None:
             return image_data, [image_name]
         acc_name.append(image_name)
@@ -214,14 +216,11 @@ class Mean(Aggregate):
         image_data = np.float32(cv2.resize(image_data, (mw, mh)))
         return acc_data + image_data, acc_name
 
-    def post(self, acc):
-        return np.uint8(acc[0] / len(acc[1])), acc[1][-1]
-
-    def __reduce__(self):
-        return self.__class__, (self.cache_dir,)
+    def write(self, aimage, ameta):
+        return super().write(np.uint8(acc[0] / len(acc[1])), acc[1][-1])
 
 
-class GroupHistoHtWt(Aggregate):
+class GroupHistoHtWt(Aggregate, Serial):
     """
     This class builds a histogram of individual image heights and widths.
     """
@@ -268,7 +267,7 @@ class GroupHistoHtWt(Aggregate):
         return self.__class__, (self.histo_dir, self.cache_dir,)
 
 
-class GroupHistoPorportion(Aggregate):
+class GroupHistoPorportion(Aggregate, Serial):
 
     """
     This class makes a histogram of all the image's proportions.
@@ -290,18 +289,15 @@ class GroupHistoPorportion(Aggregate):
             list_like.append(list(element))
         height = [el[0] for el in list_like]
         width = [el[1] for el in list_like]
-        porpor = [el[0]/el[1] for el in list_like]
+        porpor = [el[0] / el[1] for el in list_like]
         fig, ax = plt.subplots(1, 1)
         # Add axis labels
         ax.set_xlabel('h/w')
         ax.set_ylabel('count')
         # Generate the histogram
-        histo_ht_wt = ax.hist(
-            (porpor),
-            bins=10
-        )
+        histo_ht_wt = ax.hist(porpor, bins=10)
         # Add a legend
-        ax.legend(('height/width'), loc='upper right')
+        ax.legend('height/width', loc='upper right')
 
         fig.savefig(os.path.join(self.histo_dir, 'example5.jpg'))
         return np.zeros([2, 2, 3]), 'example5.jpg'
@@ -310,7 +306,7 @@ class GroupHistoPorportion(Aggregate):
         return self.__class__, (self.histo_dir, self.cache_dir,)
 
 
-class Acquire(Step):
+class Acquire(Step, Serial):
     """This class reads in images (to an array) from a path"""
 
     def read(self, path):
@@ -322,7 +318,7 @@ class Acquire(Step):
             return None, e
 
 
-class Save(Step):
+class Save(Step, Serial):
     """This class writes the images somewhere"""
 
     def __init__(self, target, extension='jpg', cache_dir=None):
@@ -440,14 +436,12 @@ class ProjectionHorizoVert(Step):
 class BlackEdgeCrop(Step):
     """This class crops image arrays of black frames"""
 
-    def apply(self, image_data, image_name):
-
+    def apply_one(self, image, meta, source):
         try:
-            nonzero = np.nonzero(image_data)
+            nonzero = np.nonzero(image)
             y_nonzero = nonzero[0]
             x_nonzero = nonzero[1]
-            # , x_nonzero, _ = np.nonzero(image)
-            return image_data[
+            return image[
                 np.min(y_nonzero):np.max(y_nonzero),
                 np.min(x_nonzero):np.max(x_nonzero)
             ], None
@@ -557,9 +551,9 @@ class Sharpie(Step):
         super().__init__(cache_dir)
         self.ksize = ksize
 
-    def apply(self, image_data, image_name):
-        blur_mask = cv2.blur(image_data, ksize=self.ksize)
-        new_image_array = 2 * image_data - blur_mask
+    def apply_one(self, image, meta, source):
+        blur_mask = cv2.blur(image, ksize=self.ksize)
+        new_image_array = 2 * image - blur_mask
         return new_image_array, None
 
     def __reduce__(self):
@@ -584,22 +578,22 @@ class BlurEdges(Step):
         super().__init__(cache_dir)
         self.ksize = ksize
 
-    def apply(self, image_data, image_name):
-        msk = np.zeros(image_data.shape)
+    def apply(self, image, meta, source):
+        msk = np.zeros(image.shape)
         center_coordinates = (
-            image_data.shape[1] // 2,
-            image_data.shape[0] // 2,
+            image.shape[1] // 2,
+            image.shape[0] // 2,
         )
         radius = int(
-            (min(image_data.shape) // 100) * (min(image_data.shape)/40)
+            (min(image.shape) // 100) * (min(image.shape)/40)
         )
         color = 255
         thickness = -1
         msk = cv2.circle(msk, center_coordinates, radius, color, thickness)
         ksize = self.ksize
         msk = cv2.blur(msk, ksize)
-        filtered = cv2.blur(image_data, ksize)
-        edge_image = image_data * (msk / 255) + filtered * ((255 - msk) / 255)
+        filtered = cv2.blur(image, ksize)
+        edge_image = image * (msk / 255) + filtered * ((255 - msk) / 255)
         return edge_image, None
 
     def __reduce__(self):
@@ -633,19 +627,19 @@ class CleanRotate(Step):
             return None, e
 
 
-class Normalize(Step):
+class Normalize(Step, Serial):
     """This class makes a simple normalizing to get values 0 to 255."""
 
-    def apply(self, image_data, image_name):
+    def apply(self, image, meta, source):
         try:
             new_max_value = 255
 
-            max_value = np.amax(image_data)
-            min_value = np.amin(image_data)
+            max_value = np.amax(image)
+            min_value = np.amin(image)
 
-            img_py = image_data - min_value
-            multiplier_ratio = new_max_value/max_value
-            img_py = img_py*multiplier_ratio
+            img_py = image - min_value
+            multiplier_ratio = new_max_value / max_value
+            img_py = img_py * multiplier_ratio
             return img_py, None
         except Exception as e:
             logging.exception(e)
@@ -660,15 +654,15 @@ class HistogramNormalize(Step):
         super().__init__(cache_dir)
         self.tail_cut_percent = tail_cut_percent
 
-    def apply(self, image_data, image_name):
+    def apply(self, image, meta, source):
         try:
             new_max_value = 255
-            img_py = np.array((image_data), dtype='int64')
+            img_py = np.int64(image)
             # num_total = img_py.shape[0]*img_py.shape[1]
             # list_from_array = img_py.tolist()
             gray_hist = np.histogram(img_py, bins=256)[0]
             area = gray_hist.sum()
-            cutoff = area * (self.tail_cut_percent/100)
+            cutoff = area * (self.tail_cut_percent / 100)
             dark_cutoff = 0
             bright_cutoff = 255
             area_so_far = 0
@@ -688,7 +682,7 @@ class HistogramNormalize(Step):
             img_py[img_py < 0] = 0
             max_value2 = np.amax(img_py)
             # min_value2 = np.amin(img_py)
-            multiplier_ratio = new_max_value/max_value2
+            multiplier_ratio = new_max_value / max_value2
             img_py = img_py*multiplier_ratio
 
             return img_py, None
