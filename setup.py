@@ -225,14 +225,26 @@ class GenerateCondaYaml(Command):
         'Python version to build the package for',
     )]
 
+    user_options = [(
+        'target-conda=',
+        'c',
+        'Conda version to build the package for',
+    )]
+
     def initialize_options(self):
         self.target_python = None
+        self.target_conda = None
 
     def finalize_options(self):
         if self.target_python is None:
             maj, min, patch = sys.version.split(maxsplit=1)[0].split('.')
-            
+
             self.target_python = '{}.{}'.format(maj, min)
+        if self.target_conda is None:
+            conda_exe = os.environ.get('CONDA_EXE', 'conda')
+            self.target_conda = subprocess.check_output(
+                [conda_exe, '--version'],
+            ).split()[-1].decode()
 
     def run(self):
         tpls = glob(os.path.join(project_dir, 'conda-pkg/*.in'))
@@ -250,6 +262,7 @@ class GenerateCondaYaml(Command):
                     version=version,
                     tag=tag,
                     python_version=self.target_python,
+                    conda_version=self.target_conda,
                 ))
 
 

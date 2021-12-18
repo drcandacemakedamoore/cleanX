@@ -8,6 +8,7 @@ source:
 requirements:
   host:
     - python==${python_version}
+    - conda==${conda_version}
     - sphinx
 
   build:
@@ -15,6 +16,7 @@ requirements:
 
   run:
     - python==${python_version}
+    - conda==${conda_version}
     - numpy
     - pandas
     - matplotlib
@@ -26,6 +28,7 @@ requirements:
 test:
   requires:
     - python==${python_version}
+    - conda==${conda_version}
   imports:
     - cleanX
 
