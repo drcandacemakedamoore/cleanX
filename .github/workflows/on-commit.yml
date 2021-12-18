@@ -100,7 +100,7 @@ jobs:
       - run: conda run -n cleanx-build python setup.py genconda
         # conda-build installation and the build cannot be in an
         # environment
-      - run: conda install -yq conda-build
+      - run: conda install -yq conda-build $(conda --version | tr ' ' '=')
       - run: conda build -c conda-forge ./conda-pkg/
       - run: conda install -yq -n cleanx-build --use-local cleanx
       - run: conda install -yq -n cleanx-build pytest pycodestyle
