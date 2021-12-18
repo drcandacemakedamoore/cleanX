@@ -617,7 +617,7 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
 
 # def crop_them_all(origin_folder, target_folder):
 #     """
-#     This funcion has been replaced by pipeline. 
+#     This funcion has been replaced by pipeline.
 #     Crops all images and moves them to a target folder
 
 #     :param origin_folder: The folder in which the images are

@@ -46,8 +46,7 @@ Special additional documentation for medical professionals with limited programm
   necessary)
 - [`tesserocr`](https://github.com/sirfz/tesserocr),
   [`matplotlib`](https://matplotlib.org/),
-  [`pandas`](https://pandas.pydata.org/),
-  [`pillow`](https://python-pillow.org/) and
+  [`pandas`](https://pandas.pydata.org/), and
   [`opencv`](https://opencv.org/)
 - Optional recommendation of [`SimpleITK`](https://simpleitk.org/) or
   [`pydicom`](https://github.com/pydicom/pydicom) for DICOM/dcm to JPG
