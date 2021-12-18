@@ -22,26 +22,40 @@ from cleanX.image_work.graph_parser import Parser
 
 def test_parse_simple():
     pipeline = '''
-    vertices: # inline comment
-    1: Save("/foo/bar")
-    2: Sharpie()
-    3: BlurEdges()
-    4: Acquire()
-    arcs:
-    # stand-alone comment
-    # on two lines
-    1 -> 2
-    2 -> 3
-    3 -> 4
+        pipeline(
+            definitions(
+                dir = cleanX.image_work:DirectorySource
+                glob = cleanX.image_work:GlobSource
+                acquire = cleanX.image_work:Acquire
+                or = cleanX.image_work.steps:Or
+                crop = cleanX.image_work:Crop
+                save = cleanX.image_work:Save
+            )
+            steps(
+                source1 = dir[path = "/foo/bar"]()
+                source2 = glob[pattern = "/foo/*.jpg"]()
+
+                out1 out2 out3 = acquire[arg1 = "foo" arg2 = 42](
+                    source1 source2
+                )
+                out4 = or[arg1 = true](out1 out2)
+                out5 = crop(out3 out4)
+            )
+            goal(
+                save[path = "/foo/bar"](out5)
+            )
+        )
     '''
-    p = Parser(StringIO(pipeline))
-    steps = tuple(p.parse())
-    a, b = steps[0]
-    c, d = steps[1]
-    e, f = steps[2]
-    assert b is c
-    assert d is e
-    assert isinstance(a, Save)
-    assert isinstance(b, Sharpie)
-    assert isinstance(d, BlurEdges)
-    assert isinstance(f, Acquire)
+    p = Parser()
+    result = p.parse(pipeline)
+    expected_vars = set((
+        'source1',
+        'source2',
+        'out1',
+        'out2',
+        'out3',
+        'out4',
+        'out5',
+    ))
+    assert expected_vars == set(result.steps.keys())
+    assert result.goal.definition is Save

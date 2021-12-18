@@ -1,324 +1,171 @@
 # -*- coding: utf-8 -*-
 
-import string
+import ast
+import importlib
 
-from .steps import get_known_steps
+from collections import namedtuple, Counter
 
-class Parser:
-
-    name_chars = string.ascii_letters + string.digits
-
-    def __init__(self, stream):
-        self.stream = stream
-        self.ctors = get_known_steps()
-        self.overflow = None
-        # TODO(olegs): Track position in the parser
-        self.line = 0
-        self.column = 0
-
-    def peek(self):
-        if self.overflow is None:
-            self.overflow = self.stream.read(1)
-            if not self.overflow:
-                raise EOFError()
-        return self.overflow
-
-    def consume(self):
-        self.overflow = None
-
-    def read_blank(self):
-        while True:
-            c = self.peek()
-            if c not in string.whitespace:
-                break
-            self.consume()
-
-    def raise_syntax_error(self, c):
-        err = SyntaxError('Unexpected {!r}'.format(c))
-        err.lineno = self.line
-        err.offset = self.column
-        raise err
-
-    def read(self, cs):
-        for c in cs:
-            d = self.peek()
-            if c != d:
-                self.raise_syntax_error(d)
-            self.consume()
-
-    def read_arrow(self):
-        self.read_blank()
-        self.read('-')
-        self.read('>')
-
-    def read_step(self):
-        raw = []
-        while True:
-            c = self.peek()
-            if c in ('\n', '#'):
-                break
-            raw.append(c)
-            self.consume()
-        l, g = locals(), globals()
-        l = dict(l)
-        l.update(self.ctors)
-        return eval(''.join(raw), l, g)
-
-    def read_label(self):
-        raw = []
-        while True:
-            c = self.peek()
-            if c == ':':
-                self.consume()
-                break
-            raw.append(c)
-            self.consume()
-        if not raw:
-            self.raise_syntax_error('empty label')
-        return ''.join(raw)
-
-    def read_comment(self):
-        self.read_blank()
-        if self.peek() != '#':
-            return False
-        self.consume()
-
-        while self.peek() != '\n':
-            self.consume()
-        return True
-
-    def read_comments(self):
-        while self.read_comment():
-            pass
-
-    def read_vertices(self):
-        self.read_blank()
-        self.read_comments()
-        self.read_blank()
-        self.read('vertices:')
-        self.read_blank()
-        self.read_comments()
-
-        result = {}
-
-        while True:
-            label = self.read_label()
-            if label == 'arcs':
-                break
-            if label in result:
-                self.raise_syntax_error(
-                    'duplicate label: {}'.format(label),
-                )
-            result[label] = self.read_step()
-            self.read_comments()
-
-        return result
-
-    def read_word(self):
-        result = []
-
-        while True:
-            c = self.peek()
-            if c in string.whitespace:
-                if not result:
-                    self.raise_syntax_error('mising word')
-                break
-            result.append(c)
-            self.consume()
-        return ''.join(result)
-
-    def read_arcs(self, labels):
-        self.read_blank()
-        self.read_comments()
-
-        while True:
-            self.read_blank()
-            a = self.read_word()
-            if a not in labels:
-                self.raise_syntax_error(a)
-            self.read_blank()
-            self.read_arrow()
-            self.read_blank()
-            b = self.read_word()
-            if b not in labels:
-                self.raise_syntax_error(b)
-            yield a, b
-            self.read_blank()
-            self.read_comments()
-
-    def parse(self):
-        try:
-            vertices = self.read_vertices()
-            for src, dst in self.read_arcs(vertices):
-                yield vertices[src], vertices[dst]
-        except EOFError:
-            # TODO(olegs): Make sure that we parsed everything
-            pass
+from lark import Lark, Transformer, v_args
 
 
-class Parser:
+class MissingDefinition(LookupError):
+
+    def __init__(self, missing):
+        super().__init__('Missing definition for {}'.format(missing))
+
+
+class DuplicateVariables(ValueError):
+
+    def __init__(self, duplicates):
+        super().__init__('Found duplicate variables: {}'.format(duplicates))
+
+
+StepCall = namedtuple('StepCall', 'definition,options,variables')
+PipelineDef = namedtuple('PipelineDef', 'steps,goal')
+
+
+cleanx_grammar = """
+    ?start: pipeline -> create_pipeline
+    ?pipeline: "pipeline" "(" definitions steps goal ")" -> pipeline
+    ?definitions: "definitions" "(" dassign+ ")" -> definitions
+    ?steps: "steps" "(" sassign+ ")" -> steps
+    ?goal: "goal" "(" step ")" -> goal
+    ?dassign: var "=" src -> dassign
+    ?var: NAME
+    ?src: module ":" def -> src
+    ?module: NAME ("." NAME)*
+    ?def: NAME
+    ?sassign: var+ "=" step -> sassign
+    ?step: var options? "(" var* ")" -> step
+    ?options: "[" oassign+ "]" -> options
+    ?oassign: var "=" val -> oassign
+    ?val: number
+        | string
+        | boolean
+        | null
+        | list
+    ?number: NUMBER -> number
+    ?string: STRING -> string
+    ?null: "null" -> null
+    ?boolean: /true|false/ -> boolean
+    ?list: "(" val* ")"
+    COMMENT: /#.*$/
+
+    %import common.ESCAPED_STRING -> STRING
+    %import common.SIGNED_NUMBER -> NUMBER
+    %import common.CNAME -> NAME
+    %import common.WS
+    %ignore COMMENT
+    %ignore WS
+"""
+
+
+@v_args(inline=True)
+class Parser(Transformer):
     '''
     Example:
 
     ::
 
-        import cleanX.source.Dir as Dir
-        import cleanX.source.Glob as Glob
+        pipeline(
+            definitions(
+                dir = cleanX.source:Dir
+                glob = cleanX.source:Glob
+                acquire = cleanX.steps:Acquire
+                or = cleanX.steps:Or
+                crop = cleanX.steps:Crop
+            )
+            steps(
+                source1 = dir[path = "/foo/bar"]()
+                source2 = glob[pattern = "/foo/*.jpg"]()
 
-        Source1 = Dir("/foo/bar")
-        Source2 = Glob("/foo/*.jpg")
-
-        Out1, Out2, Out3 = Acquire[arg1="foo", arg2=42](Source1, Source2)
-        Out4 = Or[arg1=True](Out1, Out2)
-        Out5 = Crop(Out3, Out4)
-        Save[path="/foo/bar"](Out5)
+                out1 out2 out3 = acquire[arg1 = "foo" arg2 = 42](
+                    source1 source2
+                )
+                out4 = or[arg1 = true](out1 out2)
+                out5 = crop(out3 out4)
+            )
+            goal(
+                save[path = "/foo/bar"](out5)
+            )
+        )
     '''
 
-    name_chars = string.ascii_letters + string.digits
+    def __init__(self):
+        self.lark = Lark(
+            cleanx_grammar,
+            parser='lalr',
+            transformer=self,
+        )
+        self._definitions = {}
+        self._variables = {}
 
-    def __init__(self, stream):
-        self.stream = stream
-        self.ctors = get_known_steps()
-        self.overflow = None
-        # TODO(olegs): Track position in the parser
-        self.line = 0
-        self.column = 0
+    def parse(self, stream):
+        return self.lark.parse(stream).children[0]
 
-    def peek(self):
-        if self.overflow is None:
-            self.overflow = self.stream.read(1)
-            if not self.overflow:
-                raise EOFError()
-        return self.overflow
+    def number(self, n):
+        return ast.literal_eval(n)
 
-    def consume(self):
-        self.overflow = None
+    def string(self, s):
+        return ast.literal_eval(s)
 
-    def read_blank(self):
-        while True:
-            c = self.peek()
-            if c not in string.whitespace:
-                break
-            self.consume()
+    def null(self):
+        return None
 
-    def raise_syntax_error(self, c):
-        err = SyntaxError('Unexpected {!r}'.format(c))
-        err.lineno = self.line
-        err.offset = self.column
-        raise err
+    def boolean(self, b):
+        return b == 'true'
 
-    def read(self, cs):
-        for c in cs:
-            d = self.peek()
-            if c != d:
-                self.raise_syntax_error(d)
-            self.consume()
+    def src(self, module, definition):
+        mod = importlib.import_module('.'.join(module.children))
+        return getattr(mod, definition)
 
-    def read_arrow(self):
-        self.read_blank()
-        self.read('-')
-        self.read('>')
+    def dassign(self, name, definition):
+        self._definitions[str(name)] = definition
+        return definition
 
-    def read_step(self):
-        raw = []
-        while True:
-            c = self.peek()
-            if c in ('\n', '#'):
-                break
-            raw.append(c)
-            self.consume()
-        l, g = locals(), globals()
-        l = dict(l)
-        l.update(self.ctors)
-        return eval(''.join(raw), l, g)
+    def oassign(self, name, value):
+        return str(name), value
 
-    def read_label(self):
-        raw = []
-        while True:
-            c = self.peek()
-            if c == ':':
-                self.consume()
-                break
-            raw.append(c)
-            self.consume()
-        if not raw:
-            self.raise_syntax_error('empty label')
-        return ''.join(raw)
+    def options(self, *raw):
+        return dict(raw)
 
-    def read_comment(self):
-        self.read_blank()
-        if self.peek() != '#':
-            return False
-        self.consume()
-
-        while self.peek() != '\n':
-            self.consume()
-        return True
-
-    def read_comments(self):
-        while self.read_comment():
-            pass
-
-    def read_vertices(self):
-        self.read_blank()
-        self.read_comments()
-        self.read_blank()
-        self.read('vertices:')
-        self.read_blank()
-        self.read_comments()
-
-        result = {}
-
-        while True:
-            label = self.read_label()
-            if label == 'arcs':
-                break
-            if label in result:
-                self.raise_syntax_error(
-                    'duplicate label: {}'.format(label),
-                )
-            result[label] = self.read_step()
-            self.read_comments()
-
-        return result
-
-    def read_word(self):
-        result = []
-
-        while True:
-            c = self.peek()
-            if c in string.whitespace:
-                if not result:
-                    self.raise_syntax_error('mising word')
-                break
-            result.append(c)
-            self.consume()
-        return ''.join(result)
-
-    def read_arcs(self, labels):
-        self.read_blank()
-        self.read_comments()
-
-        while True:
-            self.read_blank()
-            a = self.read_word()
-            if a not in labels:
-                self.raise_syntax_error(a)
-            self.read_blank()
-            self.read_arrow()
-            self.read_blank()
-            b = self.read_word()
-            if b not in labels:
-                self.raise_syntax_error(b)
-            yield a, b
-            self.read_blank()
-            self.read_comments()
-
-    def parse(self):
+    def step(self, *args):
         try:
-            vertices = self.read_vertices()
-            for src, dst in self.read_arcs(vertices):
-                yield vertices[src], vertices[dst]
-        except EOFError:
-            # TODO(olegs): Make sure that we parsed everything
-            pass
+            definition = self._definitions[args[0]]
+        except KeyError:
+            raise MissingDefinition(args[0])
+        args = args[1:]
+        if args and (type(args[0]) is dict):
+            options = args[0]
+            args = args[1:]
+        else:
+            options = {}
+        if args:
+            variables = tuple(str(s) for s in args)
+        else:
+            variables = ()
+        # TODO(wvxvw): Here we could validate optional arguments to
+        # steps.
+        return StepCall(definition, options, variables)
+
+    def sassign(self, *args):
+        variables = tuple(str(s) for s in args[:-1])
+        duplicates = []
+        for var, count in Counter(variables).most_common():
+            if count == 1:
+                break
+            duplicates.append(var)
+
+        for v in variables:
+            if v in self._variables:
+                duplicates.append(v)
+        if duplicates:
+            raise DuplicateVariables(duplicates)
+        for v in variables:
+            self._variables[v] = args[-1]
+        return args[-1]
+
+    def pipeline(self, *args):
+        # TODO(wvxvw): Here we could check for unused definitions, but
+        # it's not very important for now.
+        return PipelineDef(self._variables, args[-1].children[0])
