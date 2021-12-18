@@ -214,7 +214,7 @@ def simple_rotation_augmentation(angle_list1, image):
     return rotated1
 
 
-def simple_rotate_no_pil(image, angle, center = None, scale = 1.0):
+def simple_rotate_no_pil(image, angle, center=None, scale=1.0):
     """
     This function works without the PIL library. Itakes one picture
     and rotates is by a number of degrees in the parameter angle.
