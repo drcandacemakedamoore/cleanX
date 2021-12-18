@@ -309,6 +309,40 @@ def reasonable_rotation_augmentation(angle1, angle2, number_slices, image):
     return augmentos
 
 
+def multi_rotation_augmentation_no_pill(angle1, angle2, number_slices, image):
+    """
+    Works on a single image, and returns a list of augmented images which are
+    based on twisting the angle from angle1 to angle2 with 'number_slices' as
+    the number of augmented images to be made from the original. It is not
+    realistic or desirable to augment images of most X-rays by flipping them.
+    In abdominal or chest X-rays that would create an augmentation that could
+    imply specific pathologies e.g. situs inversus. We suggest augmenting
+    between angles -5 to 5.
+    :param angle1: angle1 is the angle from the original to the first augmented
+    :type angle1: float
+    :param angle2: angle2 is the angle from the original to the last augmented
+    :type angle2: float
+    :param number_slices: number of images to be produced
+    :type number_slices: int
+    :param image: image
+    :type image: string (string where image is located)
+    :return: list of image arrays
+    :rtype: list
+    """
+    increment = abs(angle1-angle2)/number_slices
+    angle1f = float(angle1)
+    angle2f = float(angle2)
+    number_slicesf = float(number_slices)
+    increment = abs(angle1f-angle2f)/number_slicesf
+    num_list = np.arange(angle1f, angle2f,  increment)
+    image4R = cv2.imread(image)
+    augmentos = []
+    for i in num_list:
+        augmentos.append(simple_rotate_no_pil(image4R, i))
+        
+    return augmentos
+
+
 def show_major_lines_on_image(pic_name):
     """
     A function that takes individual images and shows suspect lines i.e.
