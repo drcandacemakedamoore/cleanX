@@ -13,8 +13,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from PIL import Image
-from PIL import Image, ImageOps
+# from PIL import Image
+# from PIL import Image, ImageOps
 
 try:
     def __fix_tesserocr_locale():
@@ -91,27 +91,27 @@ def crop_np(image_array):
     ]
 
 
-def crop_pil(image):
-    """
-    Crops black edges of an Pil/Pillow image
+# def crop_pil(image):
+#     """
+#     Crops black edges of an Pil/Pillow image
 
-    :param image_array: Image.
-    :type image_array: image
+#     :param image_array: Image.
+#     :type image_array: image
 
 
-    :return: PIL Image with black margins cropped.
-    :rtype: PIL.Image
-    """
-    mode = image.mode
-    return Image.fromarray(
-        crop_np(np.array(image)),
-        mode=mode,
-    )
+#     :return: PIL Image with black margins cropped.
+#     :rtype: PIL.Image
+#     """
+#     mode = image.mode
+#     return Image.fromarray(
+#         crop_np(np.array(image)),
+#         mode=mode,
+#     )
 
 
 def crop(image):
     """
-    Crops an image of a black frame: does both PIL and opencv2 images
+    Crops an image of a black frame: does !both PIL and! opencv2 images
 
     :param image: Image
     :type image: This can be either a NumPy array holding image data,
@@ -120,8 +120,8 @@ def crop(image):
     :return: Image cropped of black edges
     :rtype: Same as input type.
     """
-    if isinstance(image, Image.Image):
-        return crop_pil(image)
+    # if isinstance(image, Image.Image):
+    #     return crop_pil(image)
     if isinstance(image, np.ndarray):
         return crop_np(image)
 
@@ -186,32 +186,32 @@ def salting(img):
     return salty_noised
 
 
-def simple_rotation_augmentation(angle_list1, image):
-    """
-    This function takes one picture and rotates is by a number
-    of degrees is angle_list1.This function can be used with the
-    augment_and_move function as follows (example):
+# def simple_rotation_augmentation(angle_list1, image):
+#     """
+#     This function takes one picture and rotates is by a number
+#     of degrees is angle_list1.This function can be used with the
+#     augment_and_move function as follows (example):
 
-    .. code-block:: python
+#     .. code-block:: python
 
-       augment_and_move(
-           'D:/my_academia/dataset/random_within_domain',
-           'D:/my_academia/elo',
-           [partial(simple_rotation_augmentation, 5)],
-       )
+#        augment_and_move(
+#            'D:/my_academia/dataset/random_within_domain',
+#            'D:/my_academia/elo',
+#            [partial(simple_rotation_augmentation, 5)],
+#        )
 
-    :param image: Image.
-    :type image: Image (JPEG)
+#     :param image: Image.
+#     :type image: Image (JPEG)
 
-    :return: rotated image
-    :rtype: PIL image
-    """
-    if isinstance(image, str):
-        image4R = Image.open(image)
-    else:
-        image4R = image
-    rotated1 = image4R.rotate(angle_list1)
-    return rotated1
+#     :return: rotated image
+#     :rtype: PIL image
+#     """
+#     if isinstance(image, str):
+#         image4R = Image.open(image)
+#     else:
+#         image4R = image
+#     rotated1 = image4R.rotate(angle_list1)
+#     return rotated1
 
 
 def simple_rotate_no_pil(image, angle, center=None, scale=1.0):
@@ -273,40 +273,40 @@ def blur_out_edges(image):
     return blurred_edge_image
 
 
-def reasonable_rotation_augmentation(angle1, angle2, number_slices, image):
-    """
-    Works on a single image, and returns a list of augmented images which are
-    based on twisting the angle from angle1 to angle2 with 'number_slices' as
-    the number of augmented images to be made from the original. It is not
-    realistic or desirable to augment images of most X-rays by flipping them.
-    In abdominal or chest X-rays that would create an augmentation that could
-    imply specific pathologies e.g. situs inversus. We suggest augmenting
-    between angles -5 to 5.
+# def reasonable_rotation_augmentation(angle1, angle2, number_slices, image):
+#     """
+#     Works on a single image, and returns a list of augmented images which are
+#     based on twisting the angle from angle1 to angle2 with 'number_slices' as
+#     the number of augmented images to be made from the original. It is not
+#     realistic or desirable to augment images of most X-rays by flipping them.
+#     In abdominal or chest X-rays that would create an augmentation that could
+#     imply specific pathologies e.g. situs inversus. We suggest augmenting
+#     between angles -5 to 5.
 
-    :param angle1: angle1 is the angle from the original to the first augmented
-    :type angle1: float
-    :param angle2: angle2 is the angle from the original to the last augmented
-    :type angle2: float
-    :param number_slices: number of images to be produced
-    :type number_slices: int
-    :param image: Image
-    :type image: Image (JPEG)
+#     :param angle1: angle1 is the approximate  angle for the first augmented
+#     :type angle1: float
+#     :param angle2: angle2 is approximate the angle for the last augmented
+#     :type angle2: float
+#     :param number_slices: number of images to be produced
+#     :type number_slices: int
+#     :param image: Image
+#     :type image: Image (JPEG)
 
-    :return: list of PIL images
-    :rtype: list
-    """
-    increment = abs(angle1-angle2)/number_slices
-    angle1f = float(angle1)
-    angle2f = float(angle2)
-    number_slicesf = float(number_slices)
-    increment = abs(angle1f-angle2f)/number_slicesf
-    num_list = np.arange(angle1f, angle2f,  increment)
-    image4R = Image.open(image)
-    augmentos = []
-    for i in num_list:
-        augmentos.append(image4R.rotate(i))
+#     :return: list of PIL images
+#     :rtype: list
+#     """
+#     increment = abs(angle1-angle2)/number_slices
+#     angle1f = float(angle1)
+#     angle2f = float(angle2)
+#     number_slicesf = float(number_slices)
+#     increment = abs(angle1f-angle2f)/number_slicesf
+#     num_list = np.arange(angle1f, angle2f,  increment)
+#     image4R = Image.open(image)
+#     augmentos = []
+#     for i in num_list:
+#         augmentos.append(image4R.rotate(i))
 
-    return augmentos
+#     return augmentos
 
 
 def multi_rotation_augmentation_no_pill(angle1, angle2, number_slices, image):
@@ -446,34 +446,36 @@ def separate_image_averager(set_of_images, s=5):
 # to run on files which are inside a folder
 
 
-def augment_and_move(origin_folder, target_folder, transformations):
-    """
-    Takes images and applies the same list of augmentations, which can include
-    the cleanX function crop, to all of them
+# def augment_and_move(origin_folder, target_folder, transformations):
+#     """
+#     This should be done in pipeline now...dead function
+#     Takes images and applies the same list of augmentations,
+#     which can include
+#     the cleanX function crop, to all of them
 
-    :param origin_folder: folder the images are in (should include final '/')
-    :type origin_folder: Suitable for :func:`os.path.join()`
-    :param target_folder: The folder where augmented images will be sent
-    :type target_folder: :func:`os.path.join()`
-    :param transformations: A list of augmentation functions to apply
-    :type transformations: list
+#     :param origin_folder: folder the images are in (should include final '/')
+#     :type origin_folder: Suitable for :func:`os.path.join()`
+#     :param target_folder: The folder where augmented images will be sent
+#     :type target_folder: :func:`os.path.join()`
+#     :param transformations: A list of augmentation functions to apply
+#     :type transformations: list
 
-    :return: technically a non returning function, but new images will be made
-    :rtype: none
-    """
-    non_suspects1 = glob.glob(os.path.join(origin_folder, '*.[Jj][Pp][Gg]'))
-    non_suspects2 = glob.glob(
-        os.path.join(origin_folder, '*.[Jj][Pp][Ee][Gg]'),
-    )
-    non_suspects = non_suspects2 + non_suspects1
-    for picy in non_suspects:
-        example = Image.open(picy)
-        if example.mode == 'RGBA':
-            example = example.convert('RGB')
-        novo = os.path.basename(picy)
-        for transformation in transformations:
-            example = transformation(example)
-        example.save(os.path.join(target_folder, novo + ".jpg"))
+#     :return: technically a non returning function, but new images made
+#     :rtype: none
+#     """
+#     non_suspects1 = glob.glob(os.path.join(origin_folder, '*.[Jj][Pp][Gg]'))
+#     non_suspects2 = glob.glob(
+#         os.path.join(origin_folder, '*.[Jj][Pp][Ee][Gg]'),
+#     )
+#     non_suspects = non_suspects2 + non_suspects1
+#     for picy in non_suspects:
+#         example = Image.open(picy)
+#         if example.mode == 'RGBA':
+#             example = example.convert('RGB')
+#         novo = os.path.basename(picy)
+#         for transformation in transformations:
+#             example = transformation(example)
+#         example.save(os.path.join(target_folder, novo + ".jpg"))
 
 
 def dimensions_to_df(image_directory):
@@ -613,24 +615,25 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     return histo_ht_wt_p
 
 
-def crop_them_all(origin_folder, target_folder):
-    """
-    Crops all images and moves them to a target folder
+# def crop_them_all(origin_folder, target_folder):
+#     """
+#     This funcion has been replaced by pipeline. 
+#     Crops all images and moves them to a target folder
 
-    :param origin_folder: The folder in which the images are
-    :type origin_folder: :func:`os.path.join()`
-    :param target_folder: The folder where augmented images will be sent
-    :type target_folder: :func:`os.path.join()`
+#     :param origin_folder: The folder in which the images are
+#     :type origin_folder: :func:`os.path.join()`
+#     :param target_folder: The folder where augmented images will be sent
+#     :type target_folder: :func:`os.path.join()`
 
-    :return: technically nothing returned, but new images will be made
-    :rtype: none
-    """
-    # crops and moves to a new folder for a set inside origin folder
-    augment_and_move(
-        origin_folder,
-        target_folder,
-        [crop],
-    )
+#     :return: technically nothing returned, but new images will be made
+#     :rtype: none
+#     """
+#     # crops and moves to a new folder for a set inside origin folder
+#     augment_and_move(
+#         origin_folder,
+#         target_folder,
+#         [crop],
+#     )
 
 
 def find_very_hazy(directory):

@@ -105,7 +105,7 @@ def test_cli_create_pipeline():
                 '-s', 'Acquire',
                 '-s', 'Save(target={!r})'.format(td),
                 '-j',
-                '-r', os.path.join(resources, '*.jpg'),
+                '-r', repr(os.path.join(resources, '*.jpg')),
             ]
         )
         assert not result

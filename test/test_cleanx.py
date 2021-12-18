@@ -15,7 +15,7 @@ import pandas as pd
 import matplotlib as plt
 import numpy as np
 
-from PIL import Image, ImageOps
+# from PIL import Image, ImageOps
 
 from cleanX import (
     dataset_processing as csvp,
@@ -91,10 +91,10 @@ def test_salting():
     assert salt.shape[0] > 1
 
 
-def test_simple_rotation_augmentation():
-    lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
-    lindo_rotated = iwork.simple_rotation_augmentation(6, lindo_image)
-    assert np.array(lindo_rotated).shape[0] > 1
+# def test_simple_rotation_augmentation():
+#     lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
+#     lindo_rotated = iwork.simple_rotation_augmentation(6, lindo_image)
+#     assert np.array(lindo_rotated).shape[0] > 1
 
 
 def test_check_paths_for_group_leakage():
@@ -176,30 +176,30 @@ def test_find_suspect_text_by_length():
     assert len(jobs) > 1    
 
 
-def test_augment_and_move():
-    try:
-        os.makedirs(target_directory)
-    except FileExistsError:
-        pass
-    iwork.augment_and_move(image_directory, target_directory, [ImageOps.mirror, ImageOps.flip])
-    vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
-    assert os.path.isfile(vovo) 
+# def test_augment_and_move():
+#     try:
+#         os.makedirs(target_directory)
+#     except FileExistsError:
+#         pass
+#     iwork.augment_and_move(image_directory, target_directory, [ImageOps.mirror, ImageOps.flip])
+#     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
+#     assert os.path.isfile(vovo) 
 
 
-def test_crop_them_all():
-    try:
-        os.makedirs(target_directory)
-    except FileExistsError:
-        pass
-    iwork.crop_them_all(image_directory, target_directory)
-    vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
-    assert os.path.isfile(vovo) 
+# def test_crop_them_all():
+#     try:
+#         os.makedirs(target_directory)
+#     except FileExistsError:
+#         pass
+#     iwork.crop_them_all(image_directory, target_directory)
+#     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
+#     assert os.path.isfile(vovo) 
 
 
-def test_reasonable_rotation_augmentation():
-    imageE = (os.path.join(image_directory,'testtocrop.jpg'))
-    dman = iwork.reasonable_rotation_augmentation(0, 12, 3, imageE)
-    assert len(dman) > 1
+# def test_reasonable_rotation_augmentation():
+#     imageE = (os.path.join(image_directory,'testtocrop.jpg'))
+#     dman = iwork.reasonable_rotation_augmentation(0, 12, 3, imageE)
+#     assert len(dman) > 1
 
 
 def test_find_by_sample_upper():
