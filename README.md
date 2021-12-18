@@ -32,7 +32,7 @@ Online documentation is at https://drcandacemakedamoore.github.io/cleanX/.
 You can also build up-to-date documentation, which will be generated in ./build/sphinx/html directory, by command as follows:
 
 
-    python setup.py apidoc    
+    python setup.py apidoc
     python setup.py build_sphinx
 
 
@@ -56,10 +56,12 @@ Special additional documentation for medical professionals with limited programm
 
 ### Supported Platforms
 
-cleanX is a pure Python package, but it has many dependencies on native libraries.
-We try to test it on as many platforms as we can to see if dependencies can be installed there.
-Below is the list of platforms that will potentially work. Please note that where python.org Python
-or Anaconda Python stated as supported, it means that versions 3.7, 3.8 and 3.9 (but not 3.10) are supported.
+cleanX is a pure Python package, but it has many dependencies on
+native libraries.  We try to test it on as many platforms as we can to
+see if dependencies can be installed there.  Below is the list of
+platforms that will potentially work. Please note that where
+python.org Python or Anaconda Python stated as supported, it means
+that versions 3.7, 3.8 and 3.9 (but not 3.10) are supported.
 
 #### AMD64 (x86)
 
@@ -71,11 +73,15 @@ or Anaconda Python stated as supported, it means that versions 3.7, 3.8 and 3.9 
 
 #### ARM64
 
-Unsupported at the moment on both Linux and OSX, but it's likely that support will be added in the future.
+Unsupported at the moment on both Linux and OSX, but it's likely that
+support will be added in the future.
 
 #### 32-bit Intell and ARM
 
-We don't know if either one of these is supported. There's a good chance that 32-bit Intell will work. There's a good chance that ARM won't. It's unlikely that the support for ARM will be added in the future.
+We don't know if either one of these is supported. There's a good
+chance that 32-bit Intell will work.  There's a good chance that ARM
+won't. It's unlikely that the support for ARM will be added in the
+future.
 
 ## Installation
 - setting up a virtual environment is desirable, but not absolutely
@@ -103,6 +109,18 @@ conda-forge
 
 ``` sh
 pip install cleanX
+```
+
+The `tesserocr` package deserves a special mention.  It is not
+possible to install `tesseract` library from PyPI server.  The
+`tesserocr` is simply a binding to the library.  You will need to
+install the library yourself.  For example, on Debian flavor Linux,
+this might work:
+
+``` sh
+sudo apt-get install libleptonica-dev \
+    tesseract-ocr-all \
+    libtesseract-dev
 ```
 
 ## Getting Started
