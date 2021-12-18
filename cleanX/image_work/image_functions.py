@@ -214,6 +214,38 @@ def simple_rotation_augmentation(angle_list1, image):
     return rotated1
 
 
+def simple_rotate_no_pil(image, angle, center = None, scale = 1.0):
+    """
+    This function works without the PIL library. Itakes one picture
+    and rotates is by a number of degrees in the parameter angle.
+    This function can be used with the
+    augment_and_move function as follows (example):
+    .. code-block:: python
+       augment_and_move(
+           'D:/my_academia/dataset/random_within_domain',
+           'D:/my_academia/elo',
+           [partial(simple_rotate_no_pil, 5)],
+       )
+    :param image: Image.
+    :type image: Image (JPEG)
+    :return: rotated image
+    :rtype: numpy.ndarray
+    """
+    if isinstance(image, str):
+        image = cv2.imread(image)
+
+    h, w = image.shape[0:2]
+
+    if center is None:
+        center = (w / 2, h / 2)
+
+    # Perform the rotation
+    M = cv2.getRotationMatrix2D(center, angle, scale)
+    rotated = cv2.warpAffine(image, M, (w, h))
+
+    return rotated
+
+
 def blur_out_edges(image):
     """
     For an individual image, blurs out the edges as an augmentation. This
