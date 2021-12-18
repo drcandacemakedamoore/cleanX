@@ -7,6 +7,11 @@ import subprocess
 import site
 import shutil
 import platform
+import posixpath
+import zipfile
+import email
+import pkg_resources
+import setuptools
 
 from glob import glob
 from distutils.dir_util import copy_tree
@@ -17,7 +22,10 @@ from setuptools import setup
 from setuptools.command.install import install as InstallCommand
 from setuptools.command.easy_install import easy_install as EZInstallCommand
 from setuptools.dist import Distribution
+from setuptools.wheel import Wheel
+from setuptools.command.egg_info import write_requirements
 from setuptools import Command
+from pkg_resources import parse_version
 
 
 project_dir = os.path.dirname(os.path.realpath(__file__))
@@ -45,6 +53,82 @@ except subprocess.CalledProcessError as e:
     tag = 'v0.0.0'
 
 version = tag[1:]
+
+
+def _convert_metadata(_, zf, destination_eggdir, dist_info, egg_info):
+    def get_metadata(name):
+        with zf.open(posixpath.join(dist_info, name)) as fp:
+            value = fp.read().decode('utf-8')
+            return email.parser.Parser().parsestr(value)
+
+    wheel_metadata = get_metadata('WHEEL')
+    # Check wheel format version is supported.
+    wheel_version = parse_version(wheel_metadata.get('Wheel-Version'))
+    wheel_v1 = (
+        parse_version('1.0') <= wheel_version < parse_version('2.0dev0')
+    )
+    if not wheel_v1:
+        raise ValueError(
+            'unsupported wheel format version: %s' % wheel_version)
+    # Extract to target directory.
+
+    # PATCH(wvxvw): This shole function is idiotic, written by
+    # idiots...  Specifically, this place will get conflicted with
+    # itself because it's trying to create a directory that it already
+    # created earlier...
+    try:
+        os.mkdir(destination_eggdir)
+    except FileExistsError:
+        pass
+    zf.extractall(destination_eggdir)
+    # Convert metadata.
+    dist_info = os.path.join(destination_eggdir, dist_info)
+    dist = pkg_resources.Distribution.from_location(
+        destination_eggdir, dist_info,
+        metadata=pkg_resources.PathMetadata(destination_eggdir, dist_info),
+    )
+
+    # Note: Evaluate and strip markers now,
+    # as it's difficult to convert back from the syntax:
+    # foobar; "linux" in sys_platform and extra == 'test'
+    def raw_req(req):
+        req.marker = None
+        return str(req)
+    install_requires = list(sorted(map(raw_req, dist.requires())))
+    extras_require = {
+        extra: sorted(
+            req
+            for req in map(raw_req, dist.requires((extra,)))
+            if req not in install_requires
+        )
+        for extra in dist.extras
+    }
+    os.rename(dist_info, egg_info)
+    os.rename(
+        os.path.join(egg_info, 'METADATA'),
+        os.path.join(egg_info, 'PKG-INFO'),
+    )
+    setup_dist = setuptools.Distribution(
+        attrs=dict(
+            install_requires=install_requires,
+            extras_require=extras_require,
+        ),
+    )
+    try:
+        write_requirements(
+            setup_dist.get_command_obj('egg_info'),
+            None,
+            os.path.join(egg_info, 'requires.txt'),
+        )
+    except Exception as e:
+        # The original function didn't care about exceptions here
+        # either.  Turns out, all this work it did to store the
+        # metatada, and then: whatever, who cares if it was stored,
+        # right?
+        print(e)
+
+
+Wheel._convert_metadata = _convert_metadata
 
 
 class TestCommand(Command):
