@@ -339,7 +339,7 @@ def multi_rotation_augmentation_no_pill(angle1, angle2, number_slices, image):
     augmentos = []
     for i in num_list:
         augmentos.append(simple_rotate_no_pil(image4R, i))
-        
+
     return augmentos
 
 
