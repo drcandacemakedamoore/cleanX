@@ -4,15 +4,22 @@ import os
 import shutil
 import logging
 import multiprocessing
+import time
 
 from collections import defaultdict
-from multiprocessing.pool import Pool
+from multiprocessing import Queue, Process
+from multiprocessing.pool import ThreadPool
 from tempfile import TemporaryDirectory
 from glob import glob
+from queue import Empty
 
 from .steps import Aggregate, Step, Serial, Parallel
 
 import numpy as np
+
+
+class Loop(ValueError):
+    pass
 
 
 class MultiSource:
@@ -112,17 +119,7 @@ class NoPathToGoal(LookupError):
 
 class PSG:
 
-    @classmethod
-    def create(cls, source):
-        if not source:
-            return cls(())
-        if isinstance(source[0], Step):
-            pairs = tuple(zip(source[1:], source))
-        else:
-            pairs = source
-        return cls(pairs)
-
-    def __init__(self, pairs):
+    def __init__(self, pipeline_def):
         # pairs:
         #   A -> B
         #   B -> C
@@ -154,43 +151,129 @@ class PSG:
         #   E, C, B, A, D
         # or;
         #   C, E, B, A, D
-        mapping = defaultdict(list)
-        nodes = {}
-        for a, b in pairs:
-            mapping[a.id()].append(b)
-            nodes[a.id()] = a
-            nodes[b.id()] = b
-        for a, b in pairs:
-            if b.id() not in mapping:
-                mapping[b.id()] = []
-        self._deps = dict(mapping)
-        self._nodes = nodes
+        self._def = pipeline_def
+        self._ready = {}
+        self._in_flight = set(())
 
-    def as_dict(self):
-        return self._nodes.items()
+    def goal(self):
+        return self._def.goal
 
-    def depends(self, step, others):
-        ids = set(o.id() for o in others)
-        deps = set(s.id() for s in self._deps[step.id()])
-        return ids.intersection(deps)
+    def deps(self, goal):
+        # linearized dependencies of the goal
+        found = set(())
+        unresolved = set(goal.variables)
+        while unresolved:
+            next_gen = set(())
+            next_unresolved = set(())
+            for u in unresolved:
+                s = self._def.steps[u]
+                if s not in found:
+                    next_gen.add(s)
+            for s in next_gen:
+                yield s
+                for v in s.variables:
+                    next_unresolved.add(v)
+            unresolved = next_unresolved
 
-    def immediate_dependencies(self, step):
-        yield from self._deps[step.id()]
+    def available(self, deps):
+        # selects dependencies whose preconditions have been met
+        for d in deps:
+            if d in self._in_flight:
+                continue
+            if not d.variables:
+                yield d
+            elif all(v in self._ready for v in d.variables):
+                yield d
 
-    def dependencies(self, goal):
-        pairs = dict(self._deps)
-        tier = pairs[goal.id()]
-        del pairs[goal.id()]
+    def resolve(self, dep, deps):
+        # mark dependency as resolved and return the unresolved ones
+        for v in self.out(dep):
+            self._ready[v] = dep
+        self._in_flight.pop(dep)
+        for d in deps:
+            if d != dep:
+                yield d
 
-        yield goal
+    def out(self, dep):
+        for v, s in self._def.steps.items():
+            if dep == s:
+                yield v
 
-        while tier:
-            next_tier = []
-            for t in tier:
-                next_tier += pairs[t.id()]
-                del pairs[t.id()]
-                yield t
-            tier = next_tier
+    def put(self, dep):
+        # remember this step as in-flight, so we don't mark it as
+        # available later.
+        self._in_flight.add(dep)
+
+    def pending(self, dep):
+        # True, if dep is either in-flight, or unresolved
+        for v in self._ready.values():
+            if v == dep:
+                return False
+        return True
+
+    def inflight(self):
+        yield from self._in_flight
+
+
+class Worker(Process):
+
+    def __init__(self, inbound, outbound):
+        super().__init__()
+        self.inbound = inbound
+        self.outbound = outbound
+
+    def src(self, variables, td):
+        if not variables:
+            return ()
+
+        svs = {
+            v: sorted(os.listdir(os.path.join(td, v)))
+            for v in variables
+        }
+        result = {v: [] for v in variables}
+
+        pos = 0
+        while any(svs):
+            files = {v: os.path.basename(s[0]) for v, s in svs.items()}
+            minf = min(files.values())
+            for v, f in files.items():
+                if f == minf:
+                    result[v].append(f)
+                else:
+                    result[v].append(None)
+
+        for i in range(len(result[variables[0]])):
+            table.append({v: result[v][i] for v in variables})
+
+        return tuple(
+            {v: result[v][i] for v in variables}
+            for i in range(len(result[variables[0]]))
+        )
+
+    def run(self):
+        print('Starting:', os.getpid())
+        while True:
+            try:
+                out, rec, td = self.inbound.get_nowait()
+                if rec is None:
+                    print('Terminating (1):', os.getpid())
+                    break
+            except (ValueError, AssertionError):
+                # queue was closed
+                print('Terminating: (2)', os.getpid())
+                break
+            except Empty:
+                time.sleep(1)
+                continue
+            try:
+                print('Received req:', rec)
+                step = rec.definition(**dict(rec.options))
+                src = self.src(rec.variables, td)
+                step.apply(out, src)
+                self.outbound.put((rec, None))
+            except Exception as e:
+                print('Failed req:', e)
+                self.outbound.put((rec, e))
 
 
 class Pipeline:
@@ -204,24 +287,17 @@ class Pipeline:
     once by specifying :code:`batch_size` parameter.
     """
 
-    def __init__(self, steps=None, batch_size=None):
+    def __init__(self, pipeline_def):
         """
         Initializes this pipeline, but doesn't start its execution.
 
         :param steps: A sequence of :class:`~.steps.Step` this pipeline should
                       execute.
         :type steps: Sequence[Step]
-        :param batch_size: The number of images that will be processed
-                           in parallel.
-        :type batch_size: int
         """
-        self.steps = PSG.create(steps)
-        try:
-            self.batch_size = batch_size or len(os.sched_getaffinity(0))
-        except AttributeError:
-            self.batch_size = batch_size or os.cpu_count() or 1
-
+        self.psg = PSG(pipeline_def)
         self.counter = 0
+        self.process()
 
     def workspace(self):
         """
@@ -239,13 +315,16 @@ class Pipeline:
         """
         :meta private:
         """
-        step.begin_transaction()
+        pass
 
     def commit_transaction(self, step):
         """
         :meta private:
         """
-        step.commit_transaction()
+        pass
+
+    def dep_dir(self, dep, td):
+        return os.path.join(td, dep)
 
     def find_previous_step(self):
         """
@@ -253,63 +332,80 @@ class Pipeline:
         """
         return None
 
-    def cleanup(self, dirty, pending):
+    def cleanup(self, processed, todo, td):
         new = []
-        for d in dirty:
-            if d is None:
-                continue
-            if self.steps.depends(d, pending):
-                new.append(d)
-                continue
-            if os.path.isdir(d.cache_dir):
-                shutil.rmtree(d.cache_dir)
+        for dep in processed:
+            if not self.psg.pending(dep):
+                dep_dir = self.dep_dir(dep, td)
+                if os.path.isdir(dep_dir):
+                    shutil.rmtree(dep_dir)
+            else:
+                new.append(dep)
         return new
 
-    def process(self, source, goal):
+    def process(self):
         """
         Starts this pipeline.
-
-        :param source: This must be an iterable that yields file names
-                       for the images to be processed.
-        :type source: Iterable
         """
+        goal = self.psg.goal()
+        deps = tuple(self.psg.deps(goal))
+
         with self.workspace() as td:
-            previous_step = self.find_previous_step()
-            processed_step = None
-            deps = tuple(reversed(tuple(self.steps.dependencies(goal))))
-            dirty = []
-            for n, step in enumerate(deps):
-                step.cache_dir = os.path.join(td, str(self.counter))
-                os.mkdir(step.cache_dir)
-                self.counter += 1
-                self.begin_transaction(step)
-                sdeps = tuple(self.steps.immediate_dependencies(step))
+            ctx = multiprocessing.get_context('spawn')
+            processes = os.cpu_count() or 1
+            inbound = Queue(processes)
+            outbound = Queue()
+            pool = tuple(
+                Worker(inbound, outbound) for _ in range(processes)
+            )
+            for w in pool:
+                w.start()
 
-                if previous_step is None:
-                    srciter = ((s,) for s in source)
-                else:
-                    transposed, longest = [], 0
-                    for d in sdeps:
-                        abspaths = tuple(
-                            os.path.join(d.cache_dir, f)
-                            for f in os.listdir(d.cache_dir)
-                        )
-                        longest = max(longest, len(abspaths))
-                        transposed.append(abspaths)
-                    for t in transposed:
-                        t.extend([None] * (longest - len(t)))
-                    scriter = np.array(transposed).T
-                self.process_step(step, srciter, sdeps)
+            available = set(())
+            processed = set(())
+            err = None
 
-                processed_step = previous_step
-                previous_step = step
+            while deps and (err is None):
+                available |= set(self.psg.available(deps))
+                if (not available) and (not self.psg.inflight()):
+                    err = Loop('Steps have a dependency loop')
+                    break
+                while (not inbound.full()) and available:
+                    dep = available.pop()
+                    out = tuple(self.psg.out(dep))
+                    print('Sending:', (out, dep, td))
+                    self.psg.put(dep)
+                    inbound.put((out, dep, td))
+                while not outbound.empty():
+                    print('Receiving:')
+                    dep, err = outbound.get()
+                    print('Received:', dep, err)
+                    if err:
+                        break
+                    processed.append(dep)
+                    deps = tuple(self.psg.resolve(dep, deps))
+                # TODO(wvxvw): schedule cleanups asynchronously
+                processed = self.cleanup(processed, deps, td)
 
-                dirty.append(processed_step)
-                dirty = self.cleanup(dirty, deps[n:])
-                self.commit_transaction(step)
+            if err is None:
+                inbound.put(((), goal, td))
+                _, err = outbound.get()
 
-            self.counter = 0
-            self.update_counter()
+            for w in pool:
+                inbound.put((None, None, None))
+            inbound.close()
+            inbound.join_thread()
+            outbound.close()
+            outbound.join_thread()
+            for w in pool:
+                w.terminate()
+            for w in pool:
+                w.join()
+
+            if err:
+                # TODO(wvxvw): Improve error reporting by making sure
+                # we have proper stack trace.
+                raise err
 
     def process_step(self, step, srciter, source):
         """

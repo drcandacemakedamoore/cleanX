@@ -7,7 +7,7 @@ import inspect
 import matplotlib.pyplot as plt
 import pandas as pd
 import math
-from multiprocessing import Queue
+from multiprocessing import Queue, Value
 from queue import Empty
 
 import numpy as np
@@ -64,6 +64,27 @@ class Step(metaclass=RegisteredStep):
         with self.counter:
             self.counter.value += 1
             self._id = self.counter.value
+
+    def apply_multi(self, step, src, out, td):
+        if isinstance(step, Aggregate):
+            ...
+        else:
+            errors = []
+            with ThreadPool() as tp:
+                for res, err in tp.map(self.process_src, src):
+                    if err:
+                        errors.append(err)
+                    elif len(res) != len(out):
+                        errors.append(
+                            ValueError(
+                                'Expected {} outputs, '
+                                'but received {}'.format(
+                                    len(out),
+                                    len(res),
+                                )))
+                    else:
+                        for r, o in zip(res, out):
+                            step.write(r, o)
 
     def id(self):
         return self._id

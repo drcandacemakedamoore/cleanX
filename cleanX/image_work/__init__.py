@@ -96,9 +96,10 @@ from .steps import (
     CleanRotate,
     Or,
 )
+from .graph_parser import StepCall, PipelineDef
 
 
-def create_pipeline(steps, batch_size=None, journal=None, keep_journal=False):
+def create_pipeline(steps, journal=None, keep_journal=False):
     """
     Create a pipeline that will execute the :code:`steps`.  If
     :code:`journal` is not false, create a journaling pipeline, that can
@@ -123,11 +124,10 @@ def create_pipeline(steps, batch_size=None, journal=None, keep_journal=False):
     if journal:
         return JournalingPipeline(
             steps,
-            batch_size=batch_size,
             journal=journal,
             keep_journal=keep_journal,
         )
-    return Pipeline(steps, batch_size)
+    return Pipeline(steps)
 
 
 def restore_pipeline(journal_dir, skip=0, **overrides):

@@ -20,6 +20,12 @@ class DuplicateVariables(ValueError):
         super().__init__('Found duplicate variables: {}'.format(duplicates))
 
 
+class DuplicateOptions(ValueError):
+
+    def __init__(self, duplicates):
+        super().__init__('Found duplicate options: {}'.format(duplicates))
+
+
 StepCall = namedtuple('StepCall', 'definition,options,variables')
 PipelineDef = namedtuple('PipelineDef', 'steps,goal')
 
@@ -127,26 +133,30 @@ class Parser(Transformer):
         return str(name), value
 
     def options(self, *raw):
-        return dict(raw)
+        varnames = tuple(n for n, _ in raw)
+        duplicates = []
+        for var, count in Counter(varnames).most_common():
+            if count == 1:
+                break
+            duplicates.append(var)
+        if duplicates:
+            raise DuplicateOptions(duplicates)
+        return tuple(raw)
 
     def step(self, *args):
         try:
             definition = self._definitions[args[0]]
         except KeyError:
             raise MissingDefinition(args[0])
-        args = args[1:]
-        if args and (type(args[0]) is dict):
-            options = args[0]
-            args = args[1:]
-        else:
-            options = {}
-        if args:
-            variables = tuple(str(s) for s in args)
-        else:
-            variables = ()
+        options, variables = [], []
+        for a in  args[1:]:
+            if type(a) is tuple:
+                options.append(a)
+            else:
+                variables.append(str(a))
         # TODO(wvxvw): Here we could validate optional arguments to
         # steps.
-        return StepCall(definition, options, variables)
+        return StepCall(definition, tuple(options), tuple(variables))
 
     def sassign(self, *args):
         variables = tuple(str(s) for s in args[:-1])

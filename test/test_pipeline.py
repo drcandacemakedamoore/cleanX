@@ -23,6 +23,8 @@ from cleanX.image_work import (
     BlackEdgeCrop,
     WhiteEdgeCrop,
     Mean,
+    StepCall,
+    PipelineDef,
 )
 from cleanX.image_work.steps import CleanRotate, FourierTransf, ProjectionHorizoVert
 
@@ -56,16 +58,41 @@ def test_alter_images():
     with TemporaryDirectory() as td:
         src = DirectorySource(src_dir)
         goal = Save(td)
-        p = create_pipeline(steps=(
-            Acquire(),
-            BlurEdges(),
-            Sharpie(),
-            goal,
-        ))
-        p.process(src, goal)
+        pipeline_def = PipelineDef(
+            steps={
+                'src': StepCall(
+                    definition=DirectorySource,
+                    options=(('directory', src_dir),),
+                    variables=()
+                ),
+                'acquire': StepCall(
+                    definition=Acquire,
+                    options=(),
+                    variables=('src',),
+                ),
+                'blur': StepCall(
+                    definition=BlurEdges,
+                    options=(),
+                    variables=('acquire',)
+                ),
+                'sharpie': StepCall(
+                    definition=Sharpie,
+                    options=(),
+                    variables=('blur',)
+                ),
+            },
+            goal=StepCall(
+                definition=Save,
+                options=(('path', td),),
+                variables=('sharpie',)
+            )
+        )
+
+        create_pipeline(pipeline_def)
         src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
         dst_files = set(os.listdir(td))
         assert src_files == dst_files
+
 
 def test_crop_images():
     src_dir = image_directory

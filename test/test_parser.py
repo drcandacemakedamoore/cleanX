@@ -28,7 +28,7 @@ def test_parse_simple():
                 glob = cleanX.image_work:GlobSource
                 acquire = cleanX.image_work:Acquire
                 or = cleanX.image_work.steps:Or
-                crop = cleanX.image_work:Crop
+                crop = cleanX.image_work:BlackEdgeCrop
                 save = cleanX.image_work:Save
             )
             steps(
