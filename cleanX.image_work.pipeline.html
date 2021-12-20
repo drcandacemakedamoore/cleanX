@@ -49,7 +49,7 @@
 <span id="cleanx-image-work-pipeline-module"></span><h1>cleanX.image_work.pipeline module<a class="headerlink" href="#module-cleanX.image_work.pipeline" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.MultiSource">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">MultiSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.MultiSource" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">MultiSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.MultiSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A class to append multiple sources such as <a class="reference internal" href="#cleanX.image_work.pipeline.GlobSource" title="cleanX.image_work.pipeline.GlobSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">GlobSource</span></code></a> or
 <a class="reference internal" href="#cleanX.image_work.pipeline.DirectorySource" title="cleanX.image_work.pipeline.DirectorySource"><code class="xref py py-class docutils literal notranslate"><span class="pre">DirectorySource</span></code></a>.  All source classes implement iterator
@@ -77,7 +77,7 @@ or <a class="reference internal" href="#cleanX.image_work.pipeline.DirectorySour
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.GlobSource">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">GlobSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.GlobSource" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">GlobSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.GlobSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A class that creates an iterator to list all files matching
 glob pattern.</p>
@@ -108,7 +108,7 @@ to mean any number of path fragments.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.DirectorySource">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">DirectorySource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.DirectorySource" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">DirectorySource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.DirectorySource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A class that creates an iterator to look at files in the given
 directory.</p>
@@ -138,7 +138,7 @@ filesystem being used.</p></li>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.PipelineError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">PipelineError</span></span><a class="headerlink" href="#cleanX.image_work.pipeline.PipelineError" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">PipelineError</span></span><a class="headerlink" href="#cleanX.image_work.pipeline.PipelineError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></p>
 <p>These errors are reported when pipeline encounters errors with
 reading or writing images.</p>
@@ -146,7 +146,7 @@ reading or writing images.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class is the builder for the image processing pipeline.</p>
 <p>This class executes a sequence of <a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code></a>.  It attemts to
@@ -243,7 +243,7 @@ for the images to be processed.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, doctormakeda@gmail.com.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>
