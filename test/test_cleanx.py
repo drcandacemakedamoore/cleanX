@@ -455,12 +455,14 @@ def test_black_end_ratio():
 
 def test_outline_segment_by_otsu():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    #outpic = 'testtocrop.jpg'
     outlined = iwork.outline_segment_by_otsu(vovo,11)
     assert type(outlined) is np.ndarray 
 
-def binarize_by_otsu():
+def test_binarize_by_otsu():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    #outpic = 'testtocrop.jpg'
     outlined = iwork.binarize_by_otsu(vovo,11)
     assert type(outlined) is np.ndarray 
+
+def test_find_outliers_sum_of_pixels_across_set():
+    result = iwork.find_outliers_sum_of_pixels_across_set(image_directory, 100)
+    assert len(result) > 1

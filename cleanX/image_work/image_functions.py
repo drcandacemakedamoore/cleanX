@@ -91,22 +91,42 @@ def crop_np(image_array):
     ]
 
 
-# def crop_pil(image):
-#     """
-#     Crops black edges of an Pil/Pillow image
+def find_outliers_sum_of_pixels_across_set(directory, percent_to_examine):
+    """
+    This function finds images that are outliers in terms of having a large
+    or small total pixel sum which in most cases will correlate with under or
+    overexposure OR pathology if the percent is set to a low number -
+    3% (will be written as 3) is reccomended
 
-#     :param image_array: Image.
-#     :type image_array: image
+    :param directory: Directory of images.
+    :type directory: string
 
 
-#     :return: PIL Image with black margins cropped.
-#     :rtype: PIL.Image
-#     """
-#     mode = image.mode
-#     return Image.fromarray(
-#         crop_np(np.array(image)),
-#         mode=mode,
-#     )
+    :return: top, bottom (dataframes of highest and lowest total)
+    :rtype: :class: tuple
+    """
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
+    suspects = suspects1 + suspects2
+    names = []
+    pix_list = []
+    for pic in suspects:
+        name = pic
+        img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
+        pix = img.sum()
+        names.append(name)
+        pix_list.append(pix)
+    frame = pd.DataFrame({
+                'pixel_total': pix_list,
+                'images': names,
+            })
+    frame = frame.sort_values('pixel_total')
+    number = int((percent_to_examine/100) * len(frame)/2)
+    print(number)
+    print(len(frame))
+    top = frame.head(number)
+    bottom = frame.tail(number)
+    return top, bottom
 
 
 def crop(image):

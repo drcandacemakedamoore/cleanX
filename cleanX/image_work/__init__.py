@@ -39,6 +39,7 @@ from .image_functions import (
     make_contour_image,
     avg_image_maker,
     set_image_variability,
+    find_outliers_sum_of_pixels_across_set,
     avg_image_maker_by_label,
     zero_to_twofivefive_simplest_norming,
     rescale_range_from_histogram_low_end,
