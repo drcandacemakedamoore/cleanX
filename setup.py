@@ -103,18 +103,26 @@ def _convert_metadata(_, zf, destination_eggdir, dist_info, egg_info):
         )
         for extra in dist.extras
     }
-    os.rename(dist_info, egg_info)
-    os.rename(
-        os.path.join(egg_info, 'METADATA'),
-        os.path.join(egg_info, 'PKG-INFO'),
-    )
-    setup_dist = setuptools.Distribution(
-        attrs=dict(
-            install_requires=install_requires,
-            extras_require=extras_require,
-        ),
-    )
     try:
+        # This used to be outside try-except, but, as this function
+        # ultimately doesn't care if whatever it does succeeds... why
+        # not put this here too, as it fails anyways because one of
+        # the directories had some files in them.
+
+        # Eventually, we just need to create wheels ourselves, not
+        # relying on `pip` and its idiotic friends, and life will be a
+        # lot easier.
+        os.rename(dist_info, egg_info)
+        os.rename(
+            os.path.join(egg_info, 'METADATA'),
+            os.path.join(egg_info, 'PKG-INFO'),
+        )
+        setup_dist = setuptools.Distribution(
+            attrs=dict(
+                install_requires=install_requires,
+                extras_require=extras_require,
+            ),
+        )
         write_requirements(
             setup_dist.get_command_obj('egg_info'),
             None,
