@@ -466,3 +466,9 @@ def test_binarize_by_otsu():
 def test_find_outliers_sum_of_pixels_across_set():
     result = iwork.find_outliers_sum_of_pixels_across_set(image_directory, 100)
     assert len(result) > 1
+
+def test_hist_sum_of_pixels_across_set():
+    result_hist = iwork.hist_sum_of_pixels_across_set(image_directory)
+    assert type(result_hist) is np.ndarray 
+
+

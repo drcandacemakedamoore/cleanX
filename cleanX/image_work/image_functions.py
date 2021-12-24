@@ -94,9 +94,9 @@ def crop_np(image_array):
 def find_outliers_sum_of_pixels_across_set(directory, percent_to_examine):
     """
     This function finds images that are outliers in terms of having a large
-    or small total pixel sum which in most cases will correlate with under or
-    overexposure OR pathology if the percent is set to a low number -
-    3% (will be written as 3) is reccomended
+    or small total pixel sum, which in most cases, once images are normalized
+    will correlate with under or overexposure OR pathology if the percent
+    parameter is set to a low number - 3% (will be written as 3) is reccomended
 
     :param directory: Directory of images.
     :type directory: string
@@ -127,6 +127,42 @@ def find_outliers_sum_of_pixels_across_set(directory, percent_to_examine):
     top = frame.head(number)
     bottom = frame.tail(number)
     return top, bottom
+
+
+def hist_sum_of_pixels_across_set(directory):
+    """
+    This function finds the sum of pixels per image in a set of images, then
+    turns these values into a histogram. This is useful to compare exposure
+    across normalized groups of images.
+
+    :param directory: directory of images.
+    :type directory: : string
+
+
+    :return: NumPy array shown as histogram.
+    :rtype: :class:`~numpy.ndarray`
+    """
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
+    suspects = suspects1 + suspects2
+
+    names = []
+    pix_list = []
+    for pic in suspects:
+        name = pic
+        img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
+        pix = img.sum()
+        names.append(name)
+        pix_list.append(pix)
+    column_names = ['pix_list', 'names']
+    frame = pd.DataFrame({
+                'pixel_total': pix_list,
+                'images': names})
+
+    frame = frame.sort_values('pixel_total')
+    histogram = frame.hist()
+
+    return histogram
 
 
 def crop(image):

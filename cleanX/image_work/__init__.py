@@ -37,6 +37,7 @@ from .image_functions import (
     dataframe_up_my_pics,
     simple_spinning_template,
     make_contour_image,
+    hist_sum_of_pixels_across_set,
     avg_image_maker,
     set_image_variability,
     find_outliers_sum_of_pixels_across_set,
