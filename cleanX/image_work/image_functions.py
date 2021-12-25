@@ -209,11 +209,10 @@ def crop(image):
     all colors of borders i.e. not only black or white frames
 
     :param image: Image
-    :type image: This can be either a NumPy array holding image data,
-                 or a PIL image.
+    :type image: This must be a NumPy array holding image data,
 
-    :return: Image cropped of black edges
-    :rtype: Same as input type.
+    :return: NumPy array with the image data with the black margins cropped.
+    :rtype: :class:`~numpy.ndarray`.
     """
 
     if isinstance(image, np.ndarray):
