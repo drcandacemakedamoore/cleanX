@@ -54,18 +54,16 @@ def gen_json(directory, name, rows, columns, rnd):
                 data[j].append(v)
         json.dump(data, jsonfile)
 
-
 def test_crop():
     example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
     cropped_example = iwork.crop(example)
     assert cropped_example.shape < example.shape
 
-
-# def test_simpler_crop():
-#     example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
-#     cropped_example = iwork.simpler_crop(example)
-#     assert cropped_example.shape < example.shape
-
+def test_crop_np_white():
+    example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
+    cropped_example = iwork.crop_np_white(example)
+    # our algorithm cuts off a row and column so... we can't call ==
+    assert type(cropped_example) is np.ndarray
 
 def test_blur_out_edges():
     image = os.path.join(image_directory, 'testtocrop.jpg')

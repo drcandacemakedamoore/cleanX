@@ -91,6 +91,43 @@ def crop_np(image_array):
     ]
 
 
+def crop_np_white(image_array):
+    """
+    Crops white edges of an image array
+    :param image_array: Image array.
+    :type image_array: :class:`~numpy.ndarray`
+    :return: NumPy array with the image data with the white margins cropped.
+    :rtype: :class:`~numpy.ndarray`
+    """
+    if len(image_array.shape) > 2:
+        image_array = image_array[:, :, 0]
+
+    ht, wt = image_array.shape
+    r, c, j, k = 0, 0, wt - 1, ht - 1
+    row1 = image_array[:, r]
+    column1 = image_array[c, :]
+    row_last = image_array[:, j]
+    column_last = image_array[k, :]
+    while math.ceil(row1.mean()) == 255:
+        row1 = image_array[:, r]
+        r += 1
+
+    while math.ceil(column1.mean()) == 255:
+        column1 = image_array[c, :]
+        c += 1
+
+    while math.ceil(row_last.mean()) == 255:
+        row_last = image_array[:, j]
+        j -= 1
+
+    while math.ceil(column_last.mean()) == 255:
+        column_last = image_array[k, :]
+        k -= 1
+
+    cropped_image_array = image_array[c:k, r:j]
+    return cropped_image_array
+
+
 def find_outliers_sum_of_pixels_across_set(directory, percent_to_examine):
     """
     This function finds images that are outliers in terms of having a large
@@ -167,7 +204,9 @@ def hist_sum_of_pixels_across_set(directory):
 
 def crop(image):
     """
-    Crops an image of a black frame: does !both PIL and! opencv2 images
+    Crops an image of a black frame: made for Numpy arrays only now.
+    Previous version handled PIL images. Next version handles
+    all colors of borders i.e. grey or white frames
 
     :param image: Image
     :type image: This can be either a NumPy array holding image data,
@@ -176,8 +215,7 @@ def crop(image):
     :return: Image cropped of black edges
     :rtype: Same as input type.
     """
-    # if isinstance(image, Image.Image):
-    #     return crop_pil(image)
+
     if isinstance(image, np.ndarray):
         return crop_np(image)
 
