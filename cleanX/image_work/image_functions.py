@@ -204,9 +204,9 @@ def hist_sum_of_pixels_across_set(directory):
 
 def crop(image):
     """
-    Crops an image of a black frame: made for Numpy arrays only now.
+    Crops an image of a black or white frame: made for Numpy arrays only now.
     Previous version handled PIL images. Next version handles
-    all colors of borders i.e. grey or white frames
+    all colors of borders i.e. not only black or white frames
 
     :param image: Image
     :type image: This can be either a NumPy array holding image data,
@@ -217,7 +217,9 @@ def crop(image):
     """
 
     if isinstance(image, np.ndarray):
-        return crop_np(image)
+        image_g1 = crop_np(image)
+        image_g2 = crop_np_white(image_g1)
+        return image_g2
 
 
 def subtle_sharpie_enhance(image):

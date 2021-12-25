@@ -15,7 +15,7 @@ authors:
     orcid: 0000-0002-7710-6095
     affiliation: 2
   - name: Oleg Sivokon
-    affiliation: 3
+    affiliation: "3,4"
 affiliations:
  - name: MaxCor lab, Sapir College, Israel
    index: 1
@@ -25,6 +25,8 @@ affiliations:
    index: 2
  - name: CMHM/cmhm.info, Israel
    index: 3
+- name: Bright Computing, Netherlands
+   index: 4
 date: 18 April 2021
 bibliography: paper.bib
 ---
