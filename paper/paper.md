@@ -25,7 +25,7 @@ affiliations:
    index: 2
  - name: CMHM/cmhm.info, Israel
    index: 3
-- name: Bright Computing, Netherlands
+ - name: Bright Computing, Netherlands
    index: 4
 date: 18 April 2021
 bibliography: paper.bib
