@@ -2199,7 +2199,7 @@ def blind_quality_matrix(directory):
     including: laplacian variance (somewhat correlated to blurryness/
     resolution),total pixel sum (somewhat correlated to exposure),
     and a fast forier transform variance measure
-    (correlated to resolution and contrast) and filesize
+    (correlated to resolution and contrast) and filesize divided by image area
 
     :param directory: Directory with set_of_images.
     :type directory: string
@@ -2224,9 +2224,10 @@ def blind_quality_matrix(directory):
         img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
         full_img = cv2.imread(pic)
         sharpness = cv2.Laplacian(img, cv2.CV_64F).var()
-        q = os.stat(name).st_size
+        q1 = os.stat(name).st_size
         h, w = full_img[:, :, 0].shape
         pix = img.sum()/(h*w)
+        q = q1/(h*w)
         if w > h:
             size = int(h/2)
         else:
@@ -2249,7 +2250,7 @@ def blind_quality_matrix(directory):
     dict = {'pixel_sum': pix_list,
             'laplacian_variance': laplacian_var,
             'fastforiertransform_crispyness': fft_list,
-            'file_size': q_list,
+            'file_size_over_area': q_list,
             'names': names,
             }
     frame = pd.DataFrame(dict)
