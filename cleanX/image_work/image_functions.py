@@ -2201,7 +2201,9 @@ def blind_quality_matrix(directory):
     (correlated to resolution and contrast),
     contrast by two different measures (standard deviation, and Michaelson)
     and filesize divided by image area
-    NB: images should be roughly comparable in dimension size for results to be meaningfull
+    The data frame is colored with a diverging color (purple low green high)
+    map so groups of images can be compared intuitively .NB: images should be
+    roughly comparable in dimension size for results to be meaningfull
 
     :param directory: Directory with set_of_images.
     :type directory: string
@@ -2248,7 +2250,7 @@ def blind_quality_matrix(directory):
         cmin = np.min(img)
         cmax = np.max(img)
         contrast_michaelson = (cmax-cmin)/(cmax+cmin)
-        
+
         names.append(name)
         pix_list.append(pix)
         laplacian_var.append(sharpness)
@@ -2262,8 +2264,10 @@ def blind_quality_matrix(directory):
             'laplacian_variance': laplacian_var,
             'fastforiertransform_crispness': fft_list,
             'file_size_over_area': q_list,
-            'contrast_std':contrast_list1,
-            'michaelson_contrast' :contrast_list_michaelson,
+            'contrast_std': contrast_list1,
+            'michaelson_contrast': contrast_list_michaelson,
             }
     frame = pd.DataFrame(dict)
+    frame = frame.style.background_gradient(cmap='PiYG')
+
     return frame
