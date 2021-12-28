@@ -56,6 +56,7 @@ from .image_functions import (
     outline_segment_by_otsu,
     binarize_by_otsu,
     column_sum_folder,
+    blind_quality_matrix,
 
     Rotator,
 )

@@ -469,4 +469,7 @@ def test_hist_sum_of_pixels_across_set():
     result_hist = iwork.hist_sum_of_pixels_across_set(image_directory)
     assert type(result_hist) is np.ndarray 
 
+def test_blind_quality_matrix():
+    result_df = iwork.blind_quality_matrix(image_directory)
+    assert type(result_df) is pd.core.frame.DataFrame
 

@@ -150,7 +150,8 @@ def find_outliers_sum_of_pixels_across_set(directory, percent_to_examine):
     for pic in suspects:
         name = pic
         img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
-        pix = img.sum()
+        h, w = img.shape
+        pix = img.sum()/(h*w)
         names.append(name)
         pix_list.append(pix)
     frame = pd.DataFrame({
@@ -188,7 +189,8 @@ def hist_sum_of_pixels_across_set(directory):
     for pic in suspects:
         name = pic
         img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
-        pix = img.sum()
+        h, w = img.shape
+        pix = img.sum()/(h*w)
         names.append(name)
         pix_list.append(pix)
     column_names = ['pix_list', 'names']
@@ -2147,8 +2149,10 @@ def column_sum_folder(directory):
 
     :param directory: Directory with set_of_images.
     :type directory: string
-    :param sumpix_df: df with info from new images of column sums
-    :type sumpix_df: pandas.core.frame.DataFrame
+
+    :return: sumpix_df (df with info from new images of column sums)
+    :rtype: pandas.core.frame.DataFrame
+
     """
     suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
@@ -2186,3 +2190,67 @@ def column_sum_folder(directory):
     data = list(zip(sumpix_list0, sumpix_list1))
     sumpix_df = pd.DataFrame(data, index=names_list)
     return sumpix_df
+
+
+def blind_quality_matrix(directory):
+    """
+    Creates a dataframe of image quality charecteristics
+    NB: images must be comparable in dimensions for results to be meaningfull
+    including: laplacian variance (somewhat correlated to blurryness/
+    resolution),total pixel sum (somewhat correlated to exposure),
+    and a fast forier transform variance measure
+    (correlated to resolution and contrast) and filesize
+
+    :param directory: Directory with set_of_images.
+    :type directory: string
+
+    :return: frame (dataframe)
+    :rtype: pandas.core.frame.DataFrame
+
+    """
+
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
+    suspects = suspects1 + suspects2
+
+    names = []
+    laplacian_var = []
+    pix_list = []
+    fft_list = []
+    q_list = []
+
+    for pic in suspects:
+        name = pic
+        img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
+        full_img = cv2.imread(pic)
+        sharpness = cv2.Laplacian(img, cv2.CV_64F).var()
+        q = os.stat(name).st_size
+        h, w = full_img[:, :, 0].shape
+        pix = img.sum()/(h*w)
+        if w > h:
+            size = int(h/2)
+        else:
+            size = int(w/2)
+        cntrX, cntrY = (int(w / 2.0), int(h / 2.0))
+        fft = np.fft.fft2(full_img[:, :, 0])
+        fftShift = np.fft.fftshift(fft)
+        fftShift[cntrY - size:cntrY + size, cntrX - size:cntrX + size] = 0
+        fftShift = np.fft.ifftshift(fftShift)
+        recon = np.fft.ifft2(fftShift)
+        magnitude = 20 * np.log(np.abs(recon))
+        mean_high_fft = np.mean(magnitude)
+
+        names.append(name)
+        pix_list.append(pix)
+        laplacian_var.append(sharpness)
+        fft_list.append(mean_high_fft)
+        q_list.append(q)
+
+    dict = {'pixel_sum': pix_list,
+            'laplacian_variance': laplacian_var,
+            'fastforiertransform_crispyness': fft_list,
+            'file_size': q_list,
+            'names': names,
+            }
+    frame = pd.DataFrame(dict)
+    return frame
