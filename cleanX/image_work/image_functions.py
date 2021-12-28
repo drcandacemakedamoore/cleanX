@@ -2195,11 +2195,13 @@ def column_sum_folder(directory):
 def blind_quality_matrix(directory):
     """
     Creates a dataframe of image quality charecteristics
-    NB: images must be comparable in dimensions for results to be meaningfull
     including: laplacian variance (somewhat correlated to blurryness/
     resolution),total pixel sum (somewhat correlated to exposure),
     and a fast forier transform variance measure
-    (correlated to resolution and contrast) and filesize divided by image area
+    (correlated to resolution and contrast),
+    contrast by two different measures (standard deviation, and Michaelson)
+    and filesize divided by image area
+    NB: images should be roughly comparable in dimension size for results to be meaningfull
 
     :param directory: Directory with set_of_images.
     :type directory: string
@@ -2218,6 +2220,8 @@ def blind_quality_matrix(directory):
     pix_list = []
     fft_list = []
     q_list = []
+    contrast_list1 = []
+    contrast_list_michaelson = []
 
     for pic in suspects:
         name = pic
@@ -2240,18 +2244,26 @@ def blind_quality_matrix(directory):
         recon = np.fft.ifft2(fftShift)
         magnitude = 20 * np.log(np.abs(recon))
         mean_high_fft = np.mean(magnitude)
-
+        contrast_std = img.std()
+        cmin = np.min(img)
+        cmax = np.max(img)
+        contrast_michaelson = (cmax-cmin)/(cmax+cmin)
+        
         names.append(name)
         pix_list.append(pix)
         laplacian_var.append(sharpness)
         fft_list.append(mean_high_fft)
         q_list.append(q)
+        contrast_list1.append(contrast_std)
+        contrast_list_michaelson.append(contrast_michaelson)
 
-    dict = {'pixel_sum': pix_list,
+    dict = {'name_image': names,
+            'pixel_sum_over_area': pix_list,
             'laplacian_variance': laplacian_var,
-            'fastforiertransform_crispyness': fft_list,
+            'fastforiertransform_crispness': fft_list,
             'file_size_over_area': q_list,
-            'names': names,
+            'contrast_std':contrast_list1,
+            'michaelson_contrast' :contrast_list_michaelson,
             }
     frame = pd.DataFrame(dict)
     return frame
