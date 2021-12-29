@@ -471,5 +471,5 @@ def test_hist_sum_of_pixels_across_set():
 
 def test_blind_quality_matrix():
     result_df = iwork.blind_quality_matrix(image_directory)
-    assert type(result_df) is pd.core.frame.DataFrame
+    assert type(result_df) is pd.io.formats.style.Styler
 

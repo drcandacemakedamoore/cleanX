@@ -20,8 +20,11 @@ from cleanX.image_work import (
     Aggregate,
     GroupHistoHtWt,
     GroupHistoPorportion,
+    BlackEdgeCrop,
+    WhiteEdgeCrop,
     Mean,
 )
+from cleanX.image_work.steps import BlackEdgeCrop, WhiteEdgeCrop
 
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
@@ -62,6 +65,20 @@ def test_alter_images():
         dst_files = set(os.listdir(td))
         assert src_files == dst_files
 
+def test_crop_images():
+    src_dir = image_directory
+    with TemporaryDirectory() as td:
+        src = DirectorySource(src_dir)
+        p = create_pipeline(steps=(
+            Acquire(),
+            # ROAR BlackEdgeCrop(),
+            # ROAR WhiteEdgeCrop(),
+            Save(td),
+        ))
+        p.process(src)
+        src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
+        dst_files = set(os.listdir(td))
+        assert src_files == dst_files
 
 def test_aggregate():
     src_dir = image_directory

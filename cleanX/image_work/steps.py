@@ -6,6 +6,7 @@ import json
 import inspect
 import matplotlib.pyplot as plt
 import pandas as pd
+import math
 from multiprocessing import Queue
 from queue import Empty
 
@@ -336,7 +337,7 @@ class Save(Step):
         )
 
 
-class Crop(Step):
+class BlackEdgeCrop(Step):
     """This class crops image arrays of black frames"""
 
     def apply(self, image_data, image_name):
@@ -350,6 +351,45 @@ class Crop(Step):
                 np.min(y_nonzero):np.max(y_nonzero),
                 np.min(x_nonzero):np.max(x_nonzero)
             ], None
+        except Exception as e:
+            logging.exception(e)
+            return None, e
+
+
+class WhiteEdgeCrop(Step):
+    """This class crops image arrays of white frames"""
+
+    def apply(self, image_data, image_name):
+
+        try:
+            image_array = image_data
+            if len(image_array.shape) > 2:
+                image_array = image_array[:, :, 0]
+
+            ht, wt = image_array.shape
+            r, c, j, k = 0, 0, wt - 1, ht - 1
+            row1 = image_array[:, r]
+            column1 = image_array[c, :]
+            row_last = image_array[:, j]
+            column_last = image_array[k, :]
+            while math.ceil(row1.mean()) == 255:
+                row1 = image_array[:, r]
+                r += 1
+
+            while math.ceil(column1.mean()) == 255:
+                column1 = image_array[c, :]
+                c += 1
+
+            while math.ceil(row_last.mean()) == 255:
+                row_last = image_array[:, j]
+                j -= 1
+
+            while math.ceil(column_last.mean()) == 255:
+                column_last = image_array[k, :]
+                k -= 1
+
+            cropped_image_array = image_array[c:k, r:j]
+            return cropped_image_array, None
         except Exception as e:
             logging.exception(e)
             return None, e
