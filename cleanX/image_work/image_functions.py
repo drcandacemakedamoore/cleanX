@@ -540,39 +540,7 @@ def separate_image_averager(set_of_images, s=5):
         canvas += np.array(example_small)
     return canvas / len(set_of_images)
 
-# to run on files which are inside a folder
-
-
-# def augment_and_move(origin_folder, target_folder, transformations):
-#     """
-#     This should be done in pipeline now...dead function
-#     Takes images and applies the same list of augmentations,
-#     which can include
-#     the cleanX function crop, to all of them
-
-#     :param origin_folder: folder the images are in (should include final '/')
-#     :type origin_folder: Suitable for :func:`os.path.join()`
-#     :param target_folder: The folder where augmented images will be sent
-#     :type target_folder: :func:`os.path.join()`
-#     :param transformations: A list of augmentation functions to apply
-#     :type transformations: list
-
-#     :return: technically a non returning function, but new images made
-#     :rtype: none
-#     """
-#     non_suspects1 = glob.glob(os.path.join(origin_folder, '*.[Jj][Pp][Gg]'))
-#     non_suspects2 = glob.glob(
-#         os.path.join(origin_folder, '*.[Jj][Pp][Ee][Gg]'),
-#     )
-#     non_suspects = non_suspects2 + non_suspects1
-#     for picy in non_suspects:
-#         example = Image.open(picy)
-#         if example.mode == 'RGBA':
-#             example = example.convert('RGB')
-#         novo = os.path.basename(picy)
-#         for transformation in transformations:
-#             example = transformation(example)
-#         example.save(os.path.join(target_folder, novo + ".jpg"))
+#
 
 
 def dimensions_to_df(image_directory):
@@ -710,27 +678,6 @@ def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     )
 
     return histo_ht_wt_p
-
-
-# def crop_them_all(origin_folder, target_folder):
-#     """
-#     This funcion has been replaced by pipeline.
-#     Crops all images and moves them to a target folder
-
-#     :param origin_folder: The folder in which the images are
-#     :type origin_folder: :func:`os.path.join()`
-#     :param target_folder: The folder where augmented images will be sent
-#     :type target_folder: :func:`os.path.join()`
-
-#     :return: technically nothing returned, but new images will be made
-#     :rtype: none
-#     """
-#     # crops and moves to a new folder for a set inside origin folder
-#     augment_and_move(
-#         origin_folder,
-#         target_folder,
-#         [crop],
-#     )
 
 
 def find_very_hazy(directory):
@@ -2199,11 +2146,15 @@ def blind_quality_matrix(directory):
     resolution),total pixel sum (somewhat correlated to exposure),
     and a fast forier transform variance measure
     (correlated to resolution and contrast),
-    contrast by two different measures (standard deviation, and Michaelson)
+    contrast by two different measures (standard deviation, and Michaelson),
+    bit depth (with an eye to a future when there may well be higher bit depths
+    , although probably not on your screen since at some point these
+    distrinctions go beyond human eye ability)
     and filesize divided by image area
     The data frame is colored with a diverging color (purple low green high)
-    map so groups of images can be compared intuitively .NB: images should be
-    roughly comparable in dimension size for results to be meaningfull
+    map so groups of images can be compared intuitively
+    NB: images should be roughly comparable in dimension size for results
+    to be meaningfull
 
     :param directory: Directory with set_of_images.
     :type directory: string
@@ -2224,6 +2175,7 @@ def blind_quality_matrix(directory):
     q_list = []
     contrast_list1 = []
     contrast_list_michaelson = []
+    bit_depth_list = []
 
     for pic in suspects:
         name = pic
@@ -2233,6 +2185,11 @@ def blind_quality_matrix(directory):
         q1 = os.stat(name).st_size
         h, w = full_img[:, :, 0].shape
         pix = img.sum()/(h*w)
+        sbd = str(img.dtype)
+        list_sbd = list(sbd)
+        bd = [i for i in list_sbd if i.isdigit()]
+        delim = ''
+        bd = int(delim.join(bd))
         q = q1/(h*w)
         if w > h:
             size = int(h/2)
@@ -2258,6 +2215,7 @@ def blind_quality_matrix(directory):
         q_list.append(q)
         contrast_list1.append(contrast_std)
         contrast_list_michaelson.append(contrast_michaelson)
+        bit_depth_list.append(bd)
 
     dict = {'name_image': names,
             'pixel_sum_over_area': pix_list,
@@ -2266,6 +2224,7 @@ def blind_quality_matrix(directory):
             'file_size_over_area': q_list,
             'contrast_std': contrast_list1,
             'michaelson_contrast': contrast_list_michaelson,
+            'bit_depth': bit_depth_list,
             }
     frame = pd.DataFrame(dict)
     frame = frame.style.background_gradient(cmap='PiYG')
