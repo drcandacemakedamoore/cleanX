@@ -24,7 +24,7 @@ from cleanX.image_work import (
     WhiteEdgeCrop,
     Mean,
 )
-from cleanX.image_work.steps import BlackEdgeCrop, WhiteEdgeCrop
+# from cleanX.image_work.steps import BlackEdgeCrop, WhiteEdgeCrop
 
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
@@ -71,7 +71,7 @@ def test_crop_images():
         src = DirectorySource(src_dir)
         p = create_pipeline(steps=(
             Acquire(),
-            # ROAR BlackEdgeCrop(),
+            BlackEdgeCrop(),
             # ROAR WhiteEdgeCrop(),
             Save(td),
         ))

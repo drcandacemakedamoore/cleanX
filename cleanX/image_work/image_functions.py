@@ -2149,12 +2149,12 @@ def blind_quality_matrix(directory):
     contrast by two different measures (standard deviation, and Michaelson),
     bit depth (with an eye to a future when there may well be higher bit depths
     , although probably not on your screen since at some point these
-    distrinctions go beyond human eye ability)
+    distinctions go beyond human eye ability)
     and filesize divided by image area
-    The data frame is colored with a diverging color (purple low green high)
-    map so groups of images can be compared intuitively
+    The data frame is colored with a diverging color scheme (purple low,
+    green high) map so that groups of images can be compared intuitively
     NB: images should be roughly comparable in dimension size for results
-    to be meaningfull
+    to be meaningful.
 
     :param directory: Directory with set_of_images.
     :type directory: string
