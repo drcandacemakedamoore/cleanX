@@ -356,6 +356,41 @@ class FourierTransf(Step):
             return None, e
 
 
+class ContourImage(Step):
+    """This class makes a transformation into a many line
+    contour based image from the original image"""
+
+    def apply(self, image_data, image_name):
+
+        try:
+            major_cv2 = int(cv2.__version__.split('.')[0])
+            edges = cv2.Canny(image_data, 0, 12)
+            # # get threshold image (older function that failed with cv2 dif)
+            # threshy = image_data.max()/2
+            # ret, thresh_img = cv2.threshold(edges,
+            # threshy, 255, cv2.THRESH_BINARY)
+            #  # find contours
+            if major_cv2 > 3:
+                contours, hierarchy = cv2.findContours(
+                                            edges,
+                                            cv2.RETR_EXTERNAL,
+                                            cv2.CHAIN_APPROX_SIMPLE,
+                                            )
+            else:
+                ret2, contours, hierarchy = cv2.findContours(
+                                                    edges,
+                                                    cv2.RETR_EXTERNAL,
+                                                    cv2.CHAIN_APPROX_SIMPLE,
+                                                    )
+                # create an empty image for contours
+            img_cont = np.zeros(image_data.shape)
+            drawing = cv2.drawContours(img_cont, contours, -1, (0, 255, 0), 3)
+            return drawing, None
+        except Exception as e:
+            logging.exception(e)
+            return None, e
+
+
 class ProjectionHorizoVert(Step):
     """This class makes a transformation into a projectionof the image.
     The projections of horizontal and vertical are superimposed. These

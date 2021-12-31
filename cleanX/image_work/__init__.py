@@ -73,6 +73,7 @@ from .steps import (
     Normalize,
     HistogramNormalize,
     ProjectionHorizoVert,
+    ContourImage,
     Sharpie,
     BlurEdges,
     Aggregate,
