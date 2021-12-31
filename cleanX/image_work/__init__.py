@@ -67,6 +67,7 @@ from .steps import (
     Step,
     Acquire,
     Save,
+    FourierTransf,
     BlackEdgeCrop,
     WhiteEdgeCrop,
     Normalize,

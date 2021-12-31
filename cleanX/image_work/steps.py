@@ -337,6 +337,25 @@ class Save(Step):
         )
 
 
+class FourierTransf(Step):
+    """This class makes a fourier transformation of the image"""
+
+    def apply(self, image_data, image_name):
+
+        try:
+            if len(image_data.shape) > 2:
+                img = image_data[:, :, 0]
+            else:
+                img = image_data
+            f = np.fft.fft2(img)
+            fshift = np.fft.fftshift(f)
+            transformed = np.log(np.abs(fshift))
+            return transformed, None
+        except Exception as e:
+            logging.exception(e)
+            return None, e
+
+
 class BlackEdgeCrop(Step):
     """This class crops image arrays of black frames"""
 
