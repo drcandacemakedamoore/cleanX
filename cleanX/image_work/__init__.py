@@ -1,24 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from .image_functions import (
-    # simpler_crop,
     crop_np,
-    # crop_pil,
     crop,
     subtle_sharpie_enhance,
     harsh_sharpie_enhance,
     salting,
-    # simple_rotation_augmentation,
     blur_out_edges,
-    # reasonable_rotation_augmentation,
     show_major_lines_on_image,
     find_big_lines,
     separate_image_averager,
-    # augment_and_move,
     dimensions_to_df,
     dimensions_to_histo,
     proportions_ht_wt_to_histo,
-    # crop_them_all,
     find_very_hazy,
     find_by_sample_upper,
     find_sample_upper_greater_than_lower,
@@ -57,6 +51,7 @@ from .image_functions import (
     binarize_by_otsu,
     column_sum_folder,
     blind_quality_matrix,
+    fourier_transf,
 
     Rotator,
 )

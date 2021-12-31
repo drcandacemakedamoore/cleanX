@@ -15,7 +15,6 @@ import pandas as pd
 import matplotlib as plt
 import numpy as np
 
-# from PIL import Image, ImageOps
 
 from cleanX import (
     dataset_processing as csvp,
@@ -87,13 +86,6 @@ def test_salting():
     lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
     salt = iwork.salting(lindo_image)
     assert salt.shape[0] > 1
-
-
-# def test_simple_rotation_augmentation():
-#     lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
-#     lindo_rotated = iwork.simple_rotation_augmentation(6, lindo_image)
-#     assert np.array(lindo_rotated).shape[0] > 1
-
 
 def test_check_paths_for_group_leakage():
     train_dfE = (os.path.join(image_directory,'train_sample_df.csv'))
@@ -172,32 +164,6 @@ def test_find_suspect_text():
 def test_find_suspect_text_by_length():   
     jobs = iwork.find_suspect_text_by_length(image_directory, 3)
     assert len(jobs) > 1    
-
-
-# def test_augment_and_move():
-#     try:
-#         os.makedirs(target_directory)
-#     except FileExistsError:
-#         pass
-#     iwork.augment_and_move(image_directory, target_directory, [ImageOps.mirror, ImageOps.flip])
-#     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
-#     assert os.path.isfile(vovo) 
-
-
-# def test_crop_them_all():
-#     try:
-#         os.makedirs(target_directory)
-#     except FileExistsError:
-#         pass
-#     iwork.crop_them_all(image_directory, target_directory)
-#     vovo = os.path.join(target_directory, 'testtocrop.jpg.jpg')
-#     assert os.path.isfile(vovo) 
-
-
-# def test_reasonable_rotation_augmentation():
-#     imageE = (os.path.join(image_directory,'testtocrop.jpg'))
-#     dman = iwork.reasonable_rotation_augmentation(0, 12, 3, imageE)
-#     assert len(dman) > 1
 
 
 def test_find_by_sample_upper():
@@ -439,11 +405,12 @@ def test_show_close_images(monkeypatch):
     monkeypatch.setattr(iwork.image_functions.plt, 'show', lambda: None)
     iwork.show_close_images(image_directory, 2, 190)
 
-# def test_image_to_histo():
+def test_image_to_histo():
 ## currently blocked out for oleg to check why failing
-#     outpic = cv2.imread('testtocrop.jpg')
-#     hist = iwork.image_to_histo(outpic)
-#     assert type(hist) is np.ndarray
+    vovo = os.path.join(image_directory, 'testtocrop.jpg')
+    outpic = cv2.imread(vovo)
+    hist = iwork.image_to_histo(outpic)
+    assert type(hist) is np.ndarray
 
 def test_black_end_ratio():
     vovo = os.path.join(image_directory, 'testtocrop.jpg')
@@ -473,3 +440,8 @@ def test_blind_quality_matrix():
     result_df = iwork.blind_quality_matrix(image_directory)
     assert type(result_df) is pd.io.formats.style.Styler
 
+def test_fourier_transf():
+    sample_image = os.path.join(image_directory, 'testtocrop.jpg')
+    sample_imager = cv2.imread(sample_image)
+    transformed = iwork.fourier_transf(sample_imager)
+    assert sample_imager.shape[0] == transformed.shape[0]

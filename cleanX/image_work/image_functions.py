@@ -13,8 +13,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# from PIL import Image
-# from PIL import Image, ImageOps
 
 try:
     def __fix_tesserocr_locale():
@@ -2230,3 +2228,29 @@ def blind_quality_matrix(directory):
     frame = frame.style.background_gradient(cmap='PiYG')
 
     return frame
+
+
+def fourier_transf(image):
+    """
+    A fourier transformed image from an X-ray can actually provide information
+    on everything from aliasing (moire pattern) and other noise patterns
+    to image orientation and potential registration in the right hands.
+    This creates fourier transfored images out of all in a directory.
+    This function is simply the appropriate numpy fast fourier transforms made
+    into a single code line/ "wrapper".
+
+    :param image: original image (3 or single channel)
+    :type image: numpy.ndarray
+
+    :return: transformed
+    :rtype: numpy.ndarray
+
+    """
+    if len(image.shape) > 2:
+        img = image[:, :, 0]
+    else:
+        img = image
+    f = np.fft.fft2(img)
+    fshift = np.fft.fftshift(f)
+    transformed = np.log(np.abs(fshift))
+    return transformed

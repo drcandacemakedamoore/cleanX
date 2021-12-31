@@ -72,7 +72,7 @@ def test_crop_images():
         p = create_pipeline(steps=(
             Acquire(),
             BlackEdgeCrop(),
-            # ROAR WhiteEdgeCrop(),
+            WhiteEdgeCrop(),
             Save(td),
         ))
         p.process(src)
