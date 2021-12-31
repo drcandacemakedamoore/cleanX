@@ -72,6 +72,7 @@ from .steps import (
     WhiteEdgeCrop,
     Normalize,
     HistogramNormalize,
+    ProjectionHorizoVert,
     Sharpie,
     BlurEdges,
     Aggregate,

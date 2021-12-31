@@ -24,7 +24,7 @@ from cleanX.image_work import (
     WhiteEdgeCrop,
     Mean,
 )
-from cleanX.image_work.steps import FourierTransf
+from cleanX.image_work.steps import FourierTransf, ProjectionHorizoVert
 # from cleanX.image_work.steps import BlackEdgeCrop, WhiteEdgeCrop
 
 
@@ -88,6 +88,20 @@ def test_fourier_transf():
         p = create_pipeline(steps=(
             Acquire(),
             FourierTransf(),
+            Save(td),
+        ))
+        p.process(src)
+        src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
+        dst_files = set(os.listdir(td))
+        assert src_files == dst_files
+
+def test_projectionhorizovert():
+    src_dir = image_directory
+    with TemporaryDirectory() as td:
+        src = DirectorySource(src_dir)
+        p = create_pipeline(steps=(
+            Acquire(),
+            ProjectionHorizoVert(),
             Save(td),
         ))
         p.process(src)

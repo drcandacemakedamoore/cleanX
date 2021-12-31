@@ -356,6 +356,33 @@ class FourierTransf(Step):
             return None, e
 
 
+class ProjectionHorizoVert(Step):
+    """This class makes a transformation into a projectionof the image.
+    The projections of horizontal and vertical are superimposed. These
+    one dimensional projection images can be used for image registration
+    algorithms, quality control or other purposes"""
+
+    def apply(self, image_data, image_name):
+
+        try:
+            sumpix0 = np.sum(image_data, 0)
+            sumpix1 = np.sum(image_data, 1)
+            fig, axes = plt.subplots(1, 1, figsize=(10, 10))
+            plt.plot(sumpix0)
+            plt.plot(sumpix1)
+
+            axes.axis('off')
+            fig.tight_layout(pad=0)
+            axes.margins(0)
+            fig.canvas.draw()
+            iplot = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
+            iplot = iplot.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+            return iplot, None
+        except Exception as e:
+            logging.exception(e)
+            return None, e
+
+
 class BlackEdgeCrop(Step):
     """This class crops image arrays of black frames"""
 
