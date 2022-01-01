@@ -87,6 +87,7 @@ from .steps import (
     OtsuBinarize,
     OtsuLines,
     Projection,
+    CleanRotate,
 )
 
 

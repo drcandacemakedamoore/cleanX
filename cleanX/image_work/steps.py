@@ -13,6 +13,8 @@ from queue import Empty
 import numpy as np
 import cv2
 
+from .image_functions import rotated_with_max_clean_area
+
 
 _known_steps = {}
 
@@ -590,30 +592,28 @@ class BlurEdges(Step):
         )
 
 
-# class Rotate(Step):
-#     """This class takes the image and applies a rotation  function,
-#     with control over the degree. In present version, it is reccomended to
-#     run on copies. In future versions can be run after a Tee step.
-#     UNDER DEVELOPMENT """
+class CleanRotate(Step):
+    """This class takes the image and applies a rotation  function,
+    with control over the degree. It crops off black added (makes smaller
+    borders, but will not crop existing borders) In present version, it is
+    reccomended to run on copies. In future versions can be run after a Tee
+    step. """
 
-#     def __init__(
-#         self,
-#         angle=2,
-#         center=
-#         scale=
-#         cache_dir=None,
-#     ):
-#         super().__init__(cache_dir)
-#         self.angle = angle
+    def __init__(
+        self,
+        angle=2,
+        cache_dir=None,
+    ):
+        super().__init__(cache_dir)
+        self.angle = angle
 
-#     def apply(self, image_data):
-#         matrix = cv2.getRotationMatrix2D(self.center, angle, self.scale)
-#         rotated = cv2.warpAffine(
-#               image_data, matrix,
-#               (image_data.shape[0],
-#                image_data.shape[1])
-#          )
-#         return rotated, None
+    def apply(self, image_data, image_name):
+        try:
+            rotated = rotated_with_max_clean_area(image_data, self.angle)
+            return rotated, None
+        except Exception as e:
+            logging.exception(e)
+            return None, e
 
 
 class Normalize(Step):
