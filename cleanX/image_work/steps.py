@@ -615,6 +615,12 @@ class CleanRotate(Step):
             logging.exception(e)
             return None, e
 
+    def __reduce__(self):
+        return self.__class__, (
+            self.angle,
+            self.cache_dir,
+        )
+
 
 class Normalize(Step):
     """This class makes a simple normalizing to get values 0 to 255."""
