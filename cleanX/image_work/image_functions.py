@@ -2336,7 +2336,10 @@ def cut_to_size(img, ht, wt):
 def cut_or_pad(img, ht, wt):
     """
     This function applies a cropping or a padding around the image symetrically
-    until it is the ht and wt parameters specificed.
+    until it is the ht and wt parameters specificed. Please note: what is
+    usually appropriate for neural nets is to crop off frames, then
+    resize all the images, then pad them all, so they are all as
+    unform as possible.
 
     :param img: original image (3 or single channel)
     :type img: numpy.ndarray
@@ -2366,4 +2369,38 @@ def cut_or_pad(img, ht, wt):
         image = img[subht:nowht-subht, :]
         image = pad_to_size(image, ht, wt)
 
+    return image
+
+
+def rotated_with_max_clean_area(image, angle):
+    """
+    Given an image, will rotate the image and crop off the blank triangle edges
+    Note: if image is given with a triangle edge (previously rotated?), or
+    border these existing edges and borders will not be cropped.
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+    :param angle: desired andgle for rotation
+    :type angle: int
+
+
+    :return: image
+    :rtype: numpy.ndarray
+    """
+    radians = (math.pi / 180) * angle
+    h, w = image.shape[0:2]
+    if w <= 0 or h <= 0:
+        wr, hr = 0, 0
+    else:
+        width_longer = w >= h
+        side_long, side_short = (w, h) if width_longer else (h, w)
+        sin_a, cos_a = abs(math.sin(radians)), abs(math.cos(radians))
+        if side_short <= 2.*sin_a*cos_a*side_long or abs(sin_a-cos_a) < 1e-10:
+            x = 0.5*side_short
+            wr, hr = (x/sin_a, x/cos_a) if width_longer else (x/cos_a, x/sin_a)
+        else:
+            cos_2a = cos_a*cos_a - sin_a*sin_a
+            wr, hr = (w*cos_a - h*sin_a)/cos_2a, (h*cos_a - w*sin_a)/cos_2a
+    image1 = simple_rotate_no_pil(image, angle, center=None, scale=1.0)
+    image = cut_to_size(image1, wr, hr)
     return image

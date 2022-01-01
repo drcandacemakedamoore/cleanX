@@ -55,6 +55,7 @@ from .image_functions import (
     pad_to_size,
     cut_to_size,
     cut_or_pad,
+    rotated_with_max_clean_area,
 
     Rotator,
 )

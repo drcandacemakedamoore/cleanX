@@ -463,3 +463,9 @@ def test_cut_or_pad():
     sample_imager = cv2.imread(sample_image)
     padded = iwork.cut_or_pad(sample_imager, 5000, 2)
     assert type(padded) is np.ndarray 
+
+def test_rotated_with_max_clean_area():
+    sample_image = os.path.join(image_directory, 'testtocrop.jpg')
+    sample_imager = cv2.imread(sample_image)
+    rota = iwork.rotated_with_max_clean_area(sample_imager, 2)
+    assert type(rota) is np.ndarray 
