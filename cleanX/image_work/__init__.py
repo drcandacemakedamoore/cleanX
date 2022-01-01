@@ -52,6 +52,8 @@ from .image_functions import (
     column_sum_folder,
     blind_quality_matrix,
     fourier_transf,
+    pad_to_size,
+    cut_to_size,
 
     Rotator,
 )

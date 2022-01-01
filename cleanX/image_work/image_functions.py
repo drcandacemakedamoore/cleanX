@@ -2254,3 +2254,77 @@ def fourier_transf(image):
     fshift = np.fft.fftshift(f)
     transformed = np.log(np.abs(fshift))
     return transformed
+
+
+def pad_to_size(img, ht, wt):
+    """
+    This function applies a padding with value 0 around the image symetrically
+    until it is the ht and wt parameters specificed. Note if ht or wt below
+    the existing ones are chosen, the image will be returned unpadded with
+    a message.
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+    :param ht: desired image height
+    :type ht: int
+    :param wt: desired image width
+    :type wt: wt
+
+    :return: image
+    :rtype: numpy.ndarray
+    """
+    if len(img.shape) > 2:
+        nowht, nowwt = img[:, :, 0].shape
+    else:
+        nowht, nowwt = img.shape
+    addinght = int((ht - nowht)/2)
+    addingwt = int((wt - nowwt)/2)
+    if nowht <= ht and nowwt <= wt:
+        image = cv2.copyMakeBorder(
+            img,
+            addinght,
+            addinght,
+            addingwt,
+            addingwt,
+            cv2.BORDER_CONSTANT,
+            None,
+            value=0,
+            )
+    else:
+        print("image dimensions are incorrect for  this function")
+        print("choose different ht and/or wt")
+        image = img
+
+    return image
+
+
+def cut_to_size(img, ht, wt):
+    """
+    This function applies a crop around the image symetrically
+    until it is the ht and wt parameters specificed. Note if ht or wt above
+    the existing ones are chosen, the original image will be returned uncut,
+    and a message will be printed.
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+    :param ht: desired image height
+    :type ht: int
+    :param wt: desired image width
+    :type wt: wt
+
+    :return: image
+    :rtype: numpy.ndarray
+    """
+    if len(img.shape) > 2:
+        nowht, nowwt = img[:, :, 0].shape
+    else:
+        nowht, nowwt = img.shape
+    subht = int((nowht - ht)/2)
+    subwt = int((nowwt - wt)/2)
+    if nowht <= ht or nowwt <= wt:
+        print("Choose smaller ht or wt, image not cuttable")
+        image = img
+    else:
+        image = img[subht:nowht-subht, subwt:nowwt-subwt]
+
+    return image
