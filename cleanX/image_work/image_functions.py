@@ -2262,6 +2262,9 @@ def pad_to_size(img, ht, wt):
     until it is the ht and wt parameters specificed. Note if ht or wt below
     the existing ones are chosen, the image will be returned unpadded with
     a message.
+    Note: this is not suggested as a pre-convolution padding. A preconvolution
+    padding can be done easily in opencv with copyMakeBorder function. This
+    function is a helper function, but can be used alone.
 
     :param img: original image (3 or single channel)
     :type img: numpy.ndarray
@@ -2326,5 +2329,41 @@ def cut_to_size(img, ht, wt):
         image = img
     else:
         image = img[subht:nowht-subht, subwt:nowwt-subwt]
+
+    return image
+
+
+def cut_or_pad(img, ht, wt):
+    """
+    This function applies a cropping or a padding around the image symetrically
+    until it is the ht and wt parameters specificed.
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+    :param ht: desired image height
+    :type ht: int
+    :param wt: desired image width
+    :type wt: wt
+
+    :return: image
+    :rtype: numpy.ndarray
+    """
+    if len(img.shape) > 2:
+        nowht, nowwt = img[:, :, 0].shape
+    else:
+        nowht, nowwt = img.shape
+
+    if nowht <= ht and nowwt <= wt:
+        image = pad_to_size(img, ht, wt)
+    elif nowht > ht and nowwt > wt:
+        image = cut_to_size(img, ht, wt)
+    elif nowht <= ht and nowwt > wt:
+        subwt = int((nowwt - wt)/2)
+        image = img[:, subwt:nowwt-subwt]
+        image = pad_to_size(image, ht, wt)
+    else:
+        subht = int((nowht - ht)/2)
+        image = img[subht:nowht-subht, :]
+        image = pad_to_size(image, ht, wt)
 
     return image
