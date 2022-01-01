@@ -468,4 +468,9 @@ def test_rotated_with_max_clean_area():
     sample_image = os.path.join(image_directory, 'testtocrop.jpg')
     sample_imager = cv2.imread(sample_image)
     rota = iwork.rotated_with_max_clean_area(sample_imager, 2)
-    assert type(rota) is np.ndarray 
+    assert type(rota) is np.ndarray
+
+
+def test_blind_noise_matrix():
+    result_df = iwork.blind_noise_matrix(image_directory)
+    assert type(result_df) is pd.io.formats.style.Styler

@@ -2158,7 +2158,7 @@ def blind_quality_matrix(directory):
     :type directory: string
 
     :return: frame (dataframe)
-    :rtype: pandas.core.frame.DataFrame
+    :rtype: class 'pandas.io.formats.style.Styler'
 
     """
 
@@ -2404,3 +2404,88 @@ def rotated_with_max_clean_area(image, angle):
     image1 = simple_rotate_no_pil(image, angle, center=None, scale=1.0)
     image = cut_to_size(image1, wr, hr)
     return image
+
+
+def noise_sum_cv(image):
+    """
+    Given an image, will try to sum up the noise, then divide by the area of
+    the image. The noise sumation here is based on an opencv2 algorithm for
+    noise called fastNlMeansDenoising
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+
+    :return: final_sum
+    :rtype: float
+    """
+    un_noise = cv2.fastNlMeansDenoising(image)
+    difference = abs(un_noise - image)
+    sumed = difference.sum()
+    ht, wt = image.shape[0:2]
+    area = ht*wt
+    final_sum = sumed/area
+    return final_sum
+
+
+def noise_sum_median_blur(image):
+    """
+    Given an image, will try to sum up the noise, then divide by the area of
+    the image. The noise sumation here is based on a median filter denoising
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+
+    :return: final_sum
+    :rtype: float
+    """
+    kernel_size = 5
+    un_noise = cv2.medianBlur(image, kernel_size)
+    difference = abs(un_noise - image)
+    sumed = difference.sum()
+    ht, wt = image.shape[0:2]
+    area = ht*wt
+    final_sum = sumed/area
+    return final_sum
+
+
+def blind_noise_matrix(directory):
+    """
+    Creates a dataframe of image noise approximations by different algorithms.
+    The data frame is colored with a diverging color scheme (purple low,
+    green high) map so that groups of images can be compared intuitively
+    NB: images should be roughly comparable in dimension size for results
+    to be meaningful.
+
+    :param directory: Directory with set_of_images.
+    :type directory: string
+
+    :return: frame (dataframe)
+    :rtype: class 'pandas.io.formats.style.Styler'
+
+    """
+
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
+    suspects = suspects1 + suspects2
+
+    names = []
+    noise_median_list = []
+    noise_cv_list = []
+
+    for pic in suspects:
+        name = pic
+        img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
+        medi = noise_sum_median_blur(img)
+        noise_cv = noise_sum_cv(img)
+        names.append(name)
+        noise_median_list.append(medi)
+        noise_cv_list.append(noise_cv)
+
+    dict = {'name_image': names,
+            'noise_by_median': noise_median_list,
+            'noise_by_cv': noise_cv_list,
+            }
+    frame = pd.DataFrame(dict)
+    frame = frame.style.background_gradient(cmap='PiYG')
+
+    return frame
