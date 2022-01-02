@@ -15,6 +15,9 @@ import pandas as pd
 import matplotlib as plt
 import numpy as np
 
+# # remove this before commit
+# import sys
+# sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from cleanX import (
     dataset_processing as csvp,
@@ -473,4 +476,9 @@ def test_rotated_with_max_clean_area():
 
 def test_blind_noise_matrix():
     result_df = iwork.blind_noise_matrix(image_directory)
+    assert type(result_df) is pd.io.formats.style.Styler
+
+
+def test_segmented_blind_noise_matrix():
+    result_df = iwork.segmented_blind_noise_matrix(image_directory)
     assert type(result_df) is pd.io.formats.style.Styler

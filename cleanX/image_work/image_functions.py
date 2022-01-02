@@ -48,26 +48,6 @@ from filecmp import cmp
 from pathlib import Path
 
 
-# def simpler_crop(image):
-#     """
-#     Crops an image of a black frame
-
-#     :param image: Image
-#     :type image: Image (JPEG)
-
-#     :return: image cropped of black edges
-#     :rtype: numpy.ndarray
-#     """
-#     nonzero = np.nonzero(image)
-#     y_nonzero = nonzero[0]
-#     x_nonzero = nonzero[1]
-#     # , x_nonzero, _ = np.nonzero(image)
-#     return image[
-#         np.min(y_nonzero):np.max(y_nonzero),
-#         np.min(x_nonzero):np.max(x_nonzero)
-#     ]
-
-
 def crop_np(image_array):
     """
     Crops black edges of an image array
@@ -2449,6 +2429,93 @@ def noise_sum_median_blur(image):
     return final_sum
 
 
+def noise_sum_gaussian(image):
+    """
+    Given an image, will try to sum up the noise, then divide by the area of
+    the image. The noise sumation here is based on a gaussian filter denoising
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+
+    :return: final_sum
+    :rtype: float
+    """
+    un_noise = cv2.GaussianBlur(image, (3, 3), 0)
+    difference = abs(un_noise - image)
+    sumed = difference.sum()
+    ht, wt = image.shape[0:2]
+    area = ht*wt
+    final_sum = sumed/area
+    return final_sum
+
+
+def noise_sum_bilateral(image):
+    """
+    Given an image, will try to sum up the noise, then divide by the area of
+    the image. The noise sumation here is based on a bilatera filter denoising
+    given a fairly large area (15 pixels)
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+
+    :return: final_sum
+    :rtype: float
+    """
+
+    un_noise = cv2.bilateralFilter(image, 15, 75, 75)
+    difference = abs(un_noise - image)
+    sumed = difference.sum()
+    ht, wt = image.shape[0:2]
+    area = ht*wt
+    final_sum = sumed/area
+    return final_sum
+
+
+def noise_sum_bilateralLO(image):
+    """
+    Given an image, will try to sum up the noise, then divide by the area of
+    the image. The noise sumation here is based on a bilatera filter denoising
+    given a fairly large area (15 pixels)
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+
+    :return: final_sum
+    :rtype: float
+    """
+
+    un_noise = cv2.bilateralFilter(image, 5, 5, 5)
+    difference = abs(un_noise - image)
+    sumed = difference.sum()
+    ht, wt = image.shape[0:2]
+    area = ht*wt
+    final_sum = sumed/area
+    return final_sum
+
+
+def noise_sum_5k(image):
+    """
+    Given an image, will try to sum up the noise, then divide by the area of
+    the image. The noise sumation here is based on a median filter denoising
+    using a 5*5 kernel. This kernel is reccomended for picking up moire
+    patterns and other repetitive noise that may be missed by a smaller kernel.
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+
+    :return: final_sum
+    :rtype: float
+    """
+    kernel_size = 5
+    un_noise = cv2.medianBlur(image, kernel_size)
+    difference = abs(un_noise - image)
+    sumed = difference.sum()
+    ht, wt = image.shape[0:2]
+    area = ht*wt
+    final_sum = sumed/area
+    return final_sum
+
+
 def noise_sum_7k(image):
     """
     Given an image, will try to sum up the noise, then divide by the area of
@@ -2474,7 +2541,8 @@ def noise_sum_7k(image):
 
 def blind_noise_matrix(directory):
     """
-    Creates a dataframe of image noise approximations by different algorithms.
+    Creates a dataframe of image noise approximations by different algorithms
+    here run over the whole image.
     The data frame is colored with a diverging color scheme (purple low,
     green high) map so that groups of images can be compared intuitively
     NB: images should be roughly comparable in dimension size for results
@@ -2495,23 +2563,113 @@ def blind_noise_matrix(directory):
     names = []
     noise_median_list = []
     noise_cv_list = []
+    noise_5k_list = []
     noise_7k_list = []
+    noise_gaussian_list = []
+    noise_bilateral_list = []
+    noise_bilateralLO_list = []
 
     for pic in suspects:
         name = pic
         img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
         medi = noise_sum_median_blur(img)
+        medi5 = noise_sum_5k(img)
         medi7 = noise_sum_7k(img)
         noise_cv = noise_sum_cv(img)
+        gauss = noise_sum_gaussian(img)
+        bilateral = noise_sum_bilateral(img)
+        bilateralLO = noise_sum_bilateralLO(img)
         names.append(name)
         noise_median_list.append(medi)
         noise_cv_list.append(noise_cv)
         noise_7k_list.append(medi7)
+        noise_gaussian_list.append(gauss)
+        noise_5k_list.append(medi5)
+        noise_bilateral_list.append(bilateral)
+        noise_bilateralLO_list.append(bilateralLO)
 
     dict = {'name_image': names,
-            'noise_by_3_k_median': noise_median_list,
-            'noise_by_cv': noise_cv_list,
-            'noise_by_7_k_median': noise_7k_list,
+            'noise_non_local_mean': noise_cv_list,
+            'noise_gaussian': noise_gaussian_list,
+            'noise_3_k_median': noise_median_list,
+            'noise_5_k_median': noise_5k_list,
+            'noise_7_k_median': noise_7k_list,
+            'noise_bilat_large': noise_bilateral_list,
+            'noise_bilat_small': noise_bilateralLO_list,
+
+            }
+    frame = pd.DataFrame(dict)
+    frame = frame.style.background_gradient(cmap='PiYG')
+
+    return frame
+
+
+def segmented_blind_noise_matrix(directory):
+    """
+    Creates a dataframe of image noise approximations by different algorithms
+    but only on the very dark areas. Essentially this is a segmentation
+    to the background, and a judgement of noise there.
+    The data frame is colored with a diverging color scheme (purple low,
+    green high) map so that groups of images can be compared intuitively
+    NB: images should be roughly comparable in dimension size for results
+    to be meaningful.
+
+    :param directory: Directory with set_of_images.
+    :type directory: string
+
+    :return: frame (dataframe)
+    :rtype: class 'pandas.io.formats.style.Styler'
+
+    """
+
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
+    suspects = suspects1 + suspects2
+
+    names = []
+    noise_median_list = []
+    noise_cv_list = []
+    noise_5k_list = []
+    noise_7k_list = []
+    noise_gaussian_list = []
+    noise_bilateral_list = []
+    noise_bilateralLO_list = []
+
+    for pic in suspects:
+        name = pic
+        img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
+        thresh = 20
+        output_image = img
+        mask = output_image < thresh
+        output_image[~mask] = 0
+        whole_image_ht, whole_image_wt = img.shape[0:2]
+        whole_image_area = whole_image_ht*whole_image_wt
+        area = output_image.sum()
+        medi = (noise_sum_median_blur(img) * whole_image_area)/area
+        medi5 = (noise_sum_5k(img) * whole_image_area)/area
+        medi7 = (noise_sum_7k(img) * whole_image_area)/area
+        noise_cv = (noise_sum_cv(img) * whole_image_area)/area
+        gauss = (noise_sum_gaussian(img) * whole_image_area)/area
+        bilateral = (noise_sum_bilateral(img) * whole_image_area)/area
+        bilateralLO = (noise_sum_bilateralLO(img) * whole_image_area)/area
+        names.append(name)
+        noise_median_list.append(medi)
+        noise_cv_list.append(noise_cv)
+        noise_7k_list.append(medi7)
+        noise_gaussian_list.append(gauss)
+        noise_5k_list.append(medi5)
+        noise_bilateral_list.append(bilateral)
+        noise_bilateralLO_list.append(bilateralLO)
+
+    dict = {'name_image': names,
+            'noise_non_local_mean': noise_cv_list,
+            'noise_gaussian': noise_gaussian_list,
+            'noise_3_k_median': noise_median_list,
+            'noise_5_k_median': noise_5k_list,
+            'noise_7_k_median': noise_7k_list,
+            'noise_bilat_large': noise_bilateral_list,
+            'noise_bilat_small': noise_bilateralLO_list,
+
             }
     frame = pd.DataFrame(dict)
     frame = frame.style.background_gradient(cmap='PiYG')
