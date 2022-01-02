@@ -2410,7 +2410,8 @@ def noise_sum_cv(image):
     """
     Given an image, will try to sum up the noise, then divide by the area of
     the image. The noise sumation here is based on an opencv2 algorithm for
-    noise called fastNlMeansDenoising
+    noise called fastNlMeansDenoising which is an implementation of non-local
+    means denoising.
 
     :param img: original image (3 or single channel)
     :type img: numpy.ndarray
@@ -2438,7 +2439,30 @@ def noise_sum_median_blur(image):
     :return: final_sum
     :rtype: float
     """
-    kernel_size = 5
+    kernel_size = 3
+    un_noise = cv2.medianBlur(image, kernel_size)
+    difference = abs(un_noise - image)
+    sumed = difference.sum()
+    ht, wt = image.shape[0:2]
+    area = ht*wt
+    final_sum = sumed/area
+    return final_sum
+
+
+def noise_sum_7k(image):
+    """
+    Given an image, will try to sum up the noise, then divide by the area of
+    the image. The noise sumation here is based on a median filter denoising
+    using a 7*7 kernel. This kernel is reccomended for picking up moire
+    patterns and other repetitive noise that may be missed by a smaller kernel.
+
+    :param img: original image (3 or single channel)
+    :type img: numpy.ndarray
+
+    :return: final_sum
+    :rtype: float
+    """
+    kernel_size = 7
     un_noise = cv2.medianBlur(image, kernel_size)
     difference = abs(un_noise - image)
     sumed = difference.sum()
@@ -2471,19 +2495,23 @@ def blind_noise_matrix(directory):
     names = []
     noise_median_list = []
     noise_cv_list = []
+    noise_7k_list = []
 
     for pic in suspects:
         name = pic
         img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
         medi = noise_sum_median_blur(img)
+        medi7 = noise_sum_7k(img)
         noise_cv = noise_sum_cv(img)
         names.append(name)
         noise_median_list.append(medi)
         noise_cv_list.append(noise_cv)
+        noise_7k_list.append(medi7)
 
     dict = {'name_image': names,
-            'noise_by_median': noise_median_list,
+            'noise_by_3_k_median': noise_median_list,
             'noise_by_cv': noise_cv_list,
+            'noise_by_7_k_median': noise_7k_list,
             }
     frame = pd.DataFrame(dict)
     frame = frame.style.background_gradient(cmap='PiYG')
