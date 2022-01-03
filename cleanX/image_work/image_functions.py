@@ -2645,7 +2645,7 @@ def segmented_blind_noise_matrix(directory):
         output_image[~mask] = 0
         whole_image_ht, whole_image_wt = img.shape[0:2]
         whole_image_area = whole_image_ht*whole_image_wt
-        area = output_image.sum()
+        area = whole_image_area - mask.sum()
         medi = (noise_sum_median_blur(img) * whole_image_area)/area
         medi5 = (noise_sum_5k(img) * whole_image_area)/area
         medi7 = (noise_sum_7k(img) * whole_image_area)/area
