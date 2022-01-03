@@ -2641,7 +2641,7 @@ def segmented_blind_noise_matrix(directory):
         thresh = 20
         output_image = img
         blur_image = cv2.medianBlur(img, 7)
-        mask = blur_image  < thresh
+        mask = blur_image < thresh
         output_image[~mask] = 0
         whole_image_ht, whole_image_wt = img.shape[0:2]
         whole_image_area = whole_image_ht*whole_image_wt
