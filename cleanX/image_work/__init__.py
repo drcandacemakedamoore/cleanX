@@ -66,11 +66,9 @@ from .image_functions import (
     Rotator,
 )
 from .pipeline import (
-    DirectorySource,
-    GlobSource,
-    MultiSource,
     PipelineError,
     Pipeline,
+    Loop,
 )
 from .journaling_pipeline import JournalingPipeline
 from .steps import (
@@ -95,6 +93,9 @@ from .steps import (
     Projection,
     CleanRotate,
     Or,
+    DirectorySource,
+    GlobSource,
+    MultiSource,
 )
 from .graph_parser import StepCall, PipelineDef
 

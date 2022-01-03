@@ -30,6 +30,8 @@ def test_parse_simple():
                 or = cleanX.image_work.steps:Or
                 crop = cleanX.image_work:BlackEdgeCrop
                 save = cleanX.image_work:Save
+                avg = cleanX.image_work:Avg
+                tee = cleanX.image_work:Tee
             )
             steps(
                 source1 = dir[path = "/foo/bar"]()
@@ -37,7 +39,7 @@ def test_parse_simple():
 
                 out1 out2 out3 = acquire[arg1 = "foo" arg2 = 42](
                     source1 source2
-                )
+                ) * avg(width="min" height="max") / tee()
                 out4 = or[arg1 = true](out1 out2)
                 out5 = crop(out3 out4)
             )

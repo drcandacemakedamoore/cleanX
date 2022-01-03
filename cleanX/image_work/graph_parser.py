@@ -26,7 +26,10 @@ class DuplicateOptions(ValueError):
         super().__init__('Found duplicate options: {}'.format(duplicates))
 
 
-StepCall = namedtuple('StepCall', 'definition,options,variables')
+StepCall = namedtuple(
+    'StepCall',
+    'definition,options,variables,serial,splitter,joiner',
+)
 PipelineDef = namedtuple('PipelineDef', 'steps,goal')
 
 
@@ -42,9 +45,12 @@ cleanx_grammar = """
     ?module: NAME ("." NAME)*
     ?def: NAME
     ?sassign: var+ "=" step -> sassign
-    ?step: var options? "(" var* ")" -> step
+    ?step: var options? "(" var* ")" joiner? splitter? -> step
     ?options: "[" oassign+ "]" -> options
     ?oassign: var "=" val -> oassign
+    ?joiner: "*" applier
+    ?splitter: "/" applier
+    ?applier: def "(" options? ")"
     ?val: number
         | string
         | boolean
@@ -85,9 +91,12 @@ class Parser(Transformer):
                 source1 = dir[path = "/foo/bar"]()
                 source2 = glob[pattern = "/foo/*.jpg"]()
 
+                # Two sources will be averaged producing single source
+                # and then duplicated into three different variables.
+                # I.e. out1, out2 and out3 should be the same files.
                 out1 out2 out3 = acquire[arg1 = "foo" arg2 = 42](
                     source1 source2
-                )
+                ) * avg(width="min" height="max") / tee()
                 out4 = or[arg1 = true](out1 out2)
                 out5 = crop(out3 out4)
             )
@@ -154,9 +163,20 @@ class Parser(Transformer):
                 options.append(a)
             else:
                 variables.append(str(a))
+        # TODO(wvxvw): Parse these
+        serial = True
+        splitter = None
+        joiner = None
         # TODO(wvxvw): Here we could validate optional arguments to
         # steps.
-        return StepCall(definition, tuple(options), tuple(variables))
+        return StepCall(
+            definition,
+            tuple(options),
+            tuple(variables),
+            serial,
+            splitter,
+            joiner,
+        )
 
     def sassign(self, *args):
         variables = tuple(str(s) for s in args[:-1])

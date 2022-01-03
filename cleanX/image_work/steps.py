@@ -34,16 +34,98 @@ class RegisteredStep(type):
         super().__init__(name, bases, clsdict)
 
 
-class Strategy:
-    pass
+class Applier:
+
+    def __init__(self, step=None):
+        self.step = step
+
+    def create(self, step):
+        clone = type(self).__new__(type(self))
+        kw = self.__reduce__()[-1]
+        kw['step'] = step
+        clone.__init__(**kw)
+        return clone
 
 
-class Serial(Strategy):
-    pass
+class Splitter(Applier):
+
+    def __call__(self, output, results, acc):
+        return acc
 
 
-class Parallel(Strategy):
-    pass
+class Tee(Splitter):
+
+    def __call__(self, output, results, acc):
+        if result:
+            for o in output:
+                for r in results:
+                    self.step.write(o, r)
+        return acc
+
+
+class RoundRobin(Splitter):
+
+    def __call__(self, output, results, acc):
+        if getattr(self, 'last', None) is None:
+            self.last = output[0]
+        idx = output.index(self.last)
+        for i, r in enumerate(results):
+            self.step.write(output[(idx + i) % len(output)], r)
+
+
+class Joiner(Applier):
+
+    def __call__(self, inputs, acc):
+        return inputs, acc
+
+
+PassThrough = Joiner
+
+
+class Avg(Joiner):
+
+    def __init__(self, width='avg', height='avg', step=None):
+        super().__init__(step)
+        self.width = width
+        self.height = height
+
+    def __call__(self, inputs, acc):
+        # TODO(wvxvw): Deal with the case when len(inputs) == 1.
+        # In this case we don't want any averaging to occur, and
+        # should be albe to do things faster and more precise.
+        twidth, theight = 0, 0
+        for i in inputs:
+            meta = self.step.read_meta(i)
+            w, h = meta.shape
+            if self.width == 'min':
+                twidth = min(w, twidth)
+            elif self.width == 'max':
+                twidth = max(w, twidth)
+            else:
+                width += w
+
+            if self.height == 'min':
+                theight = min(h, theight)
+            elif self.height == 'max':
+                theight = max(h, theight)
+            else:
+                theight += h
+
+        if self.width == 'avg':
+            twidth /= len(inputs)
+        if self.height == 'avg':
+            theight /= len(intend)
+
+        accim = self.step.read(inputs[0])
+        accim = np.float32(cv2.resize(accim, (twidth, theight)))
+        for i in inputs[1:]:
+            img = self.step.read(i)
+            img = np.float32(cv2.resize(img, (twidth, theight)))
+            accim += img
+
+        # Return value should be a collection of things, even if it's
+        # a single image.
+        return [np.uint8(accim / len(inputs))], acc
 
 
 class Step(metaclass=RegisteredStep):
@@ -54,16 +136,23 @@ class Step(metaclass=RegisteredStep):
     Use this as the base class if you intend to add custom steps.
     """
 
-    def __init__(self, cache_dir=None):
+    def init_step(
+            self,
+            serial=False,
+            splitter=None,
+            joiner=None,
+            workdir=None,
+    ):
         """
         If you extend this class, you need to call its :code:`__init__`.
         """
-        self.cache_dir = cache_dir
-        self.position = None
-        self.transaction_started = False
         with self.counter:
             self.counter.value += 1
-            self._id = self.counter.value
+
+        self.splitter = (splitter or Tee()).create(self)
+        self.joiner = (joiner or Avg()).create(self)
+        self.serial = serial
+        self.workdir = workdir
 
     def apply_multi(self, step, src, out, td):
         if isinstance(step, Aggregate):
@@ -86,40 +175,21 @@ class Step(metaclass=RegisteredStep):
                         for r, o in zip(res, out):
                             step.write(r, o)
 
-    def id(self):
-        return self._id
+    def apply_joined(self, joined, acc):
+        return joined, acc
 
-    def combine(self, new, accum):
-        rnew, enew = new
-        raccum, eaccum = accum
-        return raccum + rnew, eaccum + [enew]
+    def apply_one(self, outputs, i, acc):
+        return self.splitter(
+            outputs,
+            self.apply_joined(*self.joiner(i, acc)),
+            acc,
+        )
 
-    def apply(self, images, metas, sources):
-        r, e = self.apply_one(images[0], metas[0], sources[0])
-        e = [e]
-        for i, m, s in zip(images[1:], metas[1:], sources[1:]):
-            r, e = self.combine(self.apply_one(i, m, s), (r, e))
-        return r, e
-
-    def apply_one(self, image, meta, source):
-        """
-        This is the method that will be called to do the actual image
-        transformation.  This function must not raise exceptions, as it
-        is used in the :mod:`multiprocessing` context.
-
-        :param image: Will be the data obtained when calling
-                      :meth:`~.Step.read()` method of this class.
-        :type image: Unless this class overrides the defaults, this
-                     will be :class:`~numpy.ndarray`.
-
-        :return: This method should return two values.  First is the
-                 processed image data.  This should be suitable for the
-                 :meth:`~.Step.write()` method of this class to write.
-                 Second is the error, if procesing wasn't possible.  Only
-                 one element of the tuple should be :code:`not None`.
-        :rtype: Tuple[numpy.ndarray, Exception]
-        """
-        return image, None
+    def apply(self, outputs, inputs):
+        if self.serial:
+            acc = None
+            for n, i in enumerate(inputs):
+                acc = self.apply_one(outputs, i, len(inputs) - n, acc)
 
     def read(self, path):
         """
@@ -212,12 +282,95 @@ class Aggregate(Step):
         raise NotImplementedError('Subclasses must implement this method')
 
 
-class Or(Step, Parallel):
+class Or(Step):
 
     def combine(self, new, accum):
         rnew, enew = new
         raccum, eaccum = accum
         return cv2.bitwise_or(raccum, rnew), eaccum + [enew]
+
+
+class MultiSource(Step):
+    """
+    A class to append multiple sources such as :class:`~.GlobSource` or
+    :class:`~.DirectorySource`.  All source classes implement iterator
+    interface.
+    """
+
+    def __init__(self, sources):
+        """
+        Initializes this iterator with multiple sources in a way similar
+        to :code:`itertools.chain()`
+
+        :param sources: A sequence of sources, such as :class:`~.GlobSource`
+                        or :class:`~.DirectorySource`.
+        :type sources: :code:`Sequence`
+        """
+        self.sources = tuple(sources)
+
+    def __iter__(self):
+        """
+        Iterator implementation.
+        """
+        for src in self.sources:
+            for s in src:
+                yield s
+
+
+class GlobSource(Step):
+    """
+    A class that creates an iterator to list all files matching
+    glob pattern.
+    """
+
+    def __init__(self, expression, recursive=False):
+        """
+        Initializes this iterator with the arguments to be passed to
+        :code:`glob.glob()`.
+
+        :param expression: Expression to be passed to :code:`glob.glob()`
+        :type expression: :code:`Union[str, bytes]`
+        :param recursive: Controls the interpretation of :code:`**`
+                          pattern.  If :code:`True`, will interpret it
+                          to mean any number of path fragments.
+        """
+        self.expression = expression
+        self.recursive = recursive
+
+    def __iter__(self):
+        """
+        Iterator implementation.
+        """
+        for s in glob(self.expression, recursive=self.recursive):
+            yield s
+
+
+class DirectorySource(Step):
+    """
+    A class that creates an iterator to look at files in the given
+    directory.
+    """
+
+    def __init__(self, directory, extension='jpg'):
+        """
+        Initializes this iterator.
+
+        :param directory: The directory in which to look for images.
+        :type directory: Must be valid for :code:`os.path.join()`
+        :param extension: A glob pattern for fle extension.  Whether
+                          it is case-sensitive depends on the
+                          filesystem being used.
+        """
+        self.directory = directory
+        self.extension = extension
+
+    def __iter__(self):
+        """
+        Iterator implementation.
+        """
+        exp = os.path.join(self.directory, '*.' + self.extension)
+        for f in glob(exp):
+            yield f
 
 
 class Mean(Aggregate):
@@ -241,7 +394,7 @@ class Mean(Aggregate):
         return super().write(np.uint8(acc[0] / len(acc[1])), acc[1][-1])
 
 
-class GroupHistoHtWt(Aggregate, Serial):
+class GroupHistoHtWt(Aggregate):
     """
     This class builds a histogram of individual image heights and widths.
     """
@@ -288,7 +441,7 @@ class GroupHistoHtWt(Aggregate, Serial):
         return self.__class__, (self.histo_dir, self.cache_dir,)
 
 
-class GroupHistoPorportion(Aggregate, Serial):
+class GroupHistoPorportion(Aggregate):
 
     """
     This class makes a histogram of all the image's proportions.
@@ -327,7 +480,7 @@ class GroupHistoPorportion(Aggregate, Serial):
         return self.__class__, (self.histo_dir, self.cache_dir,)
 
 
-class Acquire(Step, Serial):
+class Acquire(Step):
     """This class reads in images (to an array) from a path"""
 
     def read(self, path):
@@ -339,7 +492,7 @@ class Acquire(Step, Serial):
             return None, e
 
 
-class Save(Step, Serial):
+class Save(Step):
     """This class writes the images somewhere"""
 
     def __init__(self, target, extension='jpg', cache_dir=None):
@@ -648,7 +801,7 @@ class CleanRotate(Step):
             return None, e
 
 
-class Normalize(Step, Serial):
+class Normalize(Step):
     """This class makes a simple normalizing to get values 0 to 255."""
 
     def apply(self, image, meta, source):

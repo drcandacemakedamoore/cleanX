@@ -56,35 +56,48 @@ def test_copy_images():
 def test_alter_images():
     src_dir = image_directory
     with TemporaryDirectory() as td:
-        src = DirectorySource(src_dir)
-        goal = Save(td)
         pipeline_def = PipelineDef(
             steps={
                 'src': StepCall(
                     definition=DirectorySource,
                     options=(('directory', src_dir),),
-                    variables=()
+                    variables=(),
+                    serial=True,
+                    splitter=None,
+                    joiner=None,
                 ),
                 'acquire': StepCall(
                     definition=Acquire,
                     options=(),
                     variables=('src',),
+                    serial=True,
+                    splitter=None,
+                    joiner=None,
                 ),
                 'blur': StepCall(
                     definition=BlurEdges,
                     options=(),
-                    variables=('acquire',)
+                    variables=('acquire',),
+                    serial=True,
+                    splitter=None,
+                    joiner=None,
                 ),
                 'sharpie': StepCall(
                     definition=Sharpie,
                     options=(),
-                    variables=('blur',)
+                    variables=('blur',),
+                    serial=True,
+                    splitter=None,
+                    joiner=None,
                 ),
             },
             goal=StepCall(
                 definition=Save,
                 options=(('path', td),),
-                variables=('sharpie',)
+                variables=('sharpie',),
+                serial=True,
+                splitter=None,
+                joiner=None,
             )
         )
 

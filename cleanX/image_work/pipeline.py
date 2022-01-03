@@ -13,96 +13,13 @@ from tempfile import TemporaryDirectory
 from glob import glob
 from queue import Empty
 
-from .steps import Aggregate, Step, Serial, Parallel
+from .steps import Step
 
 import numpy as np
 
 
 class Loop(ValueError):
     pass
-
-
-class MultiSource:
-    """
-    A class to append multiple sources such as :class:`~.GlobSource` or
-    :class:`~.DirectorySource`.  All source classes implement iterator
-    interface.
-    """
-
-    def __init__(self, sources):
-        """
-        Initializes this iterator with multiple sources in a way similar
-        to :code:`itertools.chain()`
-
-        :param sources: A sequence of sources, such as :class:`~.GlobSource`
-                        or :class:`~.DirectorySource`.
-        :type sources: :code:`Sequence`
-        """
-        self.sources = tuple(sources)
-
-    def __iter__(self):
-        """
-        Iterator implementation.
-        """
-        for src in self.sources:
-            for s in src:
-                yield s
-
-
-class GlobSource:
-    """
-    A class that creates an iterator to list all files matching
-    glob pattern.
-    """
-
-    def __init__(self, expression, recursive=False):
-        """
-        Initializes this iterator with the arguments to be passed to
-        :code:`glob.glob()`.
-
-        :param expression: Expression to be passed to :code:`glob.glob()`
-        :type expression: :code:`Union[str, bytes]`
-        :param recursive: Controls the interpretation of :code:`**`
-                          pattern.  If :code:`True`, will interpret it
-                          to mean any number of path fragments.
-        """
-        self.expression = expression
-        self.recursive = recursive
-
-    def __iter__(self):
-        """
-        Iterator implementation.
-        """
-        for s in glob(self.expression, recursive=self.recursive):
-            yield s
-
-
-class DirectorySource:
-    """
-    A class that creates an iterator to look at files in the given
-    directory.
-    """
-
-    def __init__(self, directory, extension='jpg'):
-        """
-        Initializes this iterator.
-
-        :param directory: The directory in which to look for images.
-        :type directory: Must be valid for :code:`os.path.join()`
-        :param extension: A glob pattern for fle extension.  Whether
-                          it is case-sensitive depends on the
-                          filesystem being used.
-        """
-        self.directory = directory
-        self.extension = extension
-
-    def __iter__(self):
-        """
-        Iterator implementation.
-        """
-        exp = os.path.join(self.directory, '*.' + self.extension)
-        for f in glob(exp):
-            yield f
 
 
 class PipelineError(RuntimeError):
@@ -189,7 +106,7 @@ class PSG:
         # mark dependency as resolved and return the unresolved ones
         for v in self.out(dep):
             self._ready[v] = dep
-        self._in_flight.pop(dep)
+        self._in_flight.remove(dep)
         for d in deps:
             if d != dep:
                 yield d
@@ -206,13 +123,20 @@ class PSG:
 
     def pending(self, dep):
         # True, if dep is either in-flight, or unresolved
-        for v in self._ready.values():
-            if v == dep:
-                return False
-        return True
+        return dep not in set(self._ready.values())
 
     def inflight(self):
         yield from self._in_flight
+
+    def used(self, var):
+        for s in self._def.steps.values():
+            if var not in s.variables:
+                continue
+            if self.pending(s):
+                return True
+            if s in self._in_flight:
+                return True
+        return False
 
 
 class Worker(Process):
@@ -251,28 +175,24 @@ class Worker(Process):
         )
 
     def run(self):
-        print('Starting:', os.getpid())
         while True:
             try:
                 out, rec, td = self.inbound.get_nowait()
                 if rec is None:
-                    print('Terminating (1):', os.getpid())
                     break
             except (ValueError, AssertionError):
-                # queue was closed
-                print('Terminating: (2)', os.getpid())
+                # queue was closed, but doesn't really seem to work...
                 break
             except Empty:
                 time.sleep(1)
                 continue
             try:
-                print('Received req:', rec)
                 step = rec.definition(**dict(rec.options))
+                step.init_step(rec.serial, rec.splitter, rec.joiner, td)
                 src = self.src(rec.variables, td)
                 step.apply(out, src)
                 self.outbound.put((rec, None))
             except Exception as e:
-                print('Failed req:', e)
                 self.outbound.put((rec, e))
 
 
@@ -323,9 +243,6 @@ class Pipeline:
         """
         pass
 
-    def dep_dir(self, dep, td):
-        return os.path.join(td, dep)
-
     def find_previous_step(self):
         """
         :meta private:
@@ -336,9 +253,11 @@ class Pipeline:
         new = []
         for dep in processed:
             if not self.psg.pending(dep):
-                dep_dir = self.dep_dir(dep, td)
-                if os.path.isdir(dep_dir):
-                    shutil.rmtree(dep_dir)
+                for v in dep.variables:
+                    if not self.psg.used(v):
+                        dep_dir = os.path.join(td, v)
+                        if os.path.isdir(dep_dir):
+                            shutil.rmtree(dep_dir)
             else:
                 new.append(dep)
         return new
@@ -406,76 +325,3 @@ class Pipeline:
                 # TODO(wvxvw): Improve error reporting by making sure
                 # we have proper stack trace.
                 raise err
-
-    def process_step(self, step, srciter, source):
-        """
-        :meta private:
-        """
-        logging.info('applying step: %s', step)
-        if isinstance(step, Aggregate):
-            self.process_batch_agg(scriter, step, source)
-        elif isinstance(step, Serial):
-            self.process_batch_serial(srciter, step, source)
-        else:
-            self.process_batch_parallel(srciter, step, source)
-
-    def process_batch_agg(self, srciter, step, source):
-        # TODO(olegs): In principle, this can also be done in
-        # parallel, but we'll implement the parallel reduction some
-        # time later.
-        iaccum, maccum = step.initial()
-        for name in srciter:
-            img, err = step.read(name)
-            if err is not None:
-                errors.append(err)
-                continue
-            niaccum, nmaccum, err = step.aggregate(
-                iaccum,
-                maccum,
-                img,
-                name,
-                source,
-            )
-            if err is not None:
-                errors.append(err)
-            else:
-                iaccum = niaccum
-                maccum = nmaccum
-
-        if errors:
-            raise PipelineError(
-                'Step {} had errors:\n  '.format(type(step).__name__) +
-                '\n  '.join(str(err) for err in errors),
-            )
-
-    def process_batch_parallel(self, srciter, step, source):
-        pass
-
-    def process_image(self, args):
-        step, name, source = args
-        print('process_image', name)
-        img, err = step.read(name)
-        if err:
-            return None, err
-        res, err = step.apply_one(img, name, source)
-        if err:
-            return None, err
-        if res:
-            return step.write(res, os.path.basename(name))
-
-    def process_batch_serial(self, srciter, step, source):
-        # Forking only works on Linux.  The garbage that Python
-        # multiprocessing is it requires a lot of workarounds...
-        ctx = multiprocessing.get_context('spawn')
-        with Pool(context=ctx) as ex:
-            errors = []
-            metas = tuple(srciter)
-            steps = tuple(step for _ in metas)
-            sources = tuple(source for _ in metas)
-            driver = ex.map(self.process_image, zip(steps, metas, sources))
-            errors = tuple(e for e in driver if e)
-            if errors:
-                raise PipelineError(
-                    'Step {} had errors:\n  '.format(type(step).__name__) +
-                    '\n  '.join(str(err) for err in errors),
-                )
