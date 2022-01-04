@@ -24,6 +24,7 @@ from .image_functions import (
     find_suspect_text,
     find_suspect_text_by_length,
     histogram_difference_for_inverts,
+    inverts_by_sum_compare,
     histogram_difference_for_inverts_todf,
     find_duplicated_images,
     find_duplicated_images_todf,

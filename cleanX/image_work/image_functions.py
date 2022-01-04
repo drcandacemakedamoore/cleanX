@@ -1064,6 +1064,39 @@ def histogram_difference_for_inverts(directory):
     return inverts
 
 
+def inverts_by_sum_compare(directory):
+    """
+    This function looks for images and compares them to thier inverts. In the
+    case of inverted typical CXR images the sum of all pixels in the image will
+    be higher than the sum of pixels in the uninverted (or inverted*2) image
+
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
+
+    return: a :code:`DataFrame` with images categorized
+    :rtype: :class:`~pandas.DataFrame`
+    """
+
+    suspects1 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Gg]'))
+    suspects2 = glob.glob(os.path.join(directory, '*.[Jj][Pp][Ee][Gg]'))
+    suspects = suspects1 + suspects2
+    regulars, inverts = [], []
+    for pic in suspects:
+        example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
+        example_inv = cv2.bitwise_not(example)
+        if example.sum() > example_inv.sum():
+            inverts.append(pic)
+        else:
+            regulars.append(pic)
+    dfr = pd.DataFrame(regulars)
+    dfr['label'] = 'regular'
+    dfh = pd.DataFrame(inverts)
+    dfh['label'] = 'inverts'
+    df = pd.concat([dfr, dfh])
+    df = df.rename(columns={0: 'image', 'label': 'label'})
+    return df
+
+
 def histogram_difference_for_inverts_todf(directory):
     # looks for inverted and returns a DataFrame
     """

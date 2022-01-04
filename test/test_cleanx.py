@@ -15,9 +15,9 @@ import pandas as pd
 import matplotlib as plt
 import numpy as np
 
-# # remove this before commit
-# import sys
-# sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+# remove this before commit
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from cleanX import (
     dataset_processing as csvp,
@@ -192,6 +192,9 @@ def test_histogram_difference_for_inverts():
     histosy = iwork.histogram_difference_for_inverts(image_directory)
     assert len(histosy) > 0
 
+def test_histogram_difference_for_inverts():
+    histosy = iwork.inverts_by_sum_compare(image_directory)
+    assert len(histosy) > 0
 
 def test_histogram_difference_for_inverts_todf():
     histos = iwork.histogram_difference_for_inverts_todf(image_directory)
