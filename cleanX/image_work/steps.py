@@ -144,6 +144,11 @@ class Step(metaclass=RegisteredStep):
 
 
 class Aggregate(Step):
+    """
+    This class has default implementations for methods all aggregate steps are
+    expected to implement. These types of steps combine and accumalte data on
+    the individual images processed in a step.
+    """
 
     def __init__(self, cache_dir=None):
         super().__init__(cache_dir=cache_dir)
@@ -184,6 +189,7 @@ class Aggregate(Step):
 
 class Mean(Aggregate):
     """
+    This class builds an averaged (by mean) image.
     """
 
     def agg(self, acc_data, acc_name, image_data, image_name):
@@ -207,8 +213,7 @@ class Mean(Aggregate):
 
 class GroupHistoHtWt(Aggregate):
     """
-    This class inherits from Aggregate, and builds a histogram of
-    individual image heights and widths.
+    This class builds a histogram of individual image heights and widths.
     """
     def __init__(self, histo_dir, cache_dir=None):
         super().__init__(cache_dir=cache_dir)
