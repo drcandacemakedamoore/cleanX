@@ -32,7 +32,7 @@ class Source(ABC):
         pydicom or SimpleITK libraries for metadata extraction.
 
         This function should return a generator yielding a tuple of two
-        elements.  First element will be inserted into the source colum
+        elements.  First element will be inserted into the source column
         (the one labeled by :code:`get_tag()` method), the second is the
         result of calling :code:`reader`.
 

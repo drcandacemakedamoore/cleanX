@@ -292,7 +292,7 @@ class SimpleITKDicomReader:
 
     def read(self, source):
         """
-        Read DICOM files, parse their metadata, and genrate a :code:`DataFrame`
+        Read DICOM files, parse their metadata, generate a :code:`DataFrame`
         based on that metadata.
 
         :param source: A source generator.  For extended explanation see
@@ -328,7 +328,7 @@ class SimpleITKDicomReader:
 def rip_out_jpgs_sitk(dicomfile_directory, output_directory):
     """
     This function is for users with simpleITK library only.  If you do
-    not have the library it will throw an error.  The funuction
+    not have the library it will throw an error.  The function
     function jpeg files out of a dicom file directory, one by one,
     each of them (not just the first series as), and puts them in an
     out put directory. It also returns the images for inspection (as
