@@ -44,7 +44,7 @@ def dicom(cfg):
     to a directory.
 
     If source type is `glob', then the source description must be a glob
-    pattern as used by Python's builtin glob function.  Whether glob
+    pattern as used by Python's built-in glob function.  Whether glob
     pattern will be interpreted as recursive is controlled by configuration
     setting GLOB_IS_RECURSIVE.
     ''',
