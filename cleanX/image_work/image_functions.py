@@ -641,9 +641,9 @@ def find_by_sample_upper(
     """
     This function takes an average (mean) of upper pixels,
     and can show outliers defined by a percentage, i.e. the function shows
-    images with an average of upper pixels in top x % where x is the percent 
+    images with an average of upper pixels in top x % where x is the percent
     height of the sample. Note: images with high averages in the upper pixels
-    are likely to be inverted, upside down or otherwise different from more 
+    are likely to be inverted, upside down or otherwise different from more
     typical X-rays.
 
     :param source_directory: folder the images are in(should include final '/')
@@ -685,7 +685,7 @@ def find_sample_upper_greater_than_lower(
     percent_height_of_sample
 ):
     """
-    Takes average of upper pixels, average of lower (you define what
+    Takes average of upper pixels, average of lower pixels (you define what
     percent of picture should be considered upper and lower) and compares.
     In a CXR if lower average is greater than upper it may be upside down
     or otherwise bizarre, as the neck is smaller than the abdomen.
@@ -723,8 +723,8 @@ def find_sample_upper_greater_than_lower(
 def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
     """
     Takes the average of all pixels in an image, returns a :code:`DataFrame`
-    with those images that are outliers by mean. Should catch some inverted
-    or problem images
+    with those images that are outliers by mean. This function can catch some
+    inverted or otherwise problematic images
 
     :param source_directory: folder images in (include final /)
     :type source_directory: :func:`os.path.join()`
@@ -754,9 +754,12 @@ def find_outliers_by_total_mean(source_directory, percentage_to_say_outliers):
 
 def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     """
-    Important note: approximate, and it can by chance cut the group
-    so images with
-    the same mean are in and out of normal range if the knife so falls
+    Takes the average of all pixels in an image, returns a :code:`DataFrame`
+    with those images classified. This function can catch some
+    inverted or otherwise problematic images
+    Important note: approximate, and the function can by chance cut the groups
+    so images with the same mean are in and out of normal range,
+    if the knife so falls
 
     :param source_directory: The folder in which the images are
     :type source_directory: :func:`os.path.join()`
@@ -769,7 +772,6 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     suspects1 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Gg]'))
     suspects2 = glob.glob(os.path.join(source_directory, '*.[Jj][Pp][Ee][Gg]'))
     suspects = suspects1 + suspects2
-    # suspects = glob.glob(os.path.join(source_directory, '*.jpg'))
     images, means = [], []
     for pic in suspects:
         example = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
@@ -780,13 +782,9 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     df.sort_values(by='means', inplace=True)
     df.reset_index(inplace=True, drop=True)
     percentile = int((len(df) / 100) * percentage_to_say_outliers)
-    # lows = df.head(percentile)
-    # highs = df.tail(percentile)
     df['results'] = 'within range'
     df.loc[:percentile, 'results'] = 'low'
     df.loc[len(df) - percentile:, 'results'] = 'high'
-    # whole = [lows, highs]
-    # new_df = pd.concat(whole)
     return(df)
 
 
@@ -932,7 +930,8 @@ def find_suspect_text_by_length(directory, length):
     # this function finds all texts above a specified length
     # (length is number of characters)
     """
-    Finds images with text over a specific length you ask for.
+    Finds images with text over a specific length (of letters, digits,
+    and spaces), specified by you the user.
     Useful if you know you do not care about R and L or SUP.
     Multi-lingual including English. Accuracy is very high, but not perfect.
 
@@ -1004,9 +1003,9 @@ def histogram_difference_for_inverts(directory):
 
 def inverts_by_sum_compare(directory):
     """
-    This function looks for images and compares them to thier inverts. In the
+    This function looks for images and compares them to their inverts. In the
     case of inverted typical CXR images the sum of all pixels in the image will
-    be higher than the sum of pixels in the uninverted (or inverted*2) image
+    be higher than the sum of pixels in the un-inverted (or inverted*2) image
 
     :param directory: Directory with source images.
     :type directory: Suitable for :func:`os.path.join()`
@@ -1158,8 +1157,8 @@ def find_duplicated_images_todf(directory):
 
 def show_images_in_df(iter_ob, length_name):
     """
-    Shows images by taking them off a :code:`DataFrame` column, and puts
-    them up but smaller, so they can be compared quickly
+    Shows images by taking them off a :code:`DataFrame` column, and displays
+    them but in smaller versions, so they can be compared quickly
 
     :param iter_ob: List, chould be a :code:`DataFrame` column, use .to_list()
     :type iter_ob: list
@@ -1312,6 +1311,8 @@ def simple_spinning_template(
     threshold4=.7,
 ):
     """
+    This function creates an image compared to a rotated template as an image.
+
     :param picy: String for image name of base image
     :type picy: str
     :param greys_template: The image array of the template,
@@ -1530,7 +1531,7 @@ def avg_image_maker_by_label(
 
 def zero_to_twofivefive_simplest_norming(img_pys):
     """
-    This function takes an image  and makes the highest pixel value 255,
+    This function takes an image and makes the highest pixel value 255,
     and the lowest zero. Note that this will not give anything like
     a true normalization, but will put all images
     into 0 to 255 values
@@ -1557,7 +1558,7 @@ def zero_to_twofivefive_simplest_norming(img_pys):
 
 def rescale_range_from_histogram_low_end(img, tail_cut_percent):
     """
-    This function takes an image  and makes the highest pixel value 255,
+    This function takes an image and makes the highest pixel value 255,
     and the lowest zero. It also normalizes based on the histogram
     distribution of values, such that the lowest percent
     (specified by tail_cut_percent) all become zero.
@@ -1645,8 +1646,9 @@ def make_histo_scaled_folder(imgs_folder, tail_cut_percent, target_folder):
 
 def give_size_count_df(folder):
     """
-    This function returns a dataframe of unique sized, and how many pictures
-    have such a size.
+    This function returns a dataframe of the unique sizes of the images ,and
+    how many images have such a size.
+
     :param folder: folder with jpgs
     :type folder: string
 
@@ -1692,7 +1694,8 @@ def give_size_count_df(folder):
 
 def give_size_counted_dfs(folder):
     """
-    This function returns dataframes of unique sized images in a list
+    This function returns dataframes of uniquely sized images in a list
+
     :param folder: folder with jpgs
     :type folder: string
 
@@ -1736,8 +1739,9 @@ def give_size_counted_dfs(folder):
 
 def image_quality_by_size(specific_image):
     """
-    This function returns the size of an image which indicates one aspect of
-    quality
+    This function returns the size of an image which can indicate one aspect of
+    quality (can be used as a helper function)
+
     :param specific_image: the jpg image
     :type specific_imager: string
 
@@ -1836,8 +1840,8 @@ def find_close_images(folder, compression_level, ref_mse):
 
 def show_close_images(folder, compression_level, ref_mse, plot_limit=20):
     """
-    This function shows potentially duplicated images by
-    comparing compressed versions of the images.
+    This function shows potentially duplicated images by comparing compressed
+    versions of the images, then displays them for inspection.
 
     :param folder: folder with jpgs
     :type folder: str
@@ -1900,7 +1904,7 @@ def black_end_ratio(image_array):
     If the image was shot without the neck, we will assume poor technique (note
     in some theoretical cases this technique might have been requested,
     but it is not standard at ALL)
-    If the ratio is below 0.3, you have a chestX-ray that is unusal in value
+    If the ratio is below 0.3, you have a chestX-ray that is unusual in value
     distributions, and in 9.9/10 cases one shot with poor technique.
     The images MUST be cropped of any frames and normalized to 0-255.
 
@@ -1925,9 +1929,9 @@ def outline_segment_by_otsu(image_to_transform, blur_k_size=1):
     with a specific method that involves an implementation
     of Otsu's algorithm, and cv2 version of Canny
     the result is line images that can be very useful
-    in and of themselves to run a nueral net on
+    in and of themselves to run a neural net on
     or can be used for segmentation in some cases
-    blur_k_size used in a blur to make ourlines less detailed
+    blur_k_size used in a blur to make our lines less detailed
     if set to a higher value, 0 < values < 100, and odd
 
     :param image_to_transform: the image name
@@ -1987,7 +1991,7 @@ def binarize_by_otsu(image_to_transform, blur_k_size):
     with a specific method that involves an implementation
     of Otsu's algorithm,
     the result is line images that can be very useful
-    in and of themselves to run a nueral net on
+    in and of themselves to run a neural net on
     or can be used for segmentation in some cases
     blur_k_size used in a blur to make our lines less detailed
     if set to a higher value, 0 < values < 100, and odd
@@ -2040,8 +2044,8 @@ def column_sum_folder(directory):
     because each run will include the newly made images.
     NB: This is a home-made projection algorithm.
     Projection algorithms can be used in image registration,
-    and future versions of cleanX will have more efficient projectiion
-    algorithms.Also note the df will be enourmous...
+    and future versions of cleanX will have more efficient projection
+    algorithms. Also note the df will be enormous...
 
     :param directory: Directory with set_of_images.
     :type directory: string
@@ -2091,9 +2095,9 @@ def column_sum_folder(directory):
 def blind_quality_matrix(directory):
     """
     Creates a dataframe of image quality charecteristics
-    including: laplacian variance (somewhat correlated to blurryness/
+    including: laplacian variance (somewhat correlated to blurriness/
     resolution),total pixel sum (somewhat correlated to exposure),
-    and a fast forier transform variance measure
+    and a fast Fourier transform variance measure
     (correlated to resolution and contrast),
     contrast by two different measures (standard deviation, and Michaelson),
     bit depth (with an eye to a future when there may well be higher bit depths
@@ -2186,8 +2190,8 @@ def fourier_transf(image):
     A fourier transformed image from an X-ray can actually provide information
     on everything from aliasing (moire pattern) and other noise patterns
     to image orientation and potential registration in the right hands.
-    This creates fourier transfored images out of all in a directory.
-    This function is simply the appropriate numpy fast fourier transforms made
+    This creates Fourier transformed images out of all in a directory.
+    This function is simply the appropriate numpy fast Fourier transforms made
     into a single code line/ "wrapper".
 
     :param image: original image (3 or single channel)
@@ -2209,7 +2213,7 @@ def fourier_transf(image):
 
 def pad_to_size(img, ht, wt):
     """
-    This function applies a padding with value 0 around the image symetrically
+    This function applies a padding with value 0 around the image symmetrically
     until it is the ht and wt parameters specificed. Note if ht or wt below
     the existing ones are chosen, the image will be returned unpadded with
     a message.
@@ -2254,8 +2258,8 @@ def pad_to_size(img, ht, wt):
 
 def cut_to_size(img, ht, wt):
     """
-    This function applies a crop around the image symetrically
-    until it is the ht and wt parameters specificed. Note if ht or wt above
+    This function applies a crop around the image symmetrically
+    until it is the ht and wt parameters specified. Note if ht or wt above
     the existing ones are chosen, the original image will be returned uncut,
     and a message will be printed.
 
@@ -2286,10 +2290,10 @@ def cut_to_size(img, ht, wt):
 
 def cut_or_pad(img, ht, wt):
     """
-    This function applies a cropping or a padding around the image symetrically
-    until it is the ht and wt parameters specificed. Please note: what is
-    usually appropriate for neural nets is to crop off frames, then
-    resize all the images, then pad them all, so they are all as
+    This function applies a cropping or a padding around the image
+    symmetrically until it is the ht and wt parameters specified.
+    Please note: what is usually appropriate for neural nets is to crop off
+    frames, then resize all the images, then pad them all, so they are all as
     unform as possible.
 
     :param img: original image (3 or single channel)
@@ -2331,7 +2335,7 @@ def rotated_with_max_clean_area(image, angle):
 
     :param img: original image (3 or single channel)
     :type img: numpy.ndarray
-    :param angle: desired andgle for rotation
+    :param angle: desired angle for rotation
     :type angle: int
 
 
@@ -2360,7 +2364,7 @@ def rotated_with_max_clean_area(image, angle):
 def noise_sum_cv(image):
     """
     Given an image, will try to sum up the noise, then divide by the area of
-    the image. The noise sumation here is based on an opencv2 algorithm for
+    the image. The noise summation here is based on an opencv2 algorithm for
     noise called fastNlMeansDenoising which is an implementation of non-local
     means denoising.
 
@@ -2382,7 +2386,7 @@ def noise_sum_cv(image):
 def noise_sum_median_blur(image):
     """
     Given an image, will try to sum up the noise, then divide by the area of
-    the image. The noise sumation here is based on a median filter denoising
+    the image. The noise summation here is based on a median filter denoising
 
     :param img: original image (3 or single channel)
     :type img: numpy.ndarray
@@ -2403,7 +2407,7 @@ def noise_sum_median_blur(image):
 def noise_sum_gaussian(image):
     """
     Given an image, will try to sum up the noise, then divide by the area of
-    the image. The noise sumation here is based on a gaussian filter denoising
+    the image. The noise summation here is based on a gaussian filter denoising
 
     :param img: original image (3 or single channel)
     :type img: numpy.ndarray
@@ -2423,7 +2427,7 @@ def noise_sum_gaussian(image):
 def noise_sum_bilateral(image):
     """
     Given an image, will try to sum up the noise, then divide by the area of
-    the image. The noise sumation here is based on a bilatera filter denoising
+    the image. The noise summation here is based on a bilatera filter denoising
     given a fairly large area (15 pixels)
 
     :param img: original image (3 or single channel)
@@ -2445,7 +2449,7 @@ def noise_sum_bilateral(image):
 def noise_sum_bilateralLO(image):
     """
     Given an image, will try to sum up the noise, then divide by the area of
-    the image. The noise sumation here is based on a bilatera filter denoising
+    the image. The noise summation here is based on a bilatera filter denoising
     given a fairly large area (15 pixels)
 
     :param img: original image (3 or single channel)
@@ -2467,7 +2471,7 @@ def noise_sum_bilateralLO(image):
 def noise_sum_5k(image):
     """
     Given an image, will try to sum up the noise, then divide by the area of
-    the image. The noise sumation here is based on a median filter denoising
+    the image. The noise summation here is based on a median filter denoising
     using a 5*5 kernel. This kernel is reccomended for picking up moire
     patterns and other repetitive noise that may be missed by a smaller kernel.
 
@@ -2490,7 +2494,7 @@ def noise_sum_5k(image):
 def noise_sum_7k(image):
     """
     Given an image, will try to sum up the noise, then divide by the area of
-    the image. The noise sumation here is based on a median filter denoising
+    the image. The noise summation here is based on a median filter denoising
     using a 7*7 kernel. This kernel is reccomended for picking up moire
     patterns and other repetitive noise that may be missed by a smaller kernel.
 
