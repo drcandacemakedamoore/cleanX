@@ -100,7 +100,7 @@ from .steps import (
 def create_pipeline(steps, batch_size=None, journal=None, keep_journal=False):
     """
     Create a pipeline that will execute the :code:`steps`.  If
-    :code:`journal` is not falsy, create a journaling pipeline, that can
+    :code:`journal` is not false, create a journaling pipeline, that can
     be pick up from the failed step.
 
     :param steps: A sequence of :class:`Step` to be executed in this pipeline.

@@ -111,7 +111,7 @@ def find_outliers_sum_of_pixels_across_set(directory, percent_to_examine):
     This function finds images that are outliers in terms of having a large
     or small total pixel sum, which in most cases, once images are normalized
     will correlate with under or overexposure OR pathology if the percent
-    parameter is set to a low number - 3% (will be written as 3) is reccomended
+    parameter is set to a low number - 3% (will be written as 3) is recommended
 
     :param directory: Directory of images.
     :type directory: string
@@ -204,7 +204,7 @@ def crop(image):
 def subtle_sharpie_enhance(image):
     """
     Makes a new image that is very subtly sharper to the human eye,
-    but has new values in most of the pixels(besides the background). This
+    but has new values in most of the pixels (besides the background). This
     is an augmentation, that has not been tested for how well the outputs match
     X-rays from new machines used well, but is within a reasonable range
     by human eye.
@@ -226,7 +226,7 @@ def harsh_sharpie_enhance(image):
     """
     Makes a new image that is very sharper to the human eye,
     and has new values in most of the pixels (besides the background). This
-    augmentation may allow humans to understnd certain elements of an image,
+    augmentation may allow humans to understand certain elements of an image,
     but should be used with care to make augmented data.
 
     :param image: String for image name
@@ -261,37 +261,9 @@ def salting(img):
     return salty_noised
 
 
-# def simple_rotation_augmentation(angle_list1, image):
-#     """
-#     This function takes one picture and rotates is by a number
-#     of degrees is angle_list1.This function can be used with the
-#     augment_and_move function as follows (example):
-
-#     .. code-block:: python
-
-#        augment_and_move(
-#            'D:/my_academia/dataset/random_within_domain',
-#            'D:/my_academia/elo',
-#            [partial(simple_rotation_augmentation, 5)],
-#        )
-
-#     :param image: Image.
-#     :type image: Image (JPEG)
-
-#     :return: rotated image
-#     :rtype: PIL image
-#     """
-#     if isinstance(image, str):
-#         image4R = Image.open(image)
-#     else:
-#         image4R = image
-#     rotated1 = image4R.rotate(angle_list1)
-#     return rotated1
-
-
 def simple_rotate_no_pil(image, angle, center=None, scale=1.0):
     """
-    This function works without the PIL library. Itakes one picture
+    This function works without the PIL library. It takes one picture
     and rotates is by a number of degrees in the parameter angle.
     This function can be used with the
     augment_and_move function as follows (example):
@@ -346,42 +318,6 @@ def blur_out_edges(image):
     filtered = cv2.blur(example, ksize)
     blurred_edge_image = example * (msk / 255) + filtered * ((255 - msk) / 255)
     return blurred_edge_image
-
-
-# def reasonable_rotation_augmentation(angle1, angle2, number_slices, image):
-#     """
-#     Works on a single image, and returns a list of augmented images which are
-#     based on twisting the angle from angle1 to angle2 with 'number_slices' as
-#     the number of augmented images to be made from the original. It is not
-#     realistic or desirable to augment images of most X-rays by flipping them.
-#     In abdominal or chest X-rays that would create an augmentation that could
-#     imply specific pathologies e.g. situs inversus. We suggest augmenting
-#     between angles -5 to 5.
-
-#     :param angle1: angle1 is the approximate  angle for the first augmented
-#     :type angle1: float
-#     :param angle2: angle2 is approximate the angle for the last augmented
-#     :type angle2: float
-#     :param number_slices: number of images to be produced
-#     :type number_slices: int
-#     :param image: Image
-#     :type image: Image (JPEG)
-
-#     :return: list of PIL images
-#     :rtype: list
-#     """
-#     increment = abs(angle1-angle2)/number_slices
-#     angle1f = float(angle1)
-#     angle2f = float(angle2)
-#     number_slicesf = float(number_slices)
-#     increment = abs(angle1f-angle2f)/number_slicesf
-#     num_list = np.arange(angle1f, angle2f,  increment)
-#     image4R = Image.open(image)
-#     augmentos = []
-#     for i in num_list:
-#         augmentos.append(image4R.rotate(i))
-
-#     return augmentos
 
 
 def multi_rotation_augmentation_no_pill(angle1, angle2, number_slices, image):
@@ -448,7 +384,6 @@ def show_major_lines_on_image(pic_name):
         # if abs(math.sqrt((x2 - x1)**2 + (y2 - y1)**2)) > 0:
         imag_lined = cv2.line(img, (x1, y1), (x2, y2), (255, 0, 0), 3)
     return plt.imshow(imag_lined)
-# to run on a list to make a prototype tiny X-ray
 
 
 def find_big_lines(directory, line_length):
@@ -500,7 +435,9 @@ def find_big_lines(directory, line_length):
 
 def separate_image_averager(set_of_images, s=5):
     """
-    To run on a list to make a prototype tiny X-ray that is an averages image
+    This function runs on a list of images  to make a prototype tiny X-ray that
+    is an average image of them. The images should be given as the strings that
+    are the location for the image file.
 
     :param set_of_images: Set_of_images
     :type set_of_images: Collection of elements suitable for
@@ -509,7 +446,7 @@ def separate_image_averager(set_of_images, s=5):
     :type s: int
 
     :return: image
-    :rtype: image
+    :rtype: class: `numpy.ndarray`
     """
     canvas = np.zeros((s, s))
     for pic in set_of_images:
@@ -518,13 +455,11 @@ def separate_image_averager(set_of_images, s=5):
         canvas += np.array(example_small)
     return canvas / len(set_of_images)
 
-#
-
 
 def dimensions_to_df(image_directory):
     """
-    Finds dimensions on images in a folder, and makes a df for exploratory
-    data analysis
+    Finds dimensions on images in a folder, and makes a dataframe for
+    exploratory data analysis.
 
     :param folder_name: Adress of folder with images (should include final '/')
     :type folder_name: :func:`os.path.join()`
