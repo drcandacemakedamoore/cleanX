@@ -107,7 +107,7 @@ class Pipeline:
     """
     This class is the builder for the image processing pipeline.
 
-    This class executes a sequence of :class:`~.steps.Step`.  It attemts to
+    This class executes a sequence of :class:`~.steps.Step`.  It attempts to
     execute as many steps as possible in parallel.  However, in order
     to avoid running out of memory, it saves the intermediate results
     to the disk.  You can control the number of images processed at

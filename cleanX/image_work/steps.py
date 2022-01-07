@@ -68,7 +68,7 @@ class Step(metaclass=RegisteredStep):
 
     def read(self, path):
         """
-        Read the image saved in the previvous step.  This function must not
+        Read the image saved in the previous step.  This function must not
         raise exceptions as it is used in :code:`multiprocessing` context.
 
         :param path: The path to the image to read.  Unless the
@@ -183,6 +183,8 @@ class Aggregate(Step):
 
 
 class Mean(Aggregate):
+    """
+    """
 
     def agg(self, acc_data, acc_name, image_data, image_name):
         if acc_data is None:
@@ -394,7 +396,7 @@ class ContourImage(Step):
 
 
 class ProjectionHorizoVert(Step):
-    """This class makes a transformation into a projectionof the image.
+    """This class makes a transformation into a projection of the image.
     The projections of horizontal and vertical are superimposed. These
     one dimensional projection images can be used for image registration
     algorithms, quality control or other purposes"""
@@ -525,12 +527,12 @@ class WhiteEdgeCrop(Step):
 
 
 class Sharpie(Step):
-    """This class takes the image and applies a variant of thethe subtle
-    sharpie  function, but with control over the degree. In present version,
+    """This class takes the image and applies a variant of the subtle_sharpie
+    function, but with control over the degree. In present version,
     it is reccomended to run on copies.
     In future versions can be run after a Tee step. For a subtle sharpening
-    a ksize of (2,2) is reccomended, and a run of normalization afterwards is
-    highly reccomended (or you may get vals over 255 for whites)"""
+    a ksize of (2,2) is recommended, and a run of normalization afterwards is
+    highly recommended (or you may get vals over 255 for whites)"""
 
     def __init__(
         self,
@@ -553,10 +555,10 @@ class Sharpie(Step):
 
 
 class BlurEdges(Step):
-    """This class takes the image and applies a variant of thethe blur out
+    """This class takes the image and applies a variant of the blur out
     edges  function, which does what it sounds like (returns an image with
     edges blurred out called edge_image). For a good effect a ksize of
-    (600,600) is reccomended. In present version,it is reccomended to run on
+    (600,600) is recommended. In present version,it is recommended to run on
     copies.In future versions can be run after a Tee step. """
 
     def __init__(
@@ -596,7 +598,7 @@ class CleanRotate(Step):
     """This class takes the image and applies a rotation  function,
     with control over the degree. It crops off black added (makes smaller
     borders, but will not crop existing borders) In present version, it is
-    reccomended to run on copies. In future versions can be run after a Tee
+    recommended to run on copies. In future versions can be run after a Tee
     step. """
 
     def __init__(
@@ -605,7 +607,7 @@ class CleanRotate(Step):
         cache_dir=None,
     ):
         super().__init__(cache_dir)
-        self.angle = angle
+        self.angle = int(angle)
 
     def apply(self, image_data, image_name):
         try:
@@ -614,12 +616,6 @@ class CleanRotate(Step):
         except Exception as e:
             logging.exception(e)
             return None, e
-
-    def __reduce__(self):
-        return self.__class__, (
-            self.angle,
-            self.cache_dir,
-        )
 
 
 class Normalize(Step):
@@ -642,7 +638,7 @@ class Normalize(Step):
 
 
 class HistogramNormalize(Step):
-    """This class allows normalization by throwing off exxtreme values on
+    """This class allows normalization by throwing off extreme values on
     image histogram. """
 
     def __init__(self, tail_cut_percent=5, cache_dir=None):
@@ -691,7 +687,7 @@ class HistogramNormalize(Step):
 
 class OtsuBinarize(Step):
     """This class makes binarized images with values of only 0 to 255, based on
-    an Otsu segmentaation with more or less blurring. ksize parameter should
+    an Otsu segmentation with more or less blurring. ksize parameter should
     be between 1 and 99, and odd"""
     def __init__(
         self,
@@ -737,7 +733,7 @@ class OtsuBinarize(Step):
 
 
 class OtsuLines(Step):
-    """This class makes an outline around asegemnted image segmentedbased on
+    """This class makes an outline around a segemnted image segmented based on
     the an Otsu segmentation with more or less blurring. ksize parameter should
     be between 1 and 99, and odd"""
     def __init__(
@@ -789,7 +785,7 @@ class OtsuLines(Step):
 class Projection(Step):
     """This class makes two one dimensional projections on the same graph,
     one for horizontal, and one for vertical. Projections can be used in many
-    processeses including registration, and analysis."""
+    processes including registration, and analysis."""
 
     def apply(self, image_data, image_name):
         try:

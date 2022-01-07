@@ -48,7 +48,7 @@ class JournalingPipeline(Pipeline):
     ):
         """
         Initializes pipeline with two additional arguments controlling
-        the behavior of presistent storage.  See
+        the behavior of persistent storage.  See
         :class:`~cleanX.image_work.pipeline.Pipeline` for remaining arguments.
 
         :param journal: If :code:`True` is passed, the pipeline code will use a
