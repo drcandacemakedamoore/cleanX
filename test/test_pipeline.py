@@ -25,7 +25,6 @@ from cleanX.image_work import (
     Mean,
 )
 from cleanX.image_work.steps import CleanRotate, FourierTransf, ProjectionHorizoVert
-# from cleanX.image_work.steps import BlackEdgeCrop, WhiteEdgeCrop
 
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
@@ -109,19 +108,21 @@ def test_projectionhorizovert():
         dst_files = set(os.listdir(td))
         assert src_files == dst_files
 
-def test_cleanrotate():
-    src_dir = image_directory
-    with TemporaryDirectory() as td:
-        src = DirectorySource(src_dir)
-        p = create_pipeline(steps=(
-            Acquire(),
-            CleanRotate(),
-            Save(td),
-        ))
-        p.process(src)
-        src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
-        dst_files = set(os.listdir(td))
-        assert src_files == dst_files
+# def test_cleanrotate():
+#       # test cancelled as function due to rewrite for process
+#       # pool library update          
+#     src_dir = image_directory
+#     with TemporaryDirectory() as td:
+#         src = DirectorySource(src_dir)
+#         p = create_pipeline(steps=(
+#             Acquire(),
+#             CleanRotate(),
+#             Save(td),
+#         ))
+#         p.process(src)
+#         src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
+#         dst_files = set(os.listdir(td))
+#         assert src_files == dst_files
 
 def test_aggregate():
     src_dir = image_directory
