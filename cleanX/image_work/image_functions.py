@@ -547,7 +547,7 @@ def dimensions_to_histo(image_directory, bins_count=10):
 def proportions_ht_wt_to_histo(folder_name, bins_count=10):
     """
     Looks in the directory given, produces a histogram of various proportions
-    of the images by dividing their height by widths.
+    of the images by dividing their heights by widths.
     Important information as many neural nets take images all the
     same size. Classically most chest X-rays are :math:`2500 \\times 2000` or
     :math:`2500 \\times 2048`; however the dataset may be different and/or
@@ -639,9 +639,12 @@ def find_by_sample_upper(
     value_for_line
 ):
     """
-    Takes average of upper pixels, and can show you outliers defined by a
-    percentage, e.g. shows images with an average of top pixels in top x %
-    where x is the percent height of the sample.
+    This function takes an average (mean) of upper pixels,
+    and can show outliers defined by a percentage, i.e. the function shows
+    images with an average of upper pixels in top x % where x is the percent 
+    height of the sample. Note: images with high averages in the upper pixels
+    are likely to be inverted, upside down or otherwise different from more 
+    typical X-rays.
 
     :param source_directory: folder the images are in(should include final '/')
     :type source_directory: :func:`os.path.join()`

@@ -72,8 +72,8 @@ def _convert_metadata(_, zf, destination_eggdir, dist_info, egg_info):
             'unsupported wheel format version: %s' % wheel_version)
     # Extract to target directory.
 
-    # PATCH(wvxvw): This shole function is idiotic, written by
-    # idiots...  Specifically, this place will get conflicted with
+    # PATCH(wvxvw): This function is copied from wheel.py.
+    # There are some issues. Specifically, this place will get conflicted with
     # itself because it's trying to create a directory that it already
     # created earlier...
     try:
@@ -110,7 +110,7 @@ def _convert_metadata(_, zf, destination_eggdir, dist_info, egg_info):
         # the directories had some files in them.
 
         # Eventually, we just need to create wheels ourselves, not
-        # relying on `pip` and its idiotic friends, and life will be a
+        # relying on `pip` and its friends, and life will be a
         # lot easier.
         os.rename(dist_info, egg_info)
         os.rename(
@@ -506,7 +506,7 @@ class Install(InstallCommand):
 
             # Apparently, this is only set if we are in bdist_xxx
             if self.root:
-                # PyPA idiots run setup.py install inside setup.py
+                # PyPA members run setup.py install inside setup.py
                 # bdist_wheel.  Because we don't do what a typical
                 # install command would, and they rely on a bunch of
                 # side effects of a typical install command, we need
