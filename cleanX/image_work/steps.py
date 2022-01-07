@@ -529,7 +529,7 @@ class WhiteEdgeCrop(Step):
 class Sharpie(Step):
     """This class takes the image and applies a variant of the subtle_sharpie
     function, but with control over the degree. In present version,
-    it is reccomended to run on copies.
+    it is recommended to run on copies.
     In future versions can be run after a Tee step. For a subtle sharpening
     a ksize of (2,2) is recommended, and a run of normalization afterwards is
     highly recommended (or you may get vals over 255 for whites)"""
