@@ -137,7 +137,7 @@ class MultiSource(ColumnsSource):
         Initializes this class with the number of sources that will
         be used in a way similar to :func:`itertools.chain()`.
 
-        :param \\*sources: Sources to be concatendated together to
+        :param \\*sources: Sources to be concatenated together to
                            create a single dataframe.
         """
         self.sources = sources
@@ -239,7 +239,7 @@ class MLSetup:
     def get_unique_id(self):
         """
         Tries to find the column in training and testing datasests that
-        uniquely identifies the entires in both.  Typically, this is
+        uniquely identifies the entries in both.  Typically, this is
         patient id of some sort.  If the setup was initialized with
         :code:`unique_id`, than that is used.  Otherwise, a rather simple
         heuristic is used.
@@ -262,7 +262,7 @@ class MLSetup:
     def get_sensitive_list(self):
         """
         Returns a list of regular expressions that will be applied to the
-        list of columns to identify the senistive categories (those that
+        list of columns to identify the sensitive categories (those that
         might bias the training towards overrepresented categories).
         """
         # TODO(wvxvw): Try to come up with names that might catch some
@@ -276,10 +276,10 @@ class MLSetup:
 
     def guess_source(self, raw_src):
         """
-        Helper method to conver sources given by external factors to internal
+        Helper method to convert sources given by external factors to internal
         representation.
 
-        :param raw_src: The externally supplied source.  This is typcially
+        :param raw_src: The externally supplied source.  This is typically
                         either a path to a file, or an existing dataframe
                         or a collection of such sources.
 
@@ -329,7 +329,7 @@ class MLSetup:
 
     def duplicated_frame(self):
         """
-        Provides more detailed information about the ducplicates found in
+        Provides more detailed information about the duplicates found in
         training and test data.
 
         :return: A tuple of two dataframes first listing duplicates in
@@ -560,7 +560,7 @@ class Report:
         for HTML report.
 
         :param data: The data to be reported.
-        :type data: Various datastructures constituting the report
+        :type data: Various data structures constituting the report
         :param level: How deeply this section is indented.
         :type level: int
         :return: A list containing HTML markup elements.

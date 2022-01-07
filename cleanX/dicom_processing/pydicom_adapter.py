@@ -109,7 +109,7 @@ class PydicomDicomReader:
         :rtype: :class:`~datetime.datetime`
         """
         #     seconds, milis = source.split('.')
-        # TODO: We don't know how to conver this yet
+        # TODO: We don't know how to convert this yet
         return source
 
     def rip_out_jpgs(self, source, destination):
@@ -179,7 +179,7 @@ def get_jpg_with_pydicom(dicom_folder_path, jpg_folder_path):
     """
     This function is for users with pydicom library only.
     If you do not have the library it will throw an error.
-    The funuction function jpeg files out of a dicom file directory,
+    The function function jpeg files out of a dicom file directory,
     one by one, each of them (not just the first series as), and puts them in
     an out put directory.
 
