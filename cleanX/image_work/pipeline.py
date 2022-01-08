@@ -157,22 +157,21 @@ class Worker(Process):
         result = {v: [] for v in variables}
 
         pos = 0
-        while any(svs):
+        while any(svs.values()):
             files = {v: os.path.basename(s[0]) for v, s in svs.items()}
             minf = min(files.values())
             for v, f in files.items():
                 if f == minf:
                     result[v].append(f)
+                    svs[v].pop(0)
                 else:
                     result[v].append(None)
 
-        for i in range(len(result[variables[0]])):
-            table.append({v: result[v][i] for v in variables})
-
-        return tuple(
-            {v: result[v][i] for v in variables}
-            for i in range(len(result[variables[0]]))
-        )
+        # return tuple(
+        #     {v: result[v][i] for v in variables}
+        #     for i in range(len(result[variables[0]]))
+        # )
+        return result
 
     def run(self):
         while True:
@@ -187,12 +186,18 @@ class Worker(Process):
                 time.sleep(1)
                 continue
             try:
+                print('scheduling step:', rec.definition, rec.options)
                 step = rec.definition(**dict(rec.options))
+                print('created step:', rec.definition)
                 step.init_step(rec.serial, rec.splitter, rec.joiner, td)
+                print('initialized step:', rec.definition)
                 src = self.src(rec.variables, td)
-                step.apply(out, src)
+                print('running step:', step)
+                step.apply_split_join(out, src)
                 self.outbound.put((rec, None))
             except Exception as e:
+                import traceback
+                traceback.print_exc()
                 self.outbound.put((rec, e))
 
 

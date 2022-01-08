@@ -9,6 +9,7 @@ import pandas as pd
 import math
 from multiprocessing import Queue, Value
 from queue import Empty
+from glob import glob
 
 import numpy as np
 import cv2
@@ -49,23 +50,24 @@ class Applier:
 
 class Splitter(Applier):
 
-    def __call__(self, output, results, acc):
+    def __call__(self, output, n, results, acc):
         return acc
 
 
 class Tee(Splitter):
 
-    def __call__(self, output, results, acc):
-        if result:
+    def __call__(self, output, n, results, acc):
+        # TODO(wvxvw): This can be done in parallel.
+        if results:
             for o in output:
-                for r in results:
-                    self.step.write(o, r)
+                for r, im in results.items():
+                    self.step.write(os.path.join(o, r), im)
         return acc
 
 
 class RoundRobin(Splitter):
 
-    def __call__(self, output, results, acc):
+    def __call__(self, output, results, n, acc):
         if getattr(self, 'last', None) is None:
             self.last = output[0]
         idx = output.index(self.last)
@@ -75,7 +77,7 @@ class RoundRobin(Splitter):
 
 class Joiner(Applier):
 
-    def __call__(self, inputs, acc):
+    def __call__(self, inputs, n, acc):
         return inputs, acc
 
 
@@ -89,10 +91,11 @@ class Avg(Joiner):
         self.width = width
         self.height = height
 
-    def __call__(self, inputs, acc):
-        # TODO(wvxvw): Deal with the case when len(inputs) == 1.
-        # In this case we don't want any averaging to occur, and
-        # should be albe to do things faster and more precise.
+    def __call__(self, inputs, n, acc):
+        if not inputs:
+            return [], acc
+        if len(inputs) == 1:
+            return inputs, acc
         twidth, theight = 0, 0
         for i in inputs:
             meta = self.step.read_meta(i)
@@ -175,21 +178,48 @@ class Step(metaclass=RegisteredStep):
                         for r, o in zip(res, out):
                             step.write(r, o)
 
-    def apply_joined(self, joined, acc):
-        return joined, acc
+    def ensure_out_dirs(self, out):
+        for o in out:
+            try:
+                os.makedirs(os.path.join(self.workdir, o))
+            except FileExistsError:
+                pass
 
-    def apply_one(self, outputs, i, acc):
-        return self.splitter(
-            outputs,
-            self.apply_joined(*self.joiner(i, acc)),
-            acc,
-        )
+    def apply_image(self, image):
+        return image, None
 
-    def apply(self, outputs, inputs):
+    def apply(self, joined, acc):
+        result = {}
+        for var, name in joined.items():
+            key = os.path.join(var, name)
+            path = os.path.join(self.workdir, key)
+            i, e = self.read(path)
+            if e is None:
+                result[key] = self.apply_image(i)
+            else:
+                result[key] = i, e
+        return result, acc
+
+    def apply_one(self, outputs, i, n, acc):
+        print('apply_one', i)
+        joined, acc = self.joiner(i, n, acc)
+        return self.splitter(outputs, n, *self.apply(joined, acc))
+
+    def apply_split_join(self, outputs, inputs):
+        self.ensure_out_dirs(outputs)
         if self.serial:
             acc = None
-            for n, i in enumerate(inputs):
-                acc = self.apply_one(outputs, i, len(inputs) - n, acc)
+            if inputs:
+                print('inputs:', inputs)
+                variables = tuple(inputs.keys())
+                items = zip(*tuple(inputs.values()))
+                for n, i in enumerate(items):
+                    one = dict(zip(variables, i))
+                    acc = self.apply_one(outputs, one, len(inputs) - n, acc)
+            else:
+                acc = self.apply_one(outputs, {}, 1, acc)
+                while acc:
+                    acc = self.apply_one(outputs, {}, 1, acc)
 
     def read(self, path):
         """
@@ -215,7 +245,7 @@ class Step(metaclass=RegisteredStep):
             logging.exception(e)
             return None, e
 
-    def write(self, image, path):
+    def write(self, path, image):
         """
         This method should write the image data to make it available for
         the next step.  Default implementation use NumPy's persistence
@@ -230,13 +260,13 @@ class Step(metaclass=RegisteredStep):
         :rtype: Exception
         """
         try:
-            assert image_data is not None, (
+            assert image is not None, (
                 'Image data should exist in {} at {}'.format(
                     type(self).__name__,
                     path,
                 ))
             path = os.path.splitext(path)[0]
-            np.save(os.path.join(self.cache_dir, path), image)
+            np.save(os.path.join(self.workdir, path), image)
             return None
         except Exception as e:
             logging.exception(e)
@@ -337,12 +367,11 @@ class GlobSource(Step):
         self.expression = expression
         self.recursive = recursive
 
-    def __iter__(self):
+    def apply(self, joined, acc):
         """
         Iterator implementation.
         """
-        for s in glob(self.expression, recursive=self.recursive):
-            yield s
+        return glob(self.expression, recursive=self.recursive), acc
 
 
 class DirectorySource(Step):
@@ -364,13 +393,18 @@ class DirectorySource(Step):
         self.directory = directory
         self.extension = extension
 
-    def __iter__(self):
+    def apply(self, joined, acc):
         """
         Iterator implementation.
         """
-        exp = os.path.join(self.directory, '*.' + self.extension)
-        for f in glob(exp):
-            yield f
+        if acc is None:
+            exp = os.path.join(self.directory, '*.' + self.extension)
+            files = glob(exp)
+        else:
+            files = acc
+        key = os.path.basename(files[0])
+        res = np.array(cv2.imread(files[0]))
+        return {key: res}, files[1:]
 
 
 class Mean(Aggregate):
@@ -509,7 +543,6 @@ class Save(Step):
             self.extension,
         )
         try:
-            print("exporting", path)
             cv2.imwrite(
                 os.path.join(self.target, name),
                 image_data,
@@ -717,24 +750,15 @@ class Sharpie(Step):
     a ksize of (2,2) is recommended, and a run of normalization afterwards is
     highly recommended (or you may get vals over 255 for whites)"""
 
-    def __init__(
-        self,
-        ksize=(2, 2),
-        cache_dir=None,
-    ):
-        super().__init__(cache_dir)
+    def __init__(self, ksize=(2, 2)):
         self.ksize = ksize
 
-    def apply_one(self, image, meta, source):
+    def apply_image(self, image):
         blur_mask = cv2.blur(image, ksize=self.ksize)
-        new_image_array = 2 * image - blur_mask
-        return new_image_array, None
+        return 2 * image - blur_mask
 
     def __reduce__(self):
-        return self.__class__, (
-            self.ksize,
-            self.cache_dir,
-        )
+        return self.__class__, (self.ksize,)
 
 
 class BlurEdges(Step):
@@ -744,15 +768,11 @@ class BlurEdges(Step):
     (600,600) is recommended. In present version,it is recommended to run on
     copies.In future versions can be run after a Tee step. """
 
-    def __init__(
-        self,
-        ksize=(600, 600),
-        cache_dir=None,
-    ):
-        super().__init__(cache_dir)
+    def __init__(self, ksize=(600, 600)):
         self.ksize = ksize
 
-    def apply(self, image, meta, source):
+    def apply_image(self, image):
+        # apply(self, image, meta, source):
         msk = np.zeros(image.shape)
         center_coordinates = (
             image.shape[1] // 2,
@@ -768,13 +788,10 @@ class BlurEdges(Step):
         msk = cv2.blur(msk, ksize)
         filtered = cv2.blur(image, ksize)
         edge_image = image * (msk / 255) + filtered * ((255 - msk) / 255)
-        return edge_image, None
+        return edge_image
 
     def __reduce__(self):
-        return self.__class__, (
-            self.ksize,
-            self.cache_dir,
-        )
+        return self.__class__, (self.ksize,)
 
 
 class CleanRotate(Step):
