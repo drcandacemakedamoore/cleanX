@@ -1174,7 +1174,7 @@ def show_images_in_df(iter_ob, length_name):
     f, axarr = plt.subplots(width, height, figsize=(14, 14))
     if width > 1:
         for x in range(width):
-            for y in range(height):
+            for y in range(min(len(iter_ob) - x * height, height)):
                 element = iter_ob[x * height + y]
                 fname = os.path.splitext(element)[0]
                 title = fname[-length_name:]
