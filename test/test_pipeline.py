@@ -10,7 +10,6 @@ import pytest
 from cleanX.image_work import (
     create_pipeline,
     restore_pipeline,
-    Acquire,
     Save,
     DirectorySource,
     Step,
@@ -27,6 +26,7 @@ from cleanX.image_work import (
     PipelineDef,
 )
 from cleanX.image_work.steps import CleanRotate, FourierTransf, ProjectionHorizoVert
+from cleanX.image_work.graph_parser import Parser
 
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
@@ -41,14 +41,76 @@ class Fail(Step):
 def test_copy_images():
     src_dir = image_directory
     with TemporaryDirectory() as td:
-        src = DirectorySource(src_dir)
-        goal = Save(td)
-        p = create_pipeline(steps=(
-            Acquire(),
-            goal,
-        ))
-        p.process(src, goal)
+        pipeline_def = PipelineDef(
+            steps={
+                'src': StepCall(
+                    definition=DirectorySource,
+                    options=(('directory', src_dir),),
+                    variables=(),
+                    serial=True,
+                    splitter=None,
+                    joiner=None,
+                ),
+            },
+            goal=StepCall(
+                definition=Save,
+                options=(('target', td),),
+                variables=('src',),
+                serial=True,
+                splitter=None,
+                joiner=None,
+            )
+        )
+        create_pipeline(pipeline_def)
         src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
+        dst_files = set(os.listdir(td))
+        assert src_files == dst_files
+
+
+def test_copy_images_parsed():
+    src_dir = image_directory
+    with TemporaryDirectory() as td:
+        pipeline = '''
+        pipeline(
+            definitions(
+                dir = cleanX.image_work:DirectorySource
+                save = cleanX.image_work:Save
+            )
+            steps(
+                src = dir[directory = "{src_dir}"]()
+            )
+            goal(save[target = "{td}"](src))
+        )
+        '''.format(src_dir=src_dir, td=td)
+        pipeline_def = Parser().parse(pipeline)
+        create_pipeline(pipeline_def)
+        src_files = set(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
+        dst_files = set(os.listdir(td))
+        assert src_files == dst_files
+
+
+def test_tee():
+    src_dir = image_directory
+    with TemporaryDirectory() as td:
+        pipeline = '''
+        pipeline(
+            definitions(
+                dir = cleanX.image_work:DirectorySource
+                save = cleanX.image_work:Save
+                blur = cleanX.image_work:BlurEdges
+            )
+            steps(
+                src1 src2 = dir[directory = "{src_dir}"]()
+                blur = blur(src2)
+            )
+            goal(save[target = "{td}"](src1 blur))
+        )
+        '''.format(src_dir=src_dir, td=td)
+        pipeline_def = Parser().parse(pipeline)
+        create_pipeline(pipeline_def)
+        src_files = set(
+            f for f in os.listdir(src_dir) if f.endswith('.jpg')
+        )
         dst_files = set(os.listdir(td))
         assert src_files == dst_files
 
@@ -85,7 +147,7 @@ def test_alter_images():
             },
             goal=StepCall(
                 definition=Save,
-                options=(('path', td),),
+                options=(('target', td),),
                 variables=('sharpie',),
                 serial=True,
                 splitter=None,

@@ -61,7 +61,8 @@ class Tee(Splitter):
         if results:
             for o in output:
                 for r, im in results.items():
-                    self.step.write(os.path.join(o, r), im)
+                    name = os.path.join(o, os.path.basename(r))
+                    self.step.write(name, im)
         return acc
 
 
@@ -201,7 +202,6 @@ class Step(metaclass=RegisteredStep):
         return result, acc
 
     def apply_one(self, outputs, i, n, acc):
-        print('apply_one', i)
         joined, acc = self.joiner(i, n, acc)
         return self.splitter(outputs, n, *self.apply(joined, acc))
 
@@ -210,7 +210,6 @@ class Step(metaclass=RegisteredStep):
         if self.serial:
             acc = None
             if inputs:
-                print('inputs:', inputs)
                 variables = tuple(inputs.keys())
                 items = zip(*tuple(inputs.values()))
                 for n, i in enumerate(items):
@@ -514,49 +513,34 @@ class GroupHistoPorportion(Aggregate):
         return self.__class__, (self.histo_dir, self.cache_dir,)
 
 
-class Acquire(Step):
-    """This class reads in images (to an array) from a path"""
-
-    def read(self, path):
-        try:
-            res = cv2.imread(path)
-            return np.array(res), None
-        except Exception as e:
-            logging.exception(e)
-            return None, e
-
-
 class Save(Step):
     """This class writes the images somewhere"""
 
-    def __init__(self, target, extension='jpg', cache_dir=None):
-        super().__init__(cache_dir)
+    def __init__(self, target, extension='jpg'):
         self.target = target
         self.extension = extension
 
-    def write(self, image_data, path):
-        err = super().write(image_data, path)
-        if err:
-            return err
-        name = '{}.{}'.format(
-            os.path.splitext(os.path.basename(path))[0],
-            self.extension,
-        )
-        try:
-            cv2.imwrite(
-                os.path.join(self.target, name),
-                image_data,
-            )
-        except Exception as e:
-            logging.exception(e)
-            return e
+    def apply(self, joined, acc):
+        read, acc = super().apply(joined, acc)
+        result = {}
+        for key, (image, err) in read.items():
+            if err is not None:
+                result[key] = image, e
+                continue
+            try:
+                fname = os.path.splitext(os.path.basename(key))[0]
+                name = '.'.join((fname, self.extension))
+                cv2.imwrite(
+                    os.path.join(self.target, name),
+                    image,
+                )
+                result[key] = image, None
+            except Exception as e:
+                result[key] = image, e
+        return result, acc
 
     def __reduce__(self):
-        return self.__class__, (
-            self.target,
-            self.extension,
-            self.cache_dir,
-        )
+        return self.__class__, (self.target, self.extension)
 
 
 class FourierTransf(Step):

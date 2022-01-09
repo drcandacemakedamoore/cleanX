@@ -5,7 +5,6 @@ from io import StringIO
 from cleanX.image_work import (
     create_pipeline,
     restore_pipeline,
-    Acquire,
     Save,
     DirectorySource,
     Step,
@@ -26,7 +25,6 @@ def test_parse_simple():
             definitions(
                 dir = cleanX.image_work:DirectorySource
                 glob = cleanX.image_work:GlobSource
-                acquire = cleanX.image_work:Acquire
                 or = cleanX.image_work.steps:Or
                 crop = cleanX.image_work:BlackEdgeCrop
                 save = cleanX.image_work:Save
@@ -37,7 +35,7 @@ def test_parse_simple():
                 source1 = dir[path = "/foo/bar"]()
                 source2 = glob[pattern = "/foo/*.jpg"]()
 
-                out1 out2 out3 = acquire[arg1 = "foo" arg2 = 42](
+                out1 out2 out3 = save[arg1 = "foo" arg2 = 42](
                     source1 source2
                 ) * avg(width="min" height="max") / tee()
                 out4 = or[arg1 = true](out1 out2)

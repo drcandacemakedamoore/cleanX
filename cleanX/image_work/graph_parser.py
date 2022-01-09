@@ -150,19 +150,20 @@ class Parser(Transformer):
             duplicates.append(var)
         if duplicates:
             raise DuplicateOptions(duplicates)
-        return tuple(raw)
+        return raw
 
     def step(self, *args):
         try:
             definition = self._definitions[args[0]]
         except KeyError:
             raise MissingDefinition(args[0])
-        options, variables = [], []
-        for a in  args[1:]:
-            if type(a) is tuple:
-                options.append(a)
+        options, variables = (), ()
+        if len(args) > 1:
+            if type(args[1]) is tuple:
+                options = args[1]
+                variables = tuple(str(a) for a in args[2:])
             else:
-                variables.append(str(a))
+                variables = tuple(str(a) for a in args[1:])
         # TODO(wvxvw): Parse these
         serial = True
         splitter = None
@@ -171,8 +172,8 @@ class Parser(Transformer):
         # steps.
         return StepCall(
             definition,
-            tuple(options),
-            tuple(variables),
+            options,
+            variables,
             serial,
             splitter,
             joiner,

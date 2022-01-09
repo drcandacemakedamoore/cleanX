@@ -10,10 +10,7 @@ from glob import glob
 import pandas as pd
 import pytest
 
-from cleanX.image_work import (
-    Acquire,
-    Save,
-)
+from cleanX.image_work import Save
 
 from harness import skip_if_missing
 

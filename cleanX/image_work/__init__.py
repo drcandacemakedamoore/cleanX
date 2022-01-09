@@ -73,7 +73,6 @@ from .pipeline import (
 from .journaling_pipeline import JournalingPipeline
 from .steps import (
     Step,
-    Acquire,
     Save,
     FourierTransf,
     BlackEdgeCrop,
