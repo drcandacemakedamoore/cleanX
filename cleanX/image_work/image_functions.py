@@ -48,6 +48,20 @@ from filecmp import cmp
 from pathlib import Path
 
 
+class Cv2Error(RuntimeError):
+    pass
+
+
+def cv2_imread(image, *args):
+    # OpenCV doesn't always raise an error when it fails to read the
+    # image.  This causes the errors to happen later and give
+    # confusing messages.  We want to catch this error earliers.
+    result = cv2.imread(image, *args)
+    if result is None:
+        raise Cv2Error('OpenCV had a problem reading: {}'.format(image))
+    return result
+
+
 def crop_np(image_array):
     """
     Crops black edges of an image array
@@ -1494,12 +1508,12 @@ def avg_image_maker_by_label(
         list_h = []
         list_w = []
 
-        for example in master_df[
-                    dataframe_image_column][master_df[
-                        dataframe_label_column]
-                            == name]:
-            example = cv2.imread(
-                (os.path.join(image_folder, example)),
+        by_label = master_df[dataframe_image_column][
+            master_df[dataframe_label_column] == name
+        ]
+        for example in by_label:
+            example = cv2_imread(
+                os.path.join(image_folder, example),
                 cv2.IMREAD_GRAYSCALE,
             )
             ht = example.shape[0]
@@ -1507,8 +1521,8 @@ def avg_image_maker_by_label(
             list_h.append(ht)
             list_w.append(wt)
 
-        h = int(sum(list_h)/len(list_h))
-        w = int(sum(list_w)/len(list_w))
+        h = int(sum(list_h) / len(list_h))
+        w = int(sum(list_w) / len(list_w))
         canvas = np.zeros((h, w))
         for example in master_df[dataframe_image_column]:
             example = cv2.imread(
