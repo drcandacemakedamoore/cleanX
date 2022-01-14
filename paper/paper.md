@@ -10,23 +10,21 @@ tags:
 authors:
   - name: Candace Makeda Moore
     orcid: 0000-0003-1672-7565
-    affiliation: "1,3"
+    affiliation: 1
   - name: Andrew Murphy, MMIS BMedImagingSc RT(R)
     orcid: 0000-0002-7710-6095
     affiliation: 2
   - name: Oleg Sivokon
-    affiliation: "3,4"
+    affiliation: 3
 affiliations:
- - name: MaxCor lab, Sapir College, Israel
+ - name: Netherlands eScience Center, Amsterdam, Netherlands
    index: 1
  - name: >-
      Department of Medical Imaging, Princess Alexandra Hospital,
      Brisbane, QLD, Australia
    index: 2
- - name: CMHM/cmhm.info, Israel
+ - name: Bright Computing / NVIDIA, Netherlands
    index: 3
- - name: Bright Computing, Netherlands
-   index: 4
 date: 18 April 2021
 bibliography: paper.bib
 ---
