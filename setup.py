@@ -286,17 +286,71 @@ class AnacondaUpload(Command):
     def run(self):
         env = dict(os.environ)
         env['ANACONDA_API_TOKEN'] = self.token
-        proc = subprocess.Popen(
-            [
-                'anaconda',
-                'upload',
-                '--force',
-                '--label', 'main',
-                glob(self.package)[0],
-            ],
-            env=env,
-            stderr=subprocess.PIPE,
-        )
+        upload = glob(self.package)[0]
+        sys.stderr.write('Uploading: {}\n'.format(upload))
+        args = ['upload', '--force', '--label', 'main', upload]
+        try:
+            proc = subprocess.Popen(
+                ['anaconda'] + args,
+                env=env,
+                stderr=subprocess.PIPE,
+            )
+        except FileNotFoundError:
+            for elt in os.environ.get('PATH', '').split(os.pathsep):
+                found = False
+                sys.stderr.write('Searching for anaconda: {!r}\n'.format(elt))
+                base = os.path.basename(elt)
+                if base == 'condabin':
+                    # My guess is conda is adding path to shell
+                    # profile with backslashes.  Wouldn't be the first
+                    # time they do something like this...
+                    sub = os.path.join(os.path.dirname(elt), 'conda', 'bin')
+                    sys.stderr.write(
+                        'Anacondas hiding place: {}\n'.format(sub),
+                    )
+                    sys.stderr.write(
+                        '    {}: {}\n'.format(elt, os.path.isdir(elt)),
+                    )
+                    sys.stderr.write(
+                        '    {}: {}\n'.format(sub, os.path.isdir(sub)),
+                    )
+                    if os.path.isdir(sub):
+                        elt = sub
+                    executable = os.path.join(elt, 'anaconda')
+                    exists = os.path.isfile(executable)
+                    sys.stderr.write(
+                        '    {}: {}\n'.format(executable, exists),
+                    )
+                    sys.stderr.write('    Possible matches:\n')
+                    for g in glob(os.path.join(elt, '*anaconda*')):
+                        sys.stderr.write('        {}\n'.format(g))
+                elif base == 'miniconda':
+                    # Another thing that might happen is that whoever
+                    # configured our environment forgot to add
+                    # miniconda/bin messed up the directory nam somehow
+                    minibin = os.path.join(elt, 'bin')
+                    if os.path.isdir(minibin):
+                        sys.stderr.write(
+                            'Maybe anaconda is here:{}\n'.format(minibin),
+                        )
+                        elt = minibin
+                for p in glob(os.path.join(elt, 'anaconda')):
+                    sys.stderr.write('Found anaconda: {}'.format(p))
+                    anaconda = p
+                    found = True
+                    break
+                if found:
+                    proc = subprocess.Popen(
+                        [anaconda] + args,
+                        env=env,
+                        stderr=subprocess.PIPE,
+                    )
+                    break
+            else:
+                import traceback
+                traceback.print_exc()
+                raise
+
         _, err = proc.communicate()
         if proc.returncode:
             sys.stderr.write('Upload to Anaconda failed\n')
