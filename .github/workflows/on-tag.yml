@@ -57,9 +57,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: conda install conda-build anaconda-client conda-verify
       - run: conda create --name cleanx-build python=${{ matrix.python-version }}
-      - run: >-
-          conda run -n cleanx-build
-          python setup.py genconda -t ${{ matrix.python-version }}
+      - run: conda run -n cleanx-build python setup.py genconda
       - run: conda build -c conda-forge --output-folder ./dist ./conda-pkg/
       - run: >
           conda run -n cleanx-build
