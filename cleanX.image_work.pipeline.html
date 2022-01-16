@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>cleanX.image_work.pipeline module &#8212; cleanX 0.1.12 documentation</title>
+    <title>cleanX.image_work.pipeline module &#8212; cleanX 0.1.13 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -33,7 +33,7 @@
         <li class="right" >
           <a href="cleanX.image_work.journaling_pipeline.html" title="cleanX.image_work.journaling_pipeline module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="cleanX.html" >cleanX package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cleanX.image_work.html" accesskey="U">cleanX.image_work package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cleanX.image_work.pipeline module</a></li> 
@@ -149,7 +149,7 @@ reading or writing images.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.pipeline.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class is the builder for the image processing pipeline.</p>
-<p>This class executes a sequence of <a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code></a>.  It attemts to
+<p>This class executes a sequence of <a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code></a>.  It attempts to
 execute as many steps as possible in parallel.  However, in order
 to avoid running out of memory, it saves the intermediate results
 to the disk.  You can control the number of images processed at
@@ -181,6 +181,21 @@ for the images to be processed.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.process_step">
+<span class="sig-name descname"><span class="pre">process_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">srciter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.process_step" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.process_batch_agg">
+<span class="sig-name descname"><span class="pre">process_batch_agg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.process_batch_agg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cleanX.image_work.pipeline.Pipeline.process_batch_parallel">
+<span class="sig-name descname"><span class="pre">process_batch_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.pipeline.Pipeline.process_batch_parallel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -235,7 +250,7 @@ for the images to be processed.</p>
         <li class="right" >
           <a href="cleanX.image_work.journaling_pipeline.html" title="cleanX.image_work.journaling_pipeline module"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="cleanX.html" >cleanX package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cleanX.image_work.html" >cleanX.image_work package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cleanX.image_work.pipeline module</a></li> 

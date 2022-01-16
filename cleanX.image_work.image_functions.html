@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>cleanX.image_work.image_functions module &#8212; cleanX 0.1.12 documentation</title>
+    <title>cleanX.image_work.image_functions module &#8212; cleanX 0.1.13 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -33,7 +33,7 @@
         <li class="right" >
           <a href="cleanX.image_work.html" title="cleanX.image_work package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="cleanX.html" >cleanX package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cleanX.image_work.html" accesskey="U">cleanX.image_work package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cleanX.image_work.image_functions module</a></li> 
@@ -49,36 +49,84 @@
 <span id="cleanx-image-work-image-functions-module"></span><h1>cleanX.image_work.image_functions module<a class="headerlink" href="#module-cleanX.image_work.image_functions" title="Permalink to this headline">¶</a></h1>
 <p>Library for cleaning radiological data used in machine learning
 applications</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.Cv2Error">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">Cv2Error</span></span><a class="headerlink" href="#cleanX.image_work.image_functions.Cv2Error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.cv2_imread">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">cv2_imread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.cv2_imread" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.crop_np">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">crop_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.crop_np" title="Permalink to this definition">¶</a></dt>
 <dd><p>Crops black edges of an image array</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>image_array</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Image array.</p>
+<dd class="field-odd"><p><strong>image_array</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Image array.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>NumPy array with the image data with the black margins cropped.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_functions.crop_pil">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">crop_pil</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.crop_pil" title="Permalink to this definition">¶</a></dt>
-<dd><p>Crops black edges of an Pil/Pillow image</p>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.crop_np_white">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">crop_np_white</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.crop_np_white" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crops white edges of an image array
+:param image_array: Image array.
+:type image_array: <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>
+:return: NumPy array with the image data with the white margins cropped.
+:rtype: <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_outliers_sum_of_pixels_across_set">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_outliers_sum_of_pixels_across_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_to_examine</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_outliers_sum_of_pixels_across_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function finds images that are outliers in terms of having a large
+or small total pixel sum, which in most cases, once images are normalized
+will correlate with under or overexposure OR pathology if the percent
+parameter is set to a low number - 3% (will be written as 3) is recommended</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>image_array</strong> (<em>image</em>) – Image.</p>
+<dd class="field-odd"><p><strong>directory</strong> (<em>string</em>) – Directory of images.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>PIL Image with black margins cropped.</p>
+<dd class="field-even"><p>top, bottom (dataframes of highest and lowest total)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>PIL.Image</p>
+<dd class="field-odd"><p><dl class="field-list simple">
+<dt class="field-odd">class</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.hist_sum_of_pixels_across_set">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">hist_sum_of_pixels_across_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.hist_sum_of_pixels_across_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function finds the sum of pixels per image in a set of images, then
+turns these values into a histogram. This is useful to compare exposure
+across normalized groups of images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>: string</em>) – directory of images.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>NumPy array shown as histogram.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -86,17 +134,18 @@ applications</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.crop">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">crop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.crop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Crops an image of a black frame: does both PIL and opencv2 images</p>
+<dd><p>Crops an image of a black or white frame: made for Numpy arrays only now.
+Previous version handled PIL images. Next version handles
+all colors of borders i.e. not only black or white frames</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>image</strong> (<em>This can be either a NumPy array holding image data</em><em>,
-or </em><em>a PIL image.</em>) – Image</p>
+<dd class="field-odd"><p><strong>image</strong> (<em>This must be a NumPy array holding image data</em><em>,</em>) – Image</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Image cropped of black edges</p>
+<dd class="field-even"><p>NumPy array with the image data with the black margins cropped.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Same as input type.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -105,7 +154,7 @@ or </em><em>a PIL image.</em>) – Image</p>
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.subtle_sharpie_enhance">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">subtle_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.subtle_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a new image that is very subtly sharper to the human eye,
-but has new values in most of the pixels(besides the background). This
+but has new values in most of the pixels (besides the background). This
 is an augmentation, that has not been tested for how well the outputs match
 X-rays from new machines used well, but is within a reasonable range
 by human eye.</p>
@@ -117,7 +166,7 @@ by human eye.</p>
 <dd class="field-even"><p>new_image_array, a nearly imperceptibly sharpened image for humans</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -127,7 +176,7 @@ by human eye.</p>
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">harsh_sharpie_enhance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.harsh_sharpie_enhance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a new image that is very sharper to the human eye,
 and has new values in most of the pixels (besides the background). This
-augmentation may allow humans to understnd certain elements of an image,
+augmentation may allow humans to understand certain elements of an image,
 but should be used with care to make augmented data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -137,7 +186,7 @@ but should be used with care to make augmented data.</p>
 <dd class="field-even"><p>new_image_array, a sharpened image for humans</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -155,24 +204,28 @@ not been tested for similarity to older machines, which also add noise.</p>
 <dd class="field-even"><p>new_image_array, with noise</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_functions.simple_rotation_augmentation">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">simple_rotation_augmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_list1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.simple_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function takes one picture and rotates is by a number
-of degrees is angle_list1.This function can be used with the
-augment_and_move function as follows (example):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">augment_and_move</span><span class="p">(</span>
-    <span class="s1">&#39;D:/my_academia/dataset/random_within_domain&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;D:/my_academia/elo&#39;</span><span class="p">,</span>
-    <span class="p">[</span><span class="n">partial</span><span class="p">(</span><span class="n">simple_rotation_augmentation</span><span class="p">,</span> <span class="mi">5</span><span class="p">)],</span>
-<span class="p">)</span>
-</pre></div>
-</div>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.simple_rotate_no_pil">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">simple_rotate_no_pil</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.simple_rotate_no_pil" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function works without the PIL library. It takes one picture
+and rotates is by a number of degrees in the parameter angle.
+This function can be used with the
+augment_and_move function as follows (example):
+.. code-block:: python</p>
+<blockquote>
+<div><dl class="simple">
+<dt>augment_and_move(</dt><dd><p>‘D:/my_academia/dataset/random_within_domain’,
+‘D:/my_academia/elo’,
+[partial(simple_rotate_no_pil, 5)],</p>
+</dd>
+</dl>
+<p>)</p>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image.</p>
@@ -181,7 +234,7 @@ augment_and_move function as follows (example):</p>
 <dd class="field-even"><p>rotated image</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>PIL image</p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)">numpy.ndarray</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -201,37 +254,31 @@ images.</p>
 <dd class="field-even"><p>blurred_edge_image an array of an image blurred around the edges</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_functions.reasonable_rotation_augmentation">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">reasonable_rotation_augmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.reasonable_rotation_augmentation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.multi_rotation_augmentation_no_pill">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">multi_rotation_augmentation_no_pill</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.multi_rotation_augmentation_no_pill" title="Permalink to this definition">¶</a></dt>
 <dd><p>Works on a single image, and returns a list of augmented images which are
 based on twisting the angle from angle1 to angle2 with ‘number_slices’ as
 the number of augmented images to be made from the original. It is not
 realistic or desirable to augment images of most X-rays by flipping them.
 In abdominal or chest X-rays that would create an augmentation that could
 imply specific pathologies e.g. situs inversus. We suggest augmenting
-between angles -5 to 5.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>angle1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – angle1 is the angle from the original to the first augmented</p></li>
-<li><p><strong>angle2</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – angle2 is the angle from the original to the last augmented</p></li>
-<li><p><strong>number_slices</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – number of images to be produced</p></li>
-<li><p><strong>image</strong> (<em>Image</em><em> (</em><em>JPEG</em><em>)</em>) – Image</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>list of PIL images</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
-</dd>
-</dl>
+between angles -5 to 5.
+:param angle1: angle1 is the angle from the original to the first augmented
+:type angle1: float
+:param angle2: angle2 is the angle from the original to the last augmented
+:type angle2: float
+:param number_slices: number of images to be produced
+:type number_slices: int
+:param image: image
+:type image: string (string where image is located)
+:return: list of image arrays
+:rtype: list</p>
 </dd></dl>
 
 <dl class="py function">
@@ -279,7 +326,9 @@ are all contiguous</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.separate_image_averager">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">separate_image_averager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_of_images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.separate_image_averager" title="Permalink to this definition">¶</a></dt>
-<dd><p>To run on a list to make a prototype tiny X-ray that is an averages image</p>
+<dd><p>This function runs on a list of images  to make a prototype tiny X-ray that
+is an average image of them. The images should be given as the strings that
+are the location for the image file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -292,29 +341,7 @@ are all contiguous</p>
 <dd class="field-even"><p>image</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>image</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_functions.augment_and_move">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">augment_and_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.augment_and_move" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes images and applies the same list of augmentations, which can include
-the cleanX function crop, to all of them</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>origin_folder</strong> (Suitable for <a class="reference external" href="https://docs.python.org/3/library/os.path.html#os.path.join" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.join()</span></code></a>) – folder the images are in (should include final ‘/’)</p></li>
-<li><p><strong>target_folder</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.path.html#os.path.join" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.join()</span></code></a>) – The folder where augmented images will be sent</p></li>
-<li><p><strong>transformations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – A list of augmentation functions to apply</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>technically a non returning function, but new images will be made</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>none</p>
+<dd class="field-odd"><p>class: <cite>numpy.ndarray</cite></p>
 </dd>
 </dl>
 </dd></dl>
@@ -322,8 +349,8 @@ the cleanX function crop, to all of them</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.dimensions_to_df">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">dimensions_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.dimensions_to_df" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds dimensions on images in a folder, and makes a df for exploratory
-data analysis</p>
+<dd><p>Finds dimensions on images in a folder, and makes a dataframe for
+exploratory data analysis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>folder_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.path.html#os.path.join" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.join()</span></code></a>) – Adress of folder with images (should include final ‘/’)</p>
@@ -366,7 +393,7 @@ varied</p>
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.proportions_ht_wt_to_histo">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">proportions_ht_wt_to_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.proportions_ht_wt_to_histo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Looks in the directory given, produces a histogram of various proportions
-of the images by dividing their height by widths.
+of the images by dividing their heights by widths.
 Important information as many neural nets take images all the
 same size. Classically most chest X-rays are <span class="math">2500 \times 2000</span> or
 <span class="math">2500 \times 2048</span>; however the dataset may be different and/or
@@ -383,26 +410,6 @@ varied</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)">tuple</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cleanX.image_work.image_functions.crop_them_all">
-<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">crop_them_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.crop_them_all" title="Permalink to this definition">¶</a></dt>
-<dd><p>Crops all images and moves them to a target folder</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>origin_folder</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.path.html#os.path.join" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.join()</span></code></a>) – The folder in which the images are</p></li>
-<li><p><strong>target_folder</strong> (<a class="reference external" href="https://docs.python.org/3/library/os.path.html#os.path.join" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.join()</span></code></a>) – The folder where augmented images will be sent</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>technically nothing returned, but new images will be made</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>none</p>
 </dd>
 </dl>
 </dd></dl>
@@ -431,9 +438,12 @@ questionable technique level.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_by_sample_upper">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_by_sample_upper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_for_line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_by_sample_upper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes average of upper pixels, and can show you outliers defined by a
-percentage, e.g. shows images with an average of top pixels in top x %
-where x is the percent height of the sample.</p>
+<dd><p>This function takes an average (mean) of upper pixels,
+and can show outliers defined by a percentage, i.e. the function shows
+images with an average of upper pixels in top x % where x is the percent
+height of the sample. Note: images with high averages in the upper pixels
+are likely to be inverted, upside down or otherwise different from more
+typical X-rays.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -455,7 +465,7 @@ values abnormal</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_sample_upper_greater_than_lower">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_sample_upper_greater_than_lower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percent_height_of_sample</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_sample_upper_greater_than_lower" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes average of upper pixels, average of lower (you define what
+<dd><p>Takes average of upper pixels, average of lower pixels (you define what
 percent of picture should be considered upper and lower) and compares.
 In a CXR if lower average is greater than upper it may be upside down
 or otherwise bizarre, as the neck is smaller than the abdomen.</p>
@@ -479,8 +489,8 @@ or otherwise bizarre, as the neck is smaller than the abdomen.</p>
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_outliers_by_total_mean">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_outliers_by_total_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_outliers_by_total_mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes the average of all pixels in an image, returns a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>
-with those images that are outliers by mean. Should catch some inverted
-or problem images</p>
+with those images that are outliers by mean. This function can catch some
+inverted or otherwise problematic images</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -500,9 +510,12 @@ or problem images</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_outliers_by_mean_to_df">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_outliers_by_mean_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">percentage_to_say_outliers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_outliers_by_mean_to_df" title="Permalink to this definition">¶</a></dt>
-<dd><p>Important note: approximate, and it can by chance cut the group
-so images with
-the same mean are in and out of normal range if the knife so falls</p>
+<dd><p>Takes the average of all pixels in an image, returns a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>
+with those images classified. This function can catch some
+inverted or otherwise problematic images
+Important note: approximate, and the function can by chance cut the groups
+so images with the same mean are in and out of normal range,
+if the knife so falls</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -610,7 +623,8 @@ Multi-lingual including English. Accuracy is very high, but not perfect.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.find_suspect_text_by_length">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">find_suspect_text_by_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.find_suspect_text_by_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds images with text over a specific length you ask for.
+<dd><p>Finds images with text over a specific length (of letters, digits,
+and spaces), specified by you the user.
 Useful if you know you do not care about R and L or SUP.
 Multi-lingual including English. Accuracy is very high, but not perfect.</p>
 <dl class="field-list simple">
@@ -646,6 +660,21 @@ X-rays, not inverted fluoroscopy images.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.inverts_by_sum_compare">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">inverts_by_sum_compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.inverts_by_sum_compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function looks for images and compares them to their inverts. In the
+case of inverted typical CXR images the sum of all pixels in the image will
+be higher than the sum of pixels in the un-inverted (or inverted*2) image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (Suitable for <a class="reference external" href="https://docs.python.org/3/library/os.path.html#os.path.join" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.join()</span></code></a>) – Directory with source images.</p>
+</dd>
+</dl>
+<p>return: a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> with images categorized
+:rtype: <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
 </dd></dl>
 
 <dl class="py function">
@@ -705,8 +734,8 @@ unclear have equal spikes on both ends). #histo</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.show_images_in_df">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">show_images_in_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iter_ob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.show_images_in_df" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shows images by taking them off a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> column, and puts
-them up but smaller, so they can be compared quickly</p>
+<dd><p>Shows images by taking them off a <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> column, and displays
+them but in smaller versions, so they can be compared quickly</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -818,11 +847,12 @@ Usage example:</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.simple_spinning_template">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">simple_spinning_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">picy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">greys_template</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.simple_spinning_template" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>This function creates an image compared to a rotated template as an image.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>picy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – String for image name of base image</p></li>
-<li><p><strong>greys_template</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – The image array of the template,</p></li>
+<li><p><strong>greys_template</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – The image array of the template,</p></li>
 <li><p><strong>angle_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – angle to spin template to, it would normally start at
 zero if picking up exact template itself is desired</p></li>
 <li><p><strong>angle_stop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – last angle to spin template to,</p></li>
@@ -837,7 +867,7 @@ too much</p></li>
 outlined in blue rectangles</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -853,7 +883,7 @@ outlined in blue rectangles</p>
 <dd class="field-odd"><p>drawing, the contour image</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -873,7 +903,7 @@ from the <code class="code docutils literal notranslate"><span class="pre">set_o
 <dd class="field-even"><p>final_avg, an image that is the average image of images in the set</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -897,7 +927,7 @@ aspects of your image set.</p>
 of the image in images in the set.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -932,7 +962,7 @@ string
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.zero_to_twofivefive_simplest_norming">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">zero_to_twofivefive_simplest_norming</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_pys</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.zero_to_twofivefive_simplest_norming" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function takes an image  and makes the highest pixel value 255,
+<dd><p>This function takes an image and makes the highest pixel value 255,
 and the lowest zero. Note that this will not give anything like
 a true normalization, but will put all images
 into 0 to 255 values</p>
@@ -952,7 +982,7 @@ into 0 to 255 values</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.rescale_range_from_histogram_low_end">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">rescale_range_from_histogram_low_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_cut_percent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.rescale_range_from_histogram_low_end" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function takes an image  and makes the highest pixel value 255,
+<dd><p>This function takes an image and makes the highest pixel value 255,
 and the lowest zero. It also normalizes based on the histogram
 distribution of values, such that the lowest percent
 (specified by tail_cut_percent) all become zero.
@@ -970,7 +1000,7 @@ in size for a neural net anyways)</p>
 <dd class="field-even"><p>New NumPy array with image data.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1001,16 +1031,17 @@ target_name.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.give_size_count_df">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">give_size_count_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.give_size_count_df" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function returns a dataframe of unique sized, and how many pictures
-have such a size.
-:param folder: folder with jpgs
-:type folder: string</p>
+<dd><p>This function returns a dataframe of the unique sizes of the images ,and
+how many images have such a size.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>df</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>folder</strong> (<em>string</em>) – folder with jpgs</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)">pandas.core.frame.DataFrame</a></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>df</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)">pandas.core.frame.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1018,15 +1049,16 @@ have such a size.
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.give_size_counted_dfs">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">give_size_counted_dfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.give_size_counted_dfs" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function returns dataframes of unique sized images in a list
-:param folder: folder with jpgs
-:type folder: string</p>
+<dd><p>This function returns dataframes of uniquely sized images in a list</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>big_sizer</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>folder</strong> (<em>string</em>) – folder with jpgs</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>big_sizer</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1034,16 +1066,17 @@ have such a size.
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.image_quality_by_size">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">image_quality_by_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specific_image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.image_quality_by_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function returns the size of an image which indicates one aspect of
-quality
-:param specific_image: the jpg image
-:type specific_imager: string</p>
+<dd><p>This function returns the size of an image which can indicate one aspect of
+quality (can be used as a helper function)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>q</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>specific_image</strong> – the jpg image</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>q</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1073,8 +1106,8 @@ comparing compressed versions of the images.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cleanX.image_work.image_functions.show_close_images">
 <span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">show_close_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression_level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_mse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.show_close_images" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function shows potentially duplicated images by
-comparing compressed versions of the images.</p>
+<dd><p>This function shows potentially duplicated images by comparing compressed
+versions of the images, then displays them for inspection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1084,6 +1117,466 @@ comparing compressed versions of the images.</p>
 <li><p><strong>plot_limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – How many images to plot when showing duplicates.
 Negative values mean to show all images.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.image_to_histo">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">image_to_histo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.image_to_histo" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a small helper function that makes returns the arrray of an
+image histogram
+:param image: the image as an array (not filename)
+:type image: array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>histogram</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.black_end_ratio">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">black_end_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.black_end_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a function to assess a specific parameter of image quality.
+The parameter checked is whether there are enough very dark/black pixels.
+In a normal chest X-ray we would expect black
+around the neck, and therefore have a lot of those low values.
+If the image was shot without the neck, we will assume poor technique (note
+in some theoretical cases this technique might have been requested,
+but it is not standard at ALL)
+If the ratio is below 0.3, you have a chestX-ray that is unusual in value
+distributions, and in 9.9/10 cases one shot with poor technique.
+The images MUST be cropped of any frames and normalized to 0-255.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_array</strong> (<em>array</em>) – the image as an array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ratio</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.outline_segment_by_otsu">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">outline_segment_by_otsu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_to_transform</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blur_k_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.outline_segment_by_otsu" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a function to turn an Xray into an outline
+with a specific method that involves an implementation
+of Otsu’s algorithm, and cv2 version of Canny
+the result is line images that can be very useful
+in and of themselves to run a neural net on
+or can be used for segmentation in some cases
+blur_k_size used in a blur to make our lines less detailed
+if set to a higher value, 0 &lt; values &lt; 100, and odd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_to_transform</strong> (<em>string</em>) – the image name</p></li>
+<li><p><strong>blur_k_size</strong> – must be odd and value &lt;100, kernel to blur</p></li>
+</ul>
+</dd>
+</dl>
+<p>to make ourlines less detailed
+:type blur_k_size: int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>edges (an image with lines)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.binarize_by_otsu">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">binarize_by_otsu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_to_transform</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blur_k_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.binarize_by_otsu" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a function to turn an Xray into an binarized image
+with a specific method that involves an implementation
+of Otsu’s algorithm,
+the result is line images that can be very useful
+in and of themselves to run a neural net on
+or can be used for segmentation in some cases
+blur_k_size used in a blur to make our lines less detailed
+if set to a higher value, 0 &lt; values &lt; 100, and odd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_to_transform</strong> (<em>string</em>) – the image name</p></li>
+<li><p><strong>blur_k_size</strong> – must be odd and value &lt;100, kernel to blur</p></li>
+</ul>
+</dd>
+</dl>
+<p>to make ourlines less detailed
+:type blur_k_size: int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>output_image (an image binarized to 0s or 255s)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.column_sum_folder">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">column_sum_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.column_sum_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes images in directory and makes a graph for each image
+of sums along horizontal or vertical lines
+this is saved as an accompanying image.
+Returns a dataframe with this information for each image,
+but also deposits new images into a new folder
+because each run will include the newly made images.
+NB: This is a home-made projection algorithm.
+Projection algorithms can be used in image registration,
+and future versions of cleanX will have more efficient projection
+algorithms. Also note the df will be enormous…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>string</em>) – Directory with set_of_images.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>sumpix_df (df with info from new images of column sums)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)">pandas.core.frame.DataFrame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.blind_quality_matrix">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">blind_quality_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.blind_quality_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a dataframe of image quality charecteristics
+including: laplacian variance (somewhat correlated to blurriness/
+resolution),total pixel sum (somewhat correlated to exposure),
+and a fast Fourier transform variance measure
+(correlated to resolution and contrast),
+contrast by two different measures (standard deviation, and Michaelson),
+bit depth (with an eye to a future when there may well be higher bit depths
+, although probably not on your screen since at some point these
+distinctions go beyond human eye ability)
+and filesize divided by image area
+The data frame is colored with a diverging color scheme (purple low,
+green high) map so that groups of images can be compared intuitively
+NB: images should be roughly comparable in dimension size for results
+to be meaningful.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>string</em>) – Directory with set_of_images.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>frame (dataframe)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>class ‘pandas.io.formats.style.Styler’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.fourier_transf">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">fourier_transf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.fourier_transf" title="Permalink to this definition">¶</a></dt>
+<dd><p>A fourier transformed image from an X-ray can actually provide information
+on everything from aliasing (moire pattern) and other noise patterns
+to image orientation and potential registration in the right hands.
+This creates Fourier transformed images out of all in a directory.
+This function is simply the appropriate numpy fast Fourier transforms made
+into a single code line/ “wrapper”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>transformed</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.pad_to_size">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">pad_to_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ht</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.pad_to_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function applies a padding with value 0 around the image symmetrically
+until it is the ht and wt parameters specificed. Note if ht or wt below
+the existing ones are chosen, the image will be returned unpadded with
+a message.
+Note: this is not suggested as a pre-convolution padding. A preconvolution
+padding can be done easily in opencv with copyMakeBorder function. This
+function is a helper function, but can be used alone.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p></li>
+<li><p><strong>ht</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – desired image height</p></li>
+<li><p><strong>wt</strong> (<em>wt</em>) – desired image width</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.cut_to_size">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">cut_to_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ht</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.cut_to_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function applies a crop around the image symmetrically
+until it is the ht and wt parameters specified. Note if ht or wt above
+the existing ones are chosen, the original image will be returned uncut,
+and a message will be printed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p></li>
+<li><p><strong>ht</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – desired image height</p></li>
+<li><p><strong>wt</strong> (<em>wt</em>) – desired image width</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.cut_or_pad">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">cut_or_pad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ht</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.cut_or_pad" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function applies a cropping or a padding around the image
+symmetrically until it is the ht and wt parameters specified.
+Please note: what is usually appropriate for neural nets is to crop off
+frames, then resize all the images, then pad them all, so they are all as
+unform as possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p></li>
+<li><p><strong>ht</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – desired image height</p></li>
+<li><p><strong>wt</strong> (<em>wt</em>) – desired image width</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.rotated_with_max_clean_area">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">rotated_with_max_clean_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.rotated_with_max_clean_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an image, will rotate the image and crop off the blank triangle edges
+Note: if image is given with a triangle edge (previously rotated?), or
+border these existing edges and borders will not be cropped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p></li>
+<li><p><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – desired angle for rotation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.noise_sum_cv">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">noise_sum_cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.noise_sum_cv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an image, will try to sum up the noise, then divide by the area of
+the image. The noise summation here is based on an opencv2 algorithm for
+noise called fastNlMeansDenoising which is an implementation of non-local
+means denoising.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>final_sum</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.noise_sum_median_blur">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">noise_sum_median_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.noise_sum_median_blur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an image, will try to sum up the noise, then divide by the area of
+the image. The noise summation here is based on a median filter denoising</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>final_sum</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.noise_sum_gaussian">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">noise_sum_gaussian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.noise_sum_gaussian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an image, will try to sum up the noise, then divide by the area of
+the image. The noise summation here is based on a gaussian filter denoising</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>final_sum</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.noise_sum_bilateral">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">noise_sum_bilateral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.noise_sum_bilateral" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an image, will try to sum up the noise, then divide by the area of
+the image. The noise summation here is based on a bilatera filter denoising
+given a fairly large area (15 pixels)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>final_sum</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.noise_sum_bilateralLO">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">noise_sum_bilateralLO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.noise_sum_bilateralLO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an image, will try to sum up the noise, then divide by the area of
+the image. The noise summation here is based on a bilatera filter denoising
+given a fairly large area (15 pixels)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>final_sum</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.noise_sum_5k">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">noise_sum_5k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.noise_sum_5k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an image, will try to sum up the noise, then divide by the area of
+the image. The noise summation here is based on a median filter denoising
+using a 5*5 kernel. This kernel is reccomended for picking up moire
+patterns and other repetitive noise that may be missed by a smaller kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>final_sum</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.noise_sum_7k">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">noise_sum_7k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.noise_sum_7k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an image, will try to sum up the noise, then divide by the area of
+the image. The noise summation here is based on a median filter denoising
+using a 7*7 kernel. This kernel is reccomended for picking up moire
+patterns and other repetitive noise that may be missed by a smaller kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – original image (3 or single channel)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>final_sum</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.blind_noise_matrix">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">blind_noise_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.blind_noise_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a dataframe of image noise approximations by different algorithms
+here run over the whole image.
+The data frame is colored with a diverging color scheme (purple low,
+green high) map so that groups of images can be compared intuitively
+NB: images should be roughly comparable in dimension size for results
+to be meaningful.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>string</em>) – Directory with set_of_images.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>frame (dataframe)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>class ‘pandas.io.formats.style.Styler’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cleanX.image_work.image_functions.segmented_blind_noise_matrix">
+<span class="sig-prename descclassname"><span class="pre">cleanX.image_work.image_functions.</span></span><span class="sig-name descname"><span class="pre">segmented_blind_noise_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.image_functions.segmented_blind_noise_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a dataframe of image noise approximations by different algorithms
+but only on the very dark areas. Essentially this is a segmentation
+to the background, and a judgement of noise there.
+The data frame is colored with a diverging color scheme (purple low,
+green high) map so that groups of images can be compared intuitively
+NB: images should be roughly comparable in dimension size for results
+to be meaningful.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>string</em>) – Directory with set_of_images.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>frame (dataframe)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>class ‘pandas.io.formats.style.Styler’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1139,7 +1632,7 @@ Negative values mean to show all images.</p></li>
         <li class="right" >
           <a href="cleanX.image_work.html" title="cleanX.image_work package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cleanX 0.1.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="cleanX.html" >cleanX package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="cleanX.image_work.html" >cleanX.image_work package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">cleanX.image_work.image_functions module</a></li> 
