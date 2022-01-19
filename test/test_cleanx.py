@@ -212,7 +212,7 @@ def test_simple_spinning_template():
     angle_stop1 = 30
     slices1 = 3
     lanter = iwork.simple_spinning_template(
-        picy1,
+        sample_image,
         greys_template1,
         angle_start1,
         angle_stop1,
