@@ -18,12 +18,14 @@ from cleanX.image_work import (
 from harness import skip_if_missing
 
 
-@skip_if_missing('no pydicom available', 'pydicom', 'click')
-def test_cli_pydicom_report():
-    dicomfile_directory1 = os.path.join(
+dicomfile_directory1 = os.path.join(
         os.path.dirname(__file__),
         'dicom_example_folder',
     )
+resources = os.path.dirname(__file__)
+
+@skip_if_missing('no pydicom available', 'pydicom', 'click')
+def test_cli_pydicom_report():
     with TemporaryDirectory() as td:
         result = subprocess.call(
             [
@@ -41,10 +43,6 @@ def test_cli_pydicom_report():
 
 @skip_if_missing('no pydicom available', 'pydicom', 'click')
 def test_cli_pydicom_extract():
-    dicomfile_directory1 = os.path.join(
-        os.path.dirname(__file__),
-        'dicom_example_folder',
-    )
     with TemporaryDirectory() as td:
         result = subprocess.call(
             [
@@ -75,7 +73,6 @@ def test_cli_pydicom_extract():
 
 @skip_if_missing('no pydicom available', 'pydicom', 'click')
 def test_cli_datasets():
-    resources = os.path.dirname(__file__)
     with TemporaryDirectory() as td:
         result = subprocess.check_output(
             [
@@ -96,7 +93,6 @@ def test_cli_datasets():
 
 @skip_if_missing('no click available', 'click')
 def test_cli_create_pipeline():
-    resources = os.path.dirname(__file__)
     with TemporaryDirectory() as td:
         result = subprocess.call(
             [
