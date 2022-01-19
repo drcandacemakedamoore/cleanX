@@ -29,6 +29,11 @@ from harness import skip_if_missing
 
 image_directory = os.path.join(os.path.dirname(__file__), 'directory')
 target_directory = os.path.join(os.path.dirname(__file__), 'target')
+dicomfile_directory1 = os.path.join(
+    os.path.dirname(__file__),
+    'dicom_example_folder',
+)
+sample_image = os.path.join(image_directory, 'testtocrop.jpg')
 
 
 def gen_row(columns, rnd):
@@ -57,37 +62,33 @@ def gen_json(directory, name, rows, columns, rnd):
         json.dump(data, jsonfile)
 
 def test_crop():
-    example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
+    example = cv2.imread(sample_image, cv2.IMREAD_GRAYSCALE)
     cropped_example = iwork.crop(example)
     assert cropped_example.shape < example.shape
 
 def test_crop_np_white():
-    example = cv2.imread(os.path.join(image_directory, 'testtocrop.jpg'), cv2.IMREAD_GRAYSCALE)
+    example = cv2.imread(sample_image, cv2.IMREAD_GRAYSCALE)
     cropped_example = iwork.crop_np_white(example)
     # our algorithm cuts off a row and column so... we can't call ==
     assert type(cropped_example) is np.ndarray
 
 def test_blur_out_edges():
-    image = os.path.join(image_directory, 'testtocrop.jpg')
-    defblur = iwork.blur_out_edges(image)
+    defblur = iwork.blur_out_edges(sample_image)
     assert type(defblur) == np.ndarray 
 
 
 def test_subtle_sharpie_enhance():
-    image = os.path.join(image_directory, 'testtocrop.jpg')
-    lo = iwork.subtle_sharpie_enhance(image)
+    lo = iwork.subtle_sharpie_enhance(sample_image)
     assert lo.shape[0] >1
 
 
 def harsh_sharpie_enhance():
-    image = os.path.join(image_directory, 'testtocrop.jpg')
-    ho = iwork.harsh_sharpie_enhance(image)
+    ho = iwork.harsh_sharpie_enhance(sample_image)
     assert ho.shape[0] >1
 
 
 def test_salting():
-    lindo_image = os.path.join(image_directory, 'testtocrop.jpg')
-    salt = iwork.salting(lindo_image)
+    salt = iwork.salting(sample_image)
     assert salt.shape[0] > 1
 
 def test_check_paths_for_group_leakage():
@@ -139,8 +140,7 @@ def test_find_very_hazy():
 
 
 def test_show_major_lines_on_image():
-    pic_name1 = os.path.join(image_directory, 'testtocrop.jpg')
-    deflop = iwork.show_major_lines_on_image(pic_name1)
+    deflop = iwork.show_major_lines_on_image(sample_image)
     assert deflop # needs a much better test
 
 
@@ -206,9 +206,7 @@ def test_dataframe_up_my_pics():
     
 
 def test_simple_spinning_template():
-    vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    picy1 = vovo
-    img = cv2.imread(vovo, cv2.IMREAD_GRAYSCALE)
+    img = cv2.imread(sample_image, cv2.IMREAD_GRAYSCALE)
     greys_template1 = img[90:110, 200:350]
     angle_start1 = 0
     angle_stop1 = 30
@@ -224,9 +222,7 @@ def test_simple_spinning_template():
 
 
 def test_def_make_contour_image():
-    vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    picy1 = vovo
-    defMkcont = iwork.make_contour_image(picy1)
+    defMkcont = iwork.make_contour_image(sample_image)
     assert len(defMkcont) > 0
 
 
@@ -260,14 +256,12 @@ def test_find_tiny_image_differences():
 
 
 def test_zero_to_twofivefive_simplest_norming():
-    vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    test_norm1 = iwork.zero_to_twofivefive_simplest_norming(vovo)
+    test_norm1 = iwork.zero_to_twofivefive_simplest_norming(sample_image)
     assert test_norm1.max() == 255
 
 
 def test_rescale_range_from_histogram_low_end():
-    image_path = os.path.join(image_directory, 'testtocrop.jpg')
-    image_from_path = cv2.imread(image_path)
+    image_from_path = cv2.imread(sample_image)
     defmax = iwork.rescale_range_from_histogram_low_end(image_from_path, 5)
     assert defmax.max() == 255
 
@@ -281,10 +275,6 @@ def test_make_histo_scaled_folder():
 
 @skip_if_missing('no simpleITK available', 'SimpleITK')
 def test_rip_out_jpgs_sitk():
-    dicomfile_directory1 = os.path.join(
-        os.path.dirname(__file__),
-        'dicom_example_folder',
-    )
     with TemporaryDirectory() as td:
         import cleanX.dicom_processing.simpleitk_adapter as sitk_adapter
         jpegs_made = sitk_adapter.rip_out_jpgs_sitk(
@@ -296,10 +286,6 @@ def test_rip_out_jpgs_sitk():
 
 @skip_if_missing('no simpleITK available', 'SimpleITK')
 def test_read_dicoms_with_sitk():
-    dicomfile_directory1 = os.path.join(
-        os.path.dirname(__file__),
-        'dicom_example_folder',
-    )
     source_column = 'file'
     import cleanX.dicom_processing.simpleitk_adapter as sitk_adapter
     reader = sitk_adapter.SimpleITKDicomReader(
@@ -315,10 +301,6 @@ def test_read_dicoms_with_sitk():
 
 @skip_if_missing('no pydicom available', 'pydicom')
 def test_get_jpg_with_pydicom():
-    dicomfile_directory1 = os.path.join(
-        os.path.dirname(__file__),
-        'dicom_example_folder',
-    )
     with TemporaryDirectory() as td:
         jpegs_made = dicomp.pydicom_adapter.get_jpg_with_pydicom(
             dicomfile_directory1,
@@ -329,10 +311,6 @@ def test_get_jpg_with_pydicom():
 
 @skip_if_missing('no pydicom available', 'pydicom')
 def test_read_dicoms_with_pydicom():
-    dicomfile_directory1 = os.path.join(
-        os.path.dirname(__file__),
-        'dicom_example_folder',
-    )
     tag = 'file'
     reader = dicomp.pydicom_adapter.PydicomDicomReader()
     source = dicomp.DirectorySource(dicomfile_directory1, tag)
@@ -343,10 +321,6 @@ def test_read_dicoms_with_pydicom():
 
 @skip_if_missing('no pydicom available', 'pydicom')
 def test_read_dicoms_options_with_pydicom():
-    dicomfile_directory1 = os.path.join(
-        os.path.dirname(__file__),
-        'dicom_example_folder',
-    )
     source_column = 'file'
     reader = dicomp.pydicom_adapter.PydicomDicomReader(
         exclude_fields=('PatientName',),
@@ -394,8 +368,7 @@ def test_give_size_count_df():
 
 
 def test_image_quality_by_size():
-    vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    quality = iwork.image_quality_by_size(vovo)
+    quality = iwork.image_quality_by_size(sample_image)
     assert quality > 0
 
 
@@ -412,25 +385,21 @@ def test_show_close_images(monkeypatch):
 
 def test_image_to_histo():
 ## currently blocked out for oleg to check why failing
-    vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    outpic = cv2.imread(vovo)
+    outpic = cv2.imread(sample_image)
     hist = iwork.image_to_histo(outpic)
     assert type(hist) is np.ndarray
 
 def test_black_end_ratio():
-    vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    outpic = cv2.imread(vovo)
+    outpic = cv2.imread(sample_image)
     ratio = iwork.black_end_ratio(outpic)
     assert type(ratio) is np.float64
 
 def test_outline_segment_by_otsu():
-    vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    outlined = iwork.outline_segment_by_otsu(vovo,11)
+    outlined = iwork.outline_segment_by_otsu(sample_image,11)
     assert type(outlined) is np.ndarray 
 
 def test_binarize_by_otsu():
-    vovo = os.path.join(image_directory, 'testtocrop.jpg')
-    outlined = iwork.binarize_by_otsu(vovo,11)
+    outlined = iwork.binarize_by_otsu(sample_image,11)
     assert type(outlined) is np.ndarray 
 
 def test_find_outliers_sum_of_pixels_across_set():
@@ -446,31 +415,26 @@ def test_blind_quality_matrix():
     assert type(result_df) is pd.io.formats.style.Styler
 
 def test_fourier_transf():
-    sample_image = os.path.join(image_directory, 'testtocrop.jpg')
     sample_imager = cv2.imread(sample_image)
     transformed = iwork.fourier_transf(sample_imager)
     assert sample_imager.shape[0] == transformed.shape[0]
 
 def test_pad_to_size():
-    sample_image = os.path.join(image_directory, 'testtocrop.jpg')
     sample_imager = cv2.imread(sample_image)
     padded = iwork.pad_to_size(sample_imager, 5000, 5000)
     assert type(padded) is np.ndarray
 
 def test_cut_to_size():
-    sample_image = os.path.join(image_directory, 'testtocrop.jpg')
     sample_imager = cv2.imread(sample_image)
     padded = iwork.cut_to_size(sample_imager, 3, 2)
     assert type(padded) is np.ndarray 
 
 def test_cut_or_pad():
-    sample_image = os.path.join(image_directory, 'testtocrop.jpg')
     sample_imager = cv2.imread(sample_image)
     padded = iwork.cut_or_pad(sample_imager, 5000, 2)
     assert type(padded) is np.ndarray 
 
 def test_rotated_with_max_clean_area():
-    sample_image = os.path.join(image_directory, 'testtocrop.jpg')
     sample_imager = cv2.imread(sample_image)
     rota = iwork.rotated_with_max_clean_area(sample_imager, 2)
     assert type(rota) is np.ndarray
