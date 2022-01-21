@@ -110,6 +110,26 @@ conda-forge
 pip install cleanX
 ```
 
+You can install some optional dependencies.
+
+To have CLI functionality:
+
+``` sh
+pip install cleanX[cli]
+```
+
+To have PyDicom installed and used to process DICOM files:
+
+``` sh
+pip install cleanX[pydicom]
+```
+
+Similarly, if you want SimpleITK used to process DICOM files:
+
+``` sh
+pip install cleanX[simpleitk]
+```
+
 The `tesserocr` package deserves a special mention.  It is not
 possible to install `tesseract` library from PyPI server.  The
 `tesserocr` is simply a binding to the library.  You will need to
@@ -121,6 +141,15 @@ sudo apt-get install libleptonica-dev \
     tesseract-ocr-all \
     libtesseract-dev
 ```
+
+We'v heard that
+
+``` sh
+brew install tesseract
+```
+
+works on Mac.
+
 
 ## Getting Started
 
@@ -215,6 +244,15 @@ from cleanX.image_work import (
 )
 
 dst = 'cleaned'
+
+# This is just an illustration, this code isn't sufficient in most
+# cases to remove a directory.  It's up to yu to come up with a
+# reasonable code to remove this directory if it already exist.
+try:
+    os.rmdir(dst)
+except FileNotFoundError:
+    pass
+
 os.mkdir(dst)
 
 src = GlobSource('/images/to/clean/*.jpg')
