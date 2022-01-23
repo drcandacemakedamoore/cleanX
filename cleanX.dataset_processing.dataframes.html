@@ -65,7 +65,7 @@ out what kind of source it is dealing with.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.dataset_processing.dataframes.</span></span><span class="sig-name descname"><span class="pre">ColumnsSource</span></span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.ColumnsSource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
 <p>Formal superclass for all sources that should be used to
-produce <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+produce <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.ColumnsSource.to_dataframe">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.ColumnsSource.to_dataframe" title="Permalink to this definition">¶</a></dt>
@@ -75,7 +75,7 @@ produce <a class="reference external" href="https://pandas.pydata.org/docs/refer
 <dd class="field-odd"><p>Dataframe produced from the source represented by this class.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -92,14 +92,14 @@ produce <a class="reference external" href="https://pandas.pydata.org/docs/refer
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.CSVSource.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes this class with the path to the csv file from which
 to create the dataframe and the pass-through arguments to
-<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v1.3.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>.</p>
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v1.4.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>csv</strong> – The path to CSV file or an open file handle.  Must be
-suitable for <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v1.3.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>.</p></li>
+suitable for <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v1.4.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>.</p></li>
 <li><p><strong>**pd_args</strong> – The pass-through arguments to
-<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v1.3.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>.</p></li>
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v1.4.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -114,7 +114,7 @@ suitable for <a class="reference external" href="https://pandas.pydata.org/docs/
 <dd class="field-odd"><p>Dataframe produced from the source represented by this class.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -131,14 +131,14 @@ suitable for <a class="reference external" href="https://pandas.pydata.org/docs/
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pd_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.JSONSource.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes this class with the path to the json file from which
 to create the dataframe and the pass-through arguments to
-<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_json.html#pandas.read_json" title="(in pandas v1.3.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_json()</span></code></a>.</p>
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_json.html#pandas.read_json" title="(in pandas v1.4.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_json()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>json</strong> – The path to JSON file or an open file handle.  Must be
-suitable for <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_json.html#pandas.read_json" title="(in pandas v1.3.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_json()</span></code></a>.</p></li>
+suitable for <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_json.html#pandas.read_json" title="(in pandas v1.4.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_json()</span></code></a>.</p></li>
 <li><p><strong>**pd_args</strong> – The pass-through arguments to
-<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_json.html#pandas.read_json" title="(in pandas v1.3.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_json()</span></code></a>.</p></li>
+<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_json.html#pandas.read_json" title="(in pandas v1.4.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_json()</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -153,7 +153,7 @@ suitable for <a class="reference external" href="https://pandas.pydata.org/docs/
 <dd class="field-odd"><p>Dataframe produced from the source represented by this class.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -172,7 +172,7 @@ ready.</p>
 <dd><p>Initializes this class with the existing dataframe.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.) – Existing dataframe that should be used as the source.</p>
+<dd class="field-odd"><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.) – Existing dataframe that should be used as the source.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -186,7 +186,7 @@ ready.</p>
 <dd class="field-odd"><p>Dataframe produced from the source represented by this class.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -220,7 +220,7 @@ create a single dataframe.</p>
 <dd class="field-odd"><p>Dataframe produced from the source represented by this class.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -269,15 +269,15 @@ machine-learning study.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>train_src</strong> (If this is a path-like object, it is interpreted
 to be a path to a file that needs to be read into
-a <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.  If this is already
+a <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.  If this is already
 a dataframe, it’s used as is.  If this is an iterable
 it is interpreted as a sequence of different sources
 and will be processed using <a class="reference internal" href="#cleanX.dataset_processing.dataframes.MultiSource" title="cleanX.dataset_processing.dataframes.MultiSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiSource</span></code></a>.) – The source for training dataset.</p></li>
 <li><p><strong>test_src</strong> (Same as <code class="code docutils literal notranslate"><span class="pre">train_src</span></code>) – Similar to <code class="code docutils literal notranslate"><span class="pre">train_src</span></code>, but for testing dataset.</p></li>
-<li><p><strong>unique_id</strong> (Suitable for accessing columns in <a class="reference external" href="https://pandas.pydata.org/docs/index.html#module-pandas" title="(in pandas v1.3.5)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pandas</span></code></a>
+<li><p><strong>unique_id</strong> (Suitable for accessing columns in <a class="reference external" href="https://pandas.pydata.org/docs/index.html#module-pandas" title="(in pandas v1.4.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pandas</span></code></a>
 dataframe.) – The name of the column that uniquely identifies the
 cases (typically, this is patient’s id).</p></li>
-<li><p><strong>label_tag</strong> (Suitable for accessing columns in <a class="reference external" href="https://pandas.pydata.org/docs/index.html#module-pandas" title="(in pandas v1.3.5)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pandas</span></code></a>
+<li><p><strong>label_tag</strong> (Suitable for accessing columns in <a class="reference external" href="https://pandas.pydata.org/docs/index.html#module-pandas" title="(in pandas v1.4.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pandas</span></code></a>
 dataframe.) – Usually, the training dataset has an assesment column
 that assings the case to the category of interest.
 Typically, this is diagnosis, or finding, etc.</p></li>
@@ -305,7 +305,7 @@ heuristic is used.</p>
 the cases being studied.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>The value from <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html#pandas.DataFrame.columns" title="(in pandas v1.3.5)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">columns</span></code></a>.  Typically,
+<dd class="field-even"><p>The value from <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html#pandas.DataFrame.columns" title="(in pandas v1.4.0)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">columns</span></code></a>.  Typically,
 this is a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.</p>
 </dd>
 </dl>
@@ -360,7 +360,7 @@ test data.</p>
 <dd class="field-odd"><p>A combined dataframe.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -374,7 +374,7 @@ test data.</p>
 <dd class="field-odd"><p>A dataframe with information about duplicates.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -419,7 +419,7 @@ testing datasets.</p>
 datasets.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -566,7 +566,7 @@ nesting level.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dataset_processing.dataframes.Report.to_ipwidget">
 <span class="sig-name descname"><span class="pre">to_ipwidget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dataset_processing.dataframes.Report.to_ipwidget" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates an <a class="reference external" href="https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.HTML" title="(in IPython v8.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTML</span></code></a> widget.  This is
+<dd><p>Generates an <a class="reference external" href="https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.HTML" title="(in IPython v8.0.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTML</span></code></a> widget.  This is
 mostly usable when running in Jupyter notebook context.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -579,7 +579,7 @@ on it being available as part of Jupyter installation.</p>
 <dd class="field-odd"><p>An HTML widget with the formatted report.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.HTML" title="(in IPython v8.0.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTML</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://ipython.readthedocs.io/en/stable/api/generated/IPython.display.html#IPython.display.HTML" title="(in IPython v8.0.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTML</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -609,9 +609,9 @@ samples</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>train_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
+<li><p><strong>train_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
 train assets.</p></li>
-<li><p><strong>test_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
+<li><p><strong>test_df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – Pandas <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> containing information about
 train assets.</p></li>
 </ul>
 </dd>
@@ -620,7 +620,7 @@ train assets.</p></li>
 <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -639,7 +639,7 @@ did not help</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> including sample IDs, labels, and sensitive
+<li><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> including sample IDs, labels, and sensitive
 columns</p></li>
 <li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the column with the labels</p></li>
 <li><p><strong>sensitive_column_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – List names sensitive columns on
@@ -650,7 +650,7 @@ columns</p></li>
 <dd class="field-even"><p>tab_fight_bias2, a neatly sorted <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -663,7 +663,7 @@ and prints information including length, data types, nulls and number
 of duplicated rows</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> you are interested in getting features of.</p>
+<dd class="field-odd"><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code> you are interested in getting features of.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Prints out information on <code class="code docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
@@ -678,7 +678,7 @@ of duplicated rows</p>
 and prints duplicated rows</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – Dataframe that needs to be searched for ducplicates.</p>
+<dd class="field-odd"><p><strong>df</strong> (<a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – Dataframe that needs to be searched for ducplicates.</p>
 </dd>
 </dl>
 </dd></dl>
