@@ -501,6 +501,7 @@ class Install(InstallCommand):
             cmd = [
                 'conda',
                 'install', '-y',
+                '-c', 'conda-forge',
                 'conda-build',
                 'conda-verify',
                 frozen,
