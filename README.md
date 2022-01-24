@@ -20,7 +20,7 @@
 
 
 
-CleanX is an open source python library for exploring, cleaning and augmenting
+CleanX is an open-source python library for exploring, cleaning and augmenting
 large datasets of X-rays, or certain other types of radiological images.  The images
 can be extracted from [DICOM](https://www.dicomstandard.org/) files or used 
 directly. The primary authors are Candace Makeda H. Moore, Oleg Sivokon, and Andrew Murphy.
@@ -246,7 +246,7 @@ from cleanX.image_work import (
 dst = 'cleaned'
 
 # This is just an illustration, this code isn't sufficient in most
-# cases to remove a directory.  It's up to yu to come up with a
+# cases to remove a directory.  It's up to you to come up with a
 # reasonable code to remove this directory if it already exist.
 try:
     os.rmdir(dst)
