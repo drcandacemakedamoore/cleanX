@@ -1602,7 +1602,7 @@ def rescale_range_from_histogram_low_end(img, tail_cut_percent):
 
     # This is an attempt to find the minimal amount of the most bright
     # and the most dark pixels to remove in order to meet the
-    # necessary percentage of the histogram.  
+    # necessary percentage of the histogram.
     # Therere's a different approach: find the smallest elements of
     # the histogram, and then remove pixels associated to the luma
     # values of those members.  This will require moving chunks of
