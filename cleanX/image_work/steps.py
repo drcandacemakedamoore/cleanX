@@ -487,7 +487,7 @@ class WhiteEdgeCrop(Step):
 # class Tee(Step):
 #     """This step makes duplicate images, then opens two parallel pipelines"""
         # Unfinished
-#     def apply(self, image_data):
+#     def apply(self, image_data, image_name):
 
 
 # class Salt(Step):
@@ -508,7 +508,7 @@ class WhiteEdgeCrop(Step):
     #     self.erosion_iterations = erosion_iterations
     #     self.dilation_iterations = dilation_iterations
 
-#     def apply(self, image_data):
+#     def apply(self, image_data, image_data):
 #         erosion = cv2.erode(
 #             image_data,
 #             self.kernel,
@@ -634,7 +634,8 @@ class Normalize(Step):
             min_value = np.amin(image_data)
 
             img_py = image_data - min_value
-            multiplier_ratio = new_max_value/max_value
+            # multiplier_ratio = new_max_value/max_value
+            multiplier_ratio = new_max_value/(max_value - min_value)
             img_py = img_py*multiplier_ratio
             return img_py, None
         except Exception as e:
