@@ -1577,6 +1577,9 @@ def rescale_range_from_histogram_low_end(img, tail_cut_percent):
     and the lowest zero. It also normalizes based on the histogram
     distribution of values, such that the lowest percent
     (specified by tail_cut_percent) all become zero.
+    This function must take images where the pixel values are integers.
+    To implement this function on an image valued from 0 to 1, multiply all
+    pixels by 255 first.
     The new histogram will be more sparse, but resamples
     should fix the problem (presumably you will have to sample down
     in size for a neural net anyways)
@@ -1599,8 +1602,7 @@ def rescale_range_from_histogram_low_end(img, tail_cut_percent):
 
     # This is an attempt to find the minimal amount of the most bright
     # and the most dark pixels to remove in order to meet the
-    # necessary percentage of the histogram.  I cannot prove to myself
-    # that it's correct, but on the face of it, I don't see a problem.
+    # necessary percentage of the histogram.  
     # Therere's a different approach: find the smallest elements of
     # the histogram, and then remove pixels associated to the luma
     # values of those members.  This will require moving chunks of
