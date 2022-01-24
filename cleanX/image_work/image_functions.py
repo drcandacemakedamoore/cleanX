@@ -1590,41 +1590,42 @@ def rescale_range_from_histogram_low_end(img, tail_cut_percent):
     :return: New NumPy array with image data.
     :rtype: :class:`~numpy.ndarray`
     """
-    # set arbitrary variables
-    new_max_value = 255
-    # new_min_value = 0
-
-    img_py = np.array((img), dtype='int64')
-
-    num_total = img_py.shape[0]*img_py.shape[1]
-
-    list_from_array = img_py.tolist()
+    img_py = np.int64(img)
     gray_hist = np.histogram(img_py, bins=256)[0]
     area = gray_hist.sum()
-    cutoff = area * (tail_cut_percent/100)
-    dark_cutoff = 0
-    bright_cutoff = 255
-    area_so_far = 0
-    for i, b in enumerate(gray_hist):
-        area_so_far += b
-        if area_so_far >= cutoff:
-            dark_cutoff = max(0, i - 1)
-            break
-    area_so_far = 0
-    for i, b in enumerate(reversed(gray_hist)):
-        area_so_far += b
-        if area_so_far >= cutoff:
-            bright_cutoff = min(255, 255 - i)
-            break
+    cutoff = area * ((100 - tail_cut_percent) / 100)
+    dark_cutoff, bright_cutoff = img_py.min(), img_py.max()
+    removed_dark, removed_bright = 0, 0
 
-    img_py = img_py - dark_cutoff
-    img_py[img_py < 0] = 0
-    max_value2 = np.amax(img_py)
-    min_value2 = np.amin(img_py)
-    multiplier_ratio = new_max_value/max_value2
-    img_py = img_py*multiplier_ratio
+    # This is an attempt to find the minimal amount of the most bright
+    # and the most dark pixels to remove in order to meet the
+    # necessary percentage of the histogram.  I cannot prove to myself
+    # that it's correct, but on the face of it, I don't see a problem.
+    # Therere's a different approach: find the smallest elements of
+    # the histogram, and then remove pixels associated to the luma
+    # values of those members.  This will require moving chunks of
+    # pixels by different number towards the middle of the histogram,
+    # but in some cases may be preferable to simply cutting off the
+    # edges.
+    while area > cutoff:
+        dark = gray_hist[dark_cutoff]
+        bright = gray_hist[bright_cutoff]
+        next_dark = removed_dark + dark
+        next_bright = removed_bright + bright
 
-    return img_py
+        if next_dark < next_bright:
+            area -= dark
+            removed_dark = next_dark
+            dark_cutoff += 1
+        else:
+            area -= bright
+            removed_bright = next_bright
+            bright_cutoff -= 1
+
+    luma_scale = 255 / (bright_cutoff - dark_cutoff)
+    img_py[img_py < dark_cutoff] = dark_cutoff
+    img_py[img_py > bright_cutoff] = bright_cutoff
+    return (img_py - dark_cutoff) * luma_scale
 
 
 def make_histo_scaled_folder(imgs_folder, tail_cut_percent, target_folder):
