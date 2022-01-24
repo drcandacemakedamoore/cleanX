@@ -3,7 +3,7 @@
         src="https://github.com/drcandacemakedamoore/cleanX/blob/main/cleanXpic.png">
 </p>
 
-# cleanX
+# CleanX
 
 [![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4725904.svg)](https://doi.org/10.5281/zenodo.4725904)
 [![License GPL-3](https://img.shields.io/github/license/drcandacemakedamoore/cleanX.svg)](https://raw.githubusercontent.com/drcandacemakedamoore/cleanX/main/LICENSE)
@@ -55,7 +55,7 @@ Special additional documentation for medical professionals with limited programm
 
 ### Supported Platforms
 
-cleanX is a pure Python package, but it has many dependencies on
+CleanX is a pure Python package, but it has many dependencies on
 native libraries.  We try to test it on as many platforms as we can to
 see if dependencies can be installed there.  Below is the list of
 platforms that will potentially work. Please note that where
@@ -142,7 +142,7 @@ sudo apt-get install libleptonica-dev \
     libtesseract-dev
 ```
 
-We'v heard that
+We've heard that
 
 ``` sh
 brew install tesseract
