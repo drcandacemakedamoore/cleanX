@@ -4,6 +4,7 @@ import os
 import sys
 import csv
 import json
+import math
 
 from functools import partial
 from tempfile import TemporaryDirectory
@@ -263,7 +264,7 @@ def test_zero_to_twofivefive_simplest_norming():
 def test_rescale_range_from_histogram_low_end():
     image_from_path = cv2.imread(sample_image)
     defmax = iwork.rescale_range_from_histogram_low_end(image_from_path, 5)
-    assert defmax.max() == 255
+    assert int(math.ceil(defmax.max())) == 255
 
 
 def test_make_histo_scaled_folder():
