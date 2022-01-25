@@ -99,14 +99,6 @@ jobs:
       - run: conda config --show-sources
       - run: conda list --show-channel-urls
       - run: >-
-          conda install
-          --override-channels
-          --strict-channel-priority
-          -c conda-forge
-          python=${{ matrix.python-version }}
-          pycryptosat
-      - run: conda config --set sat_solver pycryptosat
-      - run: >-
           conda create
           --override-channels
           --name cleanx-build
