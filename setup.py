@@ -497,14 +497,20 @@ class Install(InstallCommand):
             # sane package installer would leave your Python alone,
             # and yet...
             frozen = 'python={}.{}'.format(*sys.version_info[:2])
+            conda = subprocess.check_output(
+                ['conda', '--version'],
+            ).replace(' ', '=')
             packages = subprocess.check_output(['conda', 'list', '--export'])
             cmd = [
                 'conda',
                 'install', '-y',
+                '--strict-channel-priority',
+                '--override-channels',
                 '-c', 'conda-forge',
                 'conda-build',
                 'conda-verify',
                 frozen,
+                conda,
             ]
             for line in packages.split(b'\n'):
                 if line.startswith(b'conda-build='):
@@ -524,6 +530,8 @@ class Install(InstallCommand):
             cmd = [
                 'conda',
                 'build',
+                '--no-anaconda-upload',
+                '--override-channels',
                 '-c', 'conda-forge',
                 os.path.join(project_dir, 'conda-pkg'),
             ]
@@ -532,12 +540,16 @@ class Install(InstallCommand):
             cmd = [
                 'conda',
                 'install',
+                '--strict-channel-priority',
+                '--override-channels',
                 '-c', 'conda-forge',
                 '--use-local',
                 '--update-deps',
                 '--force-reinstall',
                 '-y',
                 'cleanx',
+                frozen,
+                conda,
             ]
             if subprocess.call(cmd):
                 raise RuntimeError('Couldn\'t install {} package'.format(name))
