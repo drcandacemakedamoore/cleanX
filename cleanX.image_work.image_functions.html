@@ -986,6 +986,9 @@ into 0 to 255 values</p>
 and the lowest zero. It also normalizes based on the histogram
 distribution of values, such that the lowest percent
 (specified by tail_cut_percent) all become zero.
+This function must take images where the pixel values are integers.
+To implement this function on an image valued from 0 to 1, multiply all
+pixels by 255 first.
 The new histogram will be more sparse, but resamples
 should fix the problem (presumably you will have to sample down
 in size for a neural net anyways)</p>
