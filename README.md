@@ -1,6 +1,5 @@
 <p align="center">
-    <img style="width: 30%; height: 30%"
-        src="https://github.com/drcandacemakedamoore/cleanX/blob/main/cleanXpic.png">
+    <img style="width: 30%; height: 30%" src="cleanx-logo.svg">
 </p>
 
 # CleanX
