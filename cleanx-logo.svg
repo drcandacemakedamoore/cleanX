@@ -16,6 +16,38 @@
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    sodipodi:docname="cleanx-logo.svg">
+  <style type="text/css"><![CDATA[
+    @media (prefers-color-scheme: dark) {
+        #text5397 {
+            font-style:normal;
+            font-weight:normal;
+            font-size:10.58333302px;
+            line-height:1.25;
+            font-family:sans-serif;
+            letter-spacing:0px;
+            word-spacing:0px;
+            fill:#ffffff;
+            fill-opacity:1;
+            stroke:none;
+            stroke-width:0.26458332
+        }
+    }
+    @media (prefers-color-scheme: light) {
+        #text5397 {
+            font-style:normal;
+            font-weight:normal;
+            font-size:10.58333302px;
+            line-height:1.25;
+            font-family:sans-serif;
+            letter-spacing:0px;
+            word-spacing:0px;
+            fill:#888888;
+            fill-opacity:1;
+            stroke:none;
+            stroke-width:0.26458332
+        }
+    }
+  ]]></style>
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -92,7 +124,6 @@
       <g
          transform="matrix(1.0614465,0,0,1.402652,-27.01816,-2.4321046)"
          id="text5397"
-         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
          aria-label="cleanX">
         <path
            inkscape:connector-curvature="0"
