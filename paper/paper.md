@@ -16,6 +16,9 @@ authors:
     affiliation: 2
   - name: Oleg Sivokon
     affiliation: 3
+  - name: Patrice J Musoke
+    orcid: 0000-0002-8379-5130
+    affiliation: 4
 affiliations:
  - name: Netherlands eScience Center, Amsterdam, Netherlands
    index: 1
@@ -25,7 +28,9 @@ affiliations:
    index: 2
  - name: Bright Computing / NVIDIA, Netherlands
    index: 3
-date: 18 April 2021
+ - name: Temple University
+   index: 4
+date: 25 January 2022
 bibliography: paper.bib
 ---
 

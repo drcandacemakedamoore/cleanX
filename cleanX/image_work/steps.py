@@ -487,7 +487,7 @@ class WhiteEdgeCrop(Step):
 # class Tee(Step):
 #     """This step makes duplicate images, then opens two parallel pipelines"""
         # Unfinished
-#     def apply(self, image_data):
+#     def apply(self, image_data, image_name):
 
 
 # class Salt(Step):
@@ -508,7 +508,7 @@ class WhiteEdgeCrop(Step):
     #     self.erosion_iterations = erosion_iterations
     #     self.dilation_iterations = dilation_iterations
 
-#     def apply(self, image_data):
+#     def apply(self, image_data, image_data):
 #         erosion = cv2.erode(
 #             image_data,
 #             self.kernel,
@@ -634,7 +634,8 @@ class Normalize(Step):
             min_value = np.amin(image_data)
 
             img_py = image_data - min_value
-            multiplier_ratio = new_max_value/max_value
+            # multiplier_ratio = new_max_value/max_value
+            multiplier_ratio = new_max_value/(max_value - min_value)
             img_py = img_py*multiplier_ratio
             return img_py, None
         except Exception as e:
@@ -652,36 +653,33 @@ class HistogramNormalize(Step):
 
     def apply(self, image_data, image_name):
         try:
-            new_max_value = 255
-            img_py = np.array((image_data), dtype='int64')
-            # num_total = img_py.shape[0]*img_py.shape[1]
-            # list_from_array = img_py.tolist()
+            img_py = np.int64(img)
             gray_hist = np.histogram(img_py, bins=256)[0]
             area = gray_hist.sum()
-            cutoff = area * (self.tail_cut_percent/100)
-            dark_cutoff = 0
-            bright_cutoff = 255
-            area_so_far = 0
-            for i, b in enumerate(gray_hist):
-                area_so_far += b
-                if area_so_far >= cutoff:
-                    dark_cutoff = max(0, i - 1)
-                    break
-            area_so_far = 0
-            for i, b in enumerate(reversed(gray_hist)):
-                area_so_far += b
-                if area_so_far >= cutoff:
-                    bright_cutoff = min(255, 255 - i)
-                    break
+            cutoff = area * ((100 - tail_cut_percent) / 100)
+            dark_cutoff, bright_cutoff = img_py.min(), img_py.max()
+            removed_dark, removed_bright = 0, 0
 
-            img_py = img_py - dark_cutoff
-            img_py[img_py < 0] = 0
-            max_value2 = np.amax(img_py)
-            # min_value2 = np.amin(img_py)
-            multiplier_ratio = new_max_value/max_value2
-            img_py = img_py*multiplier_ratio
+            while area > cutoff:
+                dark = gray_hist[dark_cutoff]
+                bright = gray_hist[bright_cutoff]
+                next_dark = removed_dark + dark
+                next_bright = removed_bright + bright
 
-            return img_py, None
+                if next_dark < next_bright:
+                    area -= dark
+                    removed_dark = next_dark
+                    dark_cutoff += 1
+                else:
+                    area -= bright
+                    removed_bright = next_bright
+                    bright_cutoff -= 1
+
+            luma_scale = 255 / (bright_cutoff - dark_cutoff)
+            img_py[img_py < dark_cutoff] = dark_cutoff
+            img_py[img_py > bright_cutoff] = bright_cutoff
+            return (img_py - dark_cutoff) * luma_scale, None
+
         except Exception as e:
             logging.exception(e)
             return None, e

@@ -523,7 +523,7 @@ class Report:
         test_df = self.mlsetup.test_src.to_dataframe()
         train_columns = train_df.columns
         test_columns = test_df.columns
-        columns = train_columns + test_columns
+        columns = list(train_columns) + list(test_columns)
         train_rows = len(train_df)
         test_rows = len(test_df)
         rows = train_rows + test_rows

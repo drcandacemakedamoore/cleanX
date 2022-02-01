@@ -96,24 +96,57 @@ jobs:
         with:
           conda-channels: conda-forge
           python-version: ${{ matrix.python-version }}
-      - run: conda create --name cleanx-build python=${{ matrix.python-version }}
+      - run: conda config --show-sources
+      - run: conda list --show-channel-urls
+      - run: conda config --remove channels defaults
+      - run: >-
+          conda create
+          --override-channels
+          --name cleanx-build
+          --strict-channel-priority
+          -c conda-forge
+          python=${{ matrix.python-version }}
       - run: conda run -n cleanx-build python setup.py bdist_egg
       - run: conda run -n cleanx-build python setup.py genconda
         # conda-build installation and the build cannot be in an
         # environment
-      - run: conda install -yq conda-build $(conda --version | tr ' ' '=')
-      - run: conda build -c conda-forge ./conda-pkg/
-      - run: conda install -yq -n cleanx-build --use-local cleanx
-      - run: conda install -yq -n cleanx-build pytest pycodestyle
-      - run: conda info
-      - run: conda list -n cleanx-build
+      - run: >-
+          conda install
+          -yq
+          --strict-channel-priority
+          --override-channels
+          -c conda-forge
+          conda-build
+          $(conda --version | tr ' ' '=')
+          python=${{ matrix.python-version }}
+      # At worst, this takes about 40-60 minuts
+      - run: >-
+          conda build
+          --override-channels
+          --no-anaconda-upload
+          -c conda-forge
+          ./conda-pkg/
+      # At worst, this ma take hours...
+      - run: >-
+          conda install
+          -yq
+          -n cleanx-build
+          --strict-channel-priority
+          --override-channels
+          -c conda-forge
+          --use-local
+          cleanx
+          $(conda --version | tr ' ' '=')
+          python=${{ matrix.python-version }}
+          pytest
+          pycodestyle
+          sphinx
       - run: >-
           conda run -n cleanx-build
           python
           ./setup.py test
           --pytest-args
           "--junit-xml report-conda-${{ matrix.os }}-${{ matrix.python-version }}.xml"
-      - run: conda install -yq -c conda-forge -n cleanx-build sphinx pycodestyle pytest
       - run: conda run -n cleanx-build python setup.py anaconda_gen_env
       - uses: actions/upload-artifact@v2
         if: always()
