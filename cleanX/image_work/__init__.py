@@ -61,6 +61,7 @@ from .image_functions import (
     noise_sum_cv,
     blind_noise_matrix,
     segmented_blind_noise_matrix,
+    make_inverted,
 
 
     Rotator,

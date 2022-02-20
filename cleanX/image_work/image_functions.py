@@ -2669,3 +2669,9 @@ def segmented_blind_noise_matrix(directory):
     frame = frame.style.background_gradient(cmap='PiYG')
 
     return frame
+
+
+def make_inverted(read_image):
+    # small helper function on inverting images
+    invert = (-1 * read_image) + 255
+    return invert
