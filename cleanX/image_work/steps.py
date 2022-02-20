@@ -688,6 +688,19 @@ class HistogramNormalize(Step):
         return self.__class__, (self.tail_cut_percent, self.cache_dir)
 
 
+class InvertImages(Step):
+    """This class inverts and image black to white and vice vera"""
+
+    def apply(self, image_data, image_name):
+
+        try:
+            invert = (-1 * image_data) + 255
+            return invert, None
+        except Exception as e:
+            logging.exception(e)
+            return None, e
+
+
 class OtsuBinarize(Step):
     """This class makes binarized images with values of only 0 to 255, based on
     an Otsu segmentation with more or less blurring. ksize parameter should

@@ -95,6 +95,7 @@ from .steps import (
     OtsuLines,
     Projection,
     CleanRotate,
+    InvertImages,
 )
 
 
