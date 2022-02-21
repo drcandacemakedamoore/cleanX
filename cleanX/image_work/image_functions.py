@@ -2672,6 +2672,14 @@ def segmented_blind_noise_matrix(directory):
 
 
 def make_inverted(read_image):
-    # small helper function on inverting images
+    """
+    Create an inverted image from a read_image
+
+    :param read_image: An image.
+    :type read_image: numpy.ndarray
+
+    :return: inverted image (black is white and white is black)
+    :rtype: :class: numpy.ndarray
+    """
     invert = (-1 * read_image) + 255
     return invert
