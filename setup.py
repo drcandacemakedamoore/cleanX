@@ -394,6 +394,14 @@ class GenerateCondaYaml(Command):
 
     def run(self):
         tpls = glob(os.path.join(project_dir, 'conda-pkg/*.in'))
+        versions = bool(os.environ.get('STRICT_PACKAGE_VERSIONS'))
+        rdeps = install_requires(versions, self.target_python)
+        ddeps = dev_deps(versions, self.target_python)
+        run_deps = '\n    - '.join(rdeps)
+        sphinx_version = ''
+        for d in ddeps:
+            if d.startswith('sphinx'):
+                sphinx_version = d[len('sphinx'):]
 
         for tpl_path in tpls:
             if tpl_path.endswith('env.yml.in'):
@@ -409,6 +417,8 @@ class GenerateCondaYaml(Command):
                     tag=tag,
                     python_version=self.target_python,
                     conda_version=self.target_conda,
+                    run_deps=run_deps,
+                    sphinx_version=sphinx_version,
                 ))
 
 
@@ -499,7 +509,7 @@ class Install(InstallCommand):
             frozen = 'python={}.{}'.format(*sys.version_info[:2])
             conda = subprocess.check_output(
                 ['conda', '--version'],
-            ).replace(' ', '=')
+            ).decode().replace(' ', '=')
             packages = subprocess.check_output(['conda', 'list', '--export'])
             cmd = [
                 'conda',
@@ -619,38 +629,42 @@ class InstallDev(Install):
             ezcmd.run()
 
 
-def install_requires():
+def install_requires(versions=False, python=None):
     if os.environ.get('CONDA_DEFAULT_ENV'):
-        return [
-            'pandas',
-            'numpy',
-            'matplotlib',
-            'pillow',
-            'tesserocr',
-            'opencv',
-        ]
+        if python is None:
+            python = '{}.{}'.format(*sys.version_info[:2])
+        location = os.path.join(
+            os.path.dirname(__file__),
+            '.conda-versions',
+            python
+        )
+        deps = [d.strip() for d in open(location).readlines()]
+        if not versions:
+            deps = [d.split('=')[0] for d in deps]
+        return deps
     return [
         'pandas',
         'numpy',
         'matplotlib',
-        'pillow',
         'tesserocr',
         'opencv-python',
         'pytz',
     ]
 
 
-def dev_deps():
+def dev_deps(versions=False, python=None):
     if os.environ.get('CONDA_DEFAULT_ENV'):
-        return [
-            'wheel',
-            'sphinx',
-            'pytest',
-            'pycodestyle',
-            'click',
-            'pydicom',
-            'SimpleITK',
-        ]
+        if python is None:
+            python = '{}.{}'.format(*sys.version_info[:2])
+        location = os.path.join(
+            os.path.dirname(__file__),
+            '.conda-versions',
+            python + '.dev'
+        )
+        deps = [d.strip() for d in open(location).readlines()]
+        if not versions:
+            deps = [d.split('=')[0] for d in deps]
+        return deps
     return [
         'wheel',
         'sphinx',
@@ -665,6 +679,7 @@ def dev_deps():
 # If we don't do this, we cannot run tests that involve
 # multiprocessing
 if __name__ == '__main__':
+    versions = bool(os.environ.get('STRICT_PACKAGE_VERSIONS'))
     setup(
         name=name,
         version=version,
@@ -705,12 +720,12 @@ if __name__ == '__main__':
             },
         },
         setup_requires=['sphinx'],
-        install_requires=install_requires(),
+        install_requires=install_requires(versions),
         extras_require={
             'cli': ['click'],
             'pydicom': ['pydicom'],
             'simpleitk': ['SimpleITK'],
-            'dev': dev_deps(),
+            'dev': dev_deps(versions),
         },
         zip_safe=False,
     )
