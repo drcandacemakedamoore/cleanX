@@ -1092,7 +1092,8 @@ def histogram_difference_for_inverts_todf(directory):
 def find_duplicated_images(directory):
     # this function finds duplicated images and return a list
     """
-    Finds duplicated images and returns a list of them.
+    Finds duplicated images with filecmp and returns a list of them.
+    This function should be replaced with cv2_phash_for_dupes
 
     :param directory: Directory with source images.
     :type directory: Suitable for :func:`os.path.join()`
@@ -1129,6 +1130,7 @@ def find_duplicated_images_todf(directory):
     # looks for duplicated images, returns DataFrame
     """
     Finds duplicated images and returns a :code:`DataFrame` of them.
+    This function should be replaced with cv2_phash_for_dupes
 
     :param directory: Directory with source images.
     :type directory: Suitable for :func:`os.path.join()`
@@ -2683,3 +2685,32 @@ def make_inverted(read_image):
     """
     invert = (-1 * read_image) + 255
     return invert
+
+
+def cv2_phash_for_dupes(origin_folder):
+    """
+    Finds duplicated images by using p-hashing and returns a list of them.
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
+    :return: a df of duplicated images
+    :rtype: class:`~pandas.DataFrame`
+    """
+    hash_list = []
+    image_names = []
+    non_suspects1 = glob.glob(os.path.join(origin_folder, '*.[Jj][Pp][Gg]'))
+    non_suspects2 = glob.glob(
+        os.path.join(origin_folder, '*.[Jj][Pp][Ee][Gg]'),
+    )
+    non_suspects = non_suspects2 + non_suspects1
+    for picy in non_suspects:
+        example = cv2.imread(picy)
+        if len(example.shape) > 2:
+            example = example[:, :, 0]
+        h = cv2.img_hash.pHash(example)   # 8-byte hash
+        hash_num = int.from_bytes(h.tobytes(), byteorder='big', signed=False)
+        hash_list.append(hash_num)
+        image_names.append(picy)
+    df = pd.DataFrame(hash_list, image_names)
+    df.columns = ["hash"]
+    outset = df["hash"].duplicated(keep=False)
+    return df[outset]

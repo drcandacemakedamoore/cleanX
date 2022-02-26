@@ -28,6 +28,7 @@ from .image_functions import (
     histogram_difference_for_inverts_todf,
     find_duplicated_images,
     find_duplicated_images_todf,
+    cv2_phash_for_dupes,
     show_images_in_df,
     dataframe_up_my_pics,
     simple_spinning_template,
