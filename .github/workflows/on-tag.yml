@@ -56,12 +56,12 @@ jobs:
           conda-channels: conda-forge
           python-version: ${{ matrix.python-version }}
       - run: conda config --remove channels defaults
+      # anaconda. Not sure why we needed this, lets see if it works without.
       - run: >
           conda install
           conda-build
           anaconda-client
           conda-verify
-          anaconda
           $(conda --version | tr ' ' '=')
           python=${{ matrix.python-version }}
       - run: >-
