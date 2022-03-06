@@ -55,6 +55,7 @@ jobs:
         with:
           conda-channels: conda-forge
           python-version: ${{ matrix.python-version }}
+      - run: conda config --remove channels defaults
       - run: >
           conda install
           conda-build
@@ -63,9 +64,27 @@ jobs:
           anaconda
           $(conda --version | tr ' ' '=')
           python=${{ matrix.python-version }}
-      - run: conda create --name cleanx-build python=${{ matrix.python-version }}
-      - run: conda run -n cleanx-build python setup.py genconda
-      - run: conda build -c conda-forge --output-folder ./dist ./conda-pkg/
+      - run: >-
+          conda create
+          --override-channels
+          --name cleanx-build
+          --strict-channel-priority
+          -c conda-forge
+          python=${{ matrix.python-version }}
+      - name: Generate conda meta.yaml (Python 3.8)
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.python-version == '3.8' }}
+        run: conda run -n cleanx-build python setup.py genconda
+        env:
+          STRICT_PACKAGE_VERSIONS: 1
+      - name: Generate conda meta.yaml
+        if: ${{ matrix.os != 'ubuntu-latest' || matrix.python-version != '3.8' }}
+        run: conda run -n cleanx-build python setup.py genconda
+      - run: >-
+          conda build
+          --override-channels
+          -c conda-forge
+          --output-folder ./dist
+          ./conda-pkg/
       - run: >-
           conda run -n cleanx-build
           python setup.py anaconda_upload
