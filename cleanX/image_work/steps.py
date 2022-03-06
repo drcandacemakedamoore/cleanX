@@ -653,10 +653,10 @@ class HistogramNormalize(Step):
 
     def apply(self, image_data, image_name):
         try:
-            img_py = np.int64(img)
+            img_py = np.int64(image_data)
             gray_hist = np.histogram(img_py, bins=256)[0]
             area = gray_hist.sum()
-            cutoff = area * ((100 - tail_cut_percent) / 100)
+            cutoff = area * ((100 - self.tail_cut_percent) / 100)
             dark_cutoff, bright_cutoff = img_py.min(), img_py.max()
             removed_dark, removed_bright = 0, 0
 

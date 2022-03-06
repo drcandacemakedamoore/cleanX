@@ -8,6 +8,7 @@ import subprocess
 import logging
 
 # imported libraries
+import os
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,10 +17,12 @@ import pandas as pd
 
 try:
     def __fix_tesserocr_locale():
-        output = subprocess.check_output(
+        output, _ = subprocess.Popen(
             ['ldconfig', '-v'],
             stderr=subprocess.DEVNULL,
-        )
+            # And pray the pipe size is enough...
+            stdout=subprocess.PIPE,
+        ).communicate()
         for line in output.decode().split('\n'):
             if line.lstrip().startswith('libtesseract'):
                 alias, soname = line.strip().split(' -> ')
@@ -33,7 +36,7 @@ try:
                     )
     __fix_tesserocr_locale()
     del __fix_tesserocr_locale
-except (FileNotFoundError, subprocess.CalledProcessError):
+except (FileNotFoundError, subprocess.CalledProcessError) as e:
     logging.warning('Don\'t know how to find Tesseract library version')
 
 from tesserocr import PyTessBaseAPI
@@ -41,7 +44,6 @@ from tesserocr import PyTessBaseAPI
 import glob
 import filecmp
 import math
-import os
 import re
 
 from filecmp import cmp
