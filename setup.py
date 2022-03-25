@@ -705,6 +705,7 @@ if __name__ == '__main__':
             'apidoc': SphinxApiDoc,
             'genconda': GenerateCondaYaml,
             'install': Install,
+            # TODO(wvxvw): make sure we have wheel
             'install_dev': InstallDev,
             'find_egg': FindEgg,
             'anaconda_upload': AnacondaUpload,
