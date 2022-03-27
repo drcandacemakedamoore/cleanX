@@ -161,6 +161,22 @@ Normalization here means ensuring that the lowest pixel value (the
 darkest part of the image) is as dark as possible and that the
 lightest part of the image is as light as possible.
 
+### Docker
+
+Docker images are available from Dockerhub.  You should be able to run
+them using:
+
+``` sh
+docker run --rm -v "$(pwd)":/cleanx drcandacemakedamoore/cleanx --help
+```
+
+The `/cleanx` directory in the image is intentionaly left to be used
+as a mount point.  The image, by default, runs as root, but doesn't
+require root privileged.  In the future, it's possible that the image
+will come with a non-root user and will default to running as a
+non-root user.
+
+
 ### CLI Example
 
 The problem above doesn't require writing any new Python code.  We can
