@@ -212,4 +212,4 @@ jobs:
         with:
           file: ./docker/Dockerfile
           push: true
-          tags: crabbone/cleanx:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cleanx:latest
