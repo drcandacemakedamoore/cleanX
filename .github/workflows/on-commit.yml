@@ -11,6 +11,7 @@ jobs:
         dicom-package: ["", pydicom, SimpleITK]
     steps:
       - uses: actions/checkout@v2
+      - run: sudo apt-get update -y
       - run: >-
           sudo apt-get install -y
           libleptonica-dev
@@ -39,6 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: sudo apt-get update -y
       - run: >-
           sudo apt-get install -y
           libleptonica-dev
