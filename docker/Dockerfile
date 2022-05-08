@@ -17,7 +17,7 @@ run apt-get update && \
     libtesseract4 \
     tesseract-ocr-all \
     libgl1
-copy --from=0 /src/env/lib/python3.9/site-packages/* /usr/local/lib/python3.9/site-packages/
+copy --from=0 /src/env/lib/python3.9/site-packages/. /usr/local/lib/python3.9/site-packages
 run mkdir /cleanx
 workdir /cleanx
 entrypoint ["python3.9", "-m", "cleanX"]
