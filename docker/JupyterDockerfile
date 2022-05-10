@@ -29,4 +29,4 @@ add ./additional_demos /home/jupyter/additional_demos
 add ./workflow_demo /home/jupyter/workflow_demo
 run chown -R jupyter:jupyter /home/jupyter
 user 1000
-entrypoint ["python3.9", "-m", "jupyter", "notebook", "/home/jupyter"]
+entrypoint ["python3.9", "-m", "jupyter", "notebook", "--ip", "0.0.0.0", "/home/jupyter"]
