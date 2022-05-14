@@ -1208,7 +1208,6 @@ def show_images_in_df(iter_ob, length_name):
             title = fname[-length_name:]
             axarr[y].set_title(title)
             axarr[y].imshow(exop, cmap=plt.cm.gray)
-            # plt.title('Outlier images')
     plt.show()
 
 
