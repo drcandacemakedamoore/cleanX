@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Library for cleaning radiological data used in machine learning
+CleanX: a library for cleaning radiological data used in machine learning
 applications
 """
 
