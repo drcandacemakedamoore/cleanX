@@ -647,7 +647,7 @@ def install_requires(versions=False, python=None):
         'numpy',
         'matplotlib',
         'tesserocr',
-        'opencv-python',
+        'opencv-contrib-python',
         'pytz',
     ]
 
