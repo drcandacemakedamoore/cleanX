@@ -180,8 +180,16 @@ Additionally, there is a Docker image with several examples in a form
 of Jupyter notebooks.  To run this image:
 
 ``` sh
-docker run --rm -ti -p 8888:8888 --network=host \
+docker run --rm -ti -p 8888:8888 \
     drcandacemakedamoore/cleanx-jupyter-examples
+```
+
+There is usually a more up-to-date image available built from
+`develop` branch _(use at your own risk:)_
+
+``` sh
+docker run --rm -ti -p 8888:8888 \
+    drcandacemakedamoore/cleanx-jupyter-examples:develop
 ```
 
 This will generate output similar to:
