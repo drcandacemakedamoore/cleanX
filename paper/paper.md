@@ -11,7 +11,7 @@ authors:
   - name: Candace Makeda Moore
     orcid: 0000-0003-1672-7565
     affiliation: 1
-  - name: Andrew Murphy, MMIS BMedImagingSc RT(R)
+  - name: Andrew Murphy
     orcid: 0000-0002-7710-6095
     affiliation: 2
   - name: Oleg Sivokon
@@ -46,7 +46,7 @@ and programmers create better datasets upon which algorithms related
 to X-rays, MRIs or CTs can be based.
 
 CleanX is a Python package for data cleaning that was developed for
-radiology AI.
+radiology artificial intelligence (AI).
 
 
 # Statement of need
