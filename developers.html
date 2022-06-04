@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Developer’s Guide &#8212; cleanX 0.0.15 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,6 +12,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -36,9 +37,9 @@
           <div class="body" role="main">
             
   <section id="developer-s-guide">
-<h1>Developer’s Guide<a class="headerlink" href="#developer-s-guide" title="Permalink to this headline">¶</a></h1>
+<h1>Developer’s Guide<a class="headerlink" href="#developer-s-guide" title="Permalink to this heading">¶</a></h1>
 <section id="sending-your-work">
-<h2>Sending Your Work<a class="headerlink" href="#sending-your-work" title="Permalink to this headline">¶</a></h2>
+<h2>Sending Your Work<a class="headerlink" href="#sending-your-work" title="Permalink to this heading">¶</a></h2>
 <p>We accept pull requests made through GitHub.  Alternatively, you can
 send patch files in an email (please find developers’ emails on their
 profile pages).  As is usual, we request that the changes be rebased
@@ -59,7 +60,7 @@ submission.</p>
 </div>
 </section>
 <section id="setting-up-development-environment">
-<h2>Setting Up Development Environment<a class="headerlink" href="#setting-up-development-environment" title="Permalink to this headline">¶</a></h2>
+<h2>Setting Up Development Environment<a class="headerlink" href="#setting-up-development-environment" title="Permalink to this heading">¶</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You may find this setup unusual.  Please read the <a class="reference internal" href="#rationale">Rationale</a>
@@ -72,7 +73,7 @@ your code is portable accross versions and platforms, then, of course,
 you don’t need all the possible combinations.  Our CI should be able
 to pick up the most obvious incompatibilities between those.</p>
 <section id="the-way-we-do-it">
-<h3>The Way We Do It<a class="headerlink" href="#the-way-we-do-it" title="Permalink to this headline">¶</a></h3>
+<h3>The Way We Do It<a class="headerlink" href="#the-way-we-do-it" title="Permalink to this heading">¶</a></h3>
 <p>Suppose you want to check your changes against Python 3.7 from
 python.org on Linux, then you would check out our sources using <cite>git</cite>
 from our <a class="reference external" href="https://github.com/drcandacemakedamoore/cleanX.git">GitHub repo</a>, and:</p>
@@ -98,7 +99,7 @@ what was installed.  This will likely take a <em>very</em> long time.
 Please, be patient.</p>
 </section>
 <section id="the-traditional-way">
-<h3>The Traditional Way<a class="headerlink" href="#the-traditional-way" title="Permalink to this headline">¶</a></h3>
+<h3>The Traditional Way<a class="headerlink" href="#the-traditional-way" title="Permalink to this heading">¶</a></h3>
 <p>Regradless of the downsides of this approach, we try to support more
 common ways to work with Python projects.  It’s a common practice to
 “install” a project during development by either using <cite>pip install
@@ -138,7 +139,7 @@ reproduce problems that either happen in our CI or are reported on
 platforms different from the one you develop on.</p>
 </section>
 <section id="rationale">
-<h3>Rationale<a class="headerlink" href="#rationale" title="Permalink to this headline">¶</a></h3>
+<h3>Rationale<a class="headerlink" href="#rationale" title="Permalink to this heading">¶</a></h3>
 <p>There are several problems with traditional way Python programmers are
 taught to organize their development environment.  The way a typical
 Python project is developed, it is designed to support a single
@@ -174,7 +175,7 @@ the core of our project.</p>
 </section>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">¶</a></h2>
 <p>The project must be installed in order to run the tests.  It doesn’t
 have to be instaleld with development dependencies though.  Once that
 is done, you may run:</p>
@@ -189,7 +190,7 @@ arguments down to <cite>pytest</cite>:</p>
 </div>
 <p>For example, if you want to only run tests related to DICOM integration.</p>
 <section id="style-guide-for-python-code">
-<h3>Style Guide for Python Code<a class="headerlink" href="#style-guide-for-python-code" title="Permalink to this headline">¶</a></h3>
+<h3>Style Guide for Python Code<a class="headerlink" href="#style-guide-for-python-code" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python ./setup.py lint
 </pre></div>
 </div>
@@ -197,7 +198,7 @@ arguments down to <cite>pytest</cite>:</p>
 should be fine.</p>
 </section>
 <section id="continuous-integration">
-<h3>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">¶</a></h3>
+<h3>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this heading">¶</a></h3>
 <p>This project has extensive CI setup that uses GitHub Actions platform.
 There’s an experimental branch with Jenkins setup, but it’s far from
 being ready yet, and we currently don’t work on it.</p>
@@ -256,7 +257,7 @@ version.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -276,7 +277,7 @@ version.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, doctormakeda@gmail.com.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.1.
     </div>
   </body>
 </html>

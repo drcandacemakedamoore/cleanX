@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>cleanX.dicom_processing.source module &#8212; cleanX 0.0.15 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,6 +12,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -46,11 +47,11 @@
           <div class="body" role="main">
             
   <section id="module-cleanX.dicom_processing.source">
-<span id="cleanx-dicom-processing-source-module"></span><h1>cleanX.dicom_processing.source module<a class="headerlink" href="#module-cleanX.dicom_processing.source" title="Permalink to this headline">¶</a></h1>
+<span id="cleanx-dicom-processing-source-module"></span><h1>cleanX.dicom_processing.source module<a class="headerlink" href="#module-cleanX.dicom_processing.source" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.Source">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">Source</span></span><a class="headerlink" href="#cleanX.dicom_processing.source.Source" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>This class is provided as a helper for those who want to implement
 their own sources.</p>
 <p>It is not necessary to extend this class.  cleanX code doesn’t do
@@ -74,7 +75,7 @@ elements.  First element will be inserted into the source column
 (the one labeled by <code class="code docutils literal notranslate"><span class="pre">get_tag()</span></code> method), the second is the
 result of calling <code class="code docutils literal notranslate"><span class="pre">reader</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>reader</strong> – A function that takes an individual source, either
 a file path or a file-like object, and returns the
@@ -195,7 +196,7 @@ in the source column of the resulting DataFrame</p></li>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -223,7 +224,7 @@ in the source column of the resulting DataFrame</p></li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, doctormakeda@gmail.com.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.1.
     </div>
   </body>
 </html>

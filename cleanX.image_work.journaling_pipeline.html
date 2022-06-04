@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>cleanX.image_work.journaling_pipeline module &#8212; cleanX 0.0.15 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,6 +12,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -46,11 +47,11 @@
           <div class="body" role="main">
             
   <section id="module-cleanX.image_work.journaling_pipeline">
-<span id="cleanx-image-work-journaling-pipeline-module"></span><h1>cleanX.image_work.journaling_pipeline module<a class="headerlink" href="#module-cleanX.image_work.journaling_pipeline" title="Permalink to this headline">¶</a></h1>
+<span id="cleanx-image-work-journaling-pipeline-module"></span><h1>cleanX.image_work.journaling_pipeline module<a class="headerlink" href="#module-cleanX.image_work.journaling_pipeline" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.image_work.journaling_pipeline.JournalingPipeline">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.image_work.journaling_pipeline.</span></span><span class="sig-name descname"><span class="pre">JournalingPipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_journal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline" title="cleanX.image_work.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">cleanX.image_work.pipeline.Pipeline</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline" title="cleanX.image_work.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a></p>
 <p>This class extends <a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline" title="cleanX.image_work.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a> with
 the ability to store the progress and the state in a database.</p>
 <dl class="py method">
@@ -60,7 +61,7 @@ the ability to store the progress and the state in a database.</p>
 the behavior of persistent storage.  See
 <a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline" title="cleanX.image_work.pipeline.Pipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code></a> for remaining arguments.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>journal</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code> is passed, the pipeline code will use a
 preconfigured directory to store the journal.
@@ -79,7 +80,7 @@ successful completion of the pipeline.</p></li>
 <dd><p>Restore the previously created journaling pipeline from the last
 executed step.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>journal_dir</strong> (Suitable for <code class="code docutils literal notranslate"><span class="pre">os.path.join()</span></code>) – The directory containing journal database to
 restore from.</p></li>
@@ -92,11 +93,11 @@ instance that will override those restored from
 the journal.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Fresh <a class="reference internal" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline" title="cleanX.image_work.journaling_pipeline.JournalingPipeline"><code class="xref py py-class docutils literal notranslate"><span class="pre">JournalingPipeline</span></code></a> object fast-forwarded to the
 last executed step + <code class="code docutils literal notranslate"><span class="pre">skip</span></code>.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="code docutils literal notranslate"><span class="pre">JournalingPipeline</span></code></p>
 </dd>
 </dl>
@@ -107,7 +108,7 @@ last executed step + <code class="code docutils literal notranslate"><span class
 <span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.process" title="Permalink to this definition">¶</a></dt>
 <dd><p>Starts this pipeline.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>source</strong> (<em>Iterable</em>) – This must be an iterable that yields file names
 for the images to be processed.</p>
 </dd>
@@ -166,7 +167,7 @@ for the images to be processed.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -194,7 +195,7 @@ for the images to be processed.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, doctormakeda@gmail.com.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.1.
     </div>
   </body>
 </html>
