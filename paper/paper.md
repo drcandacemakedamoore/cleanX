@@ -59,9 +59,10 @@ time-consuming task [@10.1145/2207243.2207253]. Of the tasks involved,
 analysis for clinical research projects [@tidy-data]. Even in the case of relatively high-quality datasets, the task of 'cleaning' is a necessary step, to avoid the problem of poor input leading to poor performance, also known as the "garbage in, garbage out" phenomenon [@Rahm2000DataCP].
 
 In contemporary research, many approaches to data cleaning for
-radiology datasets overlook the content of the images themselves. The
-quality of data, especially the image data, is often context-specific
-to a specific AI model.
+radiology datasets overlook the content of the images themselves. Recent work
+reveals more open algorithms for image de-identification than for all
+kinds of image curation[@DIAZ202125]. However the quality of data, especially the image data,
+is often context-specific and salient to a particular AI model.
 
 Algorithms that rely on shape detection may be accomplished with
 contrast and positional invariance, but specific neural networks or
