@@ -93,16 +93,17 @@ remove from a dataset with hundreds of thousands of images.
 While data cleaning can not be fully automated at present, it is
 unrealistic for many data science practitioners and researchers to
 afford the hours of an imaging specialist for every data cleaning
-task. This package speeds up data cleaning, and gives researchers some
-basic insights into datasets of images. Instead of examining all
+task. This package speeds up data cleaning, and gives researchers
+basic insights into an examined datasets of images. Instead of examining all
 data by hand or writing bespoke functions for cleaning every specific 
 dataset, the software allows users to decrease the amount of data that 
 needs to be reviewed by hand, and explore and clean data automatically.
 It also has functions for augmenting X-ray images so that the resultant
 images are within domain data.
 
-Automated data cleaning can improve dataset quality on some
-parameters. This work includes open code initially built to help with
+Automated data cleaning and augmentation can improve datasets 
+in terms of quantity, quality and diversity of images and labels.
+This work includes open code initially built to help with
 automatic chest X-ray dataset exploratory data analysis and data
 cleaning. It was expanded to include functions for DICOM processing
 and image data normalization and augmentations. The majority of the functions can be used to clean up a dataset of any two-dimensional
