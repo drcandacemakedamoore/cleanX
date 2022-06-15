@@ -9,7 +9,7 @@ requirements:
   host:
     - python==${python_version}
     - conda==${conda_version}
-    - sphinx
+    - sphinx${sphinx_version}
 
   build:
     - setuptools
@@ -17,13 +17,7 @@ requirements:
   run:
     - python==${python_version}
     - conda==${conda_version}
-    - numpy
-    - pandas
-    - matplotlib
-    # On MacOS with Python 3.9 the shared library for OpenCV is broken
-    # in new versions
-    - opencv
-    - tesserocr
+    - ${run_deps}
 
 test:
   requires:

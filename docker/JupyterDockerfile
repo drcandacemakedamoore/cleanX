@@ -1,0 +1,38 @@
+# syntax=docker/dockerfile:1
+
+from python:3.9
+
+run mkdir /src
+copy . /src
+run apt-get update && \
+    apt-get install -qy --no-install-recommends libtesseract-dev
+run cd /src && \
+    python -m venv env && \
+    /src/env/bin/python -m pip install wheel && \
+    /src/env/bin/python setup.py install_dev && \
+    /src/env/bin/python -m pip install jupyter kaggle && \
+    find /src/env/bin/ -type f \( -name 'jupyter*' -or -name 'kaggle' \) -exec \
+    sed -i 's#/src/env/bin/python#/usr/local/bin/python#' {} +
+
+from python:3.9
+run apt-get update && \
+    apt-get install -qy --no-install-recommends libtesseract-dev \
+    libtesseract4 \
+    tesseract-ocr-all \
+    libgl1
+copy --from=0 /src/env/lib/python3.9/site-packages/. /usr/local/lib/python3.9/site-packages/
+copy --from=0 /src/env/bin/jupyter* /usr/local/bin/
+copy --from=0 /src/env/bin/kaggle /usr/local/bin/
+expose 8888
+run useradd -m jupyter
+workdir /home/jupyter
+add ./additional_demos /home/jupyter/additional_demos
+add ./workflow_demo /home/jupyter/workflow_demo
+run chown -R jupyter:jupyter /home/jupyter
+user 1000
+# This account is only used for Jupyter notebook, so it's OK to
+# publish the account authentication information.  This is just a way
+# to make Kaggle API client work inside the container.
+env KAGGLE_USERNAME=cleanx
+env KAGGLE_KEY=bcb5f04b27c0f86f28e0c8a2bca99d17
+entrypoint ["python3.9", "-m", "jupyter", "notebook", "--ip", "0.0.0.0", "/home/jupyter"]

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Library for cleaning radiological data used in machine learning
+CleanX: a library for cleaning radiological data used in machine learning
 applications
 """
 
@@ -8,6 +8,7 @@ import subprocess
 import logging
 
 # imported libraries
+import os
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,10 +17,12 @@ import pandas as pd
 
 try:
     def __fix_tesserocr_locale():
-        output = subprocess.check_output(
+        output, _ = subprocess.Popen(
             ['ldconfig', '-v'],
             stderr=subprocess.DEVNULL,
-        )
+            # And pray the pipe size is enough...
+            stdout=subprocess.PIPE,
+        ).communicate()
         for line in output.decode().split('\n'):
             if line.lstrip().startswith('libtesseract'):
                 alias, soname = line.strip().split(' -> ')
@@ -33,7 +36,7 @@ try:
                     )
     __fix_tesserocr_locale()
     del __fix_tesserocr_locale
-except (FileNotFoundError, subprocess.CalledProcessError):
+except (FileNotFoundError, subprocess.CalledProcessError) as e:
     logging.warning('Don\'t know how to find Tesseract library version')
 
 from tesserocr import PyTessBaseAPI
@@ -41,7 +44,6 @@ from tesserocr import PyTessBaseAPI
 import glob
 import filecmp
 import math
-import os
 import re
 
 from filecmp import cmp
@@ -1092,7 +1094,8 @@ def histogram_difference_for_inverts_todf(directory):
 def find_duplicated_images(directory):
     # this function finds duplicated images and return a list
     """
-    Finds duplicated images and returns a list of them.
+    Finds duplicated images with filecmp and returns a list of them.
+    This function should be replaced with cv2_phash_for_dupes
 
     :param directory: Directory with source images.
     :type directory: Suitable for :func:`os.path.join()`
@@ -1129,6 +1132,7 @@ def find_duplicated_images_todf(directory):
     # looks for duplicated images, returns DataFrame
     """
     Finds duplicated images and returns a :code:`DataFrame` of them.
+    This function should be replaced with cv2_phash_for_dupes
 
     :param directory: Directory with source images.
     :type directory: Suitable for :func:`os.path.join()`
@@ -1204,7 +1208,6 @@ def show_images_in_df(iter_ob, length_name):
             title = fname[-length_name:]
             axarr[y].set_title(title)
             axarr[y].imshow(exop, cmap=plt.cm.gray)
-            # plt.title('Outlier images')
     plt.show()
 
 
@@ -2669,3 +2672,46 @@ def segmented_blind_noise_matrix(directory):
     frame = frame.style.background_gradient(cmap='PiYG')
 
     return frame
+
+
+def make_inverted(read_image):
+    """
+    Create an inverted image from a read_image
+
+    :param read_image: An image.
+    :type read_image: numpy.ndarray
+
+    :return: inverted image (black is white and white is black)
+    :rtype: :class: numpy.ndarray
+    """
+    invert = (-1 * read_image) + 255
+    return invert
+
+
+def cv2_phash_for_dupes(origin_folder):
+    """
+    Finds duplicated images by using p-hashing and returns a list of them.
+    :param directory: Directory with source images.
+    :type directory: Suitable for :func:`os.path.join()`
+    :return: a df of duplicated images
+    :rtype: class:`~pandas.DataFrame`
+    """
+    hash_list = []
+    image_names = []
+    non_suspects1 = glob.glob(os.path.join(origin_folder, '*.[Jj][Pp][Gg]'))
+    non_suspects2 = glob.glob(
+        os.path.join(origin_folder, '*.[Jj][Pp][Ee][Gg]'),
+    )
+    non_suspects = non_suspects2 + non_suspects1
+    for picy in non_suspects:
+        example = cv2.imread(picy)
+        if len(example.shape) > 2:
+            example = example[:, :, 0]
+        h = cv2.img_hash.pHash(example)   # 8-byte hash
+        hash_num = int.from_bytes(h.tobytes(), byteorder='big', signed=False)
+        hash_list.append(hash_num)
+        image_names.append(picy)
+    df = pd.DataFrame(hash_list, image_names)
+    df.columns = ["hash"]
+    outset = df["hash"].duplicated(keep=False)
+    return df[outset]

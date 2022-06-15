@@ -653,10 +653,10 @@ class HistogramNormalize(Step):
 
     def apply(self, image_data, image_name):
         try:
-            img_py = np.int64(img)
+            img_py = np.int64(image_data)
             gray_hist = np.histogram(img_py, bins=256)[0]
             area = gray_hist.sum()
-            cutoff = area * ((100 - tail_cut_percent) / 100)
+            cutoff = area * ((100 - self.tail_cut_percent) / 100)
             dark_cutoff, bright_cutoff = img_py.min(), img_py.max()
             removed_dark, removed_bright = 0, 0
 
@@ -686,6 +686,19 @@ class HistogramNormalize(Step):
 
     def __reduce__(self):
         return self.__class__, (self.tail_cut_percent, self.cache_dir)
+
+
+class InvertImages(Step):
+    """This class inverts and image black to white and vice vera"""
+
+    def apply(self, image_data, image_name):
+
+        try:
+            invert = (-1 * image_data) + 255
+            return invert, None
+        except Exception as e:
+            logging.exception(e)
+            return None, e
 
 
 class OtsuBinarize(Step):

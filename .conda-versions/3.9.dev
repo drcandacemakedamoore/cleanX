@@ -1,0 +1,7 @@
+wheel==0.37.1
+sphinx==4.4.0
+pytest==7.0.1
+pycodestyle==2.8.0
+click==8.0.4
+pydicom==2.2.2
+SimpleITK==2.1.0

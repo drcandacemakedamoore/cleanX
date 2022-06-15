@@ -11,7 +11,7 @@ authors:
   - name: Candace Makeda Moore
     orcid: 0000-0003-1672-7565
     affiliation: 1
-  - name: Andrew Murphy, MMIS BMedImagingSc RT(R)
+  - name: Andrew Murphy
     orcid: 0000-0002-7710-6095
     affiliation: 2
   - name: Oleg Sivokon
@@ -46,7 +46,7 @@ and programmers create better datasets upon which algorithms related
 to X-rays, MRIs or CTs can be based.
 
 CleanX is a Python package for data cleaning that was developed for
-radiology AI.
+radiology artificial intelligence (AI).
 
 
 # Statement of need
@@ -68,23 +68,27 @@ quality of data, especially the image data, is often context-specific
 to a specific AI model.
 
 Algorithms that rely on shape detection may be accomplished with
-contrast and positional invariance, but many neural networks or
-radiomics algorithms can and should not be insensitive contrast or
-position. Thus scales like MIDaR [@Harvey2019] are necessary but not
-sufficient to describe data. Despite the specific nature of quality
-issues for each model, some potential data contamination problems
-should be cleaned out of imaging datasets for most algorithms.
+contrast and positional invariance, but certain neural networks or
+radiomics algorithms should not be insensitive contrast or
+position, for example any neural network to detect clinical
+chest X-ray quality should not be positionally invariant, as a
+rotated patient is likely to indicate poor radiographic technique,
+and in the case of a flipped image would correlate with the clinical
+picture of situs inversus. Thus scales like MIDaR [@Harvey2019] are
+necessary but not sufficient to describe data. Despite the specific
+nature of quality issues for each model, potential data contamination
+problems should be cleaned out of imaging datasets for most algorithms.
 
 In the case of radiological datasets, the task of data cleaning
 involves checking the accuracy of labelling and/or the quality of the
 images themselves. Potential problems inside the images themselves in
 large datasets include the inclusion of "out of domain data" and
-"label leakage". Some types of "out of domain data" may not be
+"label leakage". Certain types of "out of domain data" may not be
 apparent to non-radiologists and have been a particular problem in
 datasets web-scraped together by non-radiologists [@Tizhoosh2021].
 
 "Label leakage" depends on the desired labels for a dataset but can
-happen in many ways. More subtle forms of label leakage may occur when
+happen in multiple ways. More subtle forms of label leakage may occur when
 certain machines are more likely to be used on certain
 patients. Depending upon the goals of a model, there may be other
 types of "out of domain data" that are easy to see, such as inverted
@@ -95,24 +99,27 @@ While data cleaning can not be fully automated at present, it is
 unrealistic for many data science practitioners and researchers to
 afford the hours of an imaging specialist for every data cleaning
 task. This package speeds up data cleaning, and gives researchers some
-basic insights into datasets of images. It also has functions for
-augmenting X-ray images so that the resultant images are within domain
-data.
+basic insights into datasets of images. Instead of examining all
+data by hand or writing bespoke functions for cleaning every specific 
+dataset, the software allows users to decrease the amount of data that 
+needs to be reviewed by hand, and explore and clean data automatically.
+It also has functions for augmenting X-ray images so that the resultant
+images are within domain data.
 
 Automated data cleaning can improve dataset quality on some
 parameters. This work includes open code originally built to help with
 automatic chest X-ray dataset exploratory data analysis and data
 cleaning. It was expanded to include functions for DICOM processing,
-and image data normalization and augmentations. Some of the functions
+and image data normalization and augmentations. The majority of the functions
 can be used to clean up a dataset of any two dimensional
-images. Several algorithms for identifying out of domain data in a
-large dataset of chest-X rays facilitated by the functions in this
-code library.
+images, the software has generalizability. Several algorithms for identifying
+out of domain data in a large dataset of chest-X rays facilitated by the
+functions in this code library.
 
 
 # Acknowledgements
 
-We acknowledge many contributions from Eliane Birba (delwende) and
+We acknowledge important contributions from Eliane Birba (delwende) and
 Oleg Sivokon (wvxvw) during the testing and documentation of the code
 related to this project. We did not receive any financial support for
 this project.

@@ -1,6 +1,5 @@
 <p align="center">
-    <img style="width: 30%; height: 30%"
-        src="https://github.com/drcandacemakedamoore/cleanX/blob/main/cleanXpic.png">
+    <img style="width: 30%; height: 30%" src="cleanx-logo.svg">
 </p>
 
 # CleanX
@@ -161,6 +160,65 @@ want the cleaned images to be saved in the `cleaned` directory.
 Normalization here means ensuring that the lowest pixel value (the
 darkest part of the image) is as dark as possible and that the
 lightest part of the image is as light as possible.
+
+### Docker
+
+Docker images are available from Dockerhub.  You should be able to run
+them using:
+
+``` sh
+docker run --rm -v "$(pwd)":/cleanx drcandacemakedamoore/cleanx --help
+```
+
+The `/cleanx` directory in the image is intentionaly left to be used
+as a mount point.  The image, by default, runs as root, but doesn't
+require root privileged.  In the future, it's possible that the image
+will come with a non-root user and will default to running as a
+non-root user.
+
+Additionally, there is a Docker image with several examples in a form
+of Jupyter notebooks.  To run this image:
+
+``` sh
+docker run --rm -ti -p 8888:8888 \
+    drcandacemakedamoore/cleanx-jupyter-examples
+```
+
+There is usually a more up-to-date image available built from
+`develop` branch _(use at your own risk:)_
+
+``` sh
+docker run --rm -ti -p 8888:8888 \
+    drcandacemakedamoore/cleanx-jupyter-examples:develop
+```
+
+This will generate output similar to:
+
+``` sh
+[I 12:59:52.383 NotebookApp] Writing notebook server cookie secret  \
+to /home/jupyter/.local/share/jupyter/runtime/notebook_cookie_secret
+[I 12:59:52.704 NotebookApp] Serving notebooks from local directory:\
+/home/jupyter
+[I 12:59:52.704 NotebookApp] Jupyter Notebook 6.4.11 is running at:
+[I 12:59:52.705 NotebookApp] http://localhost:8888/?token=...
+[I 12:59:52.705 NotebookApp]  or http://127.0.0.1:8888/?token=...
+[I 12:59:52.705 NotebookApp] Use Control-C to stop this server and \
+shut down all kernels (twice to skip confirmation).
+[W 12:59:52.709 NotebookApp] No web browser found: could not locate\
+runnable browser.
+[C 12:59:52.709 NotebookApp] 
+
+    To access the notebook, open this file in a browser:
+        file:///.../nbserver-1-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/?token=...
+     or http://127.0.0.1:8888/?token=...
+```
+
+Copy the text that starts with `http://127.0.0.1:8888` (including the
+token) and paste it into your browser's address bar.  The demos should
+be fully operational (you may interact with them, re-evaluate them,
+change available parameters etc.)
 
 ### CLI Example
 
