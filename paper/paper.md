@@ -69,17 +69,17 @@ to a specific AI model.
 
 Algorithms that rely on shape detection may be accomplished with
 contrast and positional invariance, but many neural networks or
-radiomics algorithms can and should not be insensitive contrast or
+radiomics algorithms should not be insensitive contrast or
 position. Thus scales like MIDaR [@Harvey2019] are necessary but not
 sufficient to describe data. Despite the specific nature of quality
-issues for each model, some potential data contamination problems
+issues for each model, potential data contamination problems
 should be cleaned out of imaging datasets for most algorithms.
 
 In the case of radiological datasets, the task of data cleaning
 involves checking the accuracy of labelling and/or the quality of the
 images themselves. Potential problems inside the images themselves in
 large datasets include the inclusion of "out of domain data" and
-"label leakage". Some types of "out of domain data" may not be
+"label leakage". Certain types of "out of domain data" may not be
 apparent to non-radiologists and have been a particular problem in
 datasets web-scraped together by non-radiologists [@Tizhoosh2021].
 
@@ -103,16 +103,16 @@ Automated data cleaning can improve dataset quality on some
 parameters. This work includes open code originally built to help with
 automatic chest X-ray dataset exploratory data analysis and data
 cleaning. It was expanded to include functions for DICOM processing,
-and image data normalization and augmentations. Some of the functions
+and image data normalization and augmentations. The majority of the functions
 can be used to clean up a dataset of any two dimensional
-images. Several algorithms for identifying out of domain data in a
-large dataset of chest-X rays facilitated by the functions in this
-code library.
+images, the software has generalizability. Several algorithms for identifying
+out of domain data in a large dataset of chest-X rays facilitated by the
+functions in this code library.
 
 
 # Acknowledgements
 
-We acknowledge many contributions from Eliane Birba (delwende) and
+We acknowledge important contributions from Eliane Birba (delwende) and
 Oleg Sivokon (wvxvw) during the testing and documentation of the code
 related to this project. We did not receive any financial support for
 this project.
