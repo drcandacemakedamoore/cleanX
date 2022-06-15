@@ -38,9 +38,9 @@ bibliography: paper.bib
 
 
 Radiological images of various anatomy are part of the diagnostic
-work-up for millions of patients for diverse indications.  A
-considerable amount of time and resources have gone into the effort to
-develop automated diagnostic interpretation of these images. The
+work-up for millions of patients for diverse indications. A
+considerable amount of time and resources have gone into 
+developing automated diagnostic interpretation of these images. The
 purpose of this library is to help scientists, medical professionals,
 and programmers create better datasets upon which algorithms related
 to X-rays, MRIs or CTs can be based.
@@ -50,17 +50,13 @@ radiology artificial intelligence (AI).
 
 
 # Statement of need
-
 `CleanX` is a Python package for data exploration, cleaning, and
 augmentation that was originally developed for radiology AI. Python is
 a widely used language on a global level. Data preparation for
-building quality machine learning algorithms is known to be a
+building quality machine learning algorithms is a
 time-consuming task [@10.1145/2207243.2207253]. Of the tasks involved,
 'data cleaning' alone usually takes the majority of time spent on
-analysis for clinical research projects [@tidy-data]. The task of data
-cleaning is a necessary step even in the case of relatively
-high-quality data to avoid the known problem of "garbage in, garbage
-out" [@Rahm2000DataCP].
+analysis for clinical research projects [@tidy-data]. Even in the case of relatively high-quality datasets, the task of 'cleaning' is a necessary step, to avoid the problem of poor input leading to poor performance, also known as the "garbage in, garbage out" phenomenon [@Rahm2000DataCP].
 
 In contemporary research, many approaches to data cleaning for
 radiology datasets overlook the content of the images themselves. The
@@ -68,28 +64,27 @@ quality of data, especially the image data, is often context-specific
 to a specific AI model.
 
 Algorithms that rely on shape detection may be accomplished with
-contrast and positional invariance, but certain neural networks or
-radiomics algorithms should not be insensitive contrast or
-position, for example any neural network to detect clinical
+contrast and positional invariance, but specific neural networks or
+radiomics algorithms should not be insensitive to contrast or
+position. A neural network designed to detect the technical quality of a  
 chest X-ray quality should not be positionally invariant, as a
-rotated patient is likely to indicate poor radiographic technique,
-and in the case of a flipped image would correlate with the clinical
+the rotated patient is likely to indicate poor radiographic technique,
+and in the case of a flipped image, would correlate with the clinical
 picture of situs inversus. Thus scales like MIDaR [@Harvey2019] are
 necessary but not sufficient to describe data. Despite the specific
 nature of quality issues for each model, potential data contamination
 problems should be cleaned out of imaging datasets for most algorithms.
 
-In the case of radiological datasets, the task of data cleaning
+In the case of radiological datasets, the data cleaning task
 involves checking the accuracy of labelling and/or the quality of the
-images themselves. Potential problems inside the images themselves in
-large datasets include the inclusion of "out of domain data" and
-"label leakage". Certain types of "out of domain data" may not be
+images. Potential problems inside the images in
+large datasets include "out-of-domain data" and
+"label leakage". Certain types of "out-of-domain data" may not be
 apparent to non-radiologists and have been a particular problem in
 datasets web-scraped together by non-radiologists [@Tizhoosh2021].
 
 "Label leakage" depends on the desired labels for a dataset but can
-happen in multiple ways. More subtle forms of label leakage may occur when
-certain machines are more likely to be used on certain
+happen in multiple ways. More subtle forms of label leakage may occur when certain machines are more likely to be used on certain
 patients. Depending upon the goals of a model, there may be other
 types of "out of domain data" that are easy to see, such as inverted
 or flipped images. Even this can cost tremendous amounts of time to
@@ -107,14 +102,11 @@ It also has functions for augmenting X-ray images so that the resultant
 images are within domain data.
 
 Automated data cleaning can improve dataset quality on some
-parameters. This work includes open code originally built to help with
+parameters. This work includes open code initially built to help with
 automatic chest X-ray dataset exploratory data analysis and data
-cleaning. It was expanded to include functions for DICOM processing,
-and image data normalization and augmentations. The majority of the functions
-can be used to clean up a dataset of any two dimensional
-images, the software has generalizability. Several algorithms for identifying
-out of domain data in a large dataset of chest-X rays facilitated by the
-functions in this code library.
+cleaning. It was expanded to include functions for DICOM processing
+and image data normalization and augmentations. The majority of the functions can be used to clean up a dataset of any two-dimensional
+images; the software has generalizability. Several algorithms for identifying out-of-domain data in a large dataset of chest-X rays are facilitated by the functions in this code library.
 
 
 # Acknowledgements
