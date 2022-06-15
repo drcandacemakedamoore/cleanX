@@ -68,12 +68,16 @@ quality of data, especially the image data, is often context-specific
 to a specific AI model.
 
 Algorithms that rely on shape detection may be accomplished with
-contrast and positional invariance, but many neural networks or
+contrast and positional invariance, but certain neural networks or
 radiomics algorithms should not be insensitive contrast or
-position. Thus scales like MIDaR [@Harvey2019] are necessary but not
-sufficient to describe data. Despite the specific nature of quality
-issues for each model, potential data contamination problems
-should be cleaned out of imaging datasets for most algorithms.
+position, for example any neural network to detect clinical
+chest X-ray quality should not be positionally invariant, as a
+rotated patient is likely to indicate poor radiographic technique,
+and in the case of a flipped image would correlate with the clinical
+picture of situs inversus. Thus scales like MIDaR [@Harvey2019] are
+necessary but not sufficient to describe data. Despite the specific
+nature of quality issues for each model, potential data contamination
+problems should be cleaned out of imaging datasets for most algorithms.
 
 In the case of radiological datasets, the task of data cleaning
 involves checking the accuracy of labelling and/or the quality of the
@@ -84,7 +88,7 @@ apparent to non-radiologists and have been a particular problem in
 datasets web-scraped together by non-radiologists [@Tizhoosh2021].
 
 "Label leakage" depends on the desired labels for a dataset but can
-happen in many ways. More subtle forms of label leakage may occur when
+happen in multiple ways. More subtle forms of label leakage may occur when
 certain machines are more likely to be used on certain
 patients. Depending upon the goals of a model, there may be other
 types of "out of domain data" that are easy to see, such as inverted
@@ -95,9 +99,12 @@ While data cleaning can not be fully automated at present, it is
 unrealistic for many data science practitioners and researchers to
 afford the hours of an imaging specialist for every data cleaning
 task. This package speeds up data cleaning, and gives researchers some
-basic insights into datasets of images. It also has functions for
-augmenting X-ray images so that the resultant images are within domain
-data.
+basic insights into datasets of images. Instead of examining all
+data by hand or writing bespoke functions for cleaning every specific 
+dataset, the software allows users to decrease the amount of data that 
+needs to be reviewed by hand, and explore and clean data automatically.
+It also has functions for augmenting X-ray images so that the resultant
+images are within domain data.
 
 Automated data cleaning can improve dataset quality on some
 parameters. This work includes open code originally built to help with
