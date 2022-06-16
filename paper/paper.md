@@ -64,10 +64,11 @@ performance, also known as the "garbage in, garbage out" phenomenon
 
 In contemporary research, many approaches to data cleaning for
 radiology datasets overlook the content of the images themselves.
-Recent work reveals more open algorithms for image de-identification
-than for all kinds of image curation[@DIAZ202125].  However the
-quality of data, especially the image data, is often context-specific
-and salient to a particular AI model.
+In fact, recent work reveals more open algorithms for image
+de-identification than for all kinds of image curation[@DIAZ202125]
+(which may or may not include analysis of image content and quality).
+However the quality of data, especially the image data, is often
+context-specific and salient to a particular AI model.
 
 Algorithms that rely on shape detection may be accomplished with
 contrast, and positional invariance, but specific neural networks or
