@@ -78,8 +78,8 @@ rotated patient is likely to indicate poor radiographic technique, and
 in the case of a flipped image, would correlate with the clinical
 picture of situs inversus.  Thus scales like MIDaR [@Harvey2019] are
 necessary but not sufficient to describe data.  Despite the specific
-nature of quality issues for each model, potential data contamination
-problems should be cleaned out of imaging datasets for most
+nature of quality issues for each model, data contamination
+problems should be cleaned out of imaging datasets before building
 algorithms.
 
 In the case of radiological datasets, the data cleaning task involves
