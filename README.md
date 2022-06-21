@@ -456,6 +456,13 @@ automatically as new functions are added.
 
 If you use the library, please cite the package.
 CleanX is free ONLY when used according to license.
+If you use any of the image data from
+the workflow_demos or additional_demos, those 
+images are licensed seperately from the package.
+Chest X-ray images that have been taken downloaded
+from Kaggle's CoronaHack -Chest X-Ray-Dataset and are
+lisenced with the [Creative Commons Attribution 4.0 International
+(CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
 
 You can get in touch with me by starting a [discussion](https://github.com/drcandacemakedamoore/cleanX/discussions/37) if you
 have a legitimate reason to use my library without open-sourcing your
