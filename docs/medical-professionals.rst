@@ -12,7 +12,7 @@ functionality for people who bring expertise outside of coding.
 Introduction
 ============
 
-`cleanX` is a package meant to ease the preparation of data for
+`CleanX` is a package meant to ease the preparation of data for
 machine learning or other algorithms created with some types of
 radiology imaging data.  The package was developed specifically for
 chest X-rays; however, some of Cleanx's functionality can be used with
@@ -23,23 +23,23 @@ Programmers have a saying, "garbage in, garbage out". That is to say,
 if you feed a machine learning algorithm incorrect and/or mislabeled data, 
 you should expect incorrect outputs (the algorithm will not work as desired).  
 Therefore the work of radiologists and allied professionals such as radiographers
-is critical  in creating machine learning algorithms for the field.
+is critical in creating machine learning algorithms for the field.
 
 At present, state of the art datasets often include over 100,000
 images.  The task of reading this many images can be aided by using a
-tool such as `cleanX`.  It will automatically reveal some
+tool such as `CleanX`.  It will automatically reveal some
 questionable images, whilst revealing images that are problematic for
 computer vision programs e.g. inverted or upside-down images that a
 human reader can read easily.
 
-`cleanX` can also be used by anyone (even programmers) to eliminate images
+`CleanX` can also be used by anyone (even programmers) to eliminate images
 that obviously should not be in a dataset. There are public
 datasets of chest X-rays that contain occasional coronal CT slices, or
 other types of images.  Such images should ideally be thrown out of a
 dataset before reading commences.  `cleanX` can help anyone with good
 vision accomplish this task.
 
-`cleanX` is also desinged to extract and clean the metadata on 
+`CleanX` is also designed to extract and clean the metadata on 
 images. Imaging professionals that are not proficient
 in coding, but still want to make a substantial contribution to a
 machine learning project, can add value via data curation, one of the most
@@ -50,13 +50,13 @@ tasks.
 Workflow
 ========
 
-`cleanX` workflow is made of three modules:
+`CleanX` workflow is made of three modules:
 
 - Dicom processing
 - Data processing
 - Image work
 
-To see some functionality of `cleanX`, it is suggested to run **both**
+To see some functionality of `CleanX`, it is suggested to run **both**
 notebooks in the `workflow demo`_ folder.  If you do not have, or know
 how to comfortably operate Jupyter notebooks, you can check out our
 videos `video demo of several classes and functions`_ and `video for
@@ -64,7 +64,7 @@ non-coders demo`_
 
 .. image:: https://raw.githubusercontent.com/drcandacemakedamoore/cleanX/main/test/cleanXpic.png
 
-What makes `cleanX` different and/or important?
+What makes `CleanX` different and/or important?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Much research about biomedical imaging relies on a combination of
@@ -86,11 +86,11 @@ dataset of images from Malawi (or whichever country we are trying out
 the algorithm in) or we actually risk worsening health inequity by
 simply applying the exact same algorithm everywhere (both present
 research, and practical field experience indicate this is a likely
-outcome).  `cleanX` is an open-source solution designed to be used
+outcome).  `CleanX` is an open-source solution designed to be used
 freely everywhere.  Some algorithms in machine learning are
 essentially solved problems, but what is not solved is how a broader
 group of people and institutions can get or create appropriate
-datasets to power these algorithms.  `cleanX` is for everyone, free
+datasets to power these algorithms.  `CleanX` is for everyone, free
 and open source.
 
 Special note for traditionalists: You may wonder why we chose to
