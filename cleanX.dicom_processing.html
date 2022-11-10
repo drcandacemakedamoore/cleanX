@@ -14,6 +14,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="cleanX.dicom_processing.pydicom_adapter module" href="cleanX.dicom_processing.pydicom_adapter.html" />
@@ -51,9 +52,70 @@
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html">cleanX.dicom_processing.pydicom_adapter module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html">cleanX.dicom_processing.simpleitk_adapter module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.dicom_processing.source.html">cleanX.dicom_processing.source module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html">cleanX.dicom_processing.pydicom_adapter module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.__init__"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.exclude_field_types"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader.exclude_field_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.date_fields"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader.date_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.time_fields"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader.time_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.exclude_fields"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader.exclude_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.dicom_date_to_date"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader.dicom_date_to_date()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.dicom_time_to_time"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader.dicom_time_to_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.rip_out_jpgs"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader.rip_out_jpgs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader.read"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader.read()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.get_jpg_with_pydicom"><code class="docutils literal notranslate"><span class="pre">get_jpg_with_pydicom()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html">cleanX.dicom_processing.simpleitk_adapter module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.MetadataHelper"><code class="docutils literal notranslate"><span class="pre">MetadataHelper</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.MetadataHelper.__init__"><code class="docutils literal notranslate"><span class="pre">MetadataHelper.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.MetadataHelper.fetch_metadata"><code class="docutils literal notranslate"><span class="pre">MetadataHelper.fetch_metadata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.MetadataHelper.fetch_image"><code class="docutils literal notranslate"><span class="pre">MetadataHelper.fetch_image()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader.__init__"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader.date_fields"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.date_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader.time_fields"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.time_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader.exclude_fields"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.exclude_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader.dicom_date_to_date"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.dicom_date_to_date()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader.dicom_time_to_time"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.dicom_time_to_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader.rip_out_jpgs"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.rip_out_jpgs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader.read"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader.read()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.rip_out_jpgs_sitk"><code class="docutils literal notranslate"><span class="pre">rip_out_jpgs_sitk()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cleanX.dicom_processing.source.html">cleanX.dicom_processing.source module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.Source"><code class="docutils literal notranslate"><span class="pre">Source</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.Source.get_tag"><code class="docutils literal notranslate"><span class="pre">Source.get_tag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.Source.items"><code class="docutils literal notranslate"><span class="pre">Source.items()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.DirectorySource"><code class="docutils literal notranslate"><span class="pre">DirectorySource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.DirectorySource.__init__"><code class="docutils literal notranslate"><span class="pre">DirectorySource.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.DirectorySource.get_tag"><code class="docutils literal notranslate"><span class="pre">DirectorySource.get_tag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.DirectorySource.items"><code class="docutils literal notranslate"><span class="pre">DirectorySource.items()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.GlobSource"><code class="docutils literal notranslate"><span class="pre">GlobSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.GlobSource.__init__"><code class="docutils literal notranslate"><span class="pre">GlobSource.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.GlobSource.get_tag"><code class="docutils literal notranslate"><span class="pre">GlobSource.get_tag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.GlobSource.items"><code class="docutils literal notranslate"><span class="pre">GlobSource.items()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.MultiSource"><code class="docutils literal notranslate"><span class="pre">MultiSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.MultiSource.__init__"><code class="docutils literal notranslate"><span class="pre">MultiSource.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.MultiSource.get_tag"><code class="docutils literal notranslate"><span class="pre">MultiSource.get_tag()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.MultiSource.items"><code class="docutils literal notranslate"><span class="pre">MultiSource.items()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.rename_file"><code class="docutils literal notranslate"><span class="pre">rename_file()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -133,7 +195,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, doctormakeda@gmail.com.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

@@ -14,6 +14,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="cleanX.image_work package" href="cleanX.image_work.html" />
@@ -51,7 +52,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.Source">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">Source</span></span><a class="headerlink" href="#cleanX.dicom_processing.source.Source" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>This class is provided as a helper for those who want to implement
 their own sources.</p>
 <p>It is not necessary to extend this class.  cleanX code doesn’t do
@@ -94,7 +95,7 @@ in the source column of the resulting DataFrame</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.DirectorySource">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">DirectorySource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.DirectorySource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Class to aid reading DICOMs, package agnostically</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.DirectorySource.__init__">
@@ -116,7 +117,7 @@ in the source column of the resulting DataFrame</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.GlobSource">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">GlobSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.GlobSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Class to aid finding files from path (for later reading out DICOM)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.GlobSource.__init__">
@@ -138,7 +139,7 @@ in the source column of the resulting DataFrame</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.MultiSource">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cleanX.dicom_processing.source.</span></span><span class="sig-name descname"><span class="pre">MultiSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.MultiSource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cleanX.dicom_processing.source.MultiSource.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">sources</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cleanX.dicom_processing.source.MultiSource.__init__" title="Permalink to this definition">¶</a></dt>
@@ -170,6 +171,39 @@ in the source column of the resulting DataFrame</p></li>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">cleanX.dicom_processing.source module</a><ul>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.Source"><code class="docutils literal notranslate"><span class="pre">Source</span></code></a><ul>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.Source.get_tag"><code class="docutils literal notranslate"><span class="pre">Source.get_tag()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.Source.items"><code class="docutils literal notranslate"><span class="pre">Source.items()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.DirectorySource"><code class="docutils literal notranslate"><span class="pre">DirectorySource</span></code></a><ul>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.DirectorySource.__init__"><code class="docutils literal notranslate"><span class="pre">DirectorySource.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.DirectorySource.get_tag"><code class="docutils literal notranslate"><span class="pre">DirectorySource.get_tag()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.DirectorySource.items"><code class="docutils literal notranslate"><span class="pre">DirectorySource.items()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.GlobSource"><code class="docutils literal notranslate"><span class="pre">GlobSource</span></code></a><ul>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.GlobSource.__init__"><code class="docutils literal notranslate"><span class="pre">GlobSource.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.GlobSource.get_tag"><code class="docutils literal notranslate"><span class="pre">GlobSource.get_tag()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.GlobSource.items"><code class="docutils literal notranslate"><span class="pre">GlobSource.items()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.MultiSource"><code class="docutils literal notranslate"><span class="pre">MultiSource</span></code></a><ul>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.MultiSource.__init__"><code class="docutils literal notranslate"><span class="pre">MultiSource.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.MultiSource.get_tag"><code class="docutils literal notranslate"><span class="pre">MultiSource.get_tag()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.MultiSource.items"><code class="docutils literal notranslate"><span class="pre">MultiSource.items()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cleanX.dicom_processing.source.rename_file"><code class="docutils literal notranslate"><span class="pre">rename_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="cleanX.dicom_processing.simpleitk_adapter.html"
@@ -224,7 +258,7 @@ in the source column of the resulting DataFrame</p></li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, doctormakeda@gmail.com.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

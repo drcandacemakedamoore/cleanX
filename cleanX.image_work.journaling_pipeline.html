@@ -14,6 +14,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="cleanX.image_work.pipeline module" href="cleanX.image_work.pipeline.html" />
@@ -63,11 +64,11 @@ the behavior of persistent storage.  See
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>journal</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code> is passed, the pipeline code will use a
+<li><p><strong>journal</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code> is passed, the pipeline code will use a
 preconfigured directory to store the journal.
 Otherwise, this must be the path to the directory to
 store the journal database.</p></li>
-<li><p><strong>keep_journal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Controls whether the journal is kept after
+<li><p><strong>keep_journal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Controls whether the journal is kept after
 successful completion of the pipeline.</p></li>
 </ul>
 </dd>
@@ -142,6 +143,24 @@ for the images to be processed.</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">cleanX.image_work.journaling_pipeline module</a><ul>
+<li><a class="reference internal" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline</span></code></a><ul>
+<li><a class="reference internal" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.__init__"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.restore"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.restore()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.process"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.process()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.process_batch_agg"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.process_batch_agg()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.process_batch_parallel"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.process_batch_parallel()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.image_work.journaling_pipeline.JournalingPipeline.process_step"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.process_step()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="cleanX.image_work.image_functions.html"
                           title="previous chapter">cleanX.image_work.image_functions module</a></p>
@@ -195,7 +214,7 @@ for the images to be processed.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, doctormakeda@gmail.com.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

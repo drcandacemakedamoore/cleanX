@@ -14,6 +14,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="cleanX.cli package" href="cleanX.cli.html" />
@@ -53,9 +54,15 @@
 <li class="toctree-l1"><a class="reference internal" href="cleanX.cli.html">cleanX.cli package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cleanX.cli.html#submodules">Submodules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cleanX.cli.dataset.html">cleanX.cli.dataset module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cleanX.cli.dicom.html">cleanX.cli.dicom module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.cli.dicom.html">cleanX.cli.dicom module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.cli.dicom.html#cleanX.cli.dicom.create_reader"><code class="docutils literal notranslate"><span class="pre">create_reader()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="cleanX.cli.images.html">cleanX.cli.images module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cleanX.cli.main.html">cleanX.cli.main module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.cli.main.html">cleanX.cli.main module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.cli.main.html#cleanX.cli.main.Config"><code class="docutils literal notranslate"><span class="pre">Config</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cleanX.cli.html#module-cleanX.cli">Module contents</a></li>
@@ -63,7 +70,22 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cleanX.dataset_processing.html">cleanX.dataset_processing package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html">cleanX.dataset_processing.dataframes module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html">cleanX.dataset_processing.dataframes module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.GuesserError"><code class="docutils literal notranslate"><span class="pre">GuesserError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.ColumnsSource"><code class="docutils literal notranslate"><span class="pre">ColumnsSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.CSVSource"><code class="docutils literal notranslate"><span class="pre">CSVSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.JSONSource"><code class="docutils literal notranslate"><span class="pre">JSONSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.DFSource"><code class="docutils literal notranslate"><span class="pre">DFSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MultiSource"><code class="docutils literal notranslate"><span class="pre">MultiSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.string_source"><code class="docutils literal notranslate"><span class="pre">string_source()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup"><code class="docutils literal notranslate"><span class="pre">MLSetup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report"><code class="docutils literal notranslate"><span class="pre">Report</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.check_paths_for_group_leakage"><code class="docutils literal notranslate"><span class="pre">check_paths_for_group_leakage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.see_part_potential_bias"><code class="docutils literal notranslate"><span class="pre">see_part_potential_bias()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.understand_df"><code class="docutils literal notranslate"><span class="pre">understand_df()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.show_duplicates"><code class="docutils literal notranslate"><span class="pre">show_duplicates()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.html#module-cleanX.dataset_processing">Module contents</a></li>
@@ -71,9 +93,25 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cleanX.dicom_processing.html">cleanX.dicom_processing package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html">cleanX.dicom_processing.pydicom_adapter module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html">cleanX.dicom_processing.simpleitk_adapter module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html">cleanX.dicom_processing.source module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html">cleanX.dicom_processing.pydicom_adapter module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.PydicomDicomReader"><code class="docutils literal notranslate"><span class="pre">PydicomDicomReader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dicom_processing.pydicom_adapter.html#cleanX.dicom_processing.pydicom_adapter.get_jpg_with_pydicom"><code class="docutils literal notranslate"><span class="pre">get_jpg_with_pydicom()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html">cleanX.dicom_processing.simpleitk_adapter module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.MetadataHelper"><code class="docutils literal notranslate"><span class="pre">MetadataHelper</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.SimpleITKDicomReader"><code class="docutils literal notranslate"><span class="pre">SimpleITKDicomReader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dicom_processing.simpleitk_adapter.html#cleanX.dicom_processing.simpleitk_adapter.rip_out_jpgs_sitk"><code class="docutils literal notranslate"><span class="pre">rip_out_jpgs_sitk()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dicom_processing.source.html">cleanX.dicom_processing.source module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.Source"><code class="docutils literal notranslate"><span class="pre">Source</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.DirectorySource"><code class="docutils literal notranslate"><span class="pre">DirectorySource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.GlobSource"><code class="docutils literal notranslate"><span class="pre">GlobSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.MultiSource"><code class="docutils literal notranslate"><span class="pre">MultiSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.dicom_processing.source.html#cleanX.dicom_processing.source.rename_file"><code class="docutils literal notranslate"><span class="pre">rename_file()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cleanX.dicom_processing.html#module-cleanX.dicom_processing">Module contents</a></li>
@@ -81,13 +119,126 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cleanX.image_work.html">cleanX.image_work package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.image_functions.html">cleanX.image_work.image_functions module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html">cleanX.image_work.journaling_pipeline module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html">cleanX.image_work.pipeline module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html">cleanX.image_work.steps module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.image_functions.html">cleanX.image_work.image_functions module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.Cv2Error"><code class="docutils literal notranslate"><span class="pre">Cv2Error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.cv2_imread"><code class="docutils literal notranslate"><span class="pre">cv2_imread()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.crop_np"><code class="docutils literal notranslate"><span class="pre">crop_np()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.crop_np_white"><code class="docutils literal notranslate"><span class="pre">crop_np_white()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_outliers_sum_of_pixels_across_set"><code class="docutils literal notranslate"><span class="pre">find_outliers_sum_of_pixels_across_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.hist_sum_of_pixels_across_set"><code class="docutils literal notranslate"><span class="pre">hist_sum_of_pixels_across_set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.crop"><code class="docutils literal notranslate"><span class="pre">crop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.subtle_sharpie_enhance"><code class="docutils literal notranslate"><span class="pre">subtle_sharpie_enhance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.harsh_sharpie_enhance"><code class="docutils literal notranslate"><span class="pre">harsh_sharpie_enhance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.salting"><code class="docutils literal notranslate"><span class="pre">salting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.simple_rotate_no_pil"><code class="docutils literal notranslate"><span class="pre">simple_rotate_no_pil()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.blur_out_edges"><code class="docutils literal notranslate"><span class="pre">blur_out_edges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.multi_rotation_augmentation_no_pill"><code class="docutils literal notranslate"><span class="pre">multi_rotation_augmentation_no_pill()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.show_major_lines_on_image"><code class="docutils literal notranslate"><span class="pre">show_major_lines_on_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_big_lines"><code class="docutils literal notranslate"><span class="pre">find_big_lines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.separate_image_averager"><code class="docutils literal notranslate"><span class="pre">separate_image_averager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.dimensions_to_df"><code class="docutils literal notranslate"><span class="pre">dimensions_to_df()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.dimensions_to_histo"><code class="docutils literal notranslate"><span class="pre">dimensions_to_histo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.proportions_ht_wt_to_histo"><code class="docutils literal notranslate"><span class="pre">proportions_ht_wt_to_histo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_very_hazy"><code class="docutils literal notranslate"><span class="pre">find_very_hazy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_by_sample_upper"><code class="docutils literal notranslate"><span class="pre">find_by_sample_upper()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_sample_upper_greater_than_lower"><code class="docutils literal notranslate"><span class="pre">find_sample_upper_greater_than_lower()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_outliers_by_total_mean"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_total_mean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_outliers_by_mean_to_df"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_mean_to_df()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.create_matrix"><code class="docutils literal notranslate"><span class="pre">create_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_tiny_image_differences"><code class="docutils literal notranslate"><span class="pre">find_tiny_image_differences()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.tesseract_specific"><code class="docutils literal notranslate"><span class="pre">tesseract_specific()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_suspect_text"><code class="docutils literal notranslate"><span class="pre">find_suspect_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_suspect_text_by_length"><code class="docutils literal notranslate"><span class="pre">find_suspect_text_by_length()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.histogram_difference_for_inverts"><code class="docutils literal notranslate"><span class="pre">histogram_difference_for_inverts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.inverts_by_sum_compare"><code class="docutils literal notranslate"><span class="pre">inverts_by_sum_compare()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.histogram_difference_for_inverts_todf"><code class="docutils literal notranslate"><span class="pre">histogram_difference_for_inverts_todf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_duplicated_images"><code class="docutils literal notranslate"><span class="pre">find_duplicated_images()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_duplicated_images_todf"><code class="docutils literal notranslate"><span class="pre">find_duplicated_images_todf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.show_images_in_df"><code class="docutils literal notranslate"><span class="pre">show_images_in_df()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.dataframe_up_my_pics"><code class="docutils literal notranslate"><span class="pre">dataframe_up_my_pics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.Rotator"><code class="docutils literal notranslate"><span class="pre">Rotator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.simple_spinning_template"><code class="docutils literal notranslate"><span class="pre">simple_spinning_template()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.make_contour_image"><code class="docutils literal notranslate"><span class="pre">make_contour_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.avg_image_maker"><code class="docutils literal notranslate"><span class="pre">avg_image_maker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.set_image_variability"><code class="docutils literal notranslate"><span class="pre">set_image_variability()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.avg_image_maker_by_label"><code class="docutils literal notranslate"><span class="pre">avg_image_maker_by_label()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.zero_to_twofivefive_simplest_norming"><code class="docutils literal notranslate"><span class="pre">zero_to_twofivefive_simplest_norming()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.rescale_range_from_histogram_low_end"><code class="docutils literal notranslate"><span class="pre">rescale_range_from_histogram_low_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.make_histo_scaled_folder"><code class="docutils literal notranslate"><span class="pre">make_histo_scaled_folder()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.give_size_count_df"><code class="docutils literal notranslate"><span class="pre">give_size_count_df()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.give_size_counted_dfs"><code class="docutils literal notranslate"><span class="pre">give_size_counted_dfs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.image_quality_by_size"><code class="docutils literal notranslate"><span class="pre">image_quality_by_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_close_images"><code class="docutils literal notranslate"><span class="pre">find_close_images()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.show_close_images"><code class="docutils literal notranslate"><span class="pre">show_close_images()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.image_to_histo"><code class="docutils literal notranslate"><span class="pre">image_to_histo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.black_end_ratio"><code class="docutils literal notranslate"><span class="pre">black_end_ratio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.outline_segment_by_otsu"><code class="docutils literal notranslate"><span class="pre">outline_segment_by_otsu()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.binarize_by_otsu"><code class="docutils literal notranslate"><span class="pre">binarize_by_otsu()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.column_sum_folder"><code class="docutils literal notranslate"><span class="pre">column_sum_folder()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.blind_quality_matrix"><code class="docutils literal notranslate"><span class="pre">blind_quality_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.fourier_transf"><code class="docutils literal notranslate"><span class="pre">fourier_transf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.pad_to_size"><code class="docutils literal notranslate"><span class="pre">pad_to_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.cut_to_size"><code class="docutils literal notranslate"><span class="pre">cut_to_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.cut_or_pad"><code class="docutils literal notranslate"><span class="pre">cut_or_pad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.rotated_with_max_clean_area"><code class="docutils literal notranslate"><span class="pre">rotated_with_max_clean_area()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_cv"><code class="docutils literal notranslate"><span class="pre">noise_sum_cv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_median_blur"><code class="docutils literal notranslate"><span class="pre">noise_sum_median_blur()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_gaussian"><code class="docutils literal notranslate"><span class="pre">noise_sum_gaussian()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_bilateral"><code class="docutils literal notranslate"><span class="pre">noise_sum_bilateral()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_bilateralLO"><code class="docutils literal notranslate"><span class="pre">noise_sum_bilateralLO()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_5k"><code class="docutils literal notranslate"><span class="pre">noise_sum_5k()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_7k"><code class="docutils literal notranslate"><span class="pre">noise_sum_7k()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.blind_noise_matrix"><code class="docutils literal notranslate"><span class="pre">blind_noise_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.segmented_blind_noise_matrix"><code class="docutils literal notranslate"><span class="pre">segmented_blind_noise_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.make_inverted"><code class="docutils literal notranslate"><span class="pre">make_inverted()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.cv2_phash_for_dupes"><code class="docutils literal notranslate"><span class="pre">cv2_phash_for_dupes()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.html#module-cleanX.image_work">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html">cleanX.image_work.journaling_pipeline module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html#cleanX.image_work.journaling_pipeline.JournalingPipeline"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html">cleanX.image_work.pipeline module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.MultiSource"><code class="docutils literal notranslate"><span class="pre">MultiSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.GlobSource"><code class="docutils literal notranslate"><span class="pre">GlobSource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.DirectorySource"><code class="docutils literal notranslate"><span class="pre">DirectorySource</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.PipelineError"><code class="docutils literal notranslate"><span class="pre">PipelineError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline"><code class="docutils literal notranslate"><span class="pre">Pipeline</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html">cleanX.image_work.steps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.get_known_steps"><code class="docutils literal notranslate"><span class="pre">get_known_steps()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.RegisteredStep"><code class="docutils literal notranslate"><span class="pre">RegisteredStep</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step"><code class="docutils literal notranslate"><span class="pre">Step</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate"><code class="docutils literal notranslate"><span class="pre">Aggregate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean"><code class="docutils literal notranslate"><span class="pre">Mean</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire"><code class="docutils literal notranslate"><span class="pre">Acquire</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save"><code class="docutils literal notranslate"><span class="pre">Save</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf"><code class="docutils literal notranslate"><span class="pre">FourierTransf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage"><code class="docutils literal notranslate"><span class="pre">ContourImage</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie"><code class="docutils literal notranslate"><span class="pre">Sharpie</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges"><code class="docutils literal notranslate"><span class="pre">BlurEdges</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate"><code class="docutils literal notranslate"><span class="pre">CleanRotate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize"><code class="docutils literal notranslate"><span class="pre">Normalize</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages"><code class="docutils literal notranslate"><span class="pre">InvertImages</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines"><code class="docutils literal notranslate"><span class="pre">OtsuLines</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection"><code class="docutils literal notranslate"><span class="pre">Projection</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.html#module-cleanX.image_work">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.html#cleanX.image_work.create_pipeline"><code class="docutils literal notranslate"><span class="pre">create_pipeline()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.html#cleanX.image_work.restore_pipeline"><code class="docutils literal notranslate"><span class="pre">restore_pipeline()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -168,7 +319,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, doctormakeda@gmail.com.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

@@ -14,6 +14,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="cleanX.image_work.image_functions module" href="cleanX.image_work.image_functions.html" />
@@ -51,10 +52,406 @@
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.image_work.image_functions.html">cleanX.image_work.image_functions module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html">cleanX.image_work.journaling_pipeline module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.image_work.pipeline.html">cleanX.image_work.pipeline module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.image_work.steps.html">cleanX.image_work.steps module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cleanX.image_work.image_functions.html">cleanX.image_work.image_functions module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.Cv2Error"><code class="docutils literal notranslate"><span class="pre">Cv2Error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.cv2_imread"><code class="docutils literal notranslate"><span class="pre">cv2_imread()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.crop_np"><code class="docutils literal notranslate"><span class="pre">crop_np()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.crop_np_white"><code class="docutils literal notranslate"><span class="pre">crop_np_white()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_outliers_sum_of_pixels_across_set"><code class="docutils literal notranslate"><span class="pre">find_outliers_sum_of_pixels_across_set()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.hist_sum_of_pixels_across_set"><code class="docutils literal notranslate"><span class="pre">hist_sum_of_pixels_across_set()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.crop"><code class="docutils literal notranslate"><span class="pre">crop()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.subtle_sharpie_enhance"><code class="docutils literal notranslate"><span class="pre">subtle_sharpie_enhance()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.harsh_sharpie_enhance"><code class="docutils literal notranslate"><span class="pre">harsh_sharpie_enhance()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.salting"><code class="docutils literal notranslate"><span class="pre">salting()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.simple_rotate_no_pil"><code class="docutils literal notranslate"><span class="pre">simple_rotate_no_pil()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.blur_out_edges"><code class="docutils literal notranslate"><span class="pre">blur_out_edges()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.multi_rotation_augmentation_no_pill"><code class="docutils literal notranslate"><span class="pre">multi_rotation_augmentation_no_pill()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.show_major_lines_on_image"><code class="docutils literal notranslate"><span class="pre">show_major_lines_on_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_big_lines"><code class="docutils literal notranslate"><span class="pre">find_big_lines()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.separate_image_averager"><code class="docutils literal notranslate"><span class="pre">separate_image_averager()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.dimensions_to_df"><code class="docutils literal notranslate"><span class="pre">dimensions_to_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.dimensions_to_histo"><code class="docutils literal notranslate"><span class="pre">dimensions_to_histo()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.proportions_ht_wt_to_histo"><code class="docutils literal notranslate"><span class="pre">proportions_ht_wt_to_histo()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_very_hazy"><code class="docutils literal notranslate"><span class="pre">find_very_hazy()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_by_sample_upper"><code class="docutils literal notranslate"><span class="pre">find_by_sample_upper()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_sample_upper_greater_than_lower"><code class="docutils literal notranslate"><span class="pre">find_sample_upper_greater_than_lower()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_outliers_by_total_mean"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_total_mean()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_outliers_by_mean_to_df"><code class="docutils literal notranslate"><span class="pre">find_outliers_by_mean_to_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.create_matrix"><code class="docutils literal notranslate"><span class="pre">create_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_tiny_image_differences"><code class="docutils literal notranslate"><span class="pre">find_tiny_image_differences()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.tesseract_specific"><code class="docutils literal notranslate"><span class="pre">tesseract_specific()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_suspect_text"><code class="docutils literal notranslate"><span class="pre">find_suspect_text()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_suspect_text_by_length"><code class="docutils literal notranslate"><span class="pre">find_suspect_text_by_length()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.histogram_difference_for_inverts"><code class="docutils literal notranslate"><span class="pre">histogram_difference_for_inverts()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.inverts_by_sum_compare"><code class="docutils literal notranslate"><span class="pre">inverts_by_sum_compare()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.histogram_difference_for_inverts_todf"><code class="docutils literal notranslate"><span class="pre">histogram_difference_for_inverts_todf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_duplicated_images"><code class="docutils literal notranslate"><span class="pre">find_duplicated_images()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_duplicated_images_todf"><code class="docutils literal notranslate"><span class="pre">find_duplicated_images_todf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.show_images_in_df"><code class="docutils literal notranslate"><span class="pre">show_images_in_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.dataframe_up_my_pics"><code class="docutils literal notranslate"><span class="pre">dataframe_up_my_pics()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.Rotator"><code class="docutils literal notranslate"><span class="pre">Rotator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.Rotator.RotationIterator"><code class="docutils literal notranslate"><span class="pre">Rotator.RotationIterator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.Rotator.RotationIterator.__init__"><code class="docutils literal notranslate"><span class="pre">Rotator.RotationIterator.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.Rotator.RotationIterator.__iter__"><code class="docutils literal notranslate"><span class="pre">Rotator.RotationIterator.__iter__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.Rotator.__init__"><code class="docutils literal notranslate"><span class="pre">Rotator.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.Rotator.iter"><code class="docutils literal notranslate"><span class="pre">Rotator.iter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.simple_spinning_template"><code class="docutils literal notranslate"><span class="pre">simple_spinning_template()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.make_contour_image"><code class="docutils literal notranslate"><span class="pre">make_contour_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.avg_image_maker"><code class="docutils literal notranslate"><span class="pre">avg_image_maker()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.set_image_variability"><code class="docutils literal notranslate"><span class="pre">set_image_variability()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.avg_image_maker_by_label"><code class="docutils literal notranslate"><span class="pre">avg_image_maker_by_label()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.zero_to_twofivefive_simplest_norming"><code class="docutils literal notranslate"><span class="pre">zero_to_twofivefive_simplest_norming()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.rescale_range_from_histogram_low_end"><code class="docutils literal notranslate"><span class="pre">rescale_range_from_histogram_low_end()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.make_histo_scaled_folder"><code class="docutils literal notranslate"><span class="pre">make_histo_scaled_folder()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.give_size_count_df"><code class="docutils literal notranslate"><span class="pre">give_size_count_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.give_size_counted_dfs"><code class="docutils literal notranslate"><span class="pre">give_size_counted_dfs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.image_quality_by_size"><code class="docutils literal notranslate"><span class="pre">image_quality_by_size()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.find_close_images"><code class="docutils literal notranslate"><span class="pre">find_close_images()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.show_close_images"><code class="docutils literal notranslate"><span class="pre">show_close_images()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.image_to_histo"><code class="docutils literal notranslate"><span class="pre">image_to_histo()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.black_end_ratio"><code class="docutils literal notranslate"><span class="pre">black_end_ratio()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.outline_segment_by_otsu"><code class="docutils literal notranslate"><span class="pre">outline_segment_by_otsu()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.binarize_by_otsu"><code class="docutils literal notranslate"><span class="pre">binarize_by_otsu()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.column_sum_folder"><code class="docutils literal notranslate"><span class="pre">column_sum_folder()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.blind_quality_matrix"><code class="docutils literal notranslate"><span class="pre">blind_quality_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.fourier_transf"><code class="docutils literal notranslate"><span class="pre">fourier_transf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.pad_to_size"><code class="docutils literal notranslate"><span class="pre">pad_to_size()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.cut_to_size"><code class="docutils literal notranslate"><span class="pre">cut_to_size()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.cut_or_pad"><code class="docutils literal notranslate"><span class="pre">cut_or_pad()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.rotated_with_max_clean_area"><code class="docutils literal notranslate"><span class="pre">rotated_with_max_clean_area()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_cv"><code class="docutils literal notranslate"><span class="pre">noise_sum_cv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_median_blur"><code class="docutils literal notranslate"><span class="pre">noise_sum_median_blur()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_gaussian"><code class="docutils literal notranslate"><span class="pre">noise_sum_gaussian()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_bilateral"><code class="docutils literal notranslate"><span class="pre">noise_sum_bilateral()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_bilateralLO"><code class="docutils literal notranslate"><span class="pre">noise_sum_bilateralLO()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_5k"><code class="docutils literal notranslate"><span class="pre">noise_sum_5k()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.noise_sum_7k"><code class="docutils literal notranslate"><span class="pre">noise_sum_7k()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.blind_noise_matrix"><code class="docutils literal notranslate"><span class="pre">blind_noise_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.segmented_blind_noise_matrix"><code class="docutils literal notranslate"><span class="pre">segmented_blind_noise_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.make_inverted"><code class="docutils literal notranslate"><span class="pre">make_inverted()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.image_functions.html#cleanX.image_work.image_functions.cv2_phash_for_dupes"><code class="docutils literal notranslate"><span class="pre">cv2_phash_for_dupes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html">cleanX.image_work.journaling_pipeline module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html#cleanX.image_work.journaling_pipeline.JournalingPipeline"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.__init__"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.restore"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.restore()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.process"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.process_batch_agg"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.process_batch_agg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.process_batch_parallel"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.process_batch_parallel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.journaling_pipeline.html#cleanX.image_work.journaling_pipeline.JournalingPipeline.process_step"><code class="docutils literal notranslate"><span class="pre">JournalingPipeline.process_step()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cleanX.image_work.pipeline.html">cleanX.image_work.pipeline module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.MultiSource"><code class="docutils literal notranslate"><span class="pre">MultiSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.MultiSource.__init__"><code class="docutils literal notranslate"><span class="pre">MultiSource.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.MultiSource.__iter__"><code class="docutils literal notranslate"><span class="pre">MultiSource.__iter__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.GlobSource"><code class="docutils literal notranslate"><span class="pre">GlobSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.GlobSource.__init__"><code class="docutils literal notranslate"><span class="pre">GlobSource.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.GlobSource.__iter__"><code class="docutils literal notranslate"><span class="pre">GlobSource.__iter__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.DirectorySource"><code class="docutils literal notranslate"><span class="pre">DirectorySource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.DirectorySource.__init__"><code class="docutils literal notranslate"><span class="pre">DirectorySource.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.DirectorySource.__iter__"><code class="docutils literal notranslate"><span class="pre">DirectorySource.__iter__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.PipelineError"><code class="docutils literal notranslate"><span class="pre">PipelineError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline"><code class="docutils literal notranslate"><span class="pre">Pipeline</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline.__init__"><code class="docutils literal notranslate"><span class="pre">Pipeline.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline.process"><code class="docutils literal notranslate"><span class="pre">Pipeline.process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline.process_step"><code class="docutils literal notranslate"><span class="pre">Pipeline.process_step()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline.process_batch_agg"><code class="docutils literal notranslate"><span class="pre">Pipeline.process_batch_agg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.pipeline.html#cleanX.image_work.pipeline.Pipeline.process_batch_parallel"><code class="docutils literal notranslate"><span class="pre">Pipeline.process_batch_parallel()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cleanX.image_work.steps.html">cleanX.image_work.steps module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.get_known_steps"><code class="docutils literal notranslate"><span class="pre">get_known_steps()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.RegisteredStep"><code class="docutils literal notranslate"><span class="pre">RegisteredStep</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.RegisteredStep.__init__"><code class="docutils literal notranslate"><span class="pre">RegisteredStep.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.RegisteredStep.mro"><code class="docutils literal notranslate"><span class="pre">RegisteredStep.mro()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step"><code class="docutils literal notranslate"><span class="pre">Step</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step.__init__"><code class="docutils literal notranslate"><span class="pre">Step.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step.apply"><code class="docutils literal notranslate"><span class="pre">Step.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step.read"><code class="docutils literal notranslate"><span class="pre">Step.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step.write"><code class="docutils literal notranslate"><span class="pre">Step.write()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step.begin_transaction"><code class="docutils literal notranslate"><span class="pre">Step.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step.commit_transaction"><code class="docutils literal notranslate"><span class="pre">Step.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step.__reduce__"><code class="docutils literal notranslate"><span class="pre">Step.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step.to_json"><code class="docutils literal notranslate"><span class="pre">Step.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">Step.from_cmd_args()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate"><code class="docutils literal notranslate"><span class="pre">Aggregate</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.__init__"><code class="docutils literal notranslate"><span class="pre">Aggregate.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.begin_transaction"><code class="docutils literal notranslate"><span class="pre">Aggregate.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.commit_transaction"><code class="docutils literal notranslate"><span class="pre">Aggregate.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.pre"><code class="docutils literal notranslate"><span class="pre">Aggregate.pre()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.post"><code class="docutils literal notranslate"><span class="pre">Aggregate.post()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.agg"><code class="docutils literal notranslate"><span class="pre">Aggregate.agg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.aggregate"><code class="docutils literal notranslate"><span class="pre">Aggregate.aggregate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.__reduce__"><code class="docutils literal notranslate"><span class="pre">Aggregate.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.apply"><code class="docutils literal notranslate"><span class="pre">Aggregate.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">Aggregate.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.read"><code class="docutils literal notranslate"><span class="pre">Aggregate.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.to_json"><code class="docutils literal notranslate"><span class="pre">Aggregate.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Aggregate.write"><code class="docutils literal notranslate"><span class="pre">Aggregate.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean"><code class="docutils literal notranslate"><span class="pre">Mean</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.agg"><code class="docutils literal notranslate"><span class="pre">Mean.agg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.post"><code class="docutils literal notranslate"><span class="pre">Mean.post()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.__reduce__"><code class="docutils literal notranslate"><span class="pre">Mean.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.__init__"><code class="docutils literal notranslate"><span class="pre">Mean.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.aggregate"><code class="docutils literal notranslate"><span class="pre">Mean.aggregate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.apply"><code class="docutils literal notranslate"><span class="pre">Mean.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.begin_transaction"><code class="docutils literal notranslate"><span class="pre">Mean.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.commit_transaction"><code class="docutils literal notranslate"><span class="pre">Mean.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">Mean.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.pre"><code class="docutils literal notranslate"><span class="pre">Mean.pre()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.read"><code class="docutils literal notranslate"><span class="pre">Mean.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.to_json"><code class="docutils literal notranslate"><span class="pre">Mean.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Mean.write"><code class="docutils literal notranslate"><span class="pre">Mean.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.__init__"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.agg"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.agg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.post"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.post()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.__reduce__"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.aggregate"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.aggregate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.apply"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.begin_transaction"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.commit_transaction"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.pre"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.pre()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.read"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.to_json"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoHtWt.write"><code class="docutils literal notranslate"><span class="pre">GroupHistoHtWt.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.__init__"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.agg"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.agg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.post"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.post()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.__reduce__"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.aggregate"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.aggregate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.apply"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.begin_transaction"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.commit_transaction"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.pre"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.pre()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.read"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.to_json"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.GroupHistoPorportion.write"><code class="docutils literal notranslate"><span class="pre">GroupHistoPorportion.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire"><code class="docutils literal notranslate"><span class="pre">Acquire</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire.read"><code class="docutils literal notranslate"><span class="pre">Acquire.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire.__init__"><code class="docutils literal notranslate"><span class="pre">Acquire.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire.__reduce__"><code class="docutils literal notranslate"><span class="pre">Acquire.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire.apply"><code class="docutils literal notranslate"><span class="pre">Acquire.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire.begin_transaction"><code class="docutils literal notranslate"><span class="pre">Acquire.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire.commit_transaction"><code class="docutils literal notranslate"><span class="pre">Acquire.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">Acquire.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire.to_json"><code class="docutils literal notranslate"><span class="pre">Acquire.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Acquire.write"><code class="docutils literal notranslate"><span class="pre">Acquire.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save"><code class="docutils literal notranslate"><span class="pre">Save</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save.__init__"><code class="docutils literal notranslate"><span class="pre">Save.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save.write"><code class="docutils literal notranslate"><span class="pre">Save.write()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save.__reduce__"><code class="docutils literal notranslate"><span class="pre">Save.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save.apply"><code class="docutils literal notranslate"><span class="pre">Save.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save.begin_transaction"><code class="docutils literal notranslate"><span class="pre">Save.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save.commit_transaction"><code class="docutils literal notranslate"><span class="pre">Save.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">Save.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save.read"><code class="docutils literal notranslate"><span class="pre">Save.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Save.to_json"><code class="docutils literal notranslate"><span class="pre">Save.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf"><code class="docutils literal notranslate"><span class="pre">FourierTransf</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf.apply"><code class="docutils literal notranslate"><span class="pre">FourierTransf.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf.__init__"><code class="docutils literal notranslate"><span class="pre">FourierTransf.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf.__reduce__"><code class="docutils literal notranslate"><span class="pre">FourierTransf.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf.begin_transaction"><code class="docutils literal notranslate"><span class="pre">FourierTransf.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf.commit_transaction"><code class="docutils literal notranslate"><span class="pre">FourierTransf.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">FourierTransf.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf.read"><code class="docutils literal notranslate"><span class="pre">FourierTransf.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf.to_json"><code class="docutils literal notranslate"><span class="pre">FourierTransf.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.FourierTransf.write"><code class="docutils literal notranslate"><span class="pre">FourierTransf.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage"><code class="docutils literal notranslate"><span class="pre">ContourImage</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage.apply"><code class="docutils literal notranslate"><span class="pre">ContourImage.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage.__init__"><code class="docutils literal notranslate"><span class="pre">ContourImage.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage.__reduce__"><code class="docutils literal notranslate"><span class="pre">ContourImage.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage.begin_transaction"><code class="docutils literal notranslate"><span class="pre">ContourImage.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage.commit_transaction"><code class="docutils literal notranslate"><span class="pre">ContourImage.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">ContourImage.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage.read"><code class="docutils literal notranslate"><span class="pre">ContourImage.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage.to_json"><code class="docutils literal notranslate"><span class="pre">ContourImage.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ContourImage.write"><code class="docutils literal notranslate"><span class="pre">ContourImage.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert.apply"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert.__init__"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert.__reduce__"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert.begin_transaction"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert.commit_transaction"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert.read"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert.to_json"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.ProjectionHorizoVert.write"><code class="docutils literal notranslate"><span class="pre">ProjectionHorizoVert.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop.apply"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop.__init__"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop.__reduce__"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop.begin_transaction"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop.commit_transaction"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop.read"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop.to_json"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlackEdgeCrop.write"><code class="docutils literal notranslate"><span class="pre">BlackEdgeCrop.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop.apply"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop.__init__"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop.__reduce__"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop.begin_transaction"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop.commit_transaction"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop.read"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop.to_json"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.WhiteEdgeCrop.write"><code class="docutils literal notranslate"><span class="pre">WhiteEdgeCrop.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie"><code class="docutils literal notranslate"><span class="pre">Sharpie</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie.__init__"><code class="docutils literal notranslate"><span class="pre">Sharpie.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie.apply"><code class="docutils literal notranslate"><span class="pre">Sharpie.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie.__reduce__"><code class="docutils literal notranslate"><span class="pre">Sharpie.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie.begin_transaction"><code class="docutils literal notranslate"><span class="pre">Sharpie.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie.commit_transaction"><code class="docutils literal notranslate"><span class="pre">Sharpie.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">Sharpie.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie.read"><code class="docutils literal notranslate"><span class="pre">Sharpie.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie.to_json"><code class="docutils literal notranslate"><span class="pre">Sharpie.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Sharpie.write"><code class="docutils literal notranslate"><span class="pre">Sharpie.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges"><code class="docutils literal notranslate"><span class="pre">BlurEdges</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges.__init__"><code class="docutils literal notranslate"><span class="pre">BlurEdges.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges.apply"><code class="docutils literal notranslate"><span class="pre">BlurEdges.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges.__reduce__"><code class="docutils literal notranslate"><span class="pre">BlurEdges.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges.begin_transaction"><code class="docutils literal notranslate"><span class="pre">BlurEdges.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges.commit_transaction"><code class="docutils literal notranslate"><span class="pre">BlurEdges.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">BlurEdges.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges.read"><code class="docutils literal notranslate"><span class="pre">BlurEdges.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges.to_json"><code class="docutils literal notranslate"><span class="pre">BlurEdges.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.BlurEdges.write"><code class="docutils literal notranslate"><span class="pre">BlurEdges.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate"><code class="docutils literal notranslate"><span class="pre">CleanRotate</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate.__init__"><code class="docutils literal notranslate"><span class="pre">CleanRotate.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate.apply"><code class="docutils literal notranslate"><span class="pre">CleanRotate.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate.__reduce__"><code class="docutils literal notranslate"><span class="pre">CleanRotate.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate.begin_transaction"><code class="docutils literal notranslate"><span class="pre">CleanRotate.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate.commit_transaction"><code class="docutils literal notranslate"><span class="pre">CleanRotate.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">CleanRotate.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate.read"><code class="docutils literal notranslate"><span class="pre">CleanRotate.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate.to_json"><code class="docutils literal notranslate"><span class="pre">CleanRotate.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.CleanRotate.write"><code class="docutils literal notranslate"><span class="pre">CleanRotate.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize"><code class="docutils literal notranslate"><span class="pre">Normalize</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize.apply"><code class="docutils literal notranslate"><span class="pre">Normalize.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize.__init__"><code class="docutils literal notranslate"><span class="pre">Normalize.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize.__reduce__"><code class="docutils literal notranslate"><span class="pre">Normalize.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize.begin_transaction"><code class="docutils literal notranslate"><span class="pre">Normalize.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize.commit_transaction"><code class="docutils literal notranslate"><span class="pre">Normalize.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">Normalize.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize.read"><code class="docutils literal notranslate"><span class="pre">Normalize.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize.to_json"><code class="docutils literal notranslate"><span class="pre">Normalize.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Normalize.write"><code class="docutils literal notranslate"><span class="pre">Normalize.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize.__init__"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize.apply"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize.__reduce__"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize.begin_transaction"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize.commit_transaction"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize.read"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize.to_json"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.HistogramNormalize.write"><code class="docutils literal notranslate"><span class="pre">HistogramNormalize.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages"><code class="docutils literal notranslate"><span class="pre">InvertImages</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages.apply"><code class="docutils literal notranslate"><span class="pre">InvertImages.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages.__init__"><code class="docutils literal notranslate"><span class="pre">InvertImages.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages.__reduce__"><code class="docutils literal notranslate"><span class="pre">InvertImages.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages.begin_transaction"><code class="docutils literal notranslate"><span class="pre">InvertImages.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages.commit_transaction"><code class="docutils literal notranslate"><span class="pre">InvertImages.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">InvertImages.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages.read"><code class="docutils literal notranslate"><span class="pre">InvertImages.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages.to_json"><code class="docutils literal notranslate"><span class="pre">InvertImages.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.InvertImages.write"><code class="docutils literal notranslate"><span class="pre">InvertImages.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize.__init__"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize.apply"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize.__reduce__"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize.begin_transaction"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize.commit_transaction"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize.read"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize.to_json"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuBinarize.write"><code class="docutils literal notranslate"><span class="pre">OtsuBinarize.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines"><code class="docutils literal notranslate"><span class="pre">OtsuLines</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines.__init__"><code class="docutils literal notranslate"><span class="pre">OtsuLines.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines.apply"><code class="docutils literal notranslate"><span class="pre">OtsuLines.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines.__reduce__"><code class="docutils literal notranslate"><span class="pre">OtsuLines.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines.begin_transaction"><code class="docutils literal notranslate"><span class="pre">OtsuLines.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines.commit_transaction"><code class="docutils literal notranslate"><span class="pre">OtsuLines.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">OtsuLines.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines.read"><code class="docutils literal notranslate"><span class="pre">OtsuLines.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines.to_json"><code class="docutils literal notranslate"><span class="pre">OtsuLines.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.OtsuLines.write"><code class="docutils literal notranslate"><span class="pre">OtsuLines.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection"><code class="docutils literal notranslate"><span class="pre">Projection</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection.apply"><code class="docutils literal notranslate"><span class="pre">Projection.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection.__init__"><code class="docutils literal notranslate"><span class="pre">Projection.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection.__reduce__"><code class="docutils literal notranslate"><span class="pre">Projection.__reduce__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection.begin_transaction"><code class="docutils literal notranslate"><span class="pre">Projection.begin_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection.commit_transaction"><code class="docutils literal notranslate"><span class="pre">Projection.commit_transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection.from_cmd_args"><code class="docutils literal notranslate"><span class="pre">Projection.from_cmd_args()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection.read"><code class="docutils literal notranslate"><span class="pre">Projection.read()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection.to_json"><code class="docutils literal notranslate"><span class="pre">Projection.to_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Projection.write"><code class="docutils literal notranslate"><span class="pre">Projection.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -70,12 +467,12 @@ be pick up from the failed step.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>steps</strong> (<em>Sequence</em><em>[</em><a class="reference internal" href="cleanX.image_work.steps.html#cleanX.image_work.steps.Step" title="cleanX.image_work.steps.Step"><em>Step</em></a><em>]</em>) – A sequence of <code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code> to be executed in this pipeline.</p></li>
-<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Controls how many steps are processed concurrently.</p></li>
-<li><p><strong>journal</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code> is passed, the pipeline code will use a
+<li><p><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Controls how many steps are processed concurrently.</p></li>
+<li><p><strong>journal</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code> is passed, the pipeline code will use a
 preconfigured directory to store the journal.  Otherwise,
 this must be the path to the directory to store the journal
 database.</p></li>
-<li><p><strong>keep_journal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Controls whether the journal is kept after successful
+<li><p><strong>keep_journal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Controls whether the journal is kept after successful
 completion of the pipeline.</p></li>
 </ul>
 </dd>
@@ -138,7 +535,11 @@ fast-forwarded to the last executed step + <code class="code docutils literal no
     <ul>
 <li><a class="reference internal" href="#">cleanX.image_work package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-cleanX.image_work">Module contents</a></li>
+<li><a class="reference internal" href="#module-cleanX.image_work">Module contents</a><ul>
+<li><a class="reference internal" href="#cleanX.image_work.create_pipeline"><code class="docutils literal notranslate"><span class="pre">create_pipeline()</span></code></a></li>
+<li><a class="reference internal" href="#cleanX.image_work.restore_pipeline"><code class="docutils literal notranslate"><span class="pre">restore_pipeline()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -197,7 +598,7 @@ fast-forwarded to the last executed step + <code class="code docutils literal no
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, doctormakeda@gmail.com.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

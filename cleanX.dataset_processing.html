@@ -14,6 +14,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="cleanX.dataset_processing.dataframes module" href="cleanX.dataset_processing.dataframes.html" />
@@ -51,7 +52,68 @@
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html">cleanX.dataset_processing.dataframes module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html">cleanX.dataset_processing.dataframes module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.GuesserError"><code class="docutils literal notranslate"><span class="pre">GuesserError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.ColumnsSource"><code class="docutils literal notranslate"><span class="pre">ColumnsSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.ColumnsSource.to_dataframe"><code class="docutils literal notranslate"><span class="pre">ColumnsSource.to_dataframe()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.CSVSource"><code class="docutils literal notranslate"><span class="pre">CSVSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.CSVSource.__init__"><code class="docutils literal notranslate"><span class="pre">CSVSource.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.CSVSource.to_dataframe"><code class="docutils literal notranslate"><span class="pre">CSVSource.to_dataframe()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.JSONSource"><code class="docutils literal notranslate"><span class="pre">JSONSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.JSONSource.__init__"><code class="docutils literal notranslate"><span class="pre">JSONSource.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.JSONSource.to_dataframe"><code class="docutils literal notranslate"><span class="pre">JSONSource.to_dataframe()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.DFSource"><code class="docutils literal notranslate"><span class="pre">DFSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.DFSource.__init__"><code class="docutils literal notranslate"><span class="pre">DFSource.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.DFSource.to_dataframe"><code class="docutils literal notranslate"><span class="pre">DFSource.to_dataframe()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MultiSource"><code class="docutils literal notranslate"><span class="pre">MultiSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MultiSource.__init__"><code class="docutils literal notranslate"><span class="pre">MultiSource.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MultiSource.to_dataframe"><code class="docutils literal notranslate"><span class="pre">MultiSource.to_dataframe()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.string_source"><code class="docutils literal notranslate"><span class="pre">string_source()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup"><code class="docutils literal notranslate"><span class="pre">MLSetup</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.known_sources"><code class="docutils literal notranslate"><span class="pre">MLSetup.known_sources</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.__init__"><code class="docutils literal notranslate"><span class="pre">MLSetup.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.get_unique_id"><code class="docutils literal notranslate"><span class="pre">MLSetup.get_unique_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.get_sensitive_list"><code class="docutils literal notranslate"><span class="pre">MLSetup.get_sensitive_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.guess_source"><code class="docutils literal notranslate"><span class="pre">MLSetup.guess_source()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.metadata"><code class="docutils literal notranslate"><span class="pre">MLSetup.metadata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.concat_dataframe"><code class="docutils literal notranslate"><span class="pre">MLSetup.concat_dataframe()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.duplicated"><code class="docutils literal notranslate"><span class="pre">MLSetup.duplicated()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.duplicated_frame"><code class="docutils literal notranslate"><span class="pre">MLSetup.duplicated_frame()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.duplicates"><code class="docutils literal notranslate"><span class="pre">MLSetup.duplicates()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.pics_in_both_groups"><code class="docutils literal notranslate"><span class="pre">MLSetup.pics_in_both_groups()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.generate_report"><code class="docutils literal notranslate"><span class="pre">MLSetup.generate_report()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.leakage"><code class="docutils literal notranslate"><span class="pre">MLSetup.leakage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.MLSetup.bias"><code class="docutils literal notranslate"><span class="pre">MLSetup.bias()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report"><code class="docutils literal notranslate"><span class="pre">Report</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report.__init__"><code class="docutils literal notranslate"><span class="pre">Report.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report.report_duplicates"><code class="docutils literal notranslate"><span class="pre">Report.report_duplicates()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report.report_leakage"><code class="docutils literal notranslate"><span class="pre">Report.report_leakage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report.report_bias"><code class="docutils literal notranslate"><span class="pre">Report.report_bias()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report.report_understand"><code class="docutils literal notranslate"><span class="pre">Report.report_understand()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report.subsection_html"><code class="docutils literal notranslate"><span class="pre">Report.subsection_html()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report.subsection_text"><code class="docutils literal notranslate"><span class="pre">Report.subsection_text()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report.to_ipwidget"><code class="docutils literal notranslate"><span class="pre">Report.to_ipwidget()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.Report.to_text"><code class="docutils literal notranslate"><span class="pre">Report.to_text()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.check_paths_for_group_leakage"><code class="docutils literal notranslate"><span class="pre">check_paths_for_group_leakage()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.see_part_potential_bias"><code class="docutils literal notranslate"><span class="pre">see_part_potential_bias()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.understand_df"><code class="docutils literal notranslate"><span class="pre">understand_df()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanX.dataset_processing.dataframes.html#cleanX.dataset_processing.dataframes.show_duplicates"><code class="docutils literal notranslate"><span class="pre">show_duplicates()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -131,7 +193,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, doctormakeda@gmail.com.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>
