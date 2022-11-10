@@ -801,7 +801,7 @@ def find_outliers_by_mean_to_df(source_directory, percentage_to_say_outliers):
     df['results'] = 'within range'
     df.loc[:percentile, 'results'] = 'low'
     df.loc[len(df) - percentile:, 'results'] = 'high'
-    return(df)
+    return (df)
 
 
 def create_matrix(width, height, default_element):
